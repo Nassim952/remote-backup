@@ -1,0 +1,11 @@
+/:
+  controller: User
+  action: landing
+
+/login:
+  controller: User
+  action: login
+
+/dashboard:
+  controller: User
+  action: dashboard
