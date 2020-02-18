@@ -1,15 +1,14 @@
 .container {
-    max-width: 992px;
+    max-width: 90%;
     margin: auto;
     overflow-x: hidden;
 }
 
 .row {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    background-color: grey;
-    margin: 0 -10px;
+    //flex-wrap: wrap;
+    //background-color: grey;
+    // margin: 0 -10px;
 }
 
 [class *="col-md"],
