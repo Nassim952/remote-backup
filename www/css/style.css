@@ -1,0 +1,167 @@
+/* Start Dashboard CSS */
+
+.flex-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 20%;
+}
+
+.site-content {
+  width: 80%;
+}
+
+table td:nth-child(odd) {
+  background-color: white;
+}
+
+.tr-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.td-dashboard-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;
+}
+
+.lists-film {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icons-wrapper {
+  display: flex;
+  width: 80px;
+  justify-content: space-around;
+}
+
+#text-wrappe {
+  width: 28%;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#hour-wrappe {
+  width: 20%;
+}
+
+#separation-bar {
+  border-top: 1px solid #c9bbbb;
+  width: 75%;
+  margin: auto;
+}
+
+.quick-tools {
+  display: flex;
+  margin-top: 25px;
+  align-items: center;
+  width: 95%;
+  justify-content: flex-end;
+}
+
+#space-icons {
+  width: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  color: #ef3535;
+}
+
+.cb-fixer{
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+h2{
+  color:#EF3535;
+}
+
+#text-white{
+  color:white;
+}
+
+#head-title{
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 40px;
+  margin-top: 15px;
+}
+
+.title-container{
+  margin-left: 20px;
+  padding: 4px;
+}
+
+.name-container{
+  color: white;
+  height: 80px;
+  background-color: #2F3334;
+  display: flex;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  font-size: larger;
+  box-shadow: inset 0 5px 5px -3px black;
+}
+
+#dot{
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.nav-content{
+  color: white;
+}
+
+li{
+  list-style-type: none;
+}
+
+.sidebar-sub-headers{
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 40px;
+  align-items: center;
+}
+
+#submenu-wrapper{
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#text-submenu-fixer{
+  margin-left: 25px;
+}
+
+.active{
+  background-color: #C4C4C4;
+}
+
+.dashboard-menu{
+  height: 50px;
+  display: flex;
+  align-items: center;
+  mix-blend-mode: hard-light;
+}
+/* END Dasshboard CSS */

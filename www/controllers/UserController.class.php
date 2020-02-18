@@ -1,17 +1,21 @@
 <?php
-class AuthentificationController
+class UserController
 {
     private $login;
     private $password;
 
-    public function __construct()
-    {
-        isset($_POST['login']) ? $this->login = $_POST['login'] : null;
-        isset($_POST['login']) ? $this->password = $_POST['password'] : null;
-    }
+    // public function __construct()
+    // {
+    //     isset($_POST['login']) ? $this->login = $_POST['login'] : null;
+    //     isset($_POST['login']) ? $this->password = $_POST['password'] : null;
+    // }
 
     public function landingAction(){
         new view("landing-page","front");
+    }
+
+    public function dashboardAction(){
+        new view("dashboard","back");
     }
 
     public function loginAction()

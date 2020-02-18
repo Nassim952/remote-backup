@@ -26,7 +26,6 @@ $listOfRoutes = yaml_parse_file("routes.yml");
 
 if(!empty($listOfRoutes[$uri])){
     $c = $listOfRoutes[$uri]["controller"]."Controller";
-    print_r($listOfRoutes[$uri]);
     $a = $listOfRoutes[$uri]["action"]."Action";
 
     if (file_exists("controllers/".$c.".class.php")) {

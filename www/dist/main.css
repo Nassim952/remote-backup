@@ -3,17 +3,24 @@
   font-family: "Montserrat", sans-serif;
   color: #F2F2F2;
   color: #444;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 h1,
 h2,
 h3 {
-  font-family: "Lato", sans-serif;
+  font-family: "Rambla" sans-serif;
 }
 
 h1 {
   font-size: rem(24);
-  color: #CE0A0B;
+  color: #EF3535;
 }
 
 h2 {
@@ -26,11 +33,15 @@ h3 {
 
 p {
   line-height: 1.5em;
-  background-color: #CE0A0B;
+  font-family: "Rambla" sans-serif;
 }
 
-#sidebar-id {
-  background-color: #66747B;
+.sidebar {
+  background-color: #3C4244;
+}
+
+.site-content {
+  background-color: #f1f1f1;
 }
 
 .button {

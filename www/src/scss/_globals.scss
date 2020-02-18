@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    font-family: $montserrat;
+    color: $light-grey;
+    color: $text-color;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3 {
+    font-family: $rambla;
+}
+
+h1 {
+    font-size: rem(24);
+    color: $text-red;
+}
+
+h2 {
+    font-size: rem(20);
+}
+
+h3 {
+    font-size: rem(16);
+}
+
+p {
+    line-height: 1.5em;
+    font-family: $rambla;
+}
+
+.sidebar{
+    background-color: $sidebar-black;
+}
+
+.site-content{
+    background-color: $site-content-white;
+}
