@@ -1,0 +1,236 @@
+/********** MEDIA QUERIES PC + TABLET + MOBILE (plus bas) **********/
+
+@media screen and (max-width:768px) {	
+	.sectionSignup > h1
+	{
+		font-size: 1.7vw;
+	}
+	.sectionSignup label
+	{
+		font-size: 1.5vw;
+	}
+}
+
+@media screen and (max-height: 520px) {
+	.headerSection2 > .containerImg
+	{
+		position: absolute;
+		top: 0;
+	}
+
+	.headerSection2 > .containerImg > img
+	{
+		width: 23vw;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translate(-50%);
+	}
+
+	.headerSection2
+	{
+		height: 20%;
+	}
+
+	.sectionSignup
+	{
+	    height: 60%;
+	}
+
+	.sectionSignup input[name="firstname"], input[name="lastname"]
+	{
+		margin-top: 10px;
+	}
+
+	.sectionSignup input[type=email], input[type=password]
+	{
+	  margin-top: 10px;
+	}
+}
+
+@media screen and (max-height: 470px) {
+	.divInput
+	{
+		margin-top: -15px;
+	}
+
+	.headerSection2 > .containerImg > img
+	{
+		width: 22vw;
+	}
+
+	.sectionSignup input[name="firstname"], input[name="lastname"]
+	{
+		margin-top: 5px;
+	}
+
+	.sectionSignup input[type=email], input[type=password]
+	{
+	  margin-top: 5px;
+	}
+}
+
+@media screen and (max-height: 420px) {
+	.divCheckbox
+	{
+		margin-top: 7px;
+	}
+
+	.sectionSignup input[name="firstname"], input[name="lastname"]
+	{
+		padding: 5px 12px;
+	}
+
+	.sectionSignup input[type=email], input[type=password]
+	{
+	  padding: 5px 12px;
+	}
+}
+
+@media screen and (max-height: 395px) {
+	.divCheckbox
+	{
+		margin-top: 3px;
+	}
+
+	button[type=submit]
+	{
+		display: block;
+		margin-top: -15px;
+		margin-bottom: 15px;
+	}
+}
+
+@media screen and (max-height: 390px) {
+	.headerSection2 > .containerImg > img
+	{
+		width: 17vw;
+	}
+
+	.container
+	{
+		overflow: auto;
+	}
+}
+
+
+
+/*************** MOBILE *****************/
+
+@media screen and (max-width: 640px) {
+
+	body
+	{
+		background-color: #4E73DE;
+	}
+
+	.container
+	{
+		width: 100%;
+		height: 100%;
+		display: block;
+		overflow: visible;
+	}
+
+	.headerSection2
+	{
+		width: 100%;
+		height: 70px;
+		position: fixed;
+		top: 0;
+		background-color: white;
+	}
+
+	.headerSection2 > .containerImg
+	{
+		width: auto;
+		height: auto;
+	}
+
+	.headerSection2 > .containerImg > img
+	{
+		width: 200px;
+		margin-left: 20px;
+	}
+
+	.section1
+	{
+		width: 90%;
+		height: 150px;
+		margin: auto;
+		background-position: 25% 82%;
+		border-radius: 15px 15px 0 0;
+		margin-top: 120px;
+	}
+
+	.section2
+	{
+		width: 100%;
+		height: auto;
+		margin: auto;
+	}
+
+	.sectionSignup
+	{
+	    width: 90%;
+		height: 300px;
+		margin: auto;
+		border-radius: 0 0 15px 15px;
+		background-color: white;
+		margin-bottom: 30px;
+	}
+
+	.sectionSignup > h1
+	{
+		width: 100%;
+		font-size: 20px;
+		text-align: center;
+		line-height: 50px;
+	}
+
+	.divInput
+	{
+		width: 70%;
+		margin: auto;
+		margin-top: -30px;
+	}
+
+	.sectionSignup input[name="firstname"], input[name="lastname"]
+	{
+		width: 45%;
+		padding: 2px 12px;
+		margin-top: 10px;
+	}
+
+	.sectionSignup input[type=email], input[type=password]
+	{
+	  width: 100%;
+	  padding: 2px 12px;
+	  margin-top: 10px;
+	}
+
+	.divCheckbox
+	{
+		width: 100%;
+		margin-top: 5px;
+	}
+
+	.sectionSignup label
+	{
+		font-size: 12px;
+	}
+
+	button[type=submit]
+	{
+		padding: 3px 20px;
+		margin: auto;
+		margin-top: -15px;
+	}
+}
+
+@media screen and (max-height: 520px) and (max-width: 640px) {
+	.headerSection2 > .containerImg > img
+	{
+		transform: none;
+	}
+}
