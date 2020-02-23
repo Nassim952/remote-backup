@@ -1,226 +1,283 @@
-$(document).ready(
-    function() {
-        makeSlider($('#' + prefix));
-    });
-
-var current_image;
-var total_images = 0;
-var prefix = 'caroussel--billboard_';
+var billboard_current_image;
+var billboard_total_images = 0;
+var preBoard = 'caroussel--billboard_';
 var space_between = 10;
 var board_to_display = 3;
 
 
-function makeSlider(elem) {
+$(document).ready(
+    function() {
+        makeBillboard($('#' + preBoard));
+    });
+
+$(window).resize(
+    function() {
+        $('.' + preBoard + ' .slide').css('height', $('.' + preBoard + ' .slider').height() + 'px');
+        $('.' + preBoard + ' .slide').css('width', ($('.' + preBoard + ' .slider').width() / board_to_display) - 2 * space_between + 'px');
+    });
+
+
+
+function makeBillboard(elem) {
     // Créer le slider (contenant)
 
 
-    elem.before('<div class="' + prefix + ' row"></div>');
+    elem.before('<div class="' + preBoard + ' row"></div>');
 
     // Ajout des boutons de nav
 
-    $('.' + prefix).append('<nav class="' + prefix + 'nav_LR row"></nav>');
+    $('.' + preBoard).append('<nav class="nav_LR row"></nav>');
 
-    $('.' + prefix + 'nav_LR').append('<button onclick="prev();resetInterval()" class="btn btn--prev"></button>');
+    $('.' + preBoard + ' .nav_LR').append('<button onclick="prevBoard();resetIntervalBillboard()" class="btn btn--prev"></button>');
 
-    $('.' + prefix + 'nav_LR').append('<div class="' + prefix + 'slider row"></div>');
+    $('.' + preBoard + ' .nav_LR').append('<div class="slider row"></div>');
 
-    $('.' + prefix + 'nav_LR').append('<button onclick="next();resetInterval()" class="btn btn--next"></button>');
+    $('.' + preBoard + ' .nav_LR').append('<button onclick="nextBoard();resetIntervalBillboard()" class="btn btn--next"></button>');
 
     // Créer le container de slides
-    var slides_container = $('<div class="' + prefix + 'slides-container row" />');
+    var billboard_slides_container = $('<div class="slides-container row" />');
+
     elem.children('img').each(function() {
         var src = $(this).attr('src');
-        var slide = $('<img class="' + prefix + 'slide">').attr('src', src);
-        slide.css('height', $('.' + prefix + 'slider').height() + 'px');
+        var slide = $('<img class="slide">').attr('src', src);
+        slide.css('height', $('.' + preBoard + ' .slider').height() + 'px');
         slide.css('margin', space_between);
-        slide.css('width', ($('.' + prefix + 'slider').width() / board_to_display) - 2 * space_between + 'px');
-        slides_container.append(slide);
+        slide.css('width', ($('.' + preBoard + ' .slider').width() / board_to_display) - 2 * space_between + 'px');
+        billboard_slides_container.append(slide);
 
         // ajout au nombre totla d'images
-        total_images++;
+        billboard_total_images++;
+        console.log("totale image: " + billboard_total_images);
     })
 
     // Ajouter le slide-container au slider
-    $('.' + prefix + 'slider').append(slides_container);
+    $('.' + preBoard + ' .slider').append(billboard_slides_container);
 
     // Supprimer l'élément cible
     elem.remove();
 
 
     //ajouter un bouton de détail
-    $('.' + prefix + 'slider').append('<button class="button draw">Details</button>');
-    $('.' + prefix + 'slider .draw').css({ 'left': 0, 'position': 'absolute', 'bottom': 0 });
+    $('.' + preBoard + ' .slider').append('<button class="button draw">Details</button>');
+    $('.' + preBoard + ' .slider .draw').css({ 'left': 0, 'position': 'absolute', 'bottom': 0 });
 
     //ajouter une navigation secondaire
-    $('.' + prefix + 'slider ').append('<nav class="' + prefix + 'nav_slider row"> <ol></ol></nav>');
-    $('.' + prefix + 'nav_slider').css('bottom', 0);
+    $('.' + preBoard + ' .slider ').append('<nav class="nav_slider row"> <ol></ol></nav>');
+    $('.' + preBoard + ' .nav_slider').css('bottom', 0);
 
-    var index_image = 0;
-    console.log(index_image);
+    var billboard_index_image = 0;
+    //console.log(billboard_index_image);
 
-    $('.' + prefix + 'slides-container .' + prefix + 'slide').each(function() {
-        console.log(index_image);
-        $('.' + prefix + 'nav_slider ol').append('<li> <a class="puce_nav puce_nav--unselected" name="' + index_image + '" onclick="slideTo(this.name) "> </a> </li>');
-        index_image++;
-    })
+    for (i = 0; i < billboard_total_images; i++) {
+        //console.log(index_image);
+        $('.' + preBoard + ' .nav_slider ol').append('<li> <a class="puce_nav puce_nav--unselected" name="' + billboard_index_image + '" onclick="slideToboard(this.name) "> </a> </li>');
+        billboard_index_image++;
+    }
 
     // Attribution de la valeur 0 à l'index de l'image en cours
-    current_image = 0;
-    select_puce(current_image);
+
+    billboard_current_image = 0;
+    select_puce_billboard(billboard_current_image);
+
 }
 
-function next() {
-    unselect_puce(current_image);
-    current_image++;
-    slide();
+function nextBoard() {
+    unselect_puce_billboard(billboard_current_image);
+    billboard_current_image++;
+    console.log('nextBoard current image: ' + billboard_current_image)
+    slideBoard();
 }
 
-function prev() {
-    unselect_puce(current_image);
-    current_image--;
-    slide();
+function prevBoard() {
+
+    if (billboard_current_image == 0) {
+        disabled_prev();
+    } else {
+        unselect_puce_billboard(billboard_current_image);
+        billboard_current_image--;
+        slideBoard();
+    }
+
 }
 
-function slide() {
-    disableNav();
+function slideBoard() {
+
+    disableNavBillboard();
     // cas où on depasse la derniere image
-    if (current_image == total_images) {
-        var slide_temp = $($('.' + prefix + 'slide')[0]).clone();
-        slide_temp.attr('id', 'temp');
-        $('.' + prefix + 'slides-container').append(slide_temp);
+    if (billboard_current_image == billboard_total_images) {
+
+        console.log('nextBoard current image: ' + billboard_current_image + 'billboard_total_images: ' + billboard_total_images);
+        var billboard_slide_temp = $($('.' + preBoard + ' .slide')[0]).clone();
+
+        billboard_slide_temp.attr('id', 'temp');
+        $('.' + preBoard + ' .slides-container').append(billboard_slide_temp);
+
         // Ecouter la fin de la transition
-        $('.' + prefix + 'slides-container').on('transitionend', function() {
+        $('.' + preBoard + ' .slides-container').on('transitionend', function() {
 
             // Supprimer l'écouteur d'événement
-            $('.' + prefix + 'slides-container').off();
+            $('.' + preBoard + ' .slides-container').off();
 
             // remmettre les slides en position d'origine
-            $('.' + prefix + 'slides-container').css('transition', 'none');
-            $('.' + prefix + 'slides-container').css('left', 0);
+            $('.' + preBoard + ' .slides-container').css('transition', 'none');
+            $('.' + preBoard + ' .slides-container').css('left', 0);
 
             // une fois le slider remis en position initiale, remettre la transition
             // Timeout de 10 ms avant de remettre la transition
             setTimeout(function() {
-                $('.' + prefix + 'slides-container').css('transition', 'all 1s');
+                $('.' + preBoard + ' .slides-container').css('transition', 'all 1s');
                 // rétablir la nav
-                enableNav();
+                enableNavBillboard();
             }, 10);
 
-            current_image = 0;
-            slide_temp.remove();
+            billboard_current_image = 0;
+            billboard_slide_temp.remove();
         })
+
     }
 
     // Cas ou on précède la premiere image
-    if (current_image == -1) {
-        var slide_temp = $($('.' + prefix + 'slide')[$('.' + prefix + 'slide').length - 1]).clone();
+    if (billboard_current_image <= -1) {
+        console.log(billboard_current_image);
 
-        slide_temp.css({
+        var billboard_slide_temp = $($('.' + preBoard + ' .slide')[$('.' + preBoard + ' .slide').length + billboard_current_image - 1]).clone();
+
+        billboard_slide_temp.css({
             "position": "absolute",
             "top": "0",
-            "left": $('.' + prefix + 'slider').width() * (-1) + "px"
+            "left": $('.' + preBoard + ' .slider').width() * (-1) + "px"
         })
 
-        $('.' + prefix + 'slides-container').prepend(slide_temp);
-        // Ecouter la fin de la transition
-        $('.' + prefix + 'slides-container').on('transitionend', function() {
+        // alert('prepend');
+        $('.' + preBoard + ' .slides-container').prepend(billboard_slide_temp);
 
-            // Supprimer l'écouteur d'événement
-            $('.' + prefix + 'slides-container').off();
+        if (current_image = -board_to_display) {
 
-            // supprimer la transition
-            $('.' + prefix + 'slides-container').css('transition', 'none');
-            // remmettre les slides en position de fin (sur la dernière slide);
-            $('.' + prefix + 'slides-container').css('left', ((total_images - 1) * $('.' + prefix + 'slider').width()) * (-1) + 'px');
+            // Ecouter la fin de la transition
+            $('.' + preBoard + ' .slides-container').on('transitionend', function() {
 
-            // Timeout de 10 ms avant de remettre la transition
-            setTimeout(function() {
-                $('.' + prefix + 'slides-container').css('transition', 'all 1s');
-                // rétablir la nav
-                enableNav();
-            }, 10);
+                // Supprimer l'écouteur d'événement
+                $('.' + preBoard + ' .slides-container').off();
 
-            current_image = total_images - 1;
-            slide_temp.remove();
-        });
+                // supprimer la transition
+                $('.' + preBoard + ' .slides-container').css('transition', 'none');
+                // remmettre les slides en position de fin (sur la dernière slide);
+                $('.' + preBoard + ' .slides-container').css('left', ((billboard_total_images - 1) * $('.' + preBoard + ' .slider').width()) * (-1) + 'px');
+
+                // Timeout de 10 ms avant de remettre la transition
+                setTimeout(function() {
+                    $('.' + preBoard + ' .slides-container').css('transition', 'all 1s');
+                    // rétablir la nav
+                    enableNavBillboard();
+                }, 10);
+
+
+
+                billboard_slide_temp.remove();
+                billboard_current_image = billboard_total_images - 1;
+
+            });
+
+        }
     }
 
-    var offset = current_image * ($('.' + prefix + 'slides-container .' + prefix + 'slide').width() + 2 * space_between);
-    $('.' + prefix + 'slides-container').css('left', (-1 * offset) + 'px');
-    $('.' + prefix + 'slides-container').on('transitionend', function() {
-        $('.' + prefix + 'slides-container').off();
-        enableNav();
+    var billboard_offset = billboard_current_image * ($('.' + preBoard + ' .slide').width() + 2 * space_between);
+    $('.' + preBoard + ' .slides-container').css('left', (-1 * billboard_offset) + 'px');
+    $('.' + preBoard + ' .slides-container').on('transitionend', function() {
+        $('.' + preBoard + ' .slides-container').off();
+        enableNavBillboard();
     })
 
-    select_puce(current_image);
+    console.log("current image: " + billboard_current_image);
+    select_puce_billboard(billboard_current_image);
 
 }
 
-function disableNav() {
-    $('.' + prefix + 'slider>nav').addClass('disabled');
+function disableNavBillboard() {
+    $('.' + preBoard + ' .nav_LR').addClass('disabled');
 }
 
-function enableNav() {
-    $('.' + prefix + 'slider>nav').removeClass('disabled');
+function enableNavBillboard() {
+    $('.' + preBoard + ' .nav_LR').removeClass('disabled');
 }
 
 // Lecture automatique
-var interval = setInterval(
+var billboardInterval = setInterval(
     function() {
-        next();
+        nextBoard();
     }, 3000);
 
-function resetInterval() {
-    clearInterval(interval);
-    interval = setInterval(function() {
-        next();
+function resetIntervalBillboard() {
+    clearInterval(billboardInterval);
+    billboardInterval = setInterval(function() {
+        nextBoard();
     }, 3000);
 }
 
-function slideTo(move_to_image) {
+function slideToboard(move_to_image) {
 
-    //alert(move_to_image);
 
-    //console.log(move_to_image);
-    unselect_puce(current_image);
+    // remmettre les slides en position d'origine
+    $('.' + preBoard + ' .slides-container').css('transition', 'none');
 
-    select_puce(move_to_image);
 
-    $('.' + prefix + 'slides-container').css('transition', 'none');
-    // $(this).addClass('selected');
-    // $(this).css('background-color','#000');
-    //$('.nav_slider ol a').css('background-color', '#000');
+    unselect_puce_billboard(billboard_current_image);
+    billboard_current_image = move_to_image;
+    select_puce_billboard(billboard_current_image);
 
-    //$('.ol:nth-child(' + move_to_image + ') a').addClass('selected');
-    // $('ol:nth-child(' + move_to_image + 'n)').children('a').css('background-color', '#000');
-    var offset = move_to_image * $('.' + prefix + 'slider').width();
-    $('.' + prefix + 'slides-container').css('left', (-1 * offset) + 'px');
-    $('.' + prefix + 'slides-container').on('transitionend', function() {
-        $('.' + prefix + 'slides-container').off();
+
+    // une fois le slider remis en position initiale, remettre la transition
+    // Timeout de 10 ms avant de remettre la transition
+    setTimeout(function() {
+        $('.' + preBoard + ' .slides-container').css('transition', 'all 1s');
+        // rétablir la nav
+        enableNavBillboard();
+    }, 10);
+
+
+
+    $('.' + preBoard + ' .slides-container').css('transition', 'none');
+
+    billboard_offset = move_to_image * ($('.' + preBoard + ' .slide').width() + 2 * space_between);
+
+    $('.' + preBoard + ' .slides-container').css('left', (-1 * billboard_offset) + 'px');
+    $('.' + preBoard + ' .slides-container').on('transitionend', function() {
+        $('.' + preBoard + ' .slides-container').off();
     })
 
 
     setTimeout(function() {
-        $('.' + prefix + 'slides-container').css('transition', 'all 1s');
+        $('.' + preBoard + ' .slides-container').css('transition', 'all 1s');
         // rétablir la nav
     }, 10);
 
-    current_image = move_to_image;
 
-    resetInterval();
+
+    resetIntervalBillboard();
 }
 
-function select_puce(slide) {
-
-    current_slide = parseInt(slide) + 1;
-    $('.' + prefix + 'nav_slider ol li:nth-child(' + current_slide + ') a').removeClass('puce_nav--unselected');
-    $('.' + prefix + 'nav_slider ol li:nth-child(' + current_slide + ') a').addClass('puce_nav--selected');
+function select_puce_billboard(slide) {
+    billboard_current_image_to = parseInt(slide) + 1;
+    // // console.log('select: ' + billboard_current_image);
+    // console.log('select: ' + billboard_current_image_to);
+    $('.' + preBoard + ' .nav_slider ol li:nth-child(' + billboard_current_image_to + ') a').removeClass('puce_nav--unselected');
+    $('.' + preBoard + ' .nav_slider ol li:nth-child(' + billboard_current_image_to + ') a').addClass('puce_nav--selected');
 
 }
 
-function unselect_puce(slide) {
-    current_slide = parseInt(slide) + 1;
-    $('.' + prefix + 'nav_slider ol li:nth-child(' + current_slide + ') a').removeClass('puce_nav--selected');
-    $('.' + prefix + 'nav_slider ol li:nth-child(' + current_slide + ') a').addClass('puce_nav--unselected');
+function unselect_puce_billboard(slide) {
+    billboard_current_image_to = parseInt(slide) + 1;
+    // // console.log('unselect: ' + billboard_current_image);
+    // console.log('unselect: ' + billboard_current_image_to);
+    $('.' + preBoard + ' .nav_slider ol li:nth-child(' + billboard_current_image_to + ') a').removeClass('puce_nav--selected');
+    $('.' + preBoard + ' .nav_slider ol li:nth-child(' + billboard_current_image_to + ') a').addClass('puce_nav--unselected');
 
+}
+
+function disablePrev() {
+    $('.' + preBoard + ' .btn--prev').addClass('disabled');
+}
+
+function enablePrev() {
+    $('.' + preBoard + ' .btn--prev').removeClass('disabled');
 }

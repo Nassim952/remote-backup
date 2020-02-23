@@ -1,5 +1,5 @@
 $caroussel_full:'caroussel--billboard_';
-.#{$caroussel_full}slider {
+.#{$caroussel_full} .slider {
     height: 350px;
     width: 100%;
     overflow: hidden;
@@ -11,7 +11,7 @@ $caroussel_full:'caroussel--billboard_';
     ;
 }
 
-.#{$caroussel_full}slides-container {
+.#{$caroussel_full} .slides-container {
     position: absolute;
     top: 0;
     left: 0;
@@ -19,11 +19,12 @@ $caroussel_full:'caroussel--billboard_';
     flex-wrap: nowrap;
 }
 
-.#{$caroussel_full}slide {
+.#{$caroussel_full} .slide {
     object-fit: cover;
+    background-color: grey;
 }
 
-.#{$caroussel_full}nav_LR {
+.#{$caroussel_full} .nav_LR {
     width: 100%;
     justify-content: space-between;
     height: 100%;
@@ -32,7 +33,7 @@ $caroussel_full:'caroussel--billboard_';
     align-items: center;
 }
 
-.#{$caroussel_full}nav_slider {
+.#{$caroussel_full} .nav_slider {
     margin: auto;
     position: absolute;
     bottom: 0;
@@ -41,19 +42,20 @@ $caroussel_full:'caroussel--billboard_';
     padding-bottom: 10px;
 }
 
-.#{$caroussel_full}nav_slider ol {
+.#{$caroussel_full} .nav_slider ol {
     list-style: none;
     margin-left: 0;
     padding-left: 0;
+    width: 80%;
     margin: auto;
     display: flex;
     justify-content: space-between;
     background-color: none;
 }
 
-.#{$caroussel_full}nav_slider .puce_nav {
+.#{$caroussel_full} .nav_slider .puce_nav {
     display: inline-block;
-    margin: 0.4rem;
+    margin: 0.1rem;
     height: 0.1rem;
     text-indent: -999px;
     cursor: pointer;
@@ -61,13 +63,13 @@ $caroussel_full:'caroussel--billboard_';
     transition: all 0.25 ease-out;
 }
 
-.#{$caroussel_full}nav_slider .puce_nav--unselected {
-    width: 5rem;
+.#{$caroussel_full} .nav_slider .puce_nav--unselected {
+    width: 0.5rem;
     background-color: $white;
 }
 
-.#{$caroussel_full}nav_slider .puce_nav--selected {
-    width: 6rem;
+.#{$caroussel_full} .nav_slider .puce_nav--selected {
+    width: 1rem;
     background-color: $lay-purple;
     align-self: center;
     transform: translate(0, -0.2rem);
@@ -107,4 +109,31 @@ $caroussel_full:'caroussel--billboard_';
 .disabled {
     pointer-events: none;
     opacity: 0.8;
+}
+
+@media screen and (min-width: 480px) {
+    .#{$caroussel_full} .nav_slider .puce_nav--unselected {
+        width: 1rem;
+    }
+    .#{$caroussel_full} .nav_slider .puce_nav--selected {
+        width: 2rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .#{$caroussel_full} .nav_slider .puce_nav--unselected {
+        width: 2rem;
+    }
+    .#{$caroussel_full} .nav_slider .puce_nav--selected {
+        width: 3rem;
+    }
+}
+
+@media screen and (min-width: 965px) {
+    .#{$caroussel_full} .nav_slider .puce_nav--unselected {
+        width: 5rem;
+    }
+    .#{$caroussel_full} .nav_slider .puce_nav--selected {
+        width: 6rem;
+    }
 }
