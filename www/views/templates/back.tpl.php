@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../../css/edition-style.css">
     <link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+    <script src="../../js/chart.js"></script>
 </head>
 <body>
     <?php include "views/".$this->view.".php" ?>

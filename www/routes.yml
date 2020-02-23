@@ -9,3 +9,7 @@
 /dashboard:
   controller: User
   action: dashboard
+
+/statistiques:
+  controller: User
+  action: stat

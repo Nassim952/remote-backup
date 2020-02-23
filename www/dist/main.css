@@ -36,6 +36,10 @@ p {
   font-family: "Rambla" sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .sidebar {
   background-color: #3C4244;
 }
@@ -188,5 +192,14 @@ p {
     flex-basis: 100%;
     max-width: 100%;
   }
+}
+
+#graph1 {
+  background-color: #FFF;
+  border-radius: 15px;
+}
+
+.graph-container {
+  padding: 50px;
 }
 

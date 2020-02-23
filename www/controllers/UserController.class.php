@@ -18,6 +18,10 @@ class UserController
         new view("dashboard","back");
     }
 
+    public function statAction(){
+        new view("statistiques","back");
+    }
+
     public function loginAction()
     {
         new View("login","back");
