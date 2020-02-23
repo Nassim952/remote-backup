@@ -42,6 +42,8 @@ a{
 
 .sidebar{
     background-color: $sidebar-black;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .site-content{

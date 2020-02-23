@@ -42,6 +42,9 @@ a {
 
 .sidebar {
   background-color: #3C4244;
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .site-content {
