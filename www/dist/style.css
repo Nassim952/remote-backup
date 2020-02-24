@@ -1,0 +1,144 @@
+* 
+{
+	margin: 0; 
+	padding: 0; 
+	box-sizing: border-box;
+}
+
+body, html 
+{
+	width: 100%;
+	height: 100%;
+	font-family: "Montserrat", sans-serif;
+}
+
+body
+{
+	background-color: white;
+}
+
+.container
+{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.section1
+{
+	width: 53%;
+	height: 100%;
+	background-image: url("../src/images/red.png");
+	background-size: auto;
+}
+
+.section2
+{
+	width: 47%;
+	height: 100%;
+}
+
+.headerSection2
+{
+	width: 100%;
+	height: 25%;
+	position: relative;
+}
+
+.headerSection2 > .containerImg
+{
+	width: 100%;
+	position: absolute;
+	bottom: 12%;
+}
+
+.headerSection2 > .containerImg > img
+{
+	width: 25vw;
+	display: block;
+	margin: auto;
+}
+
+.sectionSignup
+{
+    width: 100%;
+    height: 65%;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+	color: #3C4244;
+}
+
+.sectionSignup > h1
+{
+	width: 100%;
+	font-size: 1.5vw;
+	text-align: center;
+}
+
+.divInput
+{
+	width: 70%;
+	margin: auto;
+}
+
+.sectionSignup input[name="firstname"], input[name="lastname"]
+{
+	width: 45%;
+	padding: 8px 12px;
+	border: 1px solid #E5E5E5;
+	border-radius: 7px;
+	margin-top: 15px;
+}
+
+.sectionSignup input[type=email], input[type=password]
+{
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #E5E5E5;
+  border-radius: 7px;
+  margin-top: 15px;
+}
+
+.divCheckbox
+{
+	width: 100%;
+	margin-top: 15px;
+}
+
+.sectionSignup input[type=checkbox]
+{
+	
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #C7C7C7;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #C7C7C7;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #C7C7C7;
+}
+
+.sectionSignup label
+{
+	font-size: 1.2vw;
+}
+
+button[type=submit]
+{
+	background-color: #EF3635;
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 100px;
+	cursor: pointer;
+	margin: auto;
+}
