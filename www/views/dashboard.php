@@ -137,6 +137,66 @@
                         <a href="#" class="fas fa-trash-alt fa-lg"></a>
                     </div>
                 </td>
+                <td class="td-dashboard-wrapper">
+                    <div class="pretty p-default p-curve p-bigger cb-fixer">
+                        <input type="checkbox">
+                        <div class="state p-danger">
+                            <label></label>
+                        </div>
+                    </div>
+                    <p id="text-wrappe">Fast & Furious 8</p>
+                    |
+                    <p id="hour-wrappe">1h34</p>
+                    <div class="icons-wrapper">
+                        <a href="#" class="fas fa-edit fa-lg"></a>
+                        <a href="#" class="fas fa-trash-alt fa-lg"></a>
+                    </div>
+                </td>
+                <td class="td-dashboard-wrapper">
+                    <div class="pretty p-default p-curve p-bigger cb-fixer">
+                        <input type="checkbox">
+                        <div class="state p-danger">
+                            <label></label>
+                        </div>
+                    </div>
+                    <p id="text-wrappe">Fast & Furious 8</p>
+                    |
+                    <p id="hour-wrappe">1h34</p>
+                    <div class="icons-wrapper">
+                        <a href="#" class="fas fa-edit fa-lg"></a>
+                        <a href="#" class="fas fa-trash-alt fa-lg"></a>
+                    </div>
+                </td>
+                <td class="td-dashboard-wrapper">
+                    <div class="pretty p-default p-curve p-bigger cb-fixer">
+                        <input type="checkbox">
+                        <div class="state p-danger">
+                            <label></label>
+                        </div>
+                    </div>
+                    <p id="text-wrappe">Fast & Furious 8</p>
+                    |
+                    <p id="hour-wrappe">1h34</p>
+                    <div class="icons-wrapper">
+                        <a href="#" class="fas fa-edit fa-lg"></a>
+                        <a href="#" class="fas fa-trash-alt fa-lg"></a>
+                    </div>
+                </td>
+                <td class="td-dashboard-wrapper">
+                    <div class="pretty p-default p-curve p-bigger cb-fixer">
+                        <input type="checkbox">
+                        <div class="state p-danger">
+                            <label></label>
+                        </div>
+                    </div>
+                    <p id="text-wrappe">Fast & Furious 8</p>
+                    |
+                    <p id="hour-wrappe">1h34</p>
+                    <div class="icons-wrapper">
+                        <a href="#" class="fas fa-edit fa-lg"></a>
+                        <a href="#" class="fas fa-trash-alt fa-lg"></a>
+                    </div>
+                </td>
             </tr>
         </table>
     </div>
