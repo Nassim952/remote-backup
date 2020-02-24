@@ -24,7 +24,9 @@
 				<input type="password" name="password" id="" placeholder="Mot de passe">
 				<br>
 				<div class="divCheckbox">
-					<img src="">
+					<img src="images/image-2.png" style="    width: 60%;
+					margin-top: 15px;
+					margin-left: 20%;"/>
 				</div>
 				<br>
 				<br>
