@@ -22,6 +22,14 @@ class UserController
         new view("statistiques","back");
     }
 
+    public function signupAction(){
+        new view("signup","front");
+    }
+
+    public function signinAction(){
+        new view("signin","front");
+    }
+
     public function loginAction()
     {
         new View("login","back");
