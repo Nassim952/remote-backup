@@ -79,6 +79,7 @@
 	.sectionSignup input[name="firstname"], input[name="lastname"]
 	{
 		padding: 5px 12px;
+		width: 48%;
 	}
 
 	.sectionSignup input[type=email], input[type=password]
@@ -173,7 +174,7 @@
 	.sectionSignup
 	{
 	    width: 90%;
-		height: 300px;
+		height: 350px;
 		margin: auto;
 		border-radius: 0 0 15px 15px;
 		background-color: white;
@@ -197,7 +198,7 @@
 
 	.sectionSignup input[name="firstname"], input[name="lastname"]
 	{
-		width: 45%;
+		width: 48.4%;
 		padding: 2px 12px;
 		margin-top: 10px;
 	}
