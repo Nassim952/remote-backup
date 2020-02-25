@@ -167,3 +167,12 @@ li{
   mix-blend-mode: hard-light;
 }
 /* END Dasshboard CSS */
+
+.label-password{
+  font-size: 15px;
+  color: #EF3535;
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  justify-content: space-between;
+}

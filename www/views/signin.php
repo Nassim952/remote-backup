@@ -23,6 +23,11 @@
 				<br>
 				<input type="password" name="password" id="" placeholder="Mot de passe">
 				<br>
+				<div class="label-password">
+					<input type="checkbox"/>
+					<span style="margin-right: 30%; padding: 9px;">Se souvenir de moi</span>
+					<span>Mot de passe oublié ?</span>
+				</div>
 				<div class="divCheckbox">
 					<img src="images/image-2.png" style="    width: 60%;
 					margin-top: 15px;
