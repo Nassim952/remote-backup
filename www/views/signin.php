@@ -1,5 +1,5 @@
 <head>
-	<title>NEAR BY - Inscription</title>
+	<title>NEAR BY - Connexion</title>
 </head>
 
 <main class="container">
