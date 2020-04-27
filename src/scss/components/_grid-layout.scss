@@ -1,0 +1,44 @@
+.container {
+    max-width: 992px;
+    margin: auto;
+    overflow-x: hidden;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: grey;
+    margin: 0 -10px;
+}
+
+[class *="col-md"],
+[class *="col-lg"] {
+    flex-basis: 100%;
+}
+
+$columns:4;
+@for $i from 1 through $columns {
+    .col-sm-#{$i} {
+        flex-basis: ((100/$columns)*$i)*1%;
+        max-width: ((100/$columns)*$i)*1%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    @for $i from 1 through $columns {
+        .col-md-#{$i} {
+            flex-basis: ((100/$columns)*$i)*1%;
+            max-width: ((100/$columns)*$i)*1%;
+        }
+    }
+}
+
+@media screen and (min-width: 965px) {
+    @for $i from 1 through $columns {
+        .col-lg-#{$i} {
+            flex-basis: ((100/$columns)*$i)*1%;
+            max-width: ((100/$columns)*$i)*1%;
+        }
+    }
+}
