@@ -15,7 +15,8 @@ class user extends DB{
     public function hydrade($data){
         array_walk($data, function($key, $value){
             if(isset($data[$key])){
-                'set'.$key($value);
+                $param = 'set'.$key;
+                $param($value);
             }   
         });
     }
@@ -31,7 +32,7 @@ class user extends DB{
     public function setLastname($lastname){
         $this->lastname = trim($lastname);
     }
-    
+
     public function setLogin($login){
         $this->login = trim($login);
     }
@@ -42,5 +43,29 @@ class user extends DB{
 
     public function setType($type){
         $this->type = $type;
+    }
+
+    public function getId($id){
+        return $this->id;
+    }
+
+    public function getFirstname($firstname){
+       return $this->firstname;
+    }
+
+    public function getLastname($lastname){
+       return $this->lastname;
+    }
+    
+    public function getLogin($login){
+        return $this->login;
+    }
+
+    public function getPassword($password){
+        return $this->passwor;
+    }
+
+    public function getType($type){
+        return $this->type;
     }
 }
