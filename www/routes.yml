@@ -13,3 +13,11 @@
 /statistiques:
   controller: User
   action: stat
+
+/inscription:
+  controller: User
+  action: signup
+
+/connexion:
+  controller: User
+  action: signin
