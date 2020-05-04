@@ -36,7 +36,10 @@
 					<label>J'accepte de recevoir des offres spéciales par mail</label>
 				</div>
 				<br>
-				<center><button type="submit">S'inscrire</button></center>
+				<div class="button_wrapper">
+					<a href="#" class="button">S'inscrire</a>
+					<a href="<?= Helpers::getUrl("User", "signin") ?>" class="button" style="margin-top: 20px;">Déjà un compte ?</a>
+				</div>
 			</div>
 		</section>
 	</section>

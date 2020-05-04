@@ -35,7 +35,10 @@
 				</div>
 				<br>
 				<br>
-				<center><button type="submit">Se connecter</button></center>
+				<div class="button_wrapper">
+					<a href="#" class="button">Se connecter</a>
+					<a href="<?= Helpers::getUrl("User", "signup") ?>" class="button" style="margin-top: 20px;">Pas de compte ?</a>
+				</div>
 			</div>
 		</section>
 	</section>
