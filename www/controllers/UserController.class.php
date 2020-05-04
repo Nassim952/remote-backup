@@ -11,23 +11,23 @@ class UserController
     // }
 
     public function landingAction(){
-        new view("landing-page","front");
+        new View("landing-page","front");
     }
 
     public function dashboardAction(){
-        new view("dashboard","back");
+        new View("dashboard","back");
     }
 
     public function statAction(){
-        new view("statistiques","back");
+        new View("stat","back");
     }
 
     public function signupAction(){
-        new view("signup","front");
+        new View("signup","front");
     }
 
     public function signinAction(){
-        new view("signin","front");
+        new View("signin","front");
     }
 
     public function loginAction()
@@ -45,15 +45,15 @@ class UserController
             $typeUser = $user->getTypeUser();
 
             if ($typeUser == 1) {
-                $view = helpers::getUrl("User", "dashboard");
+                $view = Helpers::getUrl("User", "dashboard");
                 $newUrl = trim($view, "/");
                 header("Location: " . $newUrl);
             } elseif ($typeUser == 2) {
-                $view = helpers::getUrl("#", "#");
+                $view = Helpers::getUrl("#", "#");
                 $newUrl = trim($view, "/");
                 header("Location: " . $newUrl);
             } elseif ($typeUser == 3) {
-                $view = helpers::getUrl("#", "#");
+                $view = Helpers::getUrl("#", "#");
                 $newUrl = trim($view, "/");
                 header("Location: " . $newUrl);
             } elseif ($typeUser == 4) {
