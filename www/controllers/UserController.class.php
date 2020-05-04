@@ -19,7 +19,7 @@ class UserController
     }
 
     public function statAction(){
-        new View("statistiques","back");
+        new View("stat","back");
     }
 
     public function loginAction()
@@ -37,15 +37,15 @@ class UserController
             $typeUser = $user->getTypeUser();
 
             if ($typeUser == 1) {
-                $view = helpers::getUrl("User", "dashboard");
+                $view = Helpers::getUrl("User", "dashboard");
                 $newUrl = trim($view, "/");
                 header("Location: " . $newUrl);
             } elseif ($typeUser == 2) {
-                $view = helpers::getUrl("#", "#");
+                $view = Helpers::getUrl("#", "#");
                 $newUrl = trim($view, "/");
                 header("Location: " . $newUrl);
             } elseif ($typeUser == 3) {
-                $view = helpers::getUrl("#", "#");
+                $view = Helpers::getUrl("#", "#");
                 $newUrl = trim($view, "/");
                 header("Location: " . $newUrl);
             } elseif ($typeUser == 4) {

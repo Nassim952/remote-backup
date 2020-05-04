@@ -36,7 +36,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-film fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?= helpers::getUrl("User", "dashboard") ?>" id="text-white"><span>Films</span></a>
+                            <a href="<?= Helpers::getUrl("User", "dashboard") ?>" id="text-white"><span>Films</span></a>
                         </div>
                     </div>
                 </div>
