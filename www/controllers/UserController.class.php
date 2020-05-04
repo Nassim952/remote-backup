@@ -9,17 +9,17 @@ class UserController
     //     isset($_POST['login']) ? $this->login = $_POST['login'] : null;
     //     isset($_POST['login']) ? $this->password = $_POST['password'] : null;
     // }
-
+        
     public function landingAction(){
-        new view("landing-page","front");
+        new View("landing-page","front");
     }
 
     public function dashboardAction(){
-        new view("dashboard","back");
+        new View("dashboard","back");
     }
 
     public function statAction(){
-        new view("statistiques","back");
+        new View("statistiques","back");
     }
 
     public function loginAction()
