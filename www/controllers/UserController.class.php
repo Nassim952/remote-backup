@@ -1,17 +1,33 @@
 <?php
-class AuthentificationController
+class UserController
 {
     private $login;
     private $password;
 
-    public function __construct()
-    {
-        isset($_POST['login']) ? $this->login = $_POST['login'] : null;
-        isset($_POST['login']) ? $this->password = $_POST['password'] : null;
+    // public function __construct()
+    // {
+    //     isset($_POST['login']) ? $this->login = $_POST['login'] : null;
+    //     isset($_POST['login']) ? $this->password = $_POST['password'] : null;
+    // }
+        
+    public function landingAction(){
+        new View("landing-page","front");
     }
 
-    public function landingAction(){
-        new view("landing-page","front");
+    public function dashboardAction(){
+        new View("dashboard","back");
+    }
+
+    public function statAction(){
+        new View("stat","back");
+    }
+
+    public function signupAction(){
+        new View("signup","front");
+    }
+
+    public function signinAction(){
+        new View("signin","front");
     }
 
     public function loginAction()
@@ -29,15 +45,15 @@ class AuthentificationController
             $typeUser = $user->getTypeUser();
 
             if ($typeUser == 1) {
-                $view = helpers::getUrl("User", "dashboard");
+                $view = Helpers::getUrl("User", "dashboard");
                 $newUrl = trim($view, "/");
                 header("Location: " . $newUrl);
             } elseif ($typeUser == 2) {
-                $view = helpers::getUrl("#", "#");
+                $view = Helpers::getUrl("#", "#");
                 $newUrl = trim($view, "/");
                 header("Location: " . $newUrl);
             } elseif ($typeUser == 3) {
-                $view = helpers::getUrl("#", "#");
+                $view = Helpers::getUrl("#", "#");
                 $newUrl = trim($view, "/");
                 header("Location: " . $newUrl);
             } elseif ($typeUser == 4) {

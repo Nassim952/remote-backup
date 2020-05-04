@@ -3,16 +3,24 @@
   font-family: "Montserrat", sans-serif;
   color: #F2F2F2;
   color: #444;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 h1,
 h2,
 h3 {
-  font-family: "Lato", sans-serif;
+  font-family: "Rambla" sans-serif;
 }
 
 h1 {
   font-size: rem(24);
+  color: #EF3535;
 }
 
 h2 {
@@ -25,7 +33,22 @@ h3 {
 
 p {
   line-height: 1.5em;
-  background-color: #CE0A0B;
+  font-family: "Rambla" sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.sidebar {
+  background-color: #3C4244;
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.site-content {
+  background-color: #f1f1f1;
 }
 
 .button {
@@ -172,5 +195,14 @@ p {
     flex-basis: 100%;
     max-width: 100%;
   }
+}
+
+#graph1 {
+  background-color: #FFF;
+  border-radius: 15px;
+}
+
+.graph-container {
+  padding: 50px;
 }
 
