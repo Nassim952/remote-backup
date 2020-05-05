@@ -1,4 +1,9 @@
-<?php 
+<?php
+
+namespace cms\models;
+
+use cms\core\DB;
+
 class user extends DB{
     protected $login;
     protected $password;

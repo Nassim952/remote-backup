@@ -36,7 +36,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-film fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?= Helpers::getUrl("User", "dashboard") ?>" id="text-white"><span>Films</span></a>
+                            <a href="<?= \cms\core\Helpers::getUrl("User", "dashboard") ?>" id="text-white"><span>Films</span></a>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-users fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?= Helpers::getUrl("User","stat") ?>" id="text-white"><span>Stats</span></a>
+                            <a href="<?= \cms\core\Helpers::getUrl("User","stat") ?>" id="text-white"><span>Stats</span></a>
                         </div>
                     </div>
                 </div>

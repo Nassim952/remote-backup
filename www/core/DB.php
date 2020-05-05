@@ -1,4 +1,7 @@
 <?php
+
+namespace cms\core;
+
 class DB
 {
     private $table;

@@ -3,5 +3,5 @@
 </head>
 <body>
     cinema CMS
-    <a href="<?= Helpers::getUrl("User","dashboard")?>">dashboard</a>
+    <a href="<?= \cms\core\Helpers::getUrl("User","dashboard")?>">dashboard</a>
 </body>

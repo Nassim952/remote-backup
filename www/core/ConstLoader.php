@@ -1,4 +1,7 @@
 <?php
+
+namespace cms\core;
+
 class ConstLoader{
 
     private $extend;

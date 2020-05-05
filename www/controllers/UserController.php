@@ -1,4 +1,11 @@
 <?php
+
+namespace cms\controllers;
+
+use cms\models\user;
+use cms\core\View;
+use cms\core\Helpers;
+
 class UserController
 {
     private $login;

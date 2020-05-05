@@ -37,7 +37,7 @@
 				<br>
 				<div class="button_wrapper">
 					<a href="#" class="button">Se connecter</a>
-					<a href="<?= Helpers::getUrl("User", "signup") ?>" class="button" style="margin-top: 20px;">Pas de compte ?</a>
+					<a href="<?= \cms\core\Helpers::getUrl("User", "signup") ?>" class="button" style="margin-top: 20px;">Pas de compte ?</a>
 				</div>
 			</div>
 		</section>
