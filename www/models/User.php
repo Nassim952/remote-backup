@@ -4,7 +4,7 @@ namespace cms\models;
 
 use cms\core\DB;
 
-class user extends DB{
+class User extends DB{
     protected $login;
     protected $password;
     protected $type;

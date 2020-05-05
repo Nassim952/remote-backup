@@ -2,7 +2,7 @@
 
 namespace cms\controllers;
 
-use cms\models\user;
+use cms\models\User;
 use cms\core\View;
 use cms\core\Helpers;
 

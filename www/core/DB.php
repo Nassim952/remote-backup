@@ -14,7 +14,9 @@ class DB
         } catch (Exception $e) {
             die("error sql : " . $e->getMessage());
         }
-        $this->table = get_called_class();
+        $this->table = PREFIXE_DB.get_called_class();
+        $cleanTable = str_replace('cms\models\users', 'users', $this->table);
+        $this->table = $cleanTable;
     }
 
     public function checkLogin()
