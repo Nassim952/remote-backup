@@ -1,19 +1,6 @@
 <?php
 // session_start();
 
-//Permet d'inclure une classe non défini
-// function myAutoload($class){
-//     if(file_exists("core/".$class.".class.php")){
-//         include "core/".$class.".class.php";
-
-//     }else if(file_exists("models/".$class.".model.php")){
-//         include "models/".$class.".model.php";
-//     }
-//     else if(file_exists("controllers/".$class.".class.php")){
-//         include "controllers/".$class.".class.php";
-//     }
-// }
-
 function myAutoload($class)
 {
     $class = str_replace("cms", "", $class);
@@ -43,10 +30,6 @@ $listOfRoutes = yaml_parse_file("routes.yml");
 if( !empty($listOfRoutes[$uri]) ){
     $c = 'cms\controllers\\'.ucfirst($listOfRoutes[$uri]["controller"]."Controller");
     $a = $listOfRoutes[$uri]["action"]."Action";
-	
-    //Est ce que dans le dossier controller il y a une class
-    //qui correspond à $c
-    // if( file_exists("controllers/".$c.".php") ){
 
         // include "controllers/".$c.".php";
         if( class_exists($c)){
@@ -64,10 +47,6 @@ if( !empty($listOfRoutes[$uri]) ){
             die("Le class controller n'existe pas");
         }
 
-    // }else{
-    // 	die("Le fichier du controller n'existe pas : controllers/".$c.".php");
-    // }
-
 }else{
-    // include "views/404.php";
+    include "views/404.php";
 }
