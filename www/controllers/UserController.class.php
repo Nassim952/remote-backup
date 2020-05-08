@@ -30,6 +30,11 @@ class UserController
         new View("signin","front");
     }
 
+    public function addFilmAction()
+    {
+        new view("addfilm","back");
+    }
+
     public function loginAction()
     {
         new View("login","back");
