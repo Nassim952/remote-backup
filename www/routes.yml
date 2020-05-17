@@ -10,7 +10,6 @@
   controller: User
   action: template
 
-
 /dashboard:
   controller: User
   action: dashboard

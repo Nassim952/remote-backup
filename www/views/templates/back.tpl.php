@@ -80,7 +80,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-users fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?= Helpers::getUrl("User","users") ?>" id="text-white"><span>Users</span></a>
+                            <a href="<?= \cms\core\Helpers::getUrl("User","users") ?>" id="text-white"><span>Users</span></a>
                         </div>
                     </div>
                 </div>

@@ -48,11 +48,10 @@
             </thead>
 
             <tbody>
-                <!--<?php
-                /**    $users = new user;
-                    foreach($users->getUsers() as $key => $value): 
-                **/
-                ?>-->
+                <?php
+                    $max = 16;
+                    for($i=0; $i < $max; $i++): 
+                ?> 
                 <tr>
                     <th>
                         <div class="pretty p-default p-curve p-bigger cb-fixer">
@@ -70,7 +69,7 @@
                     <td><a href="#" class="fas fa-edit fa-lg"></a></td>
                     <td><a href="#" class="fas fa-trash-alt fa-lg"></a></td>
                 </tr>
-                <!--<?php /** endforeach **/; ?>-->
+                <?php endfor; ?>
 
                 <tr>
                     <th>
