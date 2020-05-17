@@ -29,6 +29,10 @@ class UserController
         new View("stat","back");
     }
 
+    public function usersAction(){
+        new View("users","back");
+    }
+
     public function signupAction(){
         new View("signup","front");
     }
