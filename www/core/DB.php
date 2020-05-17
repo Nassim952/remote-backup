@@ -19,6 +19,28 @@ class DB
         $this->table = $cleanTable;
     }
 
+    public function initBdd()
+    {
+        if(!file_exists(".sql")){
+            return false;
+        }
+
+        //.sql
+        $sql = trim(file_get_contents(".sql"));
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute();
+    }
+
+    public function load(){
+        $lines = explode("\r\n",$this->text);
+        foreach ($lines as $line) {
+            $data = explode ("=", $line);
+            if(!defined($data[0]) && isset($data[1])){
+                define($data[0], $data[1]);
+            }
+        }
+    }
+
     public function checkLogin()
     {
         $sql = "SELECT * FROM " . $this->table . ";";
