@@ -1,0 +1,47 @@
+.sub-nav-template{
+    background: rgba(252, 213, 213, 0.22);
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.link-wrapper-template{
+    display: flex;
+    width: 40%;
+    justify-content: space-around;
+}
+
+.right-input-wrapper{
+    padding: 15px;
+}
+
+.space-1{
+    width: 745px;
+    height: 360px;
+    border-color: black;
+    border: groove;
+}
+
+.space-2{
+    width: auto;
+    height: 205px;
+    border-color: black;
+    border: groove;
+}
+
+.upper-template{
+    display: flex;
+    justify-content: space-around;
+}
+
+.down-template{
+    padding: 5px;
+}
+
+.vertical-box-align{
+    display: flex;
+    justify-content: center;
+    height: -webkit-fill-available;
+    align-items: center;
+}

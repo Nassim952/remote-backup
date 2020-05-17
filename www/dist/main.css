@@ -51,7 +51,7 @@ a {
   background-color: #f1f1f1;
 }
 
-.button {
+.button-test {
   text-decoration: none;
   color: #FFF;
   padding: 1em;
@@ -64,24 +64,71 @@ a {
   transition: background-color 0.3s;
 }
 
-.button:hover {
+.button-test:hover {
   background-color: #5e5e5e;
 }
 
-.button--success {
+.button-test--success {
   background-color: #31AA65;
 }
 
-.button--success:hover {
+.button-test--success:hover {
   background-color: #45c97e;
 }
 
-.button--alert {
+.button-test--alert {
   background-color: #CE0A0B;
 }
 
-.button--alert:hover {
+.button-test--alert:hover {
   background-color: #45c97e;
+}
+
+.button-red {
+  box-shadow: inset 0px 1px 0px 0px #f5978e;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #f24537), to(#CE0A0B));
+  background: linear-gradient(to bottom, #f24537 5%, #CE0A0B 100%);
+  background-color: #f24537;
+  border-radius: 15px;
+  border: 1px solid #d02718;
+  display: inline-block;
+  cursor: pointer;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+}
+
+.button-red:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #c62d1f), to(#f24537));
+  background: linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+  background-color: #CE0A0B;
+  color: white;
+}
+
+.button-red:active {
+  position: relative;
+  top: 1px;
+}
+
+.input-round {
+  padding: 3px;
+  font-size: 19px;
+  border-width: 1px;
+  border-color: #cccccc;
+  background-color: #ffffff;
+  color: #000000;
+  border-style: solid;
+  border-radius: 11px;
+  box-shadow: 0px 0px 5px rgba(66, 66, 66, 0.75);
+  text-shadow: 0px 0px 5px rgba(66, 66, 66, 0.75);
+}
+
+.input-round:focus {
+  outline: none;
 }
 
 .image-banner {

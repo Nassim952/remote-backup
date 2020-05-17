@@ -1,10 +1,15 @@
-/:
-  controller: User
-  action: landing
-
 /login:
   controller: User
   action: login
+
+/home:
+  controller: User
+  action: home
+
+/template:
+  controller: User
+  action: template
+
 
 /dashboard:
   controller: User
@@ -21,3 +26,11 @@
 /connexion:
   controller: User
   action: signin
+
+/cinema:
+  controller: Cinema
+  action: cinema
+
+/salles:
+  controller: Cinema
+  action: salles
