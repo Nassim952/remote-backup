@@ -34,3 +34,7 @@
 /salles:
   controller: Cinema
   action: salles
+  
+/addfilm:
+  controller: User
+  action: addfilm
