@@ -1,0 +1,15 @@
+.input-round {
+    padding: 3px;
+    font-size: 19px;
+    border-width: 1px;
+    border-color: #cccccc;
+    background-color: #ffffff;
+    color: #000000;
+    border-style: solid;
+    border-radius: 11px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+    text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
+.input-round:focus {
+    outline:none;
+}
