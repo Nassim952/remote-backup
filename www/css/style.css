@@ -1,3 +1,8 @@
+body
+{
+  background-color: #F1F1F1;
+}
+
 /* Start Dashboard CSS */
 
 .flex-container {
@@ -166,4 +171,63 @@ li{
   align-items: center;
   mix-blend-mode: hard-light;
 }
+
 /* END Dasshboard CSS */
+
+
+/* Start Users CSS */
+
+.usersTable 
+{
+  border-collapse: collapse;
+  width: 90%;
+  margin: auto;
+  font-weight: bold;
+}
+
+.usersTable thead th
+{
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.usersTable tbody tr:nth-child(odd)
+{
+  background-color: white;
+}
+
+.usersTable tbody tr:nth-child(even)
+{
+  background-color: transparent;
+}
+
+.usersTable tbody td:nth-child(odd)
+{
+  background: none;
+}
+
+.usersTable tbody td
+{
+  text-align: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.usersTable tbody td:last-child
+{
+  border-radius: 0 13px 13px 0;
+
+}
+
+.usersTable tbody th:first-child
+{
+  border-radius: 13px 0 0 13px;
+
+}
+
+.usersTable tbody td:nth-child(3+4)
+{
+  width: 28%;
+}
+
+/* END Users CSS */
