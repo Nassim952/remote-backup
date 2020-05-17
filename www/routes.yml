@@ -38,3 +38,7 @@
 /addfilm:
   controller: User
   action: addfilm
+
+/users:
+  controller: User
+  action: users
