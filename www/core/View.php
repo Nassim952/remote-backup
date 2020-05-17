@@ -1,4 +1,7 @@
 <?php
+
+namespace www\core;
+
 class View
 {
     private $view;
@@ -28,6 +31,7 @@ class View
 
     public function __destruct()
     {
+
         include "views/templates/" . $this->template . ".tpl.php";
     }
 }

@@ -1,7 +1,12 @@
 <?php 
-class user extends DB{
 
-    protected $id=null;
+namespace www\models;
+
+use www\Managers\UserManager;
+
+class user extends UserManager{
+
+    protected $id = null;
     protected $firstname;
     protected $lastname;
     protected $login;
@@ -9,16 +14,7 @@ class user extends DB{
     protected $type;
 
     public function __Construct(){
-        parent::__construct();
-    }
-
-    public function hydrade($data){
-        array_walk($data, function($key, $value){
-            if(isset($data[$key])){
-                $param = 'set'.$key;
-                $param($value);
-            }   
-        });
+        $this->find($id);
     }
 
     public function setId($id){

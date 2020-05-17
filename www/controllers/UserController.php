@@ -1,5 +1,11 @@
 <?php
-class AuthentificationController
+
+namespace www\controllers;
+
+use www\core\View;
+use www\models\User;
+
+class UserController
 {
     private $login;
     private $password;
@@ -11,7 +17,7 @@ class AuthentificationController
     }
 
     public function landingAction(){
-        new view("landing-page","front");
+        new View("landing-page");
     }
 
     public function loginAction()

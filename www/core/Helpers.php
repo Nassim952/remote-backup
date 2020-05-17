@@ -1,5 +1,7 @@
 <?php
 
+namespace www\core;
+
 class Helpers{
     public static function getUrl($controller, $action)
     {

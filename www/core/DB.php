@@ -1,17 +1,20 @@
 <?php
+
+namespace cms\models;
+
 class DB
 {
     private $table;
     private $pdo;
 
-    public function __construct()
+    public function __construct($table)
     {
         try {
             $this->pdo = new PDO(DRIVER_DB . ":host=" . HOST_DB . ";dbname=" . NAME_DB, USER_DB, PWD_DB);
         } catch (Exception $e) {
             die("error sql : " . $e->getMessage());
         }
-        $this->table = get_called_class();
+        $this->table = $table;
     }
 
     public function checkLogin()
@@ -31,12 +34,39 @@ class DB
         }
     }
 
+
     public function getTypeUser()
     {
         if(isset($_SESSION))
         {
             $typeUser = $_SESSION['user']['type'];
             return $typeUser;
+        }
+    }
+
+
+    public function find(int $id){
+        $sql = "SELECT * FROM " . $this->table . " WHERE id =".$id.";";
+        $result = $this->sql($sql,[':id' => $id]);
+
+        $row = $result->fetch();
+        if($row){
+            $object = $this->class();
+            return $object->hydrate($row);
+        }else{
+            return null;
+        }
+    }
+
+    protected function sql($sql, $parameters = null)
+    {
+        if ($parameters) {
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute($parameters);     
+            return $queryPrepared;
+        } else {
+            $queryPrepared = $this->pdo->prepare($sql);
+            return $queryPrepared;
         }
     }
 

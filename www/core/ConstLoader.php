@@ -1,4 +1,7 @@
 <?php
+
+namespace www\core;
+
 class ConstLoader{
 
     private $extend;
@@ -6,7 +9,7 @@ class ConstLoader{
 
     public function __construct($extend = "env"){
 
-        $this->extend=$extend; 
+        $this->extend = $extend; 
         $this->checkFiles();
         $this->getFilesEnv();
         $this->load();
