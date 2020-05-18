@@ -37,7 +37,7 @@ CREATE OR REPLACE TABLE COMPONNENT(
     type_Componnent INT, 
     color INT,
 
- )
+)
 
 CREATE OR REPLACE TABLE PAGE(
 
