@@ -1,56 +1,39 @@
 <?php
 
-namespace www\controllers;
+namespace mvc\controllers;
 
-use www\core\View;
-use www\models\User;
+use mvc\models\Users;
+use mvc\core\View;
 
-class UserController
-{
-    private $login;
-    private $password;
+class UserController{
+	public function loginAction(){
+		$myView = new View("login", "account");
+	}
 
-    public function __construct()
-    {
-        isset($_POST['login']) ? $this->login = $_POST['login'] : null;
-        isset($_POST['login']) ? $this->password = $_POST['password'] : null;
-    }
+	public function registerAction(){
 
-    public function landingAction(){
-        new View("landing-page");
-    }
+		$configForm = users::getRegisterForm();
 
-    public function loginAction()
-    {
-        new View("login","back");
+		if($_SERVER["REQUEST_METHOD"] == "POST"){
+			$error = Validator::formValidate($configForm, $_POST);
+		}
 
-        $user = new User();
+		$user = new Users();
+		
+		$user->setFirstName("bob");
+		$user->setLastName("berry");
+		$user->setEmail("boberry@gmail.com");
+		$user->setPwd("anonymous");
+		$user->setStatus(0);
 
-        $user->setLogin($this->login);
-        $user->setPassword($this->password);
+		$user->save();
+		// $user->count();
 
-        $user->checkLogin();
+		$myView = new View("register", "account");
+		$myView->assign("configForm",$configForm);
+	}
 
-        if ($user == true) {
-            $typeUser = $user->getTypeUser();
-
-            if ($typeUser == 1) {
-                $view = helpers::getUrl("User", "dashboard");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
-            } elseif ($typeUser == 2) {
-                $view = helpers::getUrl("#", "#");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
-            } elseif ($typeUser == 3) {
-                $view = helpers::getUrl("#", "#");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
-            } elseif ($typeUser == 4) {
-                $view = Helpers::getUrl("#","#");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
-            }
-        }
-    }
+	public function forgetPwdAction(){
+		$myView = new View("forgetPwd", "account");
+	}
 }

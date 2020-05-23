@@ -2,21 +2,19 @@
 
 namespace www\core;
 
-use www\core\DB;
+class Model implements \JsonSerializable{
 
-class Model extends DB{
+    public function toString(): array
+    {
 
-    public function _construct(){
 
-        parent::_construct(get_called_class(),'user');
-    
     }
 
-    public function hydrade($data){
+    public function hydrade($data)
+    {
         array_walk(
             $data, function($key, $value){
                 $method = 'set'.ucfirst($key);
-
                 if(method_exists($this,$method))
                 {   
                     $this->$methode($value);
@@ -24,4 +22,21 @@ class Model extends DB{
             }
         );
     }
+
+    public function hydrate(array $data){
+        foreach ($data as $key => $value){
+            // permet de mettre une majuscule a la 1ere lettre de chaque clé (correspondance nom méthodes)
+            $method = 'set'.ucfirst($key);
+            
+            if(method_exists($this, $method)){
+                $this->$method($value);
+            }
+        }
+    }
+
+    public function JsonSeralisable(){
+
+       
+    }
+
 }

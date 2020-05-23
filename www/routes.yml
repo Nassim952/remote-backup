@@ -1,11 +1,43 @@
 /:
-  controller: User
-  action: landing
+  controller: Default
+  action: default
+
+/cards:
+  controller: Home
+  action: cards
+
+/buttons:
+  controller: Home
+  action: buttons
 
 /login:
   controller: User
   action: login
 
-/dashboard:
+/register:
   controller: User
-  action: dashboard
+  action: register
+
+/forget-password:
+  controller: User
+  action: forgetpwd
+
+/colors:
+  controller: Home
+  action: colors
+
+/border:
+  controller: Home
+  action: border
+
+/other:
+  controller: Home
+  action: other
+
+/charts:
+  controller: Home
+  action: charts
+
+/table:
+  controller: Home
+  action: table
