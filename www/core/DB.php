@@ -1,20 +1,20 @@
 <?php
 
-namespace mvc\core;
+namespace cms\core;
 
-use mvc\models\users;
-use PDO;
+use cms\models\users;
+use cms\models\PDOConnection;
 
 class DB{
     private $table;
     private $connection;
     private $class;
 
-    public function __construct(string $class, BDDInterface $vonnection = null)
+    public function __construct(string $class, BDDInterface $connection = null)
     {
 
-        $this->class = $classe;
-        $this->table = str_replace('mvc\models\users', 'users', PREFIXE_DB.get_called_class());
+        $this->class = $class;
+        $this->table = str_replace('cms\models\user', 'users', PREFIXE_DB.get_called_class());
        
         if(!$connection){
             $this->connection = new PDOConnection;
@@ -22,14 +22,26 @@ class DB{
        
     }
 
+    public function initBdd()
+    {
+        if(!file_exists(".sql")){
+            return false;
+        }
+        //.sql
+        $sql = trim(file_get_contents(".sql"));
+
+        $this->connection->query($sql);
+
+    }
+
     public function find(int $id): ?\App\Models\Model
     {
             $Sql = "SELECT * FROM ".$this->table. "WHERE id= ".$id;
 
-            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared = $this->connection->querry($sql);
             $queryPrepared->execute();
 
-            return (new $this->class())->hydrate($queryPrepared->fetch());
+            return (new $this->class())->load($queryPrepared->fetch());
     }
 
     public function findAll(): array
@@ -37,29 +49,18 @@ class DB{
 
         $Sql = "SELECT * FROM ".$this->table. "WHERE id= ".$id;
 
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute();
+        $result = $this->connection->query($sql);
 
-        $aData=$queryPrepared->fetchAll();
+        $rows = $rows->getArrayResult();
 
-        array_map(function($data){
+        $results = array_map(function($row){
 
-            return (new User())->hydrate($data);
-            },$aData
+            return (new $this->class())->load($row);
+            },$rows
         );
-            return (new User())->hydrate($queryPrepared->fetchAll());
+            
+        return $results;
 
-    }
-
-    public function count(){
-        $sql="select * from ".$this->table;
-
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute();
-
-        $result = $queryPrepared->fetchAll();
-
-        print_r($result);
     }
 
     public function findBy(array $params,array $order): array
@@ -89,8 +90,42 @@ class DB{
             $sql .= "ORDER BY ". key($order). " ". $order[key($order)];
         }
 
+        $result = $this->connection->query($sql, $params);
+        
+        $rows = $result->getArrayResult();
+        
+        $results = array_map(function($row){
+
+            return (new $this->class())->load($row);
+            },$rows
+        );
+
+        return $results;
+
     }
 
+    public function count(array $params): int
+    {
+        $sql = "SELECT COUNT(*) FROM $this->table where ";
+
+        foreach($params as $key => $value) {
+            if(is_string($value))
+                $comparator = 'LIKE';
+            else 
+                $comparator = '=';
+            $sql .= " $key $comparator :$key and"; 
+
+            $params[":$key"] = $value;
+            unset($params[$key]);
+        }
+
+        $sql = rtrim($sql, 'and');
+
+        $result = $this->connection->query($sql, $params);
+        
+        return $result->getValueResult();
+    }
+   
     public function save($oToSave){
 
         $oArray =  $oToSave->__toArray();
@@ -121,4 +156,17 @@ class DB{
         }
         $this->connection->query($sql, $params);
     } 
+
+    public function delete(int $id): bool
+    {
+       
+        $sql = "DELETE FROM $this->table where id = :id";
+
+        $result = $this->connection->query($sql, [':id' => $id]);
+
+        return true;
+
+
+    }
+
 }

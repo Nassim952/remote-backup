@@ -1,8 +1,8 @@
 <?php
 
-namespace www\Managers;
+namespace cms\Managers;
 
-use www\core\DB;
+use cms\core\DB;
 
 class UserManager extends DB{
 
@@ -14,7 +14,7 @@ class UserManager extends DB{
     public function checkLogin()
     {
         $sql = "SELECT * FROM " . $this->table . ";";
-        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared = $this->connction->prepare($sql);
         $queryPrepared->execute();
 
         $result = $queryPrepared->fetchAll();
@@ -37,76 +37,31 @@ class UserManager extends DB{
         }
     }
 
-    public static function getTypeNameUser($typeUser){
-        if ($typeUser == 1) {
-            return "Candidat";
-        }elseif ($typeUser == 2) {
-            return "Client";
-        }elseif ($typeUser == 3) {
-            return "Editeur";
-        }elseif($typeUser == 4){
-            return "Editeur d'utilisateur";
-        }elseif($typeUser == 5){
-            return "Correcteur";
+    public static function getTypeNameUser($typeUser = null)
+    {
+        if(null === $typeUser)
+        {
+            $typeUser = getTypeUser();
         }
-    }
 
-    public static function getRegisterForm(){
-        return [
-                    "config"=>[
-                                "method"=>"POST", 
-                                "action"=>\mvc\core\Helpers::getUrl("User", "register"),
-                                "class"=>"",
-                                "id"=>"",
-                                "submit"=>"S'inscrire"
-                            ],
-                    "fields"=>[
-                                "firstname"=>[
-                                                "type"=>"text",
-                                                "required"=>true,
-                                                "placeholder"=>"Votre prénom",
-                                                "class"=>"",
-                                                "id"=>""
-                                            ],
-                                "lastname"=>[
-                                                "type"=>"text",
-                                                "required"=>true,
-                                                "placeholder"=>"Votre nom",
-                                                "class"=>"",
-                                                "id"=>""
-                                            ],
-                                "email"=>[
-                                                "type"=>"email",
-                                                "required"=>true,
-                                                "placeholder"=>"Votre email",
-                                                "class"=>"",
-                                                "id"=>""
-                                            ],
-                                "password"=>[
-                                                "type"=>"password",
-                                                "required"=>true,
-                                                "placeholder"=>"Votre mot de passe",
-                                                "class"=>"",
-                                                "id"=>""
-                                            ],
-                                "passwordConfirm"=>[
-                                                "type"=>"password",
-                                                "required"=>true,
-                                                "placeholder"=>"Confirmer le mot de passe",
-                                                "class"=>"",
-                                                "id"=>"",
-                                                "confirmWith"=>"password"
-                                            ],
-                                "captcha"=>[
-                                                "type"=>"captcha",
-                                                "required"=>true,
-                                                "placeholder"=>"Saisir le texte",
-                                                "class"=>"",
-                                                "id"=>""
-                                            ]
-                            ]
-                ];
-    }
+        switch ($i) {
+            case 1:
+                return "Candidat";;
+                break;
+            case 2:
+                return "Client";
+                break;
+            case 3:
+                return "Editeur";
+                break;
+            case 4:
+                return "Editeur d'utilisateur";
+                break;
+            case 5:
+                return "Correcteur";
+                break;
+        }
 
+    }
 
 }

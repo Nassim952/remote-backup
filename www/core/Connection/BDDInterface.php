@@ -1,6 +1,6 @@
 <?php
 
-namespace www\core\Connection;
+namespace www\core\connection;
 
 interface BDDInterface{
 

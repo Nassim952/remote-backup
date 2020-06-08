@@ -1,6 +1,6 @@
 <?php
 
-namespace mvc\core;
+namespace cms\core;
 
 class Helpers{
 	

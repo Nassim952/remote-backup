@@ -11,10 +11,10 @@
 
 function myAutoload($class)
 {
-	$class = str_replace("mvc", "", $class);
-
+	$class = str_replace("cms", "", $class);
+	
 	$class = str_replace('\\', '/', $class);
-
+	
 	if($class[0] == '/') {
 		include substr($class.'.php', 1);
 		} else {
@@ -25,7 +25,7 @@ function myAutoload($class)
 
 spl_autoload_register("myAutoload");
 
-use mvc\core\ConstLoader;
+use cms\core\ConstLoader;
 
 new ConstLoader();
 
@@ -35,7 +35,7 @@ try{
 	$listOfRoutes = yaml_parse_file("routes.yml");
 
 	if( !empty($listOfRoutes[$uri]) ){
-		$c = 'mvc\controllers\\'.ucfirst($listOfRoutes[$uri]["controller"]."Controller");
+		$c = 'cms\controllers\\'.ucfirst($listOfRoutes[$uri]["controller"]."Controller");
 		$a = $listOfRoutes[$uri]["action"]."Action";
 
 			// include "controllers/".$c.".php";
@@ -60,6 +60,7 @@ try{
 }
 catch (Exception $e)
 {
-	echo 'Exeption. Message d\'erreur : '.$e->getMessage();
-	new view('404.php');
+	echo('toto');
+	echo 'Exception. Message d\'erreur : '.$e->getMessage();
+	//new View('404.php');
 }

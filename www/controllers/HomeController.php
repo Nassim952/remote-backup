@@ -1,6 +1,7 @@
 <?php
 
-namespace mvc\controllers;
+namespace cms\controllers;
+use cms\core\View;
 
 class HomeController{
     public function buttonsAction(){

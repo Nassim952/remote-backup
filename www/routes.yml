@@ -1,43 +1,43 @@
-/:
-  controller: Default
-  action: default
-
-/cards:
-  controller: Home
-  action: cards
-
-/buttons:
-  controller: Home
-  action: buttons
-
 /login:
   controller: User
   action: login
 
-/register:
+/home:
   controller: User
-  action: register
+  action: home
 
-/forget-password:
+/template:
   controller: User
-  action: forgetpwd
+  action: template
 
-/colors:
-  controller: Home
-  action: colors
+/dashboard:
+  controller: User
+  action: dashboard
 
-/border:
-  controller: Home
-  action: border
+/statistiques:
+  controller: User
+  action: stat
 
-/other:
-  controller: Home
-  action: other
+/inscription:
+  controller: User
+  action: signup
 
-/charts:
-  controller: Home
-  action: charts
+/connexion:
+  controller: User
+  action: signin
 
-/table:
-  controller: Home
-  action: table
+/cinema:
+  controller: Cinema
+  action: cinema
+
+/salles:
+  controller: Cinema
+  action: salles
+  
+/addfilm:
+  controller: User
+  action: addfilm
+
+/users:
+  controller: User
+  action: users

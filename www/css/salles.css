@@ -1,0 +1,52 @@
+.box {
+    border: 1px solid #d2d1d1;
+    border-radius: 20px;
+    width: 15%;
+    padding: 15px;
+    text-align: center;
+    margin: 2%;
+    margin-left: 2.8%;
+    height: auto;
+    background: linear-gradient(to bottom, #3C4244 50%, rgb(247, 247, 247) 50%);
+}
+
+.page_wrapper_flex {
+    margin-top: 15px;
+    display: flex;
+    margin-right: 20px;
+    height:71%;
+    flex-wrap: wrap;
+}
+
+.head-title-salle{
+    font-family: Century Gothic;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.ville-salle{
+    font-family: Century Gothic;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin-top: 10px;
+}
+
+.head-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-wrapper{
+    height: 25%;
+    margin-top: 22%;
+    color: black;
+}

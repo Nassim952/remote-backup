@@ -3,16 +3,24 @@ body {
     font-family: $montserrat;
     color: $light-grey;
     color: $text-color;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 h1,
 h2,
 h3 {
-    font-family: $lato;
+    font-family: $rambla;
 }
 
 h1 {
     font-size: rem(24);
+    color: $text-red;
 }
 
 h2 {
@@ -25,5 +33,19 @@ h3 {
 
 p {
     line-height: 1.5em;
-    background-color: $red;
+    font-family: $rambla;
+}
+
+a{
+    text-decoration: none;
+}
+
+.sidebar{
+    background-color: $sidebar-black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.site-content{
+    background-color: $site-content-white;
 }

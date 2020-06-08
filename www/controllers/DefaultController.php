@@ -1,8 +1,8 @@
 <?php
 
-namespace mvc\controllers;
+namespace cms\controllers;
 
-use mvc\core\View;
+use cms\core\View;
 
 class DefaultController{
 	public function defaultAction()

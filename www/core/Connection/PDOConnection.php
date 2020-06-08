@@ -1,8 +1,8 @@
 <?php
 
-namespace www\core\Connection;
+namespace www\core\connection;
 
-use www\core\Connection\PDOResult;
+use www\core\connection\PDOResult;
 
 class PDOConnection implements BDDInterface{
 
