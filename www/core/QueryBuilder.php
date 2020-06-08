@@ -19,7 +19,7 @@ class QueryBuilder {
         }
     }
 
-    public function select(string $values = 'x'):QueryBuilder
+    public function select(string $values = '*'):QueryBuilder
     {
         $query = "SELECT $values";
 
