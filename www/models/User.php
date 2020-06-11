@@ -15,47 +15,56 @@ class User extends model{
     protected $identity = null;
 
 
-    public function __Construct($id){
-
+    public function __Construct($id)
+    {
         $user = new UserManager();
         $user->find($id);
     }
 
 //SETTERS
-    public function setLogin($login){
+    public function setLogin($login)
+    {
         $this->login = $login;
     }
 
-    public function setPassword($password){
+    public function setPassword($password)
+    {
         $this->password = $password;
     }
 
-    public function setEmail($email){
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
-    public function setStatut($statut){
+    public function setStatut($statut)
+    {
         $this->statut = $statut;
     }
 
-    public function setRight($right){
+    public function setRight($right)
+    {
         $this->right = $right;
     }
 
-    public function setIdentity($identity){
+    public function setIdentity($identity)
+    {
         $this->identity = $identity;
     }
 
 //GETTERS
-    public function getLogin(){
+    public function getLogin()
+    {
         return $this->login;
     }
 
-    public function getPassword(){
+    public function getPassword()
+    {
         return $this->password;
     }
 
-    public function getEmail(){
+    public function getEmail()
+    {
         return $this->email;
     }
 
@@ -63,11 +72,13 @@ class User extends model{
         return $this->statut;
     }
 
-    public function getRight() {
+    public function getRight()
+    {
         return $this->right;
     }
 
-    public function getIdentity() {
+    public function getIdentity()
+    {
         return $this->identity;
     }
 }

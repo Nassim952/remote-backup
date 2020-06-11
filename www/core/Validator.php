@@ -3,13 +3,14 @@ namespace cms\core;
 
 class Validator{
 
-	public static function checkForm($configForm, $data){
+	public static function checkForm($configForm, $data)
+	{
 		$listOfErrors = [];
 
 		//Vérifications
 
 		//Vérifier le nb de input
-		if( count($configForm["fields"]) == count($data) ) {
+		if (count($configForm["fields"]) == count($data)) {
 
 			foreach ($configForm["fields"] as $name => $config) {
 				
@@ -45,19 +46,21 @@ class Validator{
 				//Vérifier le max
 			}
 
-		}else{
+		} else {
 			return ["Tentative de hack !!!"];
 		}
-
 		return $listOfErrors;
 	}
 
-	public static function checkEmail($email){
+	public static function checkEmail($email)
+	{
 		$email = trim($email);
 		return filter_var($email, FILTER_VALIDATE_EMAIL);
 	}
 
-	public static function checkPwd($email){
+	public static function checkPwd($email)
+	{
+		
 	}
 
 }

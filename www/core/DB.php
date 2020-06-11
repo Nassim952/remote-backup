@@ -118,16 +118,15 @@ class DB{
             $params[":$key"] = $value;
             unset($params[$key]);
         }
-
+        
         $sql = rtrim($sql, 'and');
-
         $result = $this->connection->query($sql, $params);
         
         return $result->getValueResult();
     }
    
-    public function save($oToSave){
-
+    public function save($oToSave): bool
+    {
         $oArray =  $oToSave->__toArray();
 
         $columnsData = array_values($oArray);
@@ -155,18 +154,16 @@ class DB{
             $sql = "UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id;";
         }
         $this->connection->query($sql, $params);
+
+        return true;
     } 
 
     public function delete(int $id): bool
     {
-       
         $sql = "DELETE FROM $this->table where id = :id";
-
         $result = $this->connection->query($sql, [':id' => $id]);
 
         return true;
-
-
     }
 
 }

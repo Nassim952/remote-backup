@@ -23,7 +23,6 @@ class PDOResult implements ResultInterface{
         } catch(Throwable $t) {
             echo $t->getMessage();
         }
-        
     }
 
     public function getValueResult()

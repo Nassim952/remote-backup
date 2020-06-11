@@ -11,59 +11,70 @@ class Comment extends DB{
     protected $target_type;
     protected $author;
 
-    public function __Construct(){
+    public function __Construct()
+    {
         parent::__construct();
     }
 
 //SETTERS
-    public function setComment($comment){
+    public function setComment($comment)
+    {
         $this->comment = $comment;
     }
 
-    public function setPostDate($post_date){
+    public function setPostDate($post_date)
+    {
         $this->post_date = $post_date;
     }
 
-    public function setTarget($target){
+    public function setTarget($target)
+    {
         $this->target = $target;
     }
 
-    public function setTargetType($target_type){
+    public function setTargetType($target_type)
+    {
         $this->target_type = $target_type;
     }
 
-    public function setAuthor(User $author){
+    public function setAuthor(User $author)
+    {
         $this->author = $author;
     }
 
 
 
 //GETTERS
-    public function getComment(){
+    public function getComment()
+    {
         return $this->comment;
     }
 
-    public function getPostDate(){
+    public function getPostDate()
+    {
         return $this->post_date;
     }
 
-    public function getTarget(){
+    public function getTarget()
+    {
         return $this->target = $target;
     }
 
-    public function getTargetType(){
+    public function getTargetType()
+    {
         return $this->target_type;
     }
 
-    public function getUser(){
+    public function getAuthor()
+    {
         return $this->author;
     }
 
-public function initRealation():array{
-    
-    return [
-        'author' => User::class
-    ];
-}
+    public function initRealation():array
+    {
+        return [
+            'author' => User::class
+        ];
+    }
 
 }

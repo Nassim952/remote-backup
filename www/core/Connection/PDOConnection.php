@@ -8,7 +8,8 @@ class PDOConnection implements BDDInterface{
 
     protected $pdo;
 
-    public function connect(){
+    public function connect()
+    {
 
         try {
             $this->pdo = new PDO(DRIVER_DB.":host=".HOST_DB.";dbname=".NAME_DB, USER_DB, PWD_DB);
@@ -18,7 +19,8 @@ class PDOConnection implements BDDInterface{
 
     }
 
-    public function query($sql, $parameters = null){
+    public function query($sql, $parameters = null)
+    {
         try{
             if ($parameters) {
                 $queryPrepared = $this->pdo->prepare($sql);
@@ -34,7 +36,6 @@ class PDOConnection implements BDDInterface{
         {
             echo('Exeption. Message d\'erreur : '.$e->getMessage());
         }
-
     }
 
 
