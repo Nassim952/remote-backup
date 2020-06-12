@@ -11,12 +11,16 @@ class UserController{
         new View("landing-page","front");
     }
 
-    public function dashboardAction(){
-        new View("dashboard","back");
+    public function homeAction(){
+        new View("home","empty");
     }
 
-    public function statAction(){
-        new View("stat","back");
+    public function templateAction(){
+        new View("template-create","empty");
+    }
+
+    public function usersAction(){
+        new View("users","back");
     }
 
     public function signupAction(){
@@ -25,8 +29,12 @@ class UserController{
 
     public function signinAction(){
         new View("signin","front");
-	}
-	
+    }
+
+    public function addFilmAction()
+    {
+        new view("addfilm","back");
+    }
 
 	public function getUserAction($params)
     {
@@ -37,7 +45,6 @@ class UserController{
         if(!$user) {
             throw new NotFoundException("User not found");
 		}
-		
         return $user;
     }
 

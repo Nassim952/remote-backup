@@ -10,12 +10,11 @@ class Helpers{
 
 		foreach ($listOfRoutes as $url => $values) 
 		{
-			if($values["controller"]==$controller && $values["action"]==$action)
+			if($values["controller"] == $controller && $values["action"] == $action)
 			{
 				return $url;
 			}
 		}
-	
 		return "/";
 	}
 

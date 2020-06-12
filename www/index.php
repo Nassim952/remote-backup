@@ -51,7 +51,7 @@ try{
 				}
 			
 			} else {
-				throw new Exception("Le class controller n'existe pas");
+				throw new Exception("Le class controller".$c." n'existe pas");
 			}
 
 	} else {
@@ -60,7 +60,6 @@ try{
 }
 catch (Exception $e)
 {
-	echo('toto');
 	echo 'Exception. Message d\'erreur : '.$e->getMessage();
 	//new View('404.php');
 }
