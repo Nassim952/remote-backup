@@ -1,8 +1,8 @@
 <?php
 
-namespace cms\models;
+namespace www\models;
 
-use cms\core\DB;
+use www\core\DB;
 
 class Room extends DB{
     protected $name;
@@ -12,6 +12,7 @@ class Room extends DB{
         parent::__construct();
     }
 
+//SETTERS
     public function setName(string $name){
         $this->name = $name;
     }
@@ -20,7 +21,7 @@ class Room extends DB{
         $this->section = $section;
     }
 
-
+//GETTERS
     public function getName(){
         return $this->name;
     }

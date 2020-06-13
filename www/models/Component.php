@@ -10,10 +10,11 @@ class Component extends DB{
     protected $type;
     protected $style;
 
-    public function __Construct(){
+    public function __construct(){
         parent::__construct();
     }
 
+//SETTERS
     public function setTitle($title){
         $this->title = $title;
     }
@@ -30,8 +31,9 @@ class Component extends DB{
         $this->style = $style;
     }
 
+//GETTERS
     public function getTitle(){
-       return $this->title;
+        return $this->title;
     }
 
     public function getClass(){

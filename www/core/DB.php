@@ -2,21 +2,22 @@
 
 namespace cms\core;
 
-class DB
-{
-    private $table;
-    private $pdo;
+use cms\models\users;
+use cms\models\PDOConnection;
 
-    public function __construct()
+class DB{
+    private $table;
+    private $connection;
+    private $class;
+
+    public function __construct(string $class, BDDInterface $connection = null)
     {
-        try {
-            $this->pdo = new PDO(DRIVER_DB . ":host=" . HOST_DB . ";dbname=" . NAME_DB, USER_DB, PWD_DB);
-        } catch (Exception $e) {
-            die("error sql : " . $e->getMessage());
+        $this->class = $class;
+        $this->table = str_replace('cms\models\user', 'users', PREFIXE_DB.get_called_class());
+
+        if(!$connection){
+            $this->connection = new PDOConnection;
         }
-        $this->table = PREFIXE_DB.get_called_class();
-        $cleanTable = str_replace('cms\models\users', 'users', $this->table);
-        $this->table = $cleanTable;
     }
 
     public function initBdd()
@@ -24,101 +25,143 @@ class DB
         if(!file_exists(".sql")){
             return false;
         }
-
         //.sql
         $sql = trim(file_get_contents(".sql"));
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute();
+
+        $this->connection->query($sql);
+
     }
 
-    public function load(){
-        $lines = explode("\r\n",$this->text);
-        foreach ($lines as $line) {
-            $data = explode ("=", $line);
-            if(!defined($data[0]) && isset($data[1])){
-                define($data[0], $data[1]);
-            }
-        }
-    }
-
-    public function checkLogin()
+    public function find(int $id): ?\App\Models\Model
     {
-        $sql = "SELECT * FROM " . $this->table . ";";
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute();
+            $sql = "SELECT * FROM ".$this->table. "WHERE id= ".$id;
 
-        $result = $queryPrepared->fetchAll();
-
-        foreach ($result as $value) {
-            if ($value["login"] == $this->login && $value["password"] == $this->password) {
-                session_start();
-                $_SESSION['user'] = $value;
-                return true;
-            }
-        }
-    }
-
-    public function getTypeUser()
-    {
-        if(isset($_SESSION))
-        {
-            $typeUser = $_SESSION['user']['type'];
-            return $typeUser;
-        }
-    }
-
-    public function save()
-    {
-        //retrieve properties of $this
-        $objectVars = get_object_vars($this);
-
-        //retrieve properties of current class
-        $classVars = get_class_vars(get_class());
-
-        //compare two array var and remove excess keys
-        $columnsData = array_diff_key($objectVars, $classVars);
-
-        //set only keys from columnsData to columns
-        $columns = array_keys($columnsData);
-
-        //test in column id if there's a number make an update otherwise make an insert
-        if (!is_numeric($this->id)) {
-
-            $sql = "SELECT * FROM " . $this->table . ";";
-
-            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared = $this->connection->querry($sql);
             $queryPrepared->execute();
 
-            $result = $queryPrepared->fetchAll();
-            // print_r($result);
+            return (new $this->class())->load($queryPrepared->fetch());
+    }
 
-            if ($result == null) {
-                //reset column ID auto_increment at 0
-                $sql = "TRUNCATE TABLE " . $this->table . ";";
-                $queryPrepared = $this->pdo->prepare($sql);
-                $queryPrepared->execute();
+    public function findAll(): array
+    {
 
-                //INSERT
-                $sql = "INSERT INTO " . $this->table . " (" . implode(", ", $columns) . ") VALUES (:" . implode(", :", $columns) . ");";
-                $queryPrepared = $this->pdo->prepare($sql);
-                $queryPrepared->execute($columnsData);
+        $sql = "SELECT * FROM ".$this->table. "WHERE id= ".$id;
+
+        $result = $this->connection->query($sql);
+
+        $rows = $rows->getArrayResult();
+
+        $results = array_map(function($row){
+
+            return (new $this->class())->load($row);
+            },$rows
+        );
+            
+        return $results;
+
+    }
+
+    public function findBy(array $params,array $order): array
+    {
+        $Sql = "SELECT * FROM $this->table WHERE ";
+
+        foreach($params as $key => $value)
+        {
+            if(is_string($value))
+            {
+                $separator = "LIKE";
             } else {
-                //INSERT
-                $sql = "INSERT INTO " . $this->table . " (" . implode(", ", $columns) . ") VALUES (:" . implode(", :", $columns) . ");";
-                $queryPrepared = $this->pdo->prepare($sql);
-                $queryPrepared->execute($columnsData);
+
+                $separator = "=";
             }
+
+            $sql .="$key $separator :$key and";
+
+            $params[":$key"] = $value;
+            unset($params[$key]);
+        }
+
+        $sql = rtrim($sql,'and');
+
+        if($order)
+        {
+            $sql .= "ORDER BY ". key($order). " ". $order[key($order)];
+        }
+
+        $result = $this->connection->query($sql, $params);
+        
+        $rows = $result->getArrayResult();
+        
+        $results = array_map(function($row){
+
+            return (new $this->class())->load($row);
+            },$rows
+        );
+
+        return $results;
+
+    }
+
+    public function count(array $params): int
+    {
+        $sql = "SELECT COUNT(*) FROM $this->table where ";
+
+        foreach($params as $key => $value) {
+            if(is_string($value))
+                $comparator = 'LIKE';
+            else 
+                $comparator = '=';
+            $sql .= " $key $comparator :$key and"; 
+
+            $params[":$key"] = $value;
+            unset($params[$key]);
+        }
+        
+        $sql = rtrim($sql, 'and');
+        $result = $this->connection->query($sql, $params);
+        
+        return $result->getValueResult();
+    }
+
+    public function save($oToSave): bool
+    {
+        $oArray =  $oToSave->__toArray();
+
+        $columnsData = array_values($oArray);
+        $columns = array_keys($oArray);
+        // On met 2 points devant chaque clé du tableau
+        $params = array_combine(
+                    array_map(function($k){
+                        return ':'.$k; 
+                    }, 
+                    array_keys($oArray)),
+                    $oArray
+                );
+        
+        if (!is_numeric($oToSave->getId())) {
+            array_shift($columns);
+            array_shift($params);
+            //INSERT
+            $sql = "INSERT INTO ".$this->table." (".implode(",", $columns).") VALUES (:".implode(",:", $columns).");";
+            //foreach()
         } else {
             //UPDATE
             foreach ($columns as $column) {
-                $sqlUpdate[] =  $column . "=:" . $column;
+                $sqlUpdate[] = $column."=:".$column;
             }
-            $sql = "UPDATE " . $this->table . " SET " . implode(", ", $sqlUpdate) . " WHERE " . $this->table . ".id=:id;";
-
-            $queryPrepared = $this->pdo->prepare($sql);
-            $queryPrepared->execute($columnsData);
-
-            // $queryPrepared->debugDumpParams();
+            $sql = "UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id;";
         }
+        $this->connection->query($sql, $params);
+
+        return true;
+    } 
+
+    public function delete(int $id): bool
+    {
+        $sql = "DELETE FROM $this->table where id = :id";
+        $result = $this->connection->query($sql, [':id' => $id]);
+
+        return true;
     }
+
 }

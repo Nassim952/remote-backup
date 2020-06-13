@@ -5,9 +5,10 @@ namespace cms\controllers;
 use cms\models\User;
 use cms\core\View;
 use cms\core\Helpers;
+use cms\managers\UserManager;
 
-class UserController
-{
+class UserController{
+
     private $login;
     private $password;
 
@@ -19,6 +20,10 @@ class UserController
 
     public function dashboardAction(){
         new View("dashboard","back");
+    }
+
+	public function landingAction(){
+        new View("landing-page","front");
     }
 
     public function homeAction(){
@@ -41,16 +46,28 @@ class UserController
         new View("signup","front");
     }
 
-    public function signinAction(){
-        new View("signin","front");
+    public function forgetPwdAction(){
+        new View("forgetPwd", "account");
     }
 
     public function addFilmAction()
     {
-        new view("addfilm","back");
+        new View("addfilm","back");
     }
 
-    public function loginAction()
+	public function getUserAction($params)
+    {
+        $userManager = new UserManager();
+
+        $user = $userManager->find($params['id']);
+
+        if(!$user) {
+            throw new NotFoundException("User not found");
+		}
+        return $user;
+    }
+
+	public function loginAction()
     {
         new View("login","back");
 
@@ -61,7 +78,7 @@ class UserController
 
         $user->checkLogin();
 
-        if ($user == true) {
+        if ($user) {
             $typeUser = $user->getTypeUser();
 
             if ($typeUser == 1) {
@@ -82,5 +99,21 @@ class UserController
                 header("Location: " . $newUrl);
             }
         }
-    }
+	}
+	
+	public function registerAction(){
+
+		$user = new Users();
+		
+		$user->setFirstName("bob");
+		$user->setLastName("berry");
+		$user->setEmail("boberry@gmail.com");
+		$user->setPwd("anonymous");
+		$user->setStatus(0);
+
+		// $user->save();
+		// $user->count();
+
+		$myView = new View("register", "account");
+	}
 }

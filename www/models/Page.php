@@ -1,8 +1,8 @@
 <?php
 
-namespace cms\models;
+namespace www\models;
 
-use cms\core\DB;
+use www\core\DB;
 
 class Page extends DB{
     protected $title;
@@ -16,6 +16,7 @@ class Page extends DB{
         parent::__construct();
     }
 
+//SETTERS
     public function setTitle(string $title){
         $this->title = $title;
     }
@@ -40,9 +41,7 @@ class Page extends DB{
         $this->background_image = $background_image;
     }
 
-
-
-
+//GETTERS
     public function getTitle(){
         return $this->title;
     }

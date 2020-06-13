@@ -1,8 +1,8 @@
 <?php
 
-namespace cms\models;
+namespace www\models;
 
-use cms\core\DB;
+use www\core\DB;
 
 class Movie extends DB{ 
     protected $title;
@@ -14,6 +14,7 @@ class Movie extends DB{
         parent::__construct();
     }
 
+//SETTERS
     public function setTitle($title){
         $this->title = $title;
     }
@@ -30,7 +31,7 @@ class Movie extends DB{
         $this->synopsis = $synopsis;
     }
 
-
+//GETTERS
     public function getTitle(){
         return $this->title;
     }
