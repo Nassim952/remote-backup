@@ -31,19 +31,17 @@ new ConstLoader();
 
 $uri = $_SERVER["REQUEST_URI"];
 
+
 try{
 	$listOfRoutes = yaml_parse_file("routes.yml");
 
 	if( !empty($listOfRoutes[$uri]) ){
 		$c = 'cms\controllers\\'.ucfirst($listOfRoutes[$uri]["controller"]."Controller");
 		$a = $listOfRoutes[$uri]["action"]."Action";
-
 			// include "controllers/".$c.".php";
 			if( class_exists($c)){
-
 				$controller = new $c();
 				if( method_exists($controller, $a)){
-
 					$controller->$a();
 					
 				} else {
