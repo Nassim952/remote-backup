@@ -1,7 +1,3 @@
-/:
-  controller: default
-  action: default
-
 /login:
   controller: User
   action: login
