@@ -2,11 +2,11 @@
 
 namespace cms\models;
 
-use wwww\core\DB;
+use cms\core\DB;
 
 class Component extends DB{ 
-    protected $name;
-    protected $surname;
+    protected $lastName;
+    protected $firstName;
     protected $birthdate;
 
     public function __Construct(){
@@ -15,12 +15,12 @@ class Component extends DB{
 
 
 //SETTERS
-    public function setName($nnameom){
-        $this->name = $name;
+    public function setFirstName($firstName){
+        $this->firstName = $firstName;
     }
 
-    public function setSurname($surname){
-        $this->surname = $surname;
+    public function setLastName($lastName){
+        $this->lastName = $lastName;
     }
 
     public function setBirthdate($birthdate){
@@ -28,12 +28,12 @@ class Component extends DB{
     }
 
 //GETTERS
-    public function getName(){
-        return $this->name;
+    public function getFirstName(){
+        return $this->firstName;
     }
 
-    public function getSurname(){
-        return $this->surname;
+    public function getLastName(){
+        return $this->lastName;
     }
 
     public function getBirthdate(){
