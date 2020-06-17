@@ -1,0 +1,44 @@
+/login:
+    controller: User
+    action: login
+  
+  /home:
+    controller: User
+    action: home
+  
+  /template:
+    controller: User
+    action: template
+  
+  /dashboard:
+    controller: Dashboard
+    action: dashboard
+  
+  /statistiques:
+    controller: Dashboard
+    action: stat
+  
+  /inscription:
+    controller: User
+    action: signup
+  
+  /connexion:
+    controller: User
+    action: signin
+  
+  /cinema:
+    controller: Dashboard
+    action: cinema
+  
+  /salles:
+    controller: Dashboard
+    action: salles
+    
+  /addfilm:
+    controller: Dashboard
+    action: addfilm
+  
+  /users:
+    controller: Dashboard
+    action: users
+  

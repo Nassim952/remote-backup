@@ -2,41 +2,60 @@
 
 namespace cms\models;
 
-use wwww\core\DB;
+use wwww\core\Model;
 
-class Component extends DB{ 
+class Identity extends Model
+{ 
+    protected $id;
     protected $name;
     protected $surname;
     protected $birthdate;
 
-    public function __Construct(){
-        parent::__construct();
+    public function __Construct($id){
+        $identity = new IdentityManager();
+        $identity->find($id);
     }
 
 
 //SETTERS
-    public function setName($nnameom){
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setName($nnameom)
+    {
         $this->name = $name;
     }
 
-    public function setSurname($surname){
+    public function setSurname($surname)
+    {
         $this->surname = $surname;
     }
 
-    public function setBirthdate($birthdate){
+    public function setBirthdate($birthdate)
+    {
         $this->birthdate = $birthdate;
     }
 
 //GETTERS
-    public function getName(){
+    public function getId()
+    {
+    return $this->id;
+    }
+
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getSurname(){
+    public function getSurname()
+    {
         return $this->surname;
     }
 
-    public function getBirthdate(){
+    public function getBirthdate()
+    {
         return $this->birthdate;
     }
 }

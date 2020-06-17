@@ -1,12 +1,16 @@
 <?php
 
-namespace cms\forms;
+namespace App\Forms;
 
-use cms\core\Helper;
+use App\Core\Helper;
 
-class LoginType {
+class LoginType extends Form {
 
     public function getForm(){
-        return [];
+        return $this->builder
+            ->addField("firstname", "text", [
+                'placeholder' => 'toto'
+            ])
+            ->addField;
     }
 }

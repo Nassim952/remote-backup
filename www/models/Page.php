@@ -2,9 +2,11 @@
 
 namespace www\models;
 
-use www\core\DB;
+use www\core\Model;
 
-class Page extends DB{
+class Page extends Model
+{
+    protected $id;
     protected $title;
     protected $type;
     protected $gabarit;
@@ -12,11 +14,19 @@ class Page extends DB{
     protected $theme;
     protected $background_image;
 
-    public function __Construct(){
-        parent::__construct();
+    public function __Construct($id)
+    {
+        $page = new PageManager();
+        $page->find($id); 
     }
 
 //SETTERS
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     public function setTitle(string $title){
         $this->title = $title;
     }
@@ -42,6 +52,12 @@ class Page extends DB{
     }
 
 //GETTERS
+
+    public function getId()
+    {
+       return $this->id;
+    }
+
     public function getTitle(){
         return $this->title;
     }

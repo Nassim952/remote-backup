@@ -4,19 +4,28 @@ namespace cms\models;
 
 use cms\core\DB;
 
-class Comment extends DB{ 
+class Comment extends DB
+{ 
+    protected $id;
     protected $comment;
     protected $post_date;
     protected $target;
     protected $target_type;
     protected $author;
 
-    public function __Construct()
+    public function __Construct($id)
     {
-        parent::__construct();
+        $comment = new CommentManager();
+        $comment->find($id); 
     }
 
 //SETTERS
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     public function setComment($comment)
     {
         $this->comment = $comment;
@@ -45,6 +54,12 @@ class Comment extends DB{
 
 
 //GETTERS
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getComment()
     {
         return $this->comment;

@@ -14,7 +14,8 @@ class View{
 	}
 
 	//redéfini la propriété avec la variable template récupérée via le controleur
-	public function setTemplate($template){
+	public function setTemplate($template)
+	{
 		$this->template = strtolower(trim($template));
 
 		if( !file_exists("views/templates/".$this->template.".tpl.php")){
@@ -23,7 +24,8 @@ class View{
 	}
 
 	//redéfini la propriété avec la variable view récupérée via le controleur
-	public function setView($view){
+	public function setView($view)
+	{
 		$this->view = strtolower(trim($view));
 
 		if( !file_exists("views/".$this->view.".php")){
@@ -32,14 +34,14 @@ class View{
 	}
 
 	// envoie les donnée à la vue
-	public function assign($key, $value){
+	public function assign($key, $value)
+	{
 		$this->data[$key] = $value;
 	}
 
 	//inclue le modal si il existe
-	public function addModal($modal, $data){
-
-
+	public function addModal($modal, $data)
+	{
 		if(!file_exists("views/modals/".$modal.".mod.php")){
 			throw new Exception("Le modal n'existe pas");
 		}
@@ -47,7 +49,8 @@ class View{
 	}
 		
 	// affiche le template et ce qui va avec
-	public function __destruct(){
+	public function __destruct()
+	{
 		include "views/templates/".$this->template.".tpl.php"; 
 	}
 	
