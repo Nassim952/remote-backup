@@ -46,6 +46,10 @@ class UserController{
         new View("signup","front");
     }
 
+    public function signinAction(){
+        new View("signin", "front");
+    }
+
     public function forgetPwdAction(){
         new View("forgetPwd", "account");
     }
