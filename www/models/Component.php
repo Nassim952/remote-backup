@@ -10,7 +10,7 @@ class Component extends DB
     protected $title;
     protected $class;
     protected $type;
-    protected $data;
+    protected $data = [];
     protected $position;
     protected $style;
 
@@ -45,6 +45,11 @@ class Component extends DB
     public function setStyle($style)
     {
         $this->style = $style;
+    }
+
+    public function setData($data)
+    {
+        $this->data = $data;
     }
 
 //GETTERS

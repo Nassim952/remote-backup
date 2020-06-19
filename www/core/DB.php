@@ -21,20 +21,20 @@ class DB
         }     
     }
 
-    public function initBdd()
+    public function initBdd(string $bdd = "")
     {
-        if(!file_exists(".sql")){
+        if (!file_exists($bdd.".sql")) {
             return false;
         }
         //.sql
-        $sql = trim(file_get_contents(".sql"));
+        $sql = trim(file_get_contents($bdd.".sql"));
 
         $this->connection->query($sql);
     }
 
     public function find(int $id): ?\App\Models\Model
     {
-            $Sql = "SELECT * FROM ".$this->table. "WHERE id= ".$id;
+            $Sql = "SELECT * FROM ".$this->table. "WHERE id = ".$id;
 
             $queryPrepared = $this->connection->querry($sql);
             $queryPrepared->execute();
@@ -44,7 +44,6 @@ class DB
 
     public function findAll(): array
     {
-
         $Sql = "SELECT * FROM ".$this->table. "WHERE id= ".$id;
         $result = $this->connection->query($sql);
         $rows = $rows->getArrayResult();
@@ -115,7 +114,7 @@ class DB
 
         $oArray = array_map($oArray, function($value,$key){
                 
-
+        
         });
 
         $columnsData = array_values($oArray);
