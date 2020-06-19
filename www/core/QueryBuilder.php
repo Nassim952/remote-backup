@@ -73,9 +73,8 @@ class QueryBuilder {
     }
 
 //OPERATIONS
-    public function select(string $values = null):QueryBuilder
+    public function select(string $values = '*'):QueryBuilder
     {
-        $values = (null !== $values)? $values : $this->select;
         $select =  "SELECT $values";
         buildSelect($select);
         return $this;
@@ -85,7 +84,7 @@ class QueryBuilder {
     {
        $query = "FROM $table AS $alias";
 
-       if(null !== $alias) {
+       if (null !== $alias) {
         $this->$alias = $alias;
        }
        addToQuery($query);

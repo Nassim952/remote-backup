@@ -5,8 +5,9 @@ namespace cms\models;
 use cms\core\Helper;
 use cms\managers\UserManager; 
 
-class User extends model{
-
+class User extends Model
+{
+    protected $id;
     protected $login;
     protected $password;
     protected $email;
@@ -22,6 +23,12 @@ class User extends model{
     }
 
 //SETTERS
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     public function setLogin($login)
     {
         $this->login = $login;
@@ -52,7 +59,14 @@ class User extends model{
         $this->identity = $identity;
     }
 
+    
 //GETTERS
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getLogin()
     {
         return $this->login;
@@ -81,4 +95,6 @@ class User extends model{
     {
         return $this->identity;
     }
+
+
 }

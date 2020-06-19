@@ -2,15 +2,18 @@
 
 namespace cms\models;
 
-use cms\core\DB;
+use wwww\core\Model;
 
-class Component extends DB{ 
-    protected $lastName;
-    protected $firstName;
+class Identity extends Model
+{ 
+    protected $id;
+    protected $firstname;
+    protected $lastname;
     protected $birthdate;
 
-    public function __Construct(){
-        parent::__construct();
+    public function __Construct($id){
+        $identity = new IdentityManager();
+        $identity->find($id);
     }
 
 
@@ -23,7 +26,13 @@ class Component extends DB{
         $this->lastName = $lastName;
     }
 
-    public function setBirthdate($birthdate){
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setBirthdate($birthdate)
+    {
         $this->birthdate = $birthdate;
     }
 
@@ -36,7 +45,13 @@ class Component extends DB{
         return $this->lastName;
     }
 
-    public function getBirthdate(){
+    public function getId()
+    {
+    return $this->id;
+    }
+
+    public function getBirthdate()
+    {
         return $this->birthdate;
     }
 }

@@ -10,16 +10,18 @@ class CommentManager extends DB{
         parent::_construct(Comment::class,'comment');
     }
 
-    public function getUserComment(int $id)
+    public function getUserComments(int $id = null)
     {
-        return (new QueryBuilder())
-        ->select('c.*,u.*')
-        ->from(PREFIXE_DB.'comment', 'c')
-        ->join(PREFIXE_DB.'user', 'u')
-        ->where('c.author =: iduser', $id)
-        ->setParameter('iduser',$id)
-        ->getQuery()
-        ->getArrayResult(Comment::class);
+        $query = (new QueryBuilder())
+            ->select('c, u')/// p.id as post_id, u.id as user_id,
+            ->from(PREFIXE_DB.'comment', 'c')
+            ->join(PREFIXE_DB.'user', 'u');
+            
+            if($id) {
+                $query->where('p.author = :iduser')
+                ->setParameter('iduser', $id);
+            }
+            return $query->getQuery()
+            ->getArrayResult(Post::class);
     }
-
 }
