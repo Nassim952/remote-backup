@@ -31,7 +31,6 @@ new ConstLoader();
 
 $uri = $_SERVER["REQUEST_URI"];
 
-
 try{
 	$listOfRoutes = yaml_parse_file("routes.yml");
 

@@ -29,4 +29,8 @@ class DashboardController
         new View("stat","back");
     }
 
+    public function horrairesAction(){
+        new View("horraires","back");
+    }
+
 }

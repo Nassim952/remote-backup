@@ -46,3 +46,7 @@
 /users:
   controller: Dashboard
   action: users
+
+/horraires:
+  controller: Dashboard
+  action: horraires
