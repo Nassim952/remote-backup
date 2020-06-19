@@ -2,17 +2,26 @@
 
 namespace www\models;
 
-use www\core\DB;
+use www\core\Model;
 
-class Room extends DB{
+class Room extends Model
+{
+    protected $id;
     protected $name;
     protected $section;
     
-    public function __Construct(){
-        parent::__construct();
+    public function __Construct($id){
+        $room = new RoomManager();
+        $room->find($id); 
     }
 
 //SETTERS
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     public function setName(string $name){
         $this->name = $name;
     }
@@ -22,6 +31,11 @@ class Room extends DB{
     }
 
 //GETTERS
+    public function getId()
+    {
+    return $this->id;
+    }
+
     public function getName(){
         return $this->name;
     }

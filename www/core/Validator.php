@@ -1,66 +1,76 @@
-<?php 
-namespace cms\core;
 
-class Validator{
+  <?php
+class Validator
+{
 
-	public static function checkForm($configForm, $data)
-	{
+
+	public static function formValidate( $config , $data ){
 		$listOfErrors = [];
 
-		//Vérifications
+		//Vérification du bon nb de input
+		if(count($config["fields"]) == count($data)) {
+			foreach($config["fields"] as $name => $configField){
+				//Vérifier que les names existent et Vérifier les required
+				if (isset($data[$name]) 
+					&& ($configField["required"] && !empty($data[$name]))) {
 
-		//Vérifier le nb de input
-		if (count($configForm["fields"]) == count($data)) {
+					if (isset($configField["maxString"]) 
+						&& !self::maxValidate($data[$name], $configField["maxString"])) {
+							$listOfErrors[] = $configField["errorMsg"];
+					} elseif (isset($configField["minString"]) 
+						&& !self::minValidate($data[$name], $configField["minString"])) {
+							$listOfErrors[] = $configField["errorMsg"];
+					}
+					//Vérifier le format de l'email
+					if ($configField["type"] == "email") {
+						if (self::emailValidate($data[$name])) {
+							if (!empty(UserManager::findBy(["email" => $data[$name]]))) {
+								$listOfErrors[] = $configField["errorMsg"];
+							}
+							//vérifier l'unicté de l'email
+						} else {
+							$listOfErrors[] = $configField["errorMsg"];
+						}
+					} elseif($configField["type"] = "password" && !self::pwdValidate($data[$name])) {
+						$listOfErrors[] = $configField["errorMsg"];
+					}
 
-			foreach ($configForm["fields"] as $name => $config) {
-				
-				//Vérifie que l'on a bien les champs attendus
-				//Vérifier les required
-				if( !array_key_exists($name, $data) || 
-					( $config["required"] && empty($data[$name]))
-				){
+
+
+					//Vérifier le captcha
+
+				} else {
 					return ["Tentative de hack !!!"];
 				}
-				
-				//Vérifier l'email
-				if($config["type"]=="email"){
-					
-					if(self::checkEmail($data[$name])){
-						//Vérifier l'unicité de l'email
-					}else{
-						$listOfErrors[]=$config["errorMsg"];
-					}
-				}
-
-					
-
-				//Vérifier le captcha
-				if($_SESSION["captcha"] != '?????'){
-
-				}
-
-				//Vérifier le password
-					//Vérifier les confirm
-
-				//Vérifier le min
-				//Vérifier le max
 			}
-
 		} else {
 			return ["Tentative de hack !!!"];
 		}
+
 		return $listOfErrors;
 	}
 
-	public static function checkEmail($email)
+	public static function emailValidate($email) 
 	{
-		$email = trim($email);
 		return filter_var($email, FILTER_VALIDATE_EMAIL);
 	}
 
-	public static function checkPwd($email)
+	public static function maxValidate($string, $length)
 	{
-		
+		return strlen(trim($string)) <= $length;
 	}
 
+	public static function minValidate($string, $length)
+	{
+		return strlen(trim($string)) >= $length;
+	}
+
+	public static function pwdValidate($pwd)
+	{
+		return strlen($pwd) >= 6 && strlen($pwd) <= 32 && 
+		preg_match("/[a-z]/", $pwd) && 
+		preg_match("/[A-Z]/", $pwd) && 
+		preg_match("/[0-9]/", $pwd);
+	}
 }
+

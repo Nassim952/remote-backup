@@ -9,7 +9,7 @@ class Page extends Model
     protected $id;
     protected $title;
     protected $type;
-    protected $gabarit;
+    protected $sections = [];
     protected $creation_date;
     protected $theme;
     protected $background_image;
@@ -27,27 +27,33 @@ class Page extends Model
         $this->id = $id;
     }
 
-    public function setTitle(string $title){
+    public function setTitle(string $title)
+    {
         $this->title = $title;
     }
 
-    public function setPassword(string $type){
+    public function setPassword(string $type)
+    {
         $this->type = $type;
     }
 
-    public function setGabarit($gabarit){
+    public function setGabarit($gabarit)
+    {
         $this->gabarit = $gabarit;
     }
 
-    public function setDate($creation_date){
+    public function setDate($creation_date)
+    {
         $this->creation_date = $creation_date;
     }
 
-    public function setTheme($theme){
+    public function setTheme($theme)
+    {
         $this->theme = $theme;
     }
 
-    public function setBackground($background_image){
+    public function setBackground($background_image)
+    {
         $this->background_image = $background_image;
     }
 
@@ -58,27 +64,36 @@ class Page extends Model
        return $this->id;
     }
 
-    public function getTitle(){
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function getPassword(){
+    public function getPassword()
+    {
         return $this->type;
     }
 
-    public function getGabarit(){
+    public function getGabarit()
+    {
         return $this->gabarit = $gabarit;
     }
 
-    public function getDate(){
+    public function getDate()
+    {
         return $this->creation_date;
     }
 
-    public function getTheme(){
+    public function getTheme()
+    {
         return $this->theme;
     }
 
-    public function getBackground(){
+    public function getBackground()
+    {
         return $this->background_image;
     }
+
+//OPERATIONS
+
 }
