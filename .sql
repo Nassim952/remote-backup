@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS bape_identity(
 
 INSERT INTO bape_identity (id, lastname, firstname, birthdate) VALUES
 (1, 'desouza', 'eyram', '2020-01-01'),
-(2, 'mbiya', 'randy', '2020-01-01'),
+(2, 'mbiya', 'eyram', '2020-01-01'),
 (3, 'mmadi','nassim','2020-01-01'),
 (4, 'belatoui', 'bibal', '2020-01-01'),
 (5, 'mondor', 'andrew', '2020-01-01');
