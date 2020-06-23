@@ -50,6 +50,11 @@ class UserController
         new view("addfilm","back");
     }
 
+    public function addPageAction()
+    {
+        new view("addpage","back");
+    }
+
     public function loginAction()
     {
         new View("login","back");

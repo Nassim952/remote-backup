@@ -41,3 +41,7 @@
 /users:
   controller: User
   action: users
+
+/addpage:
+  controller: User
+  action: addpage
