@@ -118,7 +118,8 @@ class QueryBuilder {
         [$table, $aliasTarget] = explode(" ", $table);
         
         $query = buildJoin($table, $aliasTarget, $fieldSource, $fieldTarget);
-        setAlias($aliasTarget);
+        
+        setAlias( (null === $aliasTarget) ? $table : $aliasTarget);
 
         if (null !== $select) {
             buildSelect($select, $this->alias);
@@ -205,13 +206,7 @@ class QueryBuilder {
 
     private function on(string $table, string $aliasTarget, string $fieldSource, string $fieldTarget)
     {
-        if(null === $aliasTarget)
-        {
-            return " ON $this->alias.$fieldSource = $table.$fieldTarget";
-        } else {
-            return  "ON $this->alias.$fieldSource = $aliasTarget.$fieldTarget";
-        }
-
+        return (null === $aliasTarget) ? " ON $this->alias.$fieldSource = $table.$fieldTarget" : "ON $this->alias.$fieldSource = $aliasTarget.$fieldTarget";
     }
 
     private function buildSelect(array $fields, $aliasTarget = null)

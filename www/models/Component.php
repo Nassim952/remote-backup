@@ -14,10 +14,9 @@ class Component extends DB
     protected $position;
     protected $style;
 
-    public function __Construct($id)
+    public function __Construct()
     {
-        $component = new ComponentManager();
-        $component->find($id);
+
     }
 
 //SETTERS

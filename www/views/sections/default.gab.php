@@ -1,5 +1,5 @@
 <section class="row">
-    <?php foreach ($components as $oComponent): ?>
+    <?php foreach ($data as $oComponent): ?>
         <div class="col-sm-3 col-md-2">
             <?php
                 $dataComponent = $oComponent->getData();

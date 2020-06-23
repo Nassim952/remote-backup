@@ -5,54 +5,26 @@ namespace cms\controllers;
 use cms\models\Users;
 use cms\core\View;
 
-class UserController extends Controller{
-
-	public function landingAction(){
-        new View("landing-page","front");
-    }
-
-    public function homeAction(){
-        new View("home","empty");
-    }
-
-    public function templateAction(){
-        new View("template-create","empty");
-    }
-
-    public function usersAction(){
-        new View("users","back");
-    }
-
-    public function signupAction(){
-        new View("signup","front");
-    }
-
-    public function signinAction(){
-        new View("signin","front");
-    }
-
-    public function addFilmAction()
+class PageController extends Controller
+{
+	public function buildPageAction($params)
     {
-        new view("addfilm","back");
-    }
+        $pageManager = new PageManager();
+        $page = $pageManager->find($params['id']);
 
-	public function getUserAction($params)
-    {
-        $userManager = new UserManager();
+        if (!$page) {
+            throw new NotFoundException("page not found");
+        }
 
-        $user = $userManager->find($params['id']);
-
-        if(!$user) {
-            throw new NotFoundException("User not found");
-		}
-        return $user;
+        $this->render("default", "front", [
+            "page" => $page
+        ]);
     }
 
 
 
 	public function loginAction()
     {
-
         $registerType = new LoginType();
 
         if ( $_SERVER["REQUEST_METHOD"] == "POST") {
@@ -66,7 +38,6 @@ class UserController extends Controller{
                 "form" => $registerType
             ]);
         }
-      
 	}
 	
     public function registerAction()
@@ -85,14 +56,9 @@ class UserController extends Controller{
             ]);
         }
     }
-    
-    public function buildPage()
+
+    public function forgetPwdAction()
     {
-
-    }
-
-
-	public function forgetPwdAction(){
 		$myView = new View("forgetPwd", "account");
 	}
 }

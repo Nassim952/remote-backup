@@ -13,10 +13,9 @@ class Comment extends DB
     protected $target_type;
     protected $author;
 
-    public function __Construct($id)
+    public function __Construct()
     {
-        $comment = new CommentManager();
-        $comment->find($id); 
+         
     }
 
 //SETTERS
