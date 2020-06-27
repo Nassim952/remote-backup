@@ -155,17 +155,9 @@ class DB
 
     public function delete(int $id): bool
     {
-        if ($parameters) {
-            $queryPrepared = $this->pdo->prepare($sql);
-            $queryPrepared->execute($parameters);
-
-            return $queryPrepared;
-        } else {
-            $queryPrepared = $this->pdo->prepare($sql);
-            $queryPrepared->execute();
-
-            return $queryPrepared;
-        }
+        $sql = "DELETE FROM $this->table where id = :id";
+        $this->connection->query($sql, [':id' => $id]);
+        return true;
     }
     
 }
