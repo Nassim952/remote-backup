@@ -18,28 +18,30 @@
 			<h1>Créez votre compte !</h1>
 			<br>
 			<div class="divInput">
-				<input type="text" name="firstname" id="firstname" placeholder="Nom">
-				<input type="text" name="lastname" id="lastname" placeholder="Prenom">
-				<br>
-				<input type="email" name="email" id="email" placeholder="Email">
-				<br>
-				<input type="password" name="password" id="" placeholder="Mot de passe">
-				<br>
-				<input type="password" name="confirmpwd" id="" placeholder="Confirmer mot de passe">
-				<br>
-
-				<div class="divCheckbox">
-					<input type="checkbox">
-					<label>J'accepte les conditions générales</label>
+				<form name="form_inscription" action="" method="post">
+					<input type="text" name="firstname" id="firstname" placeholder="Nom">
+					<input type="text" name="lastname" id="lastname" placeholder="Prenom">
 					<br>
-					<input type="checkbox">
-					<label>J'accepte de recevoir des offres spéciales par mail</label>
-				</div>
-				<br>
-				<div class="button_wrapper">
-					<a href="#" class="button">S'inscrire</a>
-					<a href="<?= \cms\core\Helpers::getUrl("User", "signin") ?>" class="button" style="margin-top: 20px;">Déjà un compte ?</a>
-				</div>
+					<input type="email" name="email" id="email" placeholder="Email">
+					<br>
+					<input type="password" name="password" id="" placeholder="Mot de passe">
+					<br>
+					<input type="password" name="confirmpwd" id="" placeholder="Confirmer mot de passe">
+					<br>
+
+					<div class="divCheckbox">
+						<input type="checkbox">
+						<label>J'accepte les conditions générales</label>
+						<br>
+						<input type="checkbox">
+						<label>J'accepte de recevoir des offres spéciales par mail</label>
+					</div>
+					<br>
+					<div class="button_wrapper">
+						<button type="submit" class="button">S'inscrire</button>
+						<a href="<?= \cms\core\Helpers::getUrl("User", "signin") ?>" class="button" style="margin-top: 20px;">Déjà un compte ?</a>
+					</div>
+				</form>
 			</div>
 		</section>
 	</section>

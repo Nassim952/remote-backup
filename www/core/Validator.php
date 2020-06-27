@@ -1,52 +1,56 @@
+<?php
 
-  <?php
+namespace cms\core;
+
+use cms\managers\UserManager;
+
 class Validator
 {
 
-
 	public static function formValidate( $config , $data ){
 		$listOfErrors = [];
+		$checkEmail = new UserManager('User','user');
 
 		//Vérification du bon nb de input
-		if(count($config["fields"]) == count($data)) {
-			foreach($config["fields"] as $name => $configField){
+		if(count($config["fields"]) == count($data)) 
+		{
+			// print_r($config);
+			// print_r($data);
+			foreach($config["fields"] as $value => $configField){
 				//Vérifier que les names existent et Vérifier les required
-				if (isset($data[$name]) 
-					&& ($configField["required"] && !empty($data[$name]))) {
-
-					if (isset($configField["maxString"]) 
-						&& !self::maxValidate($data[$name], $configField["maxString"])) {
-							$listOfErrors[] = $configField["errorMsg"];
-					} elseif (isset($configField["minString"]) 
-						&& !self::minValidate($data[$name], $configField["minString"])) {
-							$listOfErrors[] = $configField["errorMsg"];
-					}
+				if (isset($data[$value]) && ($configField["required"] && !empty($data[$value]))) 
+				{
 					//Vérifier le format de l'email
-					if ($configField["type"] == "email") {
-						if (self::emailValidate($data[$name])) {
-							if (!empty(UserManager::findBy(["email" => $data[$name]]))) {
-								$listOfErrors[] = $configField["errorMsg"];
+					if ($configField["type"] == "email")
+					{
+						if (self::emailValidate($data[$value])) 
+						{
+							if (!empty($checkEmail->findBy(["email" => $data[$value]]))) 
+							{
+								array_push($listOfErrors, "l'email est déjà existant");
 							}
-							//vérifier l'unicté de l'email
-						} else {
+						}
+					}
+					if($configField["placeholder"] == "Votre mot de passe") 
+					{
+						if(self::pwdValidate($data[$value])){
 							$listOfErrors[] = $configField["errorMsg"];
 						}
-					} elseif($configField["type"] = "password" && !self::pwdValidate($data[$name])) {
-						$listOfErrors[] = $configField["errorMsg"];
 					}
-
-
-
-					//Vérifier le captcha
-
+					if($configField["placeholder"] == "Confirmation")
+					{
+						if($data["password"] != $data["confirmpwd"]){
+							
+							$listOfErrors[] = $configField["errorMsg"];
+						}
+					}
 				} else {
-					return ["Tentative de hack !!!"];
+					return ["Tentative de hack"];
 				}
 			}
 		} else {
-			return ["Tentative de hack !!!"];
+			return ["Tentative de hack"];
 		}
-
 		return $listOfErrors;
 	}
 
@@ -67,10 +71,13 @@ class Validator
 
 	public static function pwdValidate($pwd)
 	{
-		return strlen($pwd) >= 6 && strlen($pwd) <= 32 && 
-		preg_match("/[a-z]/", $pwd) && 
-		preg_match("/[A-Z]/", $pwd) && 
-		preg_match("/[0-9]/", $pwd);
+		$uppercase = preg_match('@[A-Z]@', $pwd);
+		$lowercase = preg_match('@[a-z]@', $pwd);
+		$number    = preg_match('@[0-9]@', $pwd);
+
+		if(!$uppercase || !$lowercase || !$number || strlen($pwd) < 8) {
+			return true;
+		}
 	}
 }
 

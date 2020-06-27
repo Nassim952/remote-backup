@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Core;
+namespace cms\core;
 
-use App\Core\Builder\FormBuilder;
-use App\Core\Constraints\Validator;
+use cms\core\Builder\FormBuilder;
+use cms\core\Validator;
 
 class Form
 {

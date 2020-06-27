@@ -1,22 +1,17 @@
 <?php
 
-namespace App\Core\Builder;
+namespace cms\core\Builder;
 
-
-use App\Core\Connection\BDDInterface;
-use App\Core\Connection\PDOConnection;
-use App\Core\Connection\ResultInterface;
-
+use cms\core\Connection\BDDInterface;
+use cms\core\Connection\PDOConnection;
+use cms\core\Connection\ResultInterface;
 
 class QueryBuilder
-
 {
-
     protected $connection;
     protected $query;
     protected $parameters;
     protected $alias;
-
 
     public function __construct(BDDInterface $connection = NULL)
     {
@@ -50,7 +45,7 @@ class QueryBuilder
         return $this;
     }
 
-    public function setParameter(string $key, string $value): QueryBuilder
+    public function setParameters(string $key, string $value): QueryBuilder
     {
         $this->parameters[":$key"] = $value;
 

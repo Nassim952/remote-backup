@@ -61,6 +61,7 @@ class View
 	// affiche le template et ce qui va avec
 	public function __destruct()
 	{
+		extract($this->data);
 		include "views/templates/".$this->template.".tpl.php"; 
 	}
 	

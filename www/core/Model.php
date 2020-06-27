@@ -2,41 +2,28 @@
 
 namespace cms\core;
 
-class Model implements \JsonSerializable{
+use ReflectionMethod;
+use ReflectionProperty;
 
+class Model extends DB implements \JsonSerializable
+{
 
+    public function __construct()
+    {
+        $this->readAnnotation();
+    }
     public function __toArray(): array
     {
         return get_object_vars($this);
     }
 
-    public function toString(): array
-    {
-
-    }
-
-    // public function hydrate(array $data)
-    // {
-    //     $relations = $this->initRelation();
-    //     foreach ($data as $key => $value) {
-    //         if ( array_key_exists($key,$relations)) {
-    //             $class = $relations[$key];
-    //             $value = (new $class($value));
-    //         }
-    //         $method = 'set'.ucfirst($key);
-
-    //         if (method_exists($this, $method)) {
-    //             $this->$method($value);
-    //         }
-    //     }
-    // }
-
+    // Il est possible ici de remplacer l'objet courant par $this si vous le souhaitez
     public function hydrate(array $row)
     {
         $className = get_class($this);// $className = static::class
         $articleObj = new $className();
         foreach ($row as $key => $value) {
-          
+        
             $method = 'set'.ucFirst($key);
             if (method_exists($articleObj, $method)) {
                 // Author = 4
@@ -56,20 +43,34 @@ class Model implements \JsonSerializable{
         return $articleObj;
     }
 
+    public function jsonSerialize() {
+
+        return $this->__toArray();
+    }
+
+
     public function getRelation(string $key): ?string
     {
         $relations = $this->initRelation();
 
-        if (isset($relations[$key])) {
+        if(isset($relations[$key]))
             return $this->initRelation()[$key];
-        }
-            
+
         return null;
     }
 
-    public function JsonSeralisable()
+    public function readAnnotation()
     {
-        return $this->__toArray();
+    
+        $properties = get_class_vars(static::class);
+        $relation = [];
+
+        foreach($properties as $property => $value)
+        {
+            $methodReflection = new ReflectionProperty($this,$property);
+            $comment = $methodReflection->getDocComment();
+        // echo $comment;
+        }
     }
 
 }

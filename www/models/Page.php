@@ -1,12 +1,12 @@
 <?php
 
-namespace www\models;
+namespace cms\models;
 
-use www\core\Model;
+use cms\core\Model;
 
 class Page extends Model
 {
-    protected $id;
+    protected $id = null;
     protected $title;
     protected $type;
     protected $gabarit;

@@ -22,7 +22,7 @@ background-color: white;
 .button_wrapper{
     display: flex;
     flex-wrap: wrap;
-    width: 63%;
+    width: 62%;
     justify-content: center;
     align-items: center;
     margin-left: 82px;
