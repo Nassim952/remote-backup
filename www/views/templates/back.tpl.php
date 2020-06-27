@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+    !isset($_SESSION['user']) ? header("Location: /connexion"): '' ;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +34,7 @@
             </div>
             <div class="name-container">
                 <span id="dot"></span>
-                <p>John Doe</p>
+                <p><?= ucFirst($_SESSION['user']->getLogin()); ?></p>
             </div>
             <div class="nav-content">
                 <h2 id="text-submenu-fixer">Gestion film</h2>
@@ -90,6 +94,14 @@
                         <div class="fas fa-user-shield fa-lg"></div>
                         <div id="submenu-wrapper">
                             <span>Admin</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-menu">
+                    <div class="sidebar-sub-headers">
+                        <div class="fas fa-user-shield fa-lg"></div>
+                        <div id="submenu-wrapper">
+                            <a href="<?= \cms\core\Helpers::getUrl("User","signin") ?>" id="text-white"><span>Déconnexion</span></a>
                         </div>
                     </div>
                 </div>

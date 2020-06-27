@@ -1,6 +1,10 @@
 <?php
 
-namespace App\Core\Builder;
+namespace cms\core\Builder;
+
+use cms\core\Builder\FormBuilderInterface;
+use cms\core\Builder\ElementFormBuilder;
+use cms\core\Builder\ElementFormBuilderInterface;
 
 class FormBuilder implements FormBuilderInterface
 {
@@ -14,14 +18,14 @@ class FormBuilder implements FormBuilderInterface
                 ->setName($name)
                 ->setType($type)
                 ->setOptions($options);
-     
+    
         return $this;
     }
 
     public function remove(string $name): FormBuilderInterface
     {
         unset($this->elements[$name]);
-     
+    
         return $this;
     }
 

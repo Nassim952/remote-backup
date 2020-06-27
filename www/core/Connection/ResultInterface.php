@@ -1,10 +1,11 @@
 <?php
 
-namespace www\core\connection;
+namespace cms\core\Connection;
 
 Interface ResultInterface{
 
-    public function fetchAll();
-    public function fetchOne();
-    public function fetch();
+    public function getArrayResult();
+    public function getOneOrNullResult();
+    public function getValueResult();
+
 }

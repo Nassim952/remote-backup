@@ -1,6 +1,10 @@
 <?php
 
-namespace cms\core\builder;
+namespace cms\core;
+
+use cms\core\Connection\BDDInterface;
+use cms\core\Connection\PDOConnection;
+use cms\core\Connection\ResultInterface;
 
 class QueryBuilder {
 
@@ -17,7 +21,16 @@ class QueryBuilder {
 //SETTERS
     protected function __construct(BDDInterface $connection = null)
     {
-        setConnection($connection);
+        $this->setConnection($connection);
+    }
+
+    public function setConnection(BDDInterface $connection){
+        $this->connection = $connection;
+        if(NULL === $connection)
+            $this->connection = new PDOConnection();
+            
+        $this->query = "";
+        $this->parameters = [];
     }
 
     public function setQuery($query)
@@ -76,7 +89,7 @@ class QueryBuilder {
     public function select(string $values = '*'):QueryBuilder
     {
         $select =  "SELECT $values";
-        buildSelect($select);
+        $this->buildSelect($select);
         return $this;
     }
 
@@ -224,7 +237,7 @@ class QueryBuilder {
                 $select .= "$aliasTarget.*";
             } 
         }
-        addToSelect($select);
+        $this->addToSelect($select);
     }
 
 

@@ -21,18 +21,19 @@
 			
 			<?php $this->addModal("form", $configFormUser->getForm() );?>
 
-				<div class="divCheckbox">
-					<input type="checkbox">
-					<label>J'accepte les conditions générales</label>
+					<div class="divCheckbox">
+						<input type="checkbox">
+						<label>J'accepte les conditions générales</label>
+						<br>
+						<input type="checkbox">
+						<label>J'accepte de recevoir des offres spéciales par mail</label>
+					</div>
 					<br>
-					<input type="checkbox">
-					<label>J'accepte de recevoir des offres spéciales par mail</label>
-				</div>
-				<br>
-				<div class="button_wrapper">
-					<a href="#" class="button">S'inscrire</a>
-					<a href="<?= \cms\core\Helpers::getUrl("User", "signin") ?>" class="button" style="margin-top: 20px;">Déjà un compte ?</a>
-				</div>
+					<div class="button_wrapper">
+						<button type="submit" class="button">S'inscrire</button>
+						<a href="<?= \cms\core\Helpers::getUrl("User", "signin") ?>" class="button" style="margin-top: 20px;">Déjà un compte ?</a>
+					</div>
+				</form>
 			</div>
 		</section>
 	</section>

@@ -2,8 +2,9 @@
 
 namespace cms\core;
 
-use cms\models\users;
-use cms\models\PDOConnection;
+use cms\core\Connection\PDOConnection;
+use cms\core\Connection\BDDInterface;
+
 
 class DB
 {
@@ -14,17 +15,30 @@ class DB
     public function __construct(string $class, string $table, BDDInterface $connection = null)
     {
         $this->class = $class;
-        $this->table =  DB_PREFIXE.$table;
-        
+        $this->table = DB_PREFIXE.$table;
         $this->connection = $connection;
         if(NULL === $connection)
             $this->connection = new PDOConnection();
     }
 
-
-    public function find(int $id): ?Model
+    public function initBdd(string $bdd = "")
     {
-        $sql = "SELECT * FROM $this->table where id = :id";
+        if (!file_exists($bdd.".sql")) {
+            return false;
+        }
+        //.sql
+        $sql = trim(file_get_contents($bdd.".sql"));
+
+        $this->connection->query($sql);
+    }
+    
+    // : ?\App\Models\Model
+    public function find(int $id)
+    {
+            $sql = "SELECT * FROM ".$this->table. "WHERE id = ".$id;
+
+            $queryPrepared = $this->connection->query($sql);
+            $queryPrepared->execute();
 
         $result = $this->connection->query($sql, [':id' => $id]);
         
@@ -34,23 +48,28 @@ class DB
 
     public function findAll(): array
     {
-        $sql = "SELECT * FROM $this->table";
-
+        $sql = "SELECT * FROM ".$this->table. "WHERE id= ".$id;
         $result = $this->connection->query($sql);
-
-        return $result->getArrayResult($this->class);
-      
+        $rows = $result->getArrayResult();
+        $results = array_map(
+                        function($row)
+                        {
+                            return (new $this->class())->load($row);
+                        },$rows
+                    );     
+        return $results;
     }
 
-    public function findBy(array $params, array $order = null): array
+    public function findBy(array $params,array $order = null): array
     {
-        $results = array();
-        $sql = "SELECT * FROM $this->table where ";
-
+        $sql = "SELECT email FROM $this->table WHERE ";
         // Select * FROM users WHERE firstname LIKE :firstname ORDER BY id desc
-        foreach($params as $key => $value) {
-            if(is_string($value)) {
-                $comparator = 'LIKE';
+
+        foreach($params as $key => $value)
+        {
+            if(is_string($value))
+            {
+                $separator = "LIKE";
             } else {
                 $comparator = '=';
             }
@@ -59,14 +78,17 @@ class DB
             $params[":$key"] = $value;
             unset($params[$key]);
         }
-        $sql = rtrim($sql, 'and');
+
         // Select * FROM users WHERE firstname LIKE :firstname
-        if ($order) {
-            $sql .= "ORDER BY ". key($order). " ". $order[key($order)]; 
+        $sql = rtrim($sql,'and');
+
+        if($order)
+        {
+            $sql .= "ORDER BY ". key($order). " ". $order[key($order)];
         }
         // Select * FROM users WHERE firstname LIKE :firstname ORDER BY id desc
         $result = $this->connection->query($sql, $params);
-        return $result->getArrayResult($this->class);   
+        return $result->getArrayResult($this->class);
     }
 
     public function count(array $params): int
@@ -90,32 +112,34 @@ class DB
         return $result->getValueResult();
     }
 
-    public function delete(int $id): bool
-    {
-        $sql = "DELETE FROM $this->table where id = :id";
-        $result = $this->connection->query($sql, [':id' => $id]);
-
-        return true;
-    }
-
     public function save($objectToSave)
     {
         $objectArray =  $objectToSave->__toArray();
+
         $columnsData = array_values($objectArray);
         $columns = array_keys($objectArray);
-
-        // On met 2 points devant chaque clé du tableau
-        $params = array_combine(
-            array_map(function($k){ 
-                    return ':'.$k; }, 
-                    array_keys($objectArray)
-                ),
-            $objectArray
-        );
         
+        // On met 2 points devant chaque clé du tableau
+        $params = [];
+        foreach($objectArray as $key => $value)
+        {
+            if($value instanceof Model)
+            {
+                $params[":$key"] = $value->getId();
+                $this->save($value);
+            } else {
+                $params[":$key"] = $value;
+            }
+        }
+
         if (!is_numeric($objectToSave->getId())) {
             array_shift($columns);
             array_shift($params);
+
+            // retire le dernier index identity
+            array_pop($columns);
+            array_pop($params);
+            
             //INSERT
             $sql = "INSERT INTO ".$this->table." (".implode(",", $columns).") VALUES (:".implode(",:", $columns).");";
             //foreach()
@@ -126,10 +150,10 @@ class DB
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id;";
         }
-        $this->connection->query($sql, $params);
+        $this->connection->query($sql, $params);    
     }
 
-    protected function sql($sql, $parameters = null)
+    public function delete(int $id): bool
     {
         if ($parameters) {
             $queryPrepared = $this->pdo->prepare($sql);

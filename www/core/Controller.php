@@ -1,11 +1,11 @@
 <?php 
 
-namespace App\Core;
+namespace cms\core;
 
 use SplObserver;
 use SplObjectStorage;
-use App\Core\Builder\FormBuilder;
-use App\Core\Events\ControllerEvent;
+use cms\core\Builder\FormBuilder;
+use cms\core\Events\ControllerEvent;
 
 class Controller implements \SplSubject
 {
@@ -25,7 +25,6 @@ class Controller implements \SplSubject
         $form = new $class;
         $form->configureOptions();
         $form->buildForm(new FormBuilder());
-       
         if($model){
             $form->setModel($model);
             $form->associateValue();
@@ -47,12 +46,13 @@ class Controller implements \SplSubject
 
     }
 
-    public function render(string $controller, string $template = "back", array $params = null)
+    public function render(string $view, string $template = "back", array $params = null)
     { 
-        $this->notify();
-        $this->detach($this->event);
+        // $this->notify();
+        // $this->detach($this->event);
 
-        $myView = new View($controller, $template);
+        $myView = new View($view, $template);
+        // print_r($myView);
         foreach($params as $key => $param) {
             $myView->assign($key, $param);
         }
@@ -70,12 +70,12 @@ class Controller implements \SplSubject
 
     public function notify()
     {
-         //var_dump('COUCOU'); die;
+        //var_dump('COUCOU'); die;
     
-        /** @var SplObserver $observer */
+        // /** @var SplObserver $observer */
         foreach ($this->observers as $observer) {
             $observer->update($this);
-           // $observer->logged($_SERVER['REQUEST_URI']);
+        // $observer->logged($_SERVER['REQUEST_URI']);
         }
     }
 

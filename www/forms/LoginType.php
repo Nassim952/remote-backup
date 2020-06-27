@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Forms;
+namespace cms\forms;
 
-use App\Core\Helper;
+use cms\core\Form;
 
 class LoginType extends Form {
 

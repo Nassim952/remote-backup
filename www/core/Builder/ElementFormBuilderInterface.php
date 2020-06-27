@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Builder;
+namespace cms\core\Builder;
 
 
 interface ElementFormBuilderInterface

@@ -1,26 +1,27 @@
 <?php
 
-namespace cms\Managers;
+namespace cms\managers;
 
 use cms\core\DB;
+use cms\core\Builder\QueryBuilder;
 
 class ComponentManager extends DB{
 
     public function _construct()
     {
-        parent::_construct(Component::class,'component');
+        parent::__construct(Component::class,'component');
     }
 
     public function getSectionComponents(int $id = null)
     {
         $query = (new QueryBuilder())
             ->select('c, p')/// p.id as post_id, u.id as user_id,
-            ->from(PREFIXE_DB.'component', 'c')
-            ->join(PREFIXE_DB.'user', 'u');
+            ->from(DB_PREFIXE.'component', 'c')
+            ->join(DB_PREFIXE.'user', 'u');
             
             if($id) {
                 $query->where('p.author = :iduser')
-                ->setParameter('iduser', $id);
+                ->setParameters('iduser', $id);
             }
             return $query->getQuery()
             ->getArrayResult(Post::class);
