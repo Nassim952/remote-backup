@@ -15,12 +15,12 @@
 		</header>
 
 		<section class="row">
-            <?php foreach ($sections as $oSections): ?>
+            <?php foreach ($page as $oSections): ?>
                 <div class="col-sm-3 col-md-2">
                     <?php
-                        $dataSection = $oSection->getData();
-                        $aType = $oSection->getClass();
-                        $this->addSection($aType, $dataSection);
+                        $sections = $oSection->getData();
+						$classSection = $oSection->getClass();
+                        $this->addSection($classSection, $sections);
                     ?>
                 </div>
             <?php endforeach  ?>

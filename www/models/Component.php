@@ -14,15 +14,10 @@ class Component extends DB
     protected $position;
     protected $style;
 
-<<<<<<< HEAD
-    public function __construct(){
-        parent::__construct();
-=======
     public function __Construct($id)
     {
         $component = new ComponentManager();
         $component->find($id);
->>>>>>> pageBulider
     }
 
 //SETTERS

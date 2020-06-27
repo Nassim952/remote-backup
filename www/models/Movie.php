@@ -12,10 +12,9 @@ class Movie extends Model
     protected $duration;
     protected $synopsis;
 
-    public function __Construct($id)
+    public function __Construct()
     {
-        $movie = new MovieManager();
-        $movie->find($id);    
+      
     }
 
 //SETTERS

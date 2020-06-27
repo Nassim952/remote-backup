@@ -16,10 +16,9 @@ class User extends Model
     protected $identity = null;
 
 
-    public function __Construct($id)
+    public function __Construct()
     {
-        $user = new UserManager();
-        $user->find($id);
+    
     }
 
 //SETTERS

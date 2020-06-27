@@ -1,4 +1,4 @@
-.button-test{
+.button {
     text-decoration: none;
     color: $white;
     padding: 1em;
@@ -23,30 +23,4 @@
             background-color: lighten($green, 10%);
         }
     }
-}
-
-.button-red {
-    box-shadow:inset 0px 1px 0px 0px #f5978e;
-    background:linear-gradient(to bottom, #f24537 5%, $red 100%);
-    background-color:#f24537;
-    border-radius:15px;
-    border:1px solid #d02718;
-    display:inline-block;
-    cursor:pointer;
-    font-family:Arial;
-    font-size:15px;
-    font-weight:bold;
-    padding:6px 24px;
-    text-decoration:none;
-    color: white;
-    text-align: center;
-}
-.button-red:hover {
-    background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
-    background-color: $red;
-    color: white;
-}
-.button-red:active {
-    position:relative;
-    top:1px;
 }

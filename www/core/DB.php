@@ -9,83 +9,64 @@ class DB
 {
     private $table;
     private $connection;
-    private $class;
+    protected $class;
 
     public function __construct(string $class, string $table, BDDInterface $connection = null)
     {
         $this->class = $class;
         $this->table =  DB_PREFIXE.$table;
+        
         $this->connection = $connection;
-        if (NULL === $connection) {
+        if(NULL === $connection)
             $this->connection = new PDOConnection();
-        }     
     }
 
-    public function initBdd(string $bdd = "")
+
+    public function find(int $id): ?Model
     {
-        if (!file_exists($bdd.".sql")) {
-            return false;
-        }
-        //.sql
-        $sql = trim(file_get_contents($bdd.".sql"));
+        $sql = "SELECT * FROM $this->table where id = :id";
 
-        $this->connection->query($sql);
-    }
-
-    public function find(int $id): ?\App\Models\Model
-    {
-            $Sql = "SELECT * FROM ".$this->table. "WHERE id = ".$id;
-
-            $queryPrepared = $this->connection->querry($sql);
-            $queryPrepared->execute();
-
-            return (new $this->class())->load($queryPrepared->fetch());
+        $result = $this->connection->query($sql, [':id' => $id]);
+        
+        return $result->getOneOrNullResult($this->class);
+      
     }
 
     public function findAll(): array
     {
-        $Sql = "SELECT * FROM ".$this->table. "WHERE id= ".$id;
+        $sql = "SELECT * FROM $this->table";
+
         $result = $this->connection->query($sql);
-        $rows = $rows->getArrayResult();
-        $results = array_map(
-                        function($row)
-                        {
-                            return (new $this->class())->load($row);
-                        },$rows
-                    );     
-        return $results;
+
+        return $result->getArrayResult($this->class);
+      
     }
 
-    public function findBy(array $params,array $order): array
+    public function findBy(array $params, array $order = null): array
     {
-        $Sql = "SELECT * FROM $this->table WHERE ";
-        foreach($params as $key => $value)
-        {
-            if(is_string($value))
-            {
-                $separator = "LIKE";
+        $results = array();
+        $sql = "SELECT * FROM $this->table where ";
+
+        // Select * FROM users WHERE firstname LIKE :firstname ORDER BY id desc
+        foreach($params as $key => $value) {
+            if(is_string($value)) {
+                $comparator = 'LIKE';
             } else {
-                $separator = "=";
+                $comparator = '=';
             }
-            $sql .="$key $separator :$key and";
+            $sql .= " $key $comparator :$key and"; 
+            // Select * FROM users WHERE firstname LIKE :firstname and
             $params[":$key"] = $value;
             unset($params[$key]);
         }
-
-        $sql = rtrim($sql,'and');
-
-        if($order)
-        {
-            $sql .= "ORDER BY ". key($order). " ". $order[key($order)];
+        $sql = rtrim($sql, 'and');
+        // Select * FROM users WHERE firstname LIKE :firstname
+        if ($order) {
+            $sql .= "ORDER BY ". key($order). " ". $order[key($order)]; 
         }
+        // Select * FROM users WHERE firstname LIKE :firstname ORDER BY id desc
         $result = $this->connection->query($sql, $params);
-        $rows = $result->getArrayResult();
-        $results = array_map(function($row){
-            return (new $this->class())->load($row);
-            },$rows
-        );
-        
-        return $results;
+        return $result->getArrayResult($this->class);   
     }
 
     public function count(array $params): int
@@ -93,7 +74,7 @@ class DB
         $sql = "SELECT COUNT(*) FROM $this->table where ";
 
         foreach($params as $key => $value) {
-            if (is_string($value)) {
+            if(is_string($value)) {
                 $comparator = 'LIKE';
             } else {
                 $comparator = '=';
@@ -102,32 +83,37 @@ class DB
             $params[":$key"] = $value;
             unset($params[$key]);
         }
+
         $sql = rtrim($sql, 'and');
+
         $result = $this->connection->query($sql, $params);
-        
         return $result->getValueResult();
     }
 
-    public function save($oToSave): bool
+    public function delete(int $id): bool
     {
-        $oArray =  $oToSave->__toArray();
+        $sql = "DELETE FROM $this->table where id = :id";
+        $result = $this->connection->query($sql, [':id' => $id]);
 
-        $oArray = array_map($oArray, function($value,$key){
-                
-        
-        });
+        return true;
+    }
 
-        $columnsData = array_values($oArray);
-        $columns = array_keys($oArray);
+    public function save($objectToSave)
+    {
+        $objectArray =  $objectToSave->__toArray();
+        $columnsData = array_values($objectArray);
+        $columns = array_keys($objectArray);
+
         // On met 2 points devant chaque clé du tableau
         $params = array_combine(
-                        array_map(function($k){
-                            return ':'.$k; 
-                        }, 
-                        array_keys($oArray)),
-                        $oArray
-                    );
-        if (!is_numeric($oToSave->getId())) {
+            array_map(function($k){ 
+                    return ':'.$k; }, 
+                    array_keys($objectArray)
+                ),
+            $objectArray
+        );
+        
+        if (!is_numeric($objectToSave->getId())) {
             array_shift($columns);
             array_shift($params);
             //INSERT
@@ -141,16 +127,21 @@ class DB
             $sql = "UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id;";
         }
         $this->connection->query($sql, $params);
-
-        return true;
-    } 
-
-    public function delete(int $id): bool
-    {
-        $sql = "DELETE FROM $this->table where id = :id";
-        $result = $this->connection->query($sql, [':id' => $id]);
-
-        return true;
     }
 
+    protected function sql($sql, $parameters = null)
+    {
+        if ($parameters) {
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute($parameters);
+
+            return $queryPrepared;
+        } else {
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute();
+
+            return $queryPrepared;
+        }
+    }
+    
 }

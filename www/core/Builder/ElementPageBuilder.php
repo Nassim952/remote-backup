@@ -47,7 +47,6 @@ class ElementFormBuilder implements ElementPageBuilderInterface
         return $this;
     }
 
-
     public function getType(): string
     {
         return $this->type;
@@ -66,6 +65,5 @@ class ElementFormBuilder implements ElementPageBuilderInterface
     private function getSize(int $size)
     {
        return $this->size;
-    }
-    
+    }   
 }

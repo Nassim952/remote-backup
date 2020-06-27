@@ -7,7 +7,7 @@ use cms\core\View;
 use cms\core\Helpers;
 use cms\managers\UserManager;
 
-class UserController{
+class UserController extends Controller{
 
     private $login;
     private $password;
@@ -73,51 +73,47 @@ class UserController{
 
 	public function loginAction()
     {
-        new View("login","back");
 
-        $user = new User();
+        $registerType = new LoginType();
 
-        $user->setLogin($this->login);
-        $user->setPassword($this->password);
-
-        $user->checkLogin();
-
-        if ($user) {
-            $typeUser = $user->getTypeUser();
-
-            if ($typeUser == 1) {
-                $view = Helpers::getUrl("User", "dashboard");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
-            } elseif ($typeUser == 2) {
-                $view = Helpers::getUrl("#", "#");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
-            } elseif ($typeUser == 3) {
-                $view = Helpers::getUrl("#", "#");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
-            } elseif ($typeUser == 4) {
-                $view = Helpers::getUrl("#","#");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
-            }
+        if ( $_SERVER["REQUEST_METHOD"] == "POST") {
+            //Vérification des champs
+            $this->render("register", "account", [
+                "form" => $registerType,
+                "errors" => Validator::formLoginValidate( $registerType, $_POST )
+            ]);
+        } else {
+            $this->render("register", "account", [
+                "form" => $registerType
+            ]);
         }
+      
 	}
 	
-	public function registerAction(){
+    public function registerAction()
+    {
+        $registerType = new RegisterType();
 
-		$user = new Users();
-		
-		$user->setFirstName("bob");
-		$user->setLastName("berry");
-		$user->setEmail("boberry@gmail.com");
-		$user->setPwd("anonymous");
-		$user->setStatus(0);
+        if ( $_SERVER["REQUEST_METHOD"] == "POST") {
+            //Vérification des champs
+            $this->render("register", "account", [
+                "form" => $registerType,
+                "errors" => Validator::formRegisterValidate( $registerType, $_POST )
+            ]);
+        } else {
+            $this->render("register", "account", [
+                "form" => $registerType
+            ]);
+        }
+    }
+    
+    public function buildPage()
+    {
 
-		// $user->save();
-		// $user->count();
+    }
 
-		$myView = new View("register", "account");
+
+	public function forgetPwdAction(){
+		$myView = new View("forgetPwd", "account");
 	}
 }
