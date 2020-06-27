@@ -71,9 +71,9 @@ class DB
             {
                 $separator = "LIKE";
             } else {
-                $comparator = '=';
+                $separator = '=';
             }
-            $sql .= " $key $comparator :$key and"; 
+            $sql .= " $key $separator :$key and"; 
             // Select * FROM users WHERE firstname LIKE :firstname and
             $params[":$key"] = $value;
             unset($params[$key]);
