@@ -31,11 +31,11 @@
   action: signin
 
 /cinema:
-  controller: Dashboard
+  controller: Cinema
   action: cinema
 
 /salles:
-  controller: Dashboard
+  controller: Cinema
   action: salles
   
 /addfilm:

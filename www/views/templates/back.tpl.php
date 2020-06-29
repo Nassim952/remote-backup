@@ -34,7 +34,7 @@
             </div>
             <div class="name-container">
                 <span id="dot"></span>
-                <p><?= ucFirst($_SESSION['user']->getLogin()); ?></p>
+                <p><?= ucFirst($_SESSION['user']->getFirstname()); ?></p>
             </div>
             <div class="nav-content">
                 <h2 id="text-submenu-fixer">Gestion film</h2>
@@ -59,7 +59,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-sliders-h fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?= \cms\core\Helpers::getUrl("Dashboard", "salles") ?>" id="text-white"><span>Salles</span></a>
+                            <a href="<?= \cms\core\Helpers::getUrl("Cinema", "salles") ?>" id="text-white"><span>Salles</span></a>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-video fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?= \cms\core\Helpers::getUrl("Dashboard", "cinema") ?>" id="text-white"><span>Cinema</span></a>
+                            <a href="<?= \cms\core\Helpers::getUrl("Cinema", "cinema") ?>" id="text-white"><span>Cinema</span></a>
                         </div>
                     </div>
                 </div>

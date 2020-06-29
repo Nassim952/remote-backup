@@ -2,17 +2,24 @@
 
 namespace cms\controllers;
 
-use cms\models\User;
+use cms\managers\CinemaManager;
+use cms\core\Controller;
 use cms\core\View;
 use cms\core\Helpers;
 
-class CinemaController
+class CinemaController extends Controller
 {
     public function cinemaAction(){
-        new View("cinema","back");
+        $cinemaManager = new cinemaManager(Movie::class,'movie');
+        $cinemas = $cinemaManager->read();
+
+        $this->render("cinema", "back", ['cinemas' => $cinemas]);
     }
 
     public function sallesAction(){
-        new View("salles","back");
+        $cinemaManager = new cinemaManager(Movie::class,'movie');
+        $cinema_rooms = $cinemaManager->read();
+
+        $this->render("salles", "back", ['cinema_rooms' => $cinema_rooms]);
     }
 }

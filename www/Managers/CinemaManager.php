@@ -4,26 +4,26 @@ namespace cms\managers;
 
 use cms\core\DB;
 use cms\core\Builder\QueryBuilder;
-use cms\models\Movie;
+use cms\models\Cinema;
 
-class MovieManager extends DB{
+class CinemaManager extends DB{
 
     public function _construct(){
-        parent::__construct(Movie::class,'movie');
+        parent::__construct(Cinema::class,'cinema');
     }
 
     public function read($id = null){
         {
             $query = (new QueryBuilder())
                 ->select('*')
-                ->from(DB_PREFIXE.'movie', 'm');
+                ->from(DB_PREFIXE.'cinema', ' ');
             
                 if(isset($id)){
-                    $query->where('m.id = :idmovie')
-                    ->setParameters('idmovie', $id);
+                    $query->where('c.id = :idcinema')
+                    ->setParameters('idcinema', $id);
                 }
                 return $query->getQuery()
-                ->getArrayResult(Movie::class);
+                ->getArrayResult(Cinema::class);
         }
     }
 }

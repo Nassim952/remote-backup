@@ -1,20 +1,22 @@
 <?php
 
-namespace www\models;
+namespace cms\models;
 
-use www\core\Model;
+use cms\core\Model;
+use cms\core\ModelInterface;
 
-class Movie extends Model
+class Movie extends Model implements ModelInterface
 { 
-    protected $id;
+    protected $id = null;
     protected $title;
-    protected $release;
+    protected $release_date;
     protected $duration;
     protected $synopsis;
 
-    public function __Construct()
-    {
-      
+    public function initRelation(): array {
+        return [
+            
+        ];
     }
 
 //SETTERS
@@ -29,9 +31,9 @@ class Movie extends Model
         $this->title = $title;
     }
 
-    public function setRelease($release)
+    public function setRelease($release_date)
     {
-        $this->release = $release;
+        $this->release_date = $release_date;
     }
 
     public function setDuration($duration)
@@ -46,7 +48,7 @@ class Movie extends Model
 
 //GETTERS
 
-    public function getId()
+    public function getId(): ?int
     {
     return $this->id;
     }
@@ -56,9 +58,9 @@ class Movie extends Model
         return $this->title;
     }
 
-    public function getRelease($release)
+    public function getRelease()
     {
-        return $this->release;
+        return $this->release_date;
     }
 
     public function getDuration()

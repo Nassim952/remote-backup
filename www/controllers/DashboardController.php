@@ -2,23 +2,17 @@
 
 namespace cms\controllers;
 
-use cms\models\User;
+use cms\managers\MovieManager;
+use cms\core\Controller;
 use cms\core\View;
-use cms\core\Helpers;
 
-class DashboardController
+class DashboardController extends Controller
 {
-
     public function dashboardAction(){
-        new View("dashboard","back");
-    }
+        $movieManager = new MovieManager('movie','movie');
+        $movies = $movieManager->read();
 
-    public function cinemaAction(){
-        new View("cinema","back");
-    }
-
-    public function sallesAction(){
-        new View("salles","back");
+        $this->render("dashboard", "back", ['movies' => $movies]);
     }
 
     public function usersAction(){
