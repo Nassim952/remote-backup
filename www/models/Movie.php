@@ -12,6 +12,13 @@ class Movie extends Model implements ModelInterface
     protected $release_date;
     protected $duration;
     protected $synopsis;
+    protected $kind;
+    protected $age_require;
+    protected $director;
+    protected $main_actor;
+    protected $nationality;
+    protected $movie_type;
+    protected $image_url;
 
     public function initRelation(): array {
         return [
@@ -74,4 +81,144 @@ class Movie extends Model implements ModelInterface
     }
 
 
+
+    /**
+     * Get the value of kind
+     */ 
+    public function getKind()
+    {
+        return $this->kind;
+    }
+
+    /**
+     * Set the value of kind
+     *
+     * @returnself
+     */ 
+    public function setKind($kind)
+    {
+        $this->kind = $kind;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of director
+     */ 
+    public function getDirector()
+    {
+        return $this->director;
+    }
+
+    /**
+     * Set the value of director
+     *
+     * @returnself
+     */ 
+    public function setDirector($director)
+    {
+        $this->director = $director;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of main_actor
+     */ 
+    public function getMain_actor()
+    {
+        return $this->main_actor;
+    }
+
+    /**
+     * Set the value of main_actor
+     *
+     * @returnself
+     */ 
+    public function setMain_actor($main_actor)
+    {
+        $this->main_actor = $main_actor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nationality
+     */ 
+    public function getNationality()
+    {
+        return $this->nationality;
+    }
+
+    /**
+     * Set the value of nationality
+     *
+     * @returnself
+     */ 
+    public function setNationality($nationality)
+    {
+        $this->nationality = $nationality;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of movie_type
+     */ 
+    public function getMovie_type()
+    {
+        return $this->movie_type;
+    }
+
+    /**
+     * Set the value of movie_type
+     *
+     * @returnself
+     */ 
+    public function setMovie_type($movie_type)
+    {
+        $this->movie_type = $movie_type;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of image_url
+     */ 
+    public function getImage_url()
+    {
+        return $this->image_url;
+    }
+
+    /**
+     * Set the value of image_url
+     *
+     * @returnself
+     */ 
+    public function setImage_url($image_url)
+    {
+        $this->image_url = $image_url;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of age_require
+     */ 
+    public function getAge_require()
+    {
+        return $this->age_require;
+    }
+
+    /**
+     * Set the value of age_require
+     *
+     * @returnself
+     */ 
+    public function setAge_require($age_require)
+    {
+        $this->age_require = $age_require;
+
+        return $this;
+    }
 }

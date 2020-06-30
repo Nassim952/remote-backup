@@ -44,7 +44,7 @@ class UserController extends Controller{
 
     public function signupAction(){
         new View("signup","front");
-        $userManager = new UserManager('user','user');
+        $userManager = new UserManager(User::class,'user');
 
         $configForm  = RegisterType::getForm();
 
@@ -92,11 +92,6 @@ class UserController extends Controller{
 
     public function forgetPwdAction(){
         new View("forgetPwd", "account");
-    }
-
-    public function addFilmAction()
-    {
-        new View("addfilm","back");
     }
 
 	public function getUserAction($params)
