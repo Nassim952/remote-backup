@@ -153,7 +153,7 @@ class DB
         $this->connection->query($sql, $params);    
     }
 
-    public function delete(int $id): bool
+    public function delete($id)
     {
         $sql = "DELETE FROM $this->table where id = :id";
         $this->connection->query($sql, [':id' => $id]);

@@ -26,4 +26,9 @@ class MovieManager extends DB{
                 ->getArrayResult(Movie::class);
         }
     }
+
+    public function deleteMovie($id)
+    {
+        $this->delete($id);
+    }
 }

@@ -34,7 +34,7 @@ class DashboardController extends Controller
         if( $_SERVER["REQUEST_METHOD"] == "POST"){
 
             $movie = new Movie();
-            
+
             $movie->setTitle($_POST['title']);
             $movie->setRelease($_POST['date']);
             $movie->setDuration($_POST['duration']);
@@ -50,6 +50,10 @@ class DashboardController extends Controller
             $movieManager->save($movie);
         }
     }
+
+    public function deleteMovie(){
+        
+    }   
 
     public function statAction(){
         new View("stat","back");

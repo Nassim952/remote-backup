@@ -2,6 +2,8 @@
 
 namespace cms\core;
 
+use cms\managers\MovieManager;
+
 class Helpers{
 
     public static function getUrl($controller, $action)
@@ -16,7 +18,12 @@ class Helpers{
             }
         }
         return "/";
-    }    
+    }
+
+    public static function movieDelete($id)
+    {
+        (new MovieManager(Movie::class, 'movie'))->deleteMovie($id);
+    }
 
     public static function getTypeNameUser($typeUser){
         if ($typeUser == 1) {

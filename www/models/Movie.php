@@ -4,6 +4,7 @@ namespace cms\models;
 
 use cms\core\Model;
 use cms\core\ModelInterface;
+use cms\managers\MovieManager;
 
 class Movie extends Model implements ModelInterface
 { 
@@ -24,6 +25,12 @@ class Movie extends Model implements ModelInterface
         return [
             
         ];
+    }
+
+    public function delete($id){
+        $movieManager = new MovieManager(Movie::class, 'movie');
+
+        $movieManager->deleteMovie($id);
     }
 
 //SETTERS

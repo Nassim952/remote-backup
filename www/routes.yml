@@ -42,6 +42,10 @@
   controller: Dashboard
   action: addfilm
 
+/delete:
+  controller: Dashboard
+  action: deleteMovie
+
 /users:
   controller: Dashboard
   action: users

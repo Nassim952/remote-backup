@@ -27,12 +27,12 @@
                             <label></label>
                         </div>
                     </div>
-                    <p id="text-wrappe"><?= $movie->getTitle(); ?></p>
+                    <p id="text-wrappe"><?= $movie->getTitle() ?></p>
                     |
-                    <p id="hour-wrappe"><?= $movie->getDuration(); ?></p>
+                    <p id="hour-wrappe"><?= $movie->getDuration() ?></p>
                     <div class="icons-wrapper">
                         <a href="#" class="fas fa-edit fa-lg"></a>
-                        <a href="#" class="fas fa-trash-alt fa-lg"></a>
+                        <a href="deleteMovie.php?id_movie=<?= $movie->getId() ?>" class="fas fa-trash-alt fa-lg"></a>
                     </div>
                 </td>
                     <?php endforeach; ?>
