@@ -54,10 +54,6 @@ class UserController{
         new View("forgetPwd", "account");
     }
 
-    public function addFilmAction()
-    {
-        new View("addfilm","back");
-    }
 
 	public function getUserAction($params)
     {

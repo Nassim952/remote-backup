@@ -29,4 +29,24 @@ class DashboardController
         new View("stat","back");
     }
 
+    public function addFilmAction()
+    {
+        $addFilmType = new AddFilmType();
+
+        if ( $_POST) {
+            //Vérification des champs
+            $error = Validator::formAddFilmValidate( $addFilmType, $_POST );
+            $this->render("register", "account", [
+                "form" => $addFilmType,
+                "errors" => $error
+            ]);
+            if(empty($error)){
+                $film = new Film();
+            }
+        } else {
+            $this->render("addFilm", "Dashboard", [
+                "form" => $addFilmType
+            ]);
+        }
+    }
 }

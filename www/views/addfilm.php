@@ -42,8 +42,6 @@
                         <option value="">Type de film</option>
                         <option value="lm">Long métrage</option>
                         <option value="cm">Court métrage</option>
-                        <option value="es">Espagne</option>
-                        <option value="en">Angleterre</option>
                     </select>
                 </div>
                 <div class="flex-form-content-right">
