@@ -1,8 +1,8 @@
 <?php
 
-namespace www\forms;
+namespace cms\forms;
 
-use cms\core\Helper;
+use cms\core\Helpers;
 
 class AddFilmType
 {
@@ -11,14 +11,13 @@ class AddFilmType
     {
         return [
             "config"=>[
-                        "method"=>"POST", 
-                        "action"=>helpers::getUrl("Dashboard", "addfilm"),
-                        "class"=>"",
-                        "id"=>"",
+                        "method"=>"POST",
+                        "action"=>Helpers::getUrl('Dashboard','dashboard'),
+                        "class"=>"movie",
+                        "id"=>"form_addfilm",
                         "submit"=>"Ajouter un film"
                       ],
             "fields"=>[
-
                     "title"=>[
                             "type"=>"text",
                             "required"=>true,
@@ -27,7 +26,7 @@ class AddFilmType
                             "id"=>"title",
                             "minlength"=>2,
                             "maxlength"=>100,
-                            "errMsg"=>"Votre titre doit faire entre 2 et 50 caractères"
+                            "errorMsg"=>"Votre titre doit faire entre 2 et 50 caractères"
                         ],
                         "duration"=>[
                             "type"=>"time",
@@ -119,7 +118,7 @@ class AddFilmType
                             "errorMsg"=>"error"
                         ],
                         "poster"=>[
-                            "type"=>"file",
+                            "type"=>"url",
                             "placeholder"=>"Affiche du film",
                             "class"=>"input-form",
                             "id"=>"poster",

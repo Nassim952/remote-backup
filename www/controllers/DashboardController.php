@@ -5,8 +5,10 @@ namespace cms\controllers;
 use cms\models\User;
 use cms\core\View;
 use cms\core\Helpers;
+use cms\forms\AddFilmType;
+use cms\core\Controller;
 
-class DashboardController
+class DashboardController extends Controller
 {
 
     public function dashboardAction(){
@@ -31,22 +33,16 @@ class DashboardController
 
     public function addFilmAction()
     {
-        $addFilmType = new AddFilmType();
-
         if ( $_POST) {
             //Vérification des champs
-            $error = Validator::formAddFilmValidate( $addFilmType, $_POST );
-            $this->render("register", "account", [
-                "form" => $addFilmType,
+            $error = Validator::formAddFilmValidate( AddFilmType::class, $_POST );
+            $this->render("addfilm", "back", [
+                "form" => AddFilmType::class,
                 "errors" => $error
             ]);
             if(empty($error)){
                 $film = new Film();
             }
-        } else {
-            $this->render("addFilm", "Dashboard", [
-                "form" => $addFilmType
-            ]);
         }
     }
 }
