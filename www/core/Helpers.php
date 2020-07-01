@@ -3,6 +3,7 @@
 namespace cms\core;
 
 use cms\managers\MovieManager;
+use cms\controllers\DashboardController;
 
 class Helpers{
 
@@ -20,25 +21,23 @@ class Helpers{
         return "/";
     }
 
-    public static function movieDelete($id)
+    public static function redirect(string $controller, string $action, array $params)
     {
-        (new MovieManager(Movie::class, 'movie'))->deleteMovie($id);
-    }
+        $listOfRoutes = yaml_parse_file("routes.yml");
 
-    public static function getTypeNameUser($typeUser){
-        if ($typeUser == 1) {
-            return "Candidat";
-        }elseif ($typeUser == 2) {
-            return "Client";
-        }elseif ($typeUser == 3) {
-            return "Editeur";
-        }elseif($typeUser == 4){
-            return "Editeur d'utilisateur";
-        }elseif($typeUser == 5){
-            return "Correcteur";
+        foreach ($listOfRoutes as $url => $values) 
+        {
+            if($values["controller"]==$controller && $values["action"]==$action)
+            {
+
+                $controller.='Controller';
+                $action.='Action';
+
+                (new $controller())->$action(implode(',',$params));
+            }
         }
     }
-    
+
     public static function implodeArrayKeys($array) {
         return implode(", ",array_keys($array));
     }

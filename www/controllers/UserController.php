@@ -6,6 +6,7 @@ use cms\models\User;
 use cms\core\View;
 use cms\core\Helpers;
 use cms\managers\UserManager;
+use cms\managers\MovieManager;
 use cms\core\NotFoundException;
 use cms\core\Controller;
 use cms\forms\RegisterType;
@@ -79,7 +80,7 @@ class UserController extends Controller{
     public function signinAction(){
         new View('signin','front');
 
-        $userManager = new UserManager('user','user');
+        $userManager = new UserManager(User::class,'user');
         $users = $userManager->read();
         
         $userCheck = $userManager->checkLogin($this->email, $this->password, $users);
@@ -89,6 +90,11 @@ class UserController extends Controller{
             header("Location: " . $newUrl);
         }
     }
+
+    public function deleteMovieAction($id){
+        $userManager = new MovieManager(Movie::class, 'movie');
+        $userManager->deleteMovie($id);
+    } 
 
     public function forgetPwdAction(){
         new View("forgetPwd", "account");

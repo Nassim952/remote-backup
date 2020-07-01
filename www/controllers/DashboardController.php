@@ -51,10 +51,6 @@ class DashboardController extends Controller
         }
     }
 
-    public function deleteMovie(){
-        
-    }   
-
     public function statAction(){
         new View("stat","back");
     }
