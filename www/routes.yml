@@ -1,3 +1,7 @@
+/:
+  controller: User
+  action: home
+
 /login:
   controller: User
   action: login
@@ -41,3 +45,7 @@
 /users:
   controller: Dashboard
   action: users
+
+/horraires:
+  controller: Dashboard
+  action: horraires

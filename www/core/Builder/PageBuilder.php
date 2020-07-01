@@ -4,8 +4,8 @@ namespace App\Core\Builder;
 
 class PageBuilder implements ElementFormBuilderInterface
 {
-    private $sections = [];
-
+    protected $sections = [];
+    
     public function add(string $type = "text"): PageBuilderInterface
     {
         $this->sections[] = 

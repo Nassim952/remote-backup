@@ -15,5 +15,4 @@ class CinemaController
     public function sallesAction(){
         new View("salles","back");
     }
-
 }

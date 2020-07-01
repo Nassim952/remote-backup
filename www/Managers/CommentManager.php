@@ -3,11 +3,12 @@
 namespace cms\Managers;
 
 use cms\core\DB;
+use cms\core\builder\QueryBuilder;
 
 class CommentManager extends DB{
 
     public function _construct(){
-        parent::_construct(Comment::class,'comment');
+        parent::__construct(Comment::class,'comment');
     }
 
     public function getUserComments(int $id = null)

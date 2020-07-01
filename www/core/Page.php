@@ -7,17 +7,16 @@ use www\core\Model;
 class Page extends Model
 {
     protected $id;
+    protected $builder;
     protected $title;
     protected $type;
-    protected $sections = [];
     protected $creation_date;
     protected $theme;
     protected $background_image;
 
-    public function __Construct($id)
+    public function __Construct()
     {
-        $page = new PageManager();
-        $page->find($id); 
+    
     }
 
 //SETTERS

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Core;
+namespace cms\core;
 
-use App\Core\Builder\FormBuilder;
-use App\Core\Constraints\Validator;
+use cms\core\Builder\FormBuilder;
+use cms\core\Validator;
 
 class Form
 {
@@ -20,7 +20,6 @@ class Form
     public function __construct()
     {
         $this->validator = new Validator();
-
         $this->config = [
             "method"=>"POST", 
             "action"=>"",
@@ -101,10 +100,8 @@ class Form
     {
         $this->isValid = true;
        
-
         foreach($_POST as $key => $value)
         {
-           
             if(FALSE !== strpos($key, $this->name))
             {
                 //testtype_firstname
@@ -134,9 +131,7 @@ class Form
     // Insere les valeurs du formulaire dans $model
     public function updateObject(): void
     {
-        foreach($_POST as $key => $value)
-        {
-           
+        foreach ($_POST as $key => $value) {   
             if(FALSE !== strpos($key, $this->name))
             {
                 $key = str_replace($this->name.'_', '', $key);

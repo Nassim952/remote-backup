@@ -45,4 +45,8 @@ class DashboardController extends Controller
             }
         }
     }
+    public function horrairesAction(){
+        new View("horraires","back");
+    }
+
 }

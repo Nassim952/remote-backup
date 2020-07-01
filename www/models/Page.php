@@ -1,23 +1,37 @@
 <?php
 
-namespace www\models;
+namespace cms\models;
 
-use www\core\Model;
+use cms\core\Model;
 
 class Page extends Model
 {
-    protected $id;
+    protected $builder;
+    protected $id = null;
     protected $title;
     protected $type;
     protected $gabarit;
+    protected $section = [];
     protected $creation_date;
     protected $theme;
     protected $background_image;
 
-    public function __Construct($id)
+    public function __Construct()
     {
-        $page = new PageManager();
-        $page->find($id); 
+
+    }
+
+    public function associateValue()
+    {
+        foreach($this->builder->getElements() as $key => $element)
+        {
+            $method = 'get'.ucfirst($key);
+
+            if(method_exists($this->model, $method))
+            {
+                $this->builder->setValue($key, $this->model->$method());
+            }
+        }
     }
 
 //SETTERS

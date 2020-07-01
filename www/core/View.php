@@ -57,10 +57,21 @@ class View
 		}
 		include "views/sections/".$section.".gab.php";
 	}
+
+	//inclue une section si elle existe
+	public function addForm(string $formName, string $formTemplate = "base")
+	{
+		if (!file_exists("views/forms/".$section.".view.php")) {
+			throw new Exception("ce template de formulaire n'existe pas");
+		}
+		include "views/forms/".$formTemplate.".view.php";
+	}
+
 		
 	// affiche le template et ce qui va avec
 	public function __destruct()
 	{
+		extract($this->data);
 		include "views/templates/".$this->template.".tpl.php"; 
 	}
 	

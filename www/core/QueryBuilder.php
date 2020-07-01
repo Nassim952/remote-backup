@@ -1,6 +1,10 @@
 <?php
 
-namespace cms\core\builder;
+namespace cms\core;
+
+use cms\core\Connection\BDDInterface;
+use cms\core\Connection\PDOConnection;
+use cms\core\Connection\ResultInterface;
 
 class QueryBuilder {
 
@@ -17,7 +21,16 @@ class QueryBuilder {
 //SETTERS
     protected function __construct(BDDInterface $connection = null)
     {
-        setConnection($connection);
+        $this->setConnection($connection);
+    }
+
+    public function setConnection(BDDInterface $connection){
+        $this->connection = $connection;
+        if(NULL === $connection)
+            $this->connection = new PDOConnection();
+            
+        $this->query = "";
+        $this->parameters = [];
     }
 
     public function setQuery($query)
@@ -76,7 +89,7 @@ class QueryBuilder {
     public function select(string $values = '*'):QueryBuilder
     {
         $select =  "SELECT $values";
-        buildSelect($select);
+        $this->buildSelect($select);
         return $this;
     }
 
@@ -118,7 +131,8 @@ class QueryBuilder {
         [$table, $aliasTarget] = explode(" ", $table);
         
         $query = buildJoin($table, $aliasTarget, $fieldSource, $fieldTarget);
-        setAlias($aliasTarget);
+        
+        setAlias( (null === $aliasTarget) ? $table : $aliasTarget);
 
         if (null !== $select) {
             buildSelect($select, $this->alias);
@@ -205,13 +219,7 @@ class QueryBuilder {
 
     private function on(string $table, string $aliasTarget, string $fieldSource, string $fieldTarget)
     {
-        if(null === $aliasTarget)
-        {
-            return " ON $this->alias.$fieldSource = $table.$fieldTarget";
-        } else {
-            return  "ON $this->alias.$fieldSource = $aliasTarget.$fieldTarget";
-        }
-
+        return (null === $aliasTarget) ? " ON $this->alias.$fieldSource = $table.$fieldTarget" : "ON $this->alias.$fieldSource = $aliasTarget.$fieldTarget";
     }
 
     private function buildSelect(array $fields, $aliasTarget = null)
@@ -229,7 +237,7 @@ class QueryBuilder {
                 $select .= "$aliasTarget.*";
             } 
         }
-        addToSelect($select);
+        $this->addToSelect($select);
     }
 
 

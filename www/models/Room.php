@@ -10,9 +10,9 @@ class Room extends Model
     protected $name;
     protected $section;
     
-    public function __Construct($id){
-        $room = new RoomManager();
-        $room->find($id); 
+    public function __Construct()
+    {
+    
     }
 
 //SETTERS

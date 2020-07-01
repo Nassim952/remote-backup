@@ -2,24 +2,25 @@
 
 namespace cms\models;
 
-use cms\core\Helper;
-use cms\managers\UserManager; 
+use cms\core\Helpers;
+use cms\core\Model;
+use cms\core\ModelInterface;
+use cms\core\DB;
 
-class User extends Model
+class User extends Model implements ModelInterface
 {
-    protected $id;
+    protected $id = null;
     protected $login;
     protected $password;
     protected $email;
     protected $statut;
-    protected $right;
-    protected $identity = null;
+    protected $allow;
+    protected $identity_id = null;
 
-
-    public function __Construct($id)
-    {
-        $user = new UserManager();
-        $user->find($id);
+    public function initRelation(): array {
+        return [
+        
+        ];
     }
 
 //SETTERS
@@ -27,11 +28,13 @@ class User extends Model
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
     public function setLogin($login)
     {
         $this->login = $login;
+        return $this;
     }
 
     public function setPassword($password)
@@ -49,20 +52,20 @@ class User extends Model
         $this->statut = $statut;
     }
 
-    public function setRight($right)
+    public function setAllow($allow)
     {
-        $this->right = $right;
+        $this->allow = $allow;
     }
 
-    public function setIdentity($identity)
+    public function setIdentity($identity_id)
     {
-        $this->identity = $identity;
+        $this->identity_id = $identity_id;
     }
 
     
 //GETTERS
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -86,15 +89,13 @@ class User extends Model
         return $this->statut;
     }
 
-    public function getRight()
+    public function getAllow()
     {
-        return $this->right;
+        return $this->allow;
     }
 
     public function getIdentity()
     {
         return $this->identity;
     }
-
-
 }
