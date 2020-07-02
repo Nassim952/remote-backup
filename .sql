@@ -12,23 +12,23 @@ DROP DATABASE IF EXISTS cinedata;
 CREATE DATABASE IF NOT EXISTS cinedata;
 
 DROP TABLE IF EXISTS bape_identity;
-CREATE TABLE IF NOT EXISTS bape_identity(
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    lastname VARCHAR(100),
-    firstname VARCHAR(100),
-    birthdate DATE
-);
+-- CREATE TABLE IF NOT EXISTS bape_identity(
+--     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+--     lastname VARCHAR(100),
+--     firstname VARCHAR(100),
+--     birthdate DATE
+-- );
 
 -- 
 -- Chargement des donnees de la table user
 -- 
 
-INSERT INTO bape_identity (id, lastname, firstname, birthdate) VALUES
-(1, 'desouza', 'eyram', '2020-01-01'),
-(2, 'mbiya', 'eyram', '2020-01-01'),
-(3, 'mmadi','nassim','2020-01-01'),
-(4, 'belatoui', 'bibal', '2020-01-01'),
-(5, 'mondor', 'andrew', '2020-01-01');
+-- INSERT INTO bape_identity (id, lastname, firstname, birthdate) VALUES
+-- (1, 'desouza', 'eyram', '2020-01-01'),
+-- (2, 'mbiya', 'eyram', '2020-01-01'),
+-- (3, 'mmadi','nassim','2020-01-01'),
+-- (4, 'belatoui', 'bibal', '2020-01-01'),
+-- (5, 'mondor', 'andrew', '2020-01-01');
 
 --
 -- Structure de la table user
@@ -42,9 +42,7 @@ CREATE TABLE IF NOT EXISTS bape_user(
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     statut INT NOT NULL,
-    allow VARCHAR(255) NOT NULL,
-    identity_id INT,
-    FOREIGN KEY (identity_id) REFERENCES bape_identity(id) ON DELETE CASCADE
+    allow VARCHAR(255) NOT NULL
 );
 
 -- 
@@ -227,6 +225,7 @@ CREATE TABLE IF NOT EXISTS bape_cinema(
     name VARCHAR(255),
     place VARCHAR(255),
     number_rooms INT,
+    image_url VARCHAR(255),
     cinema_movie_id INT,
     cinema_room_id INT,
     FOREIGN KEY (cinema_movie_id) REFERENCES bape_movie(id) ON DELETE CASCADE,

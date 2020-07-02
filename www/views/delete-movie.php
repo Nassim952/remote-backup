@@ -1,5 +1,5 @@
 <head>
-    <title>Suprressiod'un film</title>
+    <title>Suprression d'un film</title>
 </head>
 
 <div class="site-content">

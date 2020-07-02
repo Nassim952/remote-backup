@@ -2,8 +2,8 @@
 
 namespace cms\core;
 
-use cms\managers\MovieManager;
-use cms\controllers\DashboardController;
+use cms\controllers;
+use cms\controllers\CinemaController;
 
 class Helpers{
 
@@ -21,7 +21,7 @@ class Helpers{
         return "/";
     }
 
-    public static function redirect(string $controller, string $action)
+    public static function redirect_to(string $controller, string $action, array $params = null)
     {
         $listOfRoutes = yaml_parse_file("routes.yml");
 
@@ -29,10 +29,14 @@ class Helpers{
         {
             if($values["controller"]==$controller && $values["action"]==$action)
             {
-                $controller.='Controller';
+                $myController = $controller.'Controller';
                 $action.='Action';
-
-                (new $controller())->$action();
+                
+                $myObject = new $myController();
+                
+                $myObject->$action(implode(',',$params));
+                
+                break;
             }
         }
     }

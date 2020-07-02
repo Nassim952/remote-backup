@@ -14,7 +14,6 @@ class User extends Model implements ModelInterface
     protected $email;
     protected $statut;
     protected $allow;
-    protected $identity_id = null;
 
     public function initRelation(): array {
         return [
@@ -48,11 +47,6 @@ class User extends Model implements ModelInterface
     public function setAllow($allow)
     {
         $this->allow = $allow;
-    }
-
-    public function setIdentity($identity_id)
-    {
-        $this->identity_id = $identity_id;
     }
 
     public function setLastname($lastname)
@@ -90,11 +84,6 @@ class User extends Model implements ModelInterface
     public function getAllow()
     {
         return $this->allow;
-    }
-
-    public function getIdentity()
-    {
-        return $this->identity;
     }
 
     public function getLastname()

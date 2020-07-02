@@ -10,7 +10,9 @@
     <div id="separation-bar"></div>
     <div class="quick-tools">
         <div id="space-icons">
-            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","addfilm") ?>" class="fas fa-plus fa-lg"></a>
+            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","addFilm") ?>" class="fas fa-plus fa-lg"></a>
+            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","editMovie") ?>" class="fas fa-edit fa-lg"></a>
+            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","deleteMovie") ?>" class="fas fa-trash-alt fa-lg"></a>
         </div>
     </div>
     <div class="lists-film">
@@ -29,10 +31,6 @@
                         <p id="text-wrappe"><?= $movie->getTitle() ?></p>
                         |
                         <p id="hour-wrappe"><?= $movie->getDuration() ?></p>
-                        <div class="icons-wrapper">
-                            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","editMovie") ?>" class="fas fa-edit fa-lg"></a>
-                            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","deleteMovie") ?>" class="fas fa-trash-alt fa-lg"></a>
-                        </div>
                     </td>
                 <?php endforeach; ?>
             </tr>

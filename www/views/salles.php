@@ -10,8 +10,7 @@
     <div id="separation-bar"></div>
     <div class="quick-tools">
         <div id="space-icons">
-            <a href="#" class="fas fa-plus fa-lg"></a>
-            <a href="#" class="fas fa-trash-alt fa-lg"></a>
+            <a href="" class="fas fa-plus fa-lg"></a>
         </div>
     </div>
 

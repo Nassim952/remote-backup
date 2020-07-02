@@ -11,6 +11,7 @@ class Cinema extends Model implements ModelInterface
     protected $name;
     protected $place;
     protected $number_rooms;
+    protected $image_url;
 
     public function initRelation(): array {
         return [
@@ -94,6 +95,26 @@ class Cinema extends Model implements ModelInterface
     public function setNumber_rooms($number_rooms)
     {
         $this->number_rooms = $number_rooms;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of image_url
+     */ 
+    public function getImage_url()
+    {
+        return $this->image_url;
+    }
+
+    /**
+     * Set the value of image_url
+     *
+     * @returnself
+     */ 
+    public function setImage_url($image_url)
+    {
+        $this->image_url = $image_url;
 
         return $this;
     }

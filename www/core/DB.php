@@ -117,8 +117,9 @@ class DB
         $objectArray =  $objectToSave->__toArray();
 
         $columnsData = array_values($objectArray);
+
         $columns = array_keys($objectArray);
-        
+
         // On met 2 points devant chaque clé du tableau
         $params = [];
         foreach($objectArray as $key => $value)
@@ -133,16 +134,15 @@ class DB
         }
 
         if (!is_numeric($objectToSave->getId())) {
+
             array_shift($columns);
             array_shift($params);
 
-            // retire le dernier index identity
             array_pop($columns);
             array_pop($params);
             
             //INSERT
             $sql = "INSERT INTO ".$this->table." (".implode(",", $columns).") VALUES (:".implode(",:", $columns).");";
-            //foreach()
         } else {
             //UPDATE
             foreach ($columns as $column) {

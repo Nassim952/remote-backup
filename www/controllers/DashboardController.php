@@ -28,7 +28,7 @@ class DashboardController extends Controller
 
     public function addFilmAction()
     {
-        new View("addfilm","back");
+        new View("add-film","back");
         $movieManager = new MovieManager(Movie::class, 'movie');
 
         if( $_SERVER["REQUEST_METHOD"] == "POST"){
