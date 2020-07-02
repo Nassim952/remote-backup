@@ -2,6 +2,8 @@
 
 namespace cms\core;
 
+use Exception;
+
 class View
 {
 	private $view;

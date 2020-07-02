@@ -21,7 +21,7 @@ class Helpers{
         return "/";
     }
 
-    public static function redirect(string $controller, string $action, array $params)
+    public static function redirect(string $controller, string $action)
     {
         $listOfRoutes = yaml_parse_file("routes.yml");
 
@@ -29,11 +29,10 @@ class Helpers{
         {
             if($values["controller"]==$controller && $values["action"]==$action)
             {
-
                 $controller.='Controller';
                 $action.='Action';
 
-                (new $controller())->$action(implode(',',$params));
+                (new $controller())->$action();
             }
         }
     }

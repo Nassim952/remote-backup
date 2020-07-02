@@ -18,6 +18,14 @@
   controller: Dashboard
   action: dashboard
 
+/delete:
+  controller: Dashboard
+  action: deleteMovie
+
+/edit:
+  controller: Dashboard
+  action: editMovie
+
 /statistiques:
   controller: Dashboard
   action: stat
@@ -40,7 +48,7 @@
   
 /addfilm:
   controller: Dashboard
-  action: addfilm
+  action: addFilm
 
 /delete:
   controller: Dashboard

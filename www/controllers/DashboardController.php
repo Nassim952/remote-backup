@@ -51,6 +51,33 @@ class DashboardController extends Controller
         }
     }
 
+    public function deleteMovieAction(){
+        $movieManager = new MovieManager(Movie::class, 'movie');
+        $movies = $movieManager->read();
+
+        $this->render("delete-movie", "back", ['movies' => $movies]);
+
+        if( $_SERVER["REQUEST_METHOD"] == "POST"){
+            $id = $_POST['id'];
+            $movieManager->delete($id);
+
+            echo("<meta http-equiv='refresh' content='1'>");
+        }
+    }
+
+    public function editMovieAction(){
+        $movieManager = new MovieManager(Movie::class, 'movie');
+        $movies = $movieManager->read();
+
+        $this->render("edit-movie", "back", ['movies' => $movies]);
+
+        if( $_SERVER["REQUEST_METHOD"] == "POST"){
+            $id = $_POST['id'];
+            
+            Helpers::redirect('Dashboard','addFilm');
+        }
+    }
+
     public function statAction(){
         new View("stat","back");
     }
