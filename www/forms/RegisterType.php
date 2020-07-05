@@ -111,14 +111,14 @@ class RegisterType
                                 "confirmWith"=>"pwd",
                                 "errorMsg"=>"Votre mot de passe de confirmation ne correspond pas"
                             ],
-                        // "captcha"=>[
-                        //         "type"=>"captcha",
-                        //         "class"=>"form-control form-control-user",
-                        //         "id"=>"",
-                        //         "required"=>true,
-                        //         "placeholder"=>"Veuillez saisir les caractères",
-                        //         "errorMsg"=>"Captcha incorrect"
-                        //     ]
+                         "captcha"=>[
+                                 "type"=>"captcha",
+                                 "class"=>"form-control form-control-user",
+                                 "id"=>"",
+                                 "required"=>true,
+                                 "placeholder"=>"Veuillez saisir les caractères",
+                                 "errorMsg"=>"Captcha incorrect"
+                             ]
                     ]
                 ];
     }
