@@ -81,3 +81,7 @@
 /delete-cinema:
   controller: Cinema
   action: deleteCinema
+
+/show-movie:
+  controller: Cinema
+  action: showMovie

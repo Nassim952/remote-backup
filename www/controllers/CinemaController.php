@@ -10,8 +10,6 @@ use cms\core\View;
 
 class CinemaController extends Controller
 {
-    private $cinema;
-
     public function cinemaAction(){
         $cinemaManager = new cinemaManager(Movie::class,'movie');
         $cinemas = $cinemaManager->read();
@@ -68,5 +66,9 @@ class CinemaController extends Controller
         $cinema_rooms = $cinemaManager->read();
 
         $this->render("salles", "back", ['cinema_rooms' => $cinema_rooms]);
+    }
+
+    public function showMovieAction(){
+        new View("show-movies","back");
     }
 }

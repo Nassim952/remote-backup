@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/salles.css">
     <link rel="stylesheet" href="../../css/addfilm.css">
+    <link rel="stylesheet" href="../../css/show-movie.css">
     <link rel="stylesheet" href="../../css/horraires.css">
     <link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css'>
@@ -84,14 +85,6 @@
                         <div class="fas fa-users fa-lg"></div>
                         <div id="submenu-wrapper">
                             <a href="<?=\cms\core\Helpers::getUrl("Dashboard","users")?>" id="text-white"><span>Users</span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="dashboard-menu">
-                    <div class="sidebar-sub-headers">
-                        <div class="fas fa-user-shield fa-lg"></div>
-                        <div id="submenu-wrapper">
-                            <span>Admin</span>
                         </div>
                     </div>
                 </div>
