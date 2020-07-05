@@ -2,11 +2,8 @@
 
 namespace cms\core;
 
-use cms\controllers;
-use cms\controllers\CinemaController;
-
-class Helpers{
-
+class Helpers
+{
     public static function getUrl($controller, $action)
     {
         $listOfRoutes = yaml_parse_file("routes.yml");
@@ -21,22 +18,17 @@ class Helpers{
         return "/";
     }
 
-    public static function redirect_to(string $controller, string $action, array $params = null)
+    public function redirect_to(string $controller, string $action, array $params = null)
     {
         $listOfRoutes = yaml_parse_file("routes.yml");
-
         foreach ($listOfRoutes as $url => $values) 
         {
             if($values["controller"]==$controller && $values["action"]==$action)
             {
-                $myController = $controller.'Controller';
+                $controller.='Controller';
                 $action.='Action';
                 
-                $myObject = new $myController();
-                
-                $myObject->$action(implode(',',$params));
-                
-                break;
+                (new $controller())->$action(implode(',',$params));
             }
         }
     }
@@ -52,21 +44,21 @@ class Helpers{
         };
     }
 
-    function displayStarsEdition($levelString) {
+    public function displayStarsEdition($levelString) {
         $level = intval($levelString);
         for ($i = 1; $i <= $level; $i++) { 
             echo "<img class='star_home_edition' src='public/images/favorite.png'/>"; 
         };
     }
 
-    function displayStarsEditionRead($levelString) {
+    public function displayStarsEditionRead($levelString) {
         $level = intval($levelString);
         for ($i = 1; $i <= $level; $i++) { 
             echo "<img class='star_home_edition_read' src='public/images/favorite.png'/>"; 
         };
     }
 
-    function displayState($number_state) {
+    public function displayState($number_state) {
         switch ($number_state) {
             case 1:
                 echo "Pas fait";

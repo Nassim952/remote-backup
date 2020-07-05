@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS bape_movie_session(
 DROP TABLE IF EXISTS bape_cinema;
 CREATE TABLE IF NOT EXISTS bape_cinema(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255),
+    name VARCHAR(255) NOT NULL,
     place VARCHAR(255),
     number_rooms INT,
     image_url VARCHAR(255),

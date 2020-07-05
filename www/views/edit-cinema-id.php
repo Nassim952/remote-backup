@@ -8,17 +8,21 @@
     </div>
     <div id="separation-bar"></div>
     <div class=form-add style='margin-top: 50px;'>
-        <form action="" class=add-film method="post">
-            <input class="input-form cinema-title" type="text" name="name" placeholder="Nom du cinema"><?= $cinema[0]->getName() ?></input>
+        <form class=add-film method="POST">
+            <label>Nom du cinéma</label>
+            <input class="input-form cinema-title" type="text" name="name" value="<?= $cinema[0]->getName() ?>"></input>
             <div class="flex-form-container">
-                <div class="flex-form-content-left">
-                    <input class=input-form  type="text" name="city" placeholder="Ville">
-                    <input class=input-form type="number" name="number_rooms" placeholder="nombre de salles">
+                <div class="flex-form-content-left" style="flex: auto;">
+                    <label>Ville</label>
+                    <input class=input-form  type="text" name="city" value="<?= $cinema[0]->getPlace() ?>">
+                    <label>Nombre de salles</label>
+                    <input class=input-form type="number" name="number_rooms" value="<?= $cinema[0]->getNumber_rooms() ?>">
                 <div class="flex-form-content-right">
-                    <input class="input-form affiche" type="url" name="image_url" placeholder="url image"></input>
+                <label>Image URL</label>
+                    <input class="input-form affiche" type="url" name="image_url" value="<?= $cinema[0]->getImage_url() ?>"></input>
                 </div>
             </div>
-            <input type="submit" class="input-form submit-addfilm" value="Ajouter le film"></input>
+            <button type="submit" class="input-form submit-addfilm">Valider</button>
         </form>
     </div>
 </div>

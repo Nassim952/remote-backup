@@ -62,7 +62,7 @@ class DB
 
     public function findBy(array $params,array $order = null): array
     {
-        $sql = "SELECT email FROM $this->table WHERE ";
+        $sql = "SELECT * FROM $this->table WHERE ";
         // Select * FROM users WHERE firstname LIKE :firstname ORDER BY id desc
 
         foreach($params as $key => $value)
@@ -133,14 +133,15 @@ class DB
             }
         }
 
+        array_pop($columns);
+        array_pop($params);
+
         if (!is_numeric($objectToSave->getId())) {
 
+            //remove the last array index [class] 
             array_shift($columns);
             array_shift($params);
 
-            array_pop($columns);
-            array_pop($params);
-            
             //INSERT
             $sql = "INSERT INTO ".$this->table." (".implode(",", $columns).") VALUES (:".implode(",:", $columns).");";
         } else {
@@ -149,6 +150,7 @@ class DB
                 $sqlUpdate[] = $column."=:".$column;
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id;";
+            echo $sql;
         }
         $this->connection->query($sql, $params);    
     }

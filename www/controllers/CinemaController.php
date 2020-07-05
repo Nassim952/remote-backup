@@ -10,6 +10,8 @@ use cms\core\View;
 
 class CinemaController extends Controller
 {
+    private $cinema;
+
     public function cinemaAction(){
         $cinemaManager = new cinemaManager(Movie::class,'movie');
         $cinemas = $cinemaManager->read();
@@ -54,30 +56,10 @@ class CinemaController extends Controller
 
         $this->render("edit-cinema", "back", ['cinemas' => $cinemas]);
 
-        if ( $_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_POST['id'];
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $cinema = $cinemaManager->findBy(['id' => $_POST['id']]);
 
-            $cinemaManager = new CinemaManager(Cinema::class, 'cinema');
-            $cinema = $cinemaManager->findBy(['id' => $id]);
-
-            Helpers::redirect_to('Cinema','editCinemaId', $cinema);
-        }
-    }
-
-    public function editCinemaId($cinema){
-        $this->render('edit-cinema-id','back', ['cinema' => $cinema]);
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            $cinemaEdit = new Cinema();
-
-            $cinemaEdit->setId($cinema[0]->getId());
-            $cinemaEdit->setName($_POST['name']);
-            $cinemaEdit->setplace($_POST['city']);
-            $cinemaEdit->setNumber_rooms($_POST['number_rooms']);
-            $cinemaEdit->setImage_url($_POST['image_url']);
-
-            $cinemaManager = new cinemaManager(Cinema::class,'cinema');
-            $cinemaManager->save($cinemaEdit);
+            $this->render('edit-cinema-id','empty', ['cinema' => $cinema]);
         }
     }
 

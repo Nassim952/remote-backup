@@ -13,7 +13,6 @@ function myAutoload($class)
 	}
 	
 }
-
 spl_autoload_register("myAutoload");
 
 use cms\core\ConstLoader;
