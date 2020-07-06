@@ -22,6 +22,7 @@ class PDOResult implements ResultInterface
         $result =  $this->statement->fetchAll(PDO::FETCH_ASSOC);
 
         if($class) {
+            $class = "cms\\models\\".$class;
             $results = [];
             foreach ($result as $key => $value) {
                 array_push($results, (new $class())->hydrate($value));
