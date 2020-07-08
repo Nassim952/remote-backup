@@ -1,7 +1,4 @@
-<?php 
-    session_start();
-    !isset($_SESSION['user']) ? header("Location: /connexion"): '' ;
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +31,7 @@
             </div>
             <div class="name-container">
                 <span id="dot"></span>
-                <p><?= ucFirst($_SESSION['user']->getLogin()); ?></p>
+                <p></p>
             </div>
             <div class="nav-content">
                 <h2 id="text-submenu-fixer">Gestion film</h2>

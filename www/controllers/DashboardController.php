@@ -7,6 +7,7 @@ use cms\core\View;
 use cms\core\Helpers;
 use cms\forms\AddFilmType;
 use cms\core\Controller;
+use cms\core\Validator;
 
 class DashboardController extends Controller
 {
@@ -33,17 +34,22 @@ class DashboardController extends Controller
 
     public function addFilmAction()
     {
+        $configForm = AddFilmType::getForm();
+
+        $errors = Validator::formAddFilmValidate( $configForm, $_POST );
+
         if ( $_POST) {
             //Vérification des champs
-            $error = Validator::formAddFilmValidate( AddFilmType::class, $_POST );
-            $this->render("addfilm", "back", [
-                "form" => AddFilmType::class,
-                "errors" => $error
-            ]);
-            if(empty($error)){
-                $film = new Film();
-            }
+            
+            /* if(empty($error)){
+                $film = new Movie();
+                $film->setTitle($_POST['title']);
+            } */
         }
+        $this->render('addfilm','back', [
+            'configForm' => $configForm,
+            'errors' => $errors
+            ]);
     }
     public function horrairesAction(){
         new View("horraires","back");
