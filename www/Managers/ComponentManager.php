@@ -4,6 +4,7 @@ namespace cms\managers;
 
 use cms\core\DB;
 use cms\core\Builder\QueryBuilder;
+use cms\models\Component;
 
 class ComponentManager extends DB{
 
@@ -26,5 +27,24 @@ class ComponentManager extends DB{
             return $query->getQuery()
             ->getArrayResult(Post::class);
     }
-}
 
+    public function read($id = null)
+    {
+            $query = (new QueryBuilder())
+                ->select('*')
+                ->from(DB_PREFIXE.'component', 'c');
+            
+                if(isset($id)){
+                    $query->where('c.id = :idcomponent')
+                    ->setParameters('idcomponent', $id);
+                }
+                return $query->getQuery()
+                ->getArrayResult(Component::class);
+    }
+
+    public function deleteComponent($id)
+    {
+        $this->delete($id);
+    }
+
+}

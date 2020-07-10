@@ -2,9 +2,10 @@
 
 namespace cms\models;
 
-use cms\core\DB;
+use cms\core\Model;
+use cms\core\ModelInterface;
 
-class Component extends DB
+class Component extends Model implements ModelInterface
 { 
     protected $id;
     protected $title;
@@ -14,13 +15,13 @@ class Component extends DB
     protected $position;
     protected $style;
 
-    public function __Construct($id)
-    {
-        $component = new ComponentManager();
-        $component->find($id);
+    public function initRelation(): array {
+        return [
+        
+        ];
     }
 
-//SETTERS
+    //SETTERS
 
     public function setId($id)
     {

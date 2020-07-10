@@ -5,7 +5,7 @@
 
 <div class="site-content">
     <div id="head-title">
-        <h2 style="font-size:32px;">Comment</h2>
+        <h2 style="font-size:32px;">Commentaires</h2>
     </div>
     <div id="separation-bar"></div>
     <div class="quick-tools">
