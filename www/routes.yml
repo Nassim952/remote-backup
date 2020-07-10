@@ -81,3 +81,14 @@
 /delete-cinema:
   controller: Cinema
   action: deleteCinema
+
+
+########### Comment.php #############
+
+/comments:
+  controller: Comment
+  action: comment
+
+/delete-comment:
+  controller: Comment
+  action: deleteComment
