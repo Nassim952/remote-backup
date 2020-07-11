@@ -17,6 +17,7 @@ class CommentController extends Controller{
 
     }
 
+    //on testing
     public function deleteCommentAction(){
 
         $commentManager = new CommentManager(Comment::class, 'Comment');

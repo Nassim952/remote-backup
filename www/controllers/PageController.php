@@ -2,12 +2,31 @@
 
 namespace cms\controllers;
 
-use cms\models\Users;
+use cms\core\Controller;
+use cms\managers\PageManager;
+use cms\models\Page;
 use cms\core\View;
+
 
 class PageController extends Controller
 {
-	public function buildPageAction($params)
+    private $pages;
+    
+    // page action callling the view
+    public function pageAction(){
+        $pageManager = new PageManager(Page::class, 'Page');
+        $pageManager = $pageManager->read();
+        
+        // This send comment data to the view thanks to the Commentmanager read function
+        $this->render("page", "back", ['pages'=> $pages ]);
+    }
+
+    //deleting data in the database
+
+
+
+
+    public function buildPageAction($params)
     {
         $pageManager = new PageManager();
         $page = $pageManager->find($params['id']);
@@ -60,5 +79,9 @@ class PageController extends Controller
     public function forgetPwdAction()
     {
 		$myView = new View("forgetPwd", "account");
-	}
+    } 
+
+   
+
+
 }

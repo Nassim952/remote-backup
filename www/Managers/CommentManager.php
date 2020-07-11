@@ -39,10 +39,11 @@ class CommentManager extends DB{
                 }
                 return $query->getQuery()
                 ->getArrayResult(Comment::class);
-                var_dump($query->getQuery()->getArrayResult());
+           
         }
     }
-
+    
+    // fonction qui supprime un element de la base de donnée
     public function deleteComment($id)
     {
         $this->delete($id);

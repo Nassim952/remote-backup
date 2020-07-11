@@ -92,3 +92,10 @@
 /delete-comment:
   controller: Comment
   action: deleteComment
+
+  ########### page.php #############
+
+/pages:
+  controller: page
+  action: page
+

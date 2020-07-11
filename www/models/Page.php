@@ -3,8 +3,9 @@
 namespace cms\models;
 
 use cms\core\Model;
+use cms\core\ModelInterface;
 
-class Page extends Model
+class Page extends Model implements ModelInterface
 {
     protected $builder;
     protected $id = null;
@@ -16,9 +17,10 @@ class Page extends Model
     protected $theme;
     protected $background_image;
 
-    public function __Construct()
-    {
-
+    public function initRelation(): array {
+        return [
+        
+        ];
     }
 
     public function associateValue()
@@ -33,6 +35,13 @@ class Page extends Model
             }
         }
     }
+
+    public function delete($id){
+        $pageManager = new PageManager(Page::class, 'page');
+
+        $pageManager->deletePage($id);
+    }
+
 
 //SETTERS
 
@@ -67,7 +76,7 @@ class Page extends Model
 
 //GETTERS
 
-    public function getId()
+    public function getId(): ?int
     {
        return $this->id;
     }

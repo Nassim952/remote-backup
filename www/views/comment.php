@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <p id="text-wrappe"><?= $comment->getComment(); ?></p>
-                
+
                     <p id="hour-wrappe"><?= $comment->getPostDate() ?></p>
                 </td>
                 <?php endforeach; ?>
