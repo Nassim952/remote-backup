@@ -34,22 +34,19 @@ class DashboardController extends Controller
 
     public function addFilmAction()
     {
-        $configForm = AddFilmType::getForm();
+        $form = $this->createForm(AddFilmType::class);
+        $form->handle();
 
-        $errors = Validator::formAddFilmValidate( $configForm, $_POST );
-
-        if ( $_POST) {
-            //Vérification des champs
-            
-            /* if(empty($error)){
-                $film = new Movie();
-                $film->setTitle($_POST['title']);
-            } */
+        if($form->isSubmit() && $form->isValid())
+        {  
+            //(new UserManager())->save($user);
+            // j'ai mon nouveau modele valide ($user) je peux le save
         }
-        $this->render('addfilm','back', [
-            'configForm' => $configForm,
-            'errors' => $errors
-            ]);
+
+        $this->render("addfilm", "account", [
+            "formProfile" => $form
+        ]);
+
     }
     public function horrairesAction(){
         new View("horraires","back");
