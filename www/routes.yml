@@ -50,6 +50,6 @@
   controller: User
   action: addpage
 
-  /horraires:
+/horraires:
   controller: Dashboard
   action: horraires
