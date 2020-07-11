@@ -14,14 +14,16 @@ class AddFilmType extends Form {
     {
         return $this->builder
                 ->add("name", "text", [
+                    "attr"=>[
+                        "placeholder"=>"Nom de la page",
+                        "id"=>"title",
+                        "class"=>"input-form"
+                    ],
                     "required"=>true,
-                    "placeholder"=>"Nom de la page",
-                    "class"=>"input-form",
-                    "id"=>"title",
-                    "minlength"=>2,
-                    "maxlength"=>200,
-                    "errorMsg"=>"Le nom de la page doit faire entre 2 et 200 caractères"
-                    ])
+                    'constraints' => [
+                        new Length(2,50, 'Le nom de la page doit faire entre 2 et 200 caractères')
+                    ]
+                ])
                 ->add("content", "select", [
                     "placeholder"=>"Taille du contenu",
                     "class"=>"input-form",
@@ -36,6 +38,22 @@ class AddFilmType extends Form {
                         "col-12"=>"12 colonnes"
                     ], 
                     "errorMsg"=>"error"
+                ])
+                ->add("content", "select", [
+                    "attr"=>[
+                        "placeholder"=>"Taille du contenu",
+                        "id"=>"content",
+                        "class"=>"input-form"
+                    ],
+                    "required"=>true,
+                    "option"=>[
+                        "col-1"=>"1 colonne", 
+                        "col-2"=>"2 colonnes", 
+                        "col-3"=>"3 colonnes", 
+                        "col-4"=>"4 colonnes", 
+                        "col-6"=>"6 colonnes",
+                        "col-12"=>"12 colonnes"
+                    ]
                 ])
                 ->add("bg-color", "select", [
                     "placeholder"=>"Couleur du fond",
@@ -72,8 +90,19 @@ class AddFilmType extends Form {
                         "red"=>"Rouge", 
                         "grey"=>"Gris", 
                         "white"=>"Blanc"
-                    ], 
-                    "errorMsg"=>"error"
+                    ]
                 ]);
+    }
+
+    public function configureOptions(): void
+    {
+        $this
+            ->addConfig('class', Page::class)
+            ->setName('AddPage')
+            ->addConfig('attr', [
+                "method" => "POST",
+                "id"=>"formAddPage",
+                "class"=>"page",
+            ]);
     }
 }
