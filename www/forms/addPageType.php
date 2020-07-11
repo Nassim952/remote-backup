@@ -25,21 +25,6 @@ class AddFilmType extends Form {
                     ]
                 ])
                 ->add("content", "select", [
-                    "placeholder"=>"Taille du contenu",
-                    "class"=>"input-form",
-                    "id"=>"content",
-                    "required"=>true,
-                    "option"=>[
-                        "col-1"=>"1 colonne", 
-                        "col-2"=>"2 colonnes", 
-                        "col-3"=>"3 colonnes", 
-                        "col-4"=>"4 colonnes", 
-                        "col-6"=>"6 colonnes",
-                        "col-12"=>"12 colonnes"
-                    ], 
-                    "errorMsg"=>"error"
-                ])
-                ->add("content", "select", [
                     "attr"=>[
                         "placeholder"=>"Taille du contenu",
                         "id"=>"content",
@@ -56,34 +41,38 @@ class AddFilmType extends Form {
                     ]
                 ])
                 ->add("bg-color", "select", [
-                    "placeholder"=>"Couleur du fond",
-                    "class"=>"input-form",
-                    "id"=>"bg-color",
+                    "attr"=>[
+                        "placeholder"=>"Couleur du fond",
+                        "id"=>"bg-color",
+                        "class"=>"input-form"
+                    ],
                     "required"=>true,
                     "option"=>[
                         "blue"=>"Bleu", 
                         "red"=>"Rouge", 
                         "grey"=>"Gris", 
                         "white"=>"Blanc" 
-                    ], 
-                    "errorMsg"=>"error"
+                    ]
                 ])
                 ->add("font", "select", [
-                    "placeholder"=>"Police d'écriture",
-                    "class"=>"input-form",
-                    "id"=>"font",
+                    "attr"=>[
+                        "placeholder"=>"Police d'écriture",
+                        "id"=>"bg-color",
+                        "class"=>"font"
+                    ],
                     "required"=>true,
                     "option"=>[
                         "roboto"=>"Roboto", 
                         "raleway"=>"Raleway", 
                         "fondamento"=>"Fondamento"
-                    ], 
-                    "errorMsg"=>"error"
+                    ]
                 ])
                 ->add("font-color", "select", [
-                    "placeholder"=>"Couleur de police",
-                    "class"=>"input-form",
-                    "id"=>"font-color",
+                    "attr"=>[
+                        "placeholder"=>"Couleur de police",
+                        "id"=>"bg-color",
+                        "class"=>"font-color"
+                    ],
                     "required"=>true,
                     "option"=>[
                         "blue"=>"Bleu", 
