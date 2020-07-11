@@ -1,3 +1,7 @@
+/:
+  controller: User
+  action: home
+
 /login:
   controller: User
   action: login
@@ -11,11 +15,11 @@
   action: template
 
 /dashboard:
-  controller: User
+  controller: Dashboard
   action: dashboard
 
 /statistiques:
-  controller: User
+  controller: Dashboard
   action: stat
 
 /inscription:
@@ -27,21 +31,25 @@
   action: signin
 
 /cinema:
-  controller: Cinema
+  controller: Dashboard
   action: cinema
 
 /salles:
-  controller: Cinema
+  controller: Dashboard
   action: salles
   
 /addfilm:
-  controller: User
+  controller: Dashboard
   action: addfilm
 
 /users:
-  controller: User
+  controller: Dashboard
   action: users
 
 /addpage:
   controller: User
   action: addpage
+
+  /horraires:
+  controller: Dashboard
+  action: horraires

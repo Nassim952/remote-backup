@@ -2,18 +2,43 @@
 
 namespace cms\models;
 
-use cms\core\DB;
+use cms\core\Model;
 
-class Page extends DB{
+class Page extends Model
+{
+    protected $builder;
+    protected $id = null;
     protected $title;
     protected $type;
     protected $gabarit;
+    protected $section = [];
     protected $creation_date;
     protected $theme;
     protected $background_image;
 
-    public function __Construct(){
-        parent::__construct();
+    public function __Construct()
+    {
+
+    }
+
+    public function associateValue()
+    {
+        foreach($this->builder->getElements() as $key => $element)
+        {
+            $method = 'get'.ucfirst($key);
+
+            if(method_exists($this->model, $method))
+            {
+                $this->builder->setValue($key, $this->model->$method());
+            }
+        }
+    }
+
+//SETTERS
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function setTitle(string $title){
@@ -40,8 +65,12 @@ class Page extends DB{
         $this->background_image = $background_image;
     }
 
+//GETTERS
 
-
+    public function getId()
+    {
+       return $this->id;
+    }
 
     public function getTitle(){
         return $this->title;

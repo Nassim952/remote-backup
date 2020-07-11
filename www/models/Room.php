@@ -1,15 +1,25 @@
 <?php
 
-namespace cms\models;
+namespace www\models;
 
-use cms\core\DB;
+use www\core\Model;
 
-class Room extends DB{
+class Room extends Model
+{
+    protected $id;
     protected $name;
     protected $section;
     
-    public function __Construct(){
-        parent::__construct();
+    public function __Construct()
+    {
+    
+    }
+
+//SETTERS
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function setName(string $name){
@@ -20,6 +30,11 @@ class Room extends DB{
         $this->section = $section;
     }
 
+//GETTERS
+    public function getId()
+    {
+    return $this->id;
+    }
 
     public function getName(){
         return $this->name;

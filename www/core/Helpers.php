@@ -3,6 +3,7 @@
 namespace cms\core;
 
 class Helpers{
+
     public static function getUrl($controller, $action)
     {
         $listOfRoutes = yaml_parse_file("routes.yml");
@@ -14,7 +15,6 @@ class Helpers{
                 return $url;
             }
         }
-	
         return "/";
     }    
 

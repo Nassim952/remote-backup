@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+    !isset($_SESSION['user']) ? header("Location: /connexion"): '' ;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +14,7 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/salles.css">
     <link rel="stylesheet" href="../../css/addfilm.css">
+    <link rel="stylesheet" href="../../css/horraires.css">
     <link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
@@ -29,7 +34,7 @@
             </div>
             <div class="name-container">
                 <span id="dot"></span>
-                <p>John Doe</p>
+                <p><?= ucFirst($_SESSION['user']->getLogin()); ?></p>
             </div>
             <div class="nav-content">
                 <h2 id="text-submenu-fixer">Gestion film</h2>
@@ -37,7 +42,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-film fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?= \cms\core\Helpers::getUrl("User", "dashboard") ?>" id="text-white"><span>Films</span></a>
+                            <a href="<?= \cms\core\Helpers::getUrl("Dashboard", "dashboard") ?>" id="text-white"><span>Films</span></a>
                         </div>
                     </div>
                 </div>
@@ -46,7 +51,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-clock fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <span>Horaires</span>
+                        <a href="<?= \cms\core\Helpers::getUrl("Dashboard", "horraires") ?>" id="text-white"><span>Horraires</span></a>
                         </div>
                     </div>
                 </div>
@@ -54,7 +59,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-sliders-h fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?= \cms\core\Helpers::getUrl("Cinema", "salles") ?>" id="text-white"><span>Salles</span></a>
+                            <a href="<?= \cms\core\Helpers::getUrl("Dashboard", "salles") ?>" id="text-white"><span>Salles</span></a>
                         </div>
                     </div>
                 </div>
@@ -62,7 +67,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-video fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?= \cms\core\Helpers::getUrl("Cinema", "cinema") ?>" id="text-white"><span>Cinema</span></a>
+                            <a href="<?= \cms\core\Helpers::getUrl("Dashboard", "cinema") ?>" id="text-white"><span>Cinema</span></a>
                         </div>
                     </div>
                 </div>
@@ -71,7 +76,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-users fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?= \cms\core\Helpers::getUrl("User","stat") ?>" id="text-white"><span>Stats</span></a>
+                            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","stat") ?>" id="text-white"><span>Stats</span></a>
                         </div>
                     </div>
                 </div>
@@ -80,7 +85,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-users fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?= \cms\core\Helpers::getUrl("User","users") ?>" id="text-white"><span>Users</span></a>
+                            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","users") ?>" id="text-white"><span>Users</span></a>
                         </div>
                     </div>
                 </div>
@@ -89,6 +94,14 @@
                         <div class="fas fa-user-shield fa-lg"></div>
                         <div id="submenu-wrapper">
                             <span>Admin</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-menu">
+                    <div class="sidebar-sub-headers">
+                        <div class="fas fa-user-shield fa-lg"></div>
+                        <div id="submenu-wrapper">
+                            <a href="<?= \cms\core\Helpers::getUrl("User","signin") ?>" id="text-white"><span>Déconnexion</span></a>
                         </div>
                     </div>
                 </div>
