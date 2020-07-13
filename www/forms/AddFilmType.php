@@ -31,7 +31,7 @@
                 ],
                 'required'=>true,
             ])
-            ->add('genre', 'select', [
+            ->add('kind', 'select', [
                 'attr'=>[
                     'placeholder'=>'Genre',
                     'id'=>'genre',
@@ -68,10 +68,10 @@
                 ],
                 'required'=>true,
             ])
-            ->add('real', 'text', [
+            ->add('director', 'text', [
                 'attr'=>[
                     'placeholder'=>'Réalisateur',
-                    'id'=>'real',
+                    'id'=>'director',
                     'class'=>'input-form'
                 ],
                 'required'=>true,
@@ -103,15 +103,35 @@
                     'es'=>'Espagne'
                 ],
             ])
-            ->add('poster', 'url', [
+            ->add('type', 'select', [
+                'attr'=>[
+                    'placeholder'=>'Type',
+                    'id'=>'type',
+                    'class'=>'input-form'
+                ],
+                'required'=>true,
+                'options'=>[
+                    'lm'=>'Long metrage', 
+                    'cm'=>'Court metrage'
+                ],
+            ])
+            ->add('image_url', 'url', [
                 'attr'=>[
                     'placeholder'=>'Affiche du film',
-                    'id'=>'poster',
+                    'id'=>'image_url',
                     'class'=>'input-form'
                 ],
                 'required'=>true,
             ])
-            ->add('submit', 'submit', [
+            ->add('synopsis', 'textarea', [
+                'attr'=>[
+                    'placeholder'=>'Synopsis',
+                    'id'=>'synopsis',
+                    'class'=>'input-form'
+                ],
+                'required'=>true,
+            ])
+            ->add('add-film', 'submit', [
                 'attr' => [
                     'value'=>'Ajouter le film',
                     'id'=>'add-film',
