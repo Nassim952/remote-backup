@@ -15,7 +15,7 @@ class PageController extends Controller
     // page action callling the view
     public function pageAction(){
         $pageManager = new PageManager(Page::class, 'Page');
-        $pageManager = $pageManager->read();
+        $pages = $pageManager->read();
         
         // This send comment data to the view thanks to the Commentmanager read function
         $this->render("page", "back", ['pages'=> $pages ]);

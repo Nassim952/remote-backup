@@ -90,7 +90,7 @@ class Page extends Model implements ModelInterface
     }
 
     public function getGabarit(){
-        return $this->gabarit = $gabarit;
+        return $this->gabarit;
     }
 
     public function getDate(){
