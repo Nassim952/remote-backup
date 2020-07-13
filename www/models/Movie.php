@@ -1,20 +1,36 @@
 <?php
 
-namespace www\models;
+namespace cms\models;
 
-use www\core\Model;
+use cms\core\Model;
+use cms\core\ModelInterface;
+use cms\managers\MovieManager;
 
-class Movie extends Model
+class Movie extends Model implements ModelInterface
 { 
-    protected $id;
+    protected $id = null;
     protected $title;
-    protected $release;
+    protected $release_date;
     protected $duration;
     protected $synopsis;
+    protected $kind;
+    protected $age_require;
+    protected $director;
+    protected $main_actor;
+    protected $nationality;
+    protected $movie_type;
+    protected $image_url;
 
-    public function __Construct()
-    {
-      
+    public function initRelation(): array {
+        return [
+            
+        ];
+    }
+
+    public function delete($id){
+        $movieManager = new MovieManager(Movie::class, 'movie');
+
+        $movieManager->deleteMovie($id);
     }
 
 //SETTERS
@@ -29,9 +45,9 @@ class Movie extends Model
         $this->title = $title;
     }
 
-    public function setRelease($release)
+    public function setRelease($release_date)
     {
-        $this->release = $release;
+        $this->release_date = $release_date;
     }
 
     public function setDuration($duration)
@@ -46,7 +62,7 @@ class Movie extends Model
 
 //GETTERS
 
-    public function getId()
+    public function getId(): ?int
     {
     return $this->id;
     }
@@ -56,9 +72,9 @@ class Movie extends Model
         return $this->title;
     }
 
-    public function getRelease($release)
+    public function getRelease()
     {
-        return $this->release;
+        return $this->release_date;
     }
 
     public function getDuration()
@@ -72,4 +88,144 @@ class Movie extends Model
     }
 
 
+
+    /**
+     * Get the value of kind
+     */ 
+    public function getKind()
+    {
+        return $this->kind;
+    }
+
+    /**
+     * Set the value of kind
+     *
+     * @returnself
+     */ 
+    public function setKind($kind)
+    {
+        $this->kind = $kind;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of director
+     */ 
+    public function getDirector()
+    {
+        return $this->director;
+    }
+
+    /**
+     * Set the value of director
+     *
+     * @returnself
+     */ 
+    public function setDirector($director)
+    {
+        $this->director = $director;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of main_actor
+     */ 
+    public function getMain_actor()
+    {
+        return $this->main_actor;
+    }
+
+    /**
+     * Set the value of main_actor
+     *
+     * @returnself
+     */ 
+    public function setMain_actor($main_actor)
+    {
+        $this->main_actor = $main_actor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nationality
+     */ 
+    public function getNationality()
+    {
+        return $this->nationality;
+    }
+
+    /**
+     * Set the value of nationality
+     *
+     * @returnself
+     */ 
+    public function setNationality($nationality)
+    {
+        $this->nationality = $nationality;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of movie_type
+     */ 
+    public function getMovie_type()
+    {
+        return $this->movie_type;
+    }
+
+    /**
+     * Set the value of movie_type
+     *
+     * @returnself
+     */ 
+    public function setMovie_type($movie_type)
+    {
+        $this->movie_type = $movie_type;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of image_url
+     */ 
+    public function getImage_url()
+    {
+        return $this->image_url;
+    }
+
+    /**
+     * Set the value of image_url
+     *
+     * @returnself
+     */ 
+    public function setImage_url($image_url)
+    {
+        $this->image_url = $image_url;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of age_require
+     */ 
+    public function getAge_require()
+    {
+        return $this->age_require;
+    }
+
+    /**
+     * Set the value of age_require
+     *
+     * @returnself
+     */ 
+    public function setAge_require($age_require)
+    {
+        $this->age_require = $age_require;
+
+        return $this;
+    }
 }

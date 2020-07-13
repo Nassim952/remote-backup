@@ -1,6 +1,50 @@
+############ Dashboard ###########
+
+/dashboard:
+  controller: Dashboard
+  action: dashboard
+
+/suppression-film:
+  controller: Dashboard
+  action: deleteMovie
+
+/edition-film:
+  controller: Dashboard
+  action: editMovie
+
+/statistiques:
+  controller: Dashboard
+  action: stat
+
+/ajout-film:
+  controller: Dashboard
+  action: addFilm
+
+/users:
+  controller: Dashboard
+  action: users
+
+/horaires:
+  controller: Dashboard
+  action: horraires
+
+/addFilm:
+  controller: Dashboard
+  action: addFilm
+
+############ User ############
+
 /:
   controller: User
   action: home
+
+/inscription:
+  controller: User
+  action: signup
+
+/connexion:
+  controller: User
+  action: signin
 
 /login:
   controller: User
@@ -14,38 +58,33 @@
   controller: User
   action: template
 
-/dashboard:
-  controller: Dashboard
-  action: dashboard
 
-/statistiques:
-  controller: Dashboard
-  action: stat
-
-/inscription:
-  controller: User
-  action: signup
-
-/connexion:
-  controller: User
-  action: signin
-
-/cinema:
-  controller: Dashboard
-  action: cinema
+########### Cinema.php #############
 
 /salles:
-  controller: Dashboard
+  controller: Cinema
   action: salles
-  
-/addfilm:
-  controller: Dashboard
-  action: addfilm
 
-/users:
-  controller: Dashboard
-  action: users
+/cinema:
+  controller: Cinema
+  action: cinema
 
-/horraires:
-  controller: Dashboard
-  action: horraires
+/ajout-cinema:
+  controller: Cinema
+  action: addCinema
+
+/edit-cinema:
+  controller: Cinema
+  action: editCinema
+
+/edit-cinema-id:
+  controller: Cinema
+  action: editCinemaId
+
+/delete-cinema:
+  controller: Cinema
+  action: deleteCinema
+
+/show-movie:
+  controller: Cinema
+  action: showMovie

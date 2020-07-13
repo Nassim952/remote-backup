@@ -51,18 +51,19 @@ name="<?= $form->getName() ?>"
             <?php endif;?>
             <!---------------TEXT --->
             <?php if($field->getType() == "text"):?>
-              <label
-                  <?php 
-                  if(isset($field->getOptions()['attr_label'])) {
-                    foreach($field->getOptions()['attr_label'] as $attr => $value)
-                      {
-                        echo "$attr = '$value' ";
-                      }
-                  }
-                  
-                    ?>
-              ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
-              
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <label
+                    <?php 
+                    if(isset($field->getOptions()['attr_label'])) {
+                      foreach($field->getOptions()['attr_label'] as $attr => $value)
+                        {
+                          echo "$attr = '$value' ";
+                        }
+                    }
+                    
+                      ?>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+              <?php endif ?> 
               
               <input 
                 value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
@@ -77,25 +78,68 @@ name="<?= $form->getName() ?>"
                     }
                   }
                   ?>
+                
                 <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
                 <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
-              <?php endif;?>  
+                </input>
+            <?php endif;?>  
+
+            <!---------------SELECT --->
+            <?php if($field->getType() == "select"):?>
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <div class="label-password">
+                  <label
+                      <?php 
+                      if(isset($field->getOptions()['attr_label'])) {
+                        foreach($field->getOptions()['attr_label'] as $attr => $value)
+                          {
+                            echo "$attr = '$value' ";
+                          }
+                      }
+                      
+                        ?>
+                  ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+                <?php endif;?>
+              
+                <select 
+                  value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
+                  type="email"
+                  name="<?= $form->getName().'_'.$field->getName() ?>"
+                
+                  <?php 
+                  if(isset($field->getOptions()['attr'])) {
+                    foreach($field->getOptions()['attr'] as $attr => $value)
+                      {
+                        echo "$attr = '$value' ";
+                      }
+                    }
+                    ?>
+                  <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
+                  <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+                  
+                  <?php foreach ($field->getOptions()['options'] as $key => $option):?>
+                    <option value="<?= $key?>"> <?=$option?></option>
+                  <?php endforeach;?> 
+                </select>
+              </div>
+            <?php endif;?> 
               
               <!---------------EMAIL --->
             <?php if($field->getType() == "email"):?>
-              <div class="label-password">
-                <label
-                    <?php 
-                    if(isset($field->getOptions()['attr_label'])) {
-                      foreach($field->getOptions()['attr_label'] as $attr => $value)
-                        {
-                          echo "$attr = '$value' ";
-                        }
-                    }
-                    
-                      ?>
-                ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
-                
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <div class="label-password">
+                  <label
+                      <?php 
+                      if(isset($field->getOptions()['attr_label'])) {
+                        foreach($field->getOptions()['attr_label'] as $attr => $value)
+                          {
+                            echo "$attr = '$value' ";
+                          }
+                      }
+                      
+                        ?>
+                  ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+              <?php endif;?>  
                 
                 <input 
                   value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"

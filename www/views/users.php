@@ -49,8 +49,7 @@
 
             <tbody>
                 <?php
-                    $max = 16;
-                    for($i=0; $i < $max; $i++): 
+                    foreach($users as $user):
                 ?> 
                 <tr>
                     <th>
@@ -61,33 +60,15 @@
                             </div>
                         </div>
                     </th>
-                    <td scope="row">1</td>
-                    <td>Kendrick</td>
-                    <td>Lamar</td>
-                    <td>kdot@gmail.com</td>
-                    <td>Statut: 0</td>
+                    <td scope="row"><?= $user->getId(); ?></td>
+                    <td><?= $user->getLastname(); ?></td>
+                    <td><?= $user->getFirstname(); ?></td>
+                    <td><?= $user->getEmail(); ?></td>
+                    <td><?= $user->getStatut(); ?></td>
                     <td><a href="#" class="fas fa-edit fa-lg"></a></td>
                     <td><a href="#" class="fas fa-trash-alt fa-lg"></a></td>
                 </tr>
-                <?php endfor; ?>
-
-                <tr>
-                    <th>
-                        <div class="pretty p-default p-curve p-bigger cb-fixer">
-                            <input type="checkbox" id="userSelect" name="userSelect">
-                            <div class="state p-danger">
-                                <label></label>
-                            </div>
-                        </div>
-                    </th>
-                    <td scope="row">2</td>
-                    <td>Rihanna</td>
-                    <td>Fenty</td>
-                    <td>rfenty@gmail.com</td>
-                    <td>Statut: 1</td>
-                    <td><a href="#" class="fas fa-edit fa-lg"></a></td>
-                    <td><a href="#" class="fas fa-trash-alt fa-lg"></a></td>
-                </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

@@ -24,13 +24,11 @@ class Controller implements \SplSubject
     {
         $form = new $class;
         $form->configureOptions();
-        $form->buildForm(new FormBuilder());
+        $form->initForm();
         if($model){
             $form->setModel($model);
             $form->associateValue();
         }
-            
-
         return $form;
     }
 
