@@ -28,6 +28,9 @@
   controller: Dashboard
   action: horraires
 
+/addFilm:
+  controller: Dashboard
+  action: addFilm
 
 ############ User ############
 
