@@ -27,7 +27,7 @@
                     <span class="nombre-salle">Nombre de salles :</span>
                     <span class="number-room-info"><?= $cinema_room->getNumber_rooms() ?></span>
                 </div>
-                <a href="#" class="button-red">Sélectionner</a>
+                <a href="#" class="Button">Sélectionner</a>
             </div>
         <?php endforeach; ?>
     </div>

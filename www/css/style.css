@@ -47,8 +47,14 @@ table td:nth-child(odd) {
   justify-content: space-around;
 }
 
+#form-list-wrapper{
+  width: -webkit-fill-available;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 #text-wrappe {
-  width: 28%;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -74,7 +80,11 @@ table td:nth-child(odd) {
 #space-icons {
   width: 8%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+a{
+  color: inherit;
 }
 
 a:link {

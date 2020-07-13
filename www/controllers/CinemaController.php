@@ -3,6 +3,7 @@
 namespace cms\controllers;
 
 use cms\managers\CinemaManager;
+use cms\managers\MovieManager;
 use cms\core\Controller;
 use cms\models\Cinema;
 use cms\core\Helpers;
@@ -66,9 +67,5 @@ class CinemaController extends Controller
         $cinema_rooms = $cinemaManager->read();
 
         $this->render("salles", "back", ['cinema_rooms' => $cinema_rooms]);
-    }
-
-    public function showMovieAction(){
-        new View("show-movies","back");
     }
 }

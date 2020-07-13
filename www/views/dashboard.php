@@ -11,7 +11,6 @@
     <div class="quick-tools">
         <div id="space-icons">
             <a href="<?= \cms\core\Helpers::getUrl("Dashboard","addFilm") ?>" class="fas fa-plus fa-lg"></a>
-            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","editMovie") ?>" class="fas fa-edit fa-lg"></a>
             <a href="<?= \cms\core\Helpers::getUrl("Dashboard","deleteMovie") ?>" class="fas fa-trash-alt fa-lg"></a>
         </div>
     </div>
@@ -28,7 +27,7 @@
                                 <label></label>
                             </div>
                         </div>
-                        <p id="text-wrappe"><?= $movie->getTitle() ?></p>
+                        <a id="text-wrappe" href="show-movie/<?= $movie->getId() ?>"><?= $movie->getTitle() ?></a>
                         |
                         <p id="hour-wrappe"><?= $movie->getDuration() ?></p>
                     </td>

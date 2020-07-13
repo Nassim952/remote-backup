@@ -15,11 +15,51 @@
 
 .show-title-movie{
     height: 70px;
-    background-color: #CE0A0B;
+    background-color: #EF3535;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .show-title-style{
     color:white;
-    
+    position: absolute;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 33px;
+    text-align: center;
+}
+
+.show-desc-container{
+    display: flex;
+    width: -webkit-fill-available;
+}
+
+.show-right-desc{
+    margin-top: 30px;
+    width: -webkit-fill-available;
+}
+
+.show-li-wrapper{
+    margin-top: 20px;
+}
+
+.show-button-wrapper{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: auto;
+    margin-top: 40px;
+    width: 340px;
+}
+
+#show-label-bold{
+    font-weight: bold;
+}
+
+.show-left-img{
+    /* display: flex;
+    align-items: center; */
 }
