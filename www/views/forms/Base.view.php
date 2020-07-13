@@ -117,7 +117,42 @@ name="<?= $form->getName() ?>"
                 <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
                 <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
                 </input>
-            <?php endif;?>  
+            <?php endif;?> 
+            
+            <!---------------DATE --->
+            <?php if($field->getType() == "date"):?>
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <label
+                    <?php 
+                    if(isset($field->getOptions()['attr_label'])) {
+                      foreach($field->getOptions()['attr_label'] as $attr => $value)
+                        {
+                          echo "$attr = '$value' ";
+                        }
+                    }
+                    
+                      ?>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+              <?php endif ?> 
+              
+              <input 
+                value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
+                type="date"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
+                <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+                </input>
+            <?php endif;?> 
 
             <!---------------SELECT --->
             <?php if($field->getType() == "select"):?>
@@ -156,7 +191,6 @@ name="<?= $form->getName() ?>"
                     <option value="<?= $key?>"> <?=$option?></option>
                   <?php endforeach;?> 
                 </select>
-              </div>
             <?php endif;?> 
               
               <!---------------EMAIL --->

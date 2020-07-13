@@ -16,10 +16,6 @@
   controller: Dashboard
   action: stat
 
-/ajout-film:
-  controller: Dashboard
-  action: addFilm
-
 /users:
   controller: Dashboard
   action: users
@@ -28,7 +24,7 @@
   controller: Dashboard
   action: horraires
 
-/addFilm:
+/addfilm:
   controller: Dashboard
   action: addFilm
 

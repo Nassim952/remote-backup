@@ -8,6 +8,6 @@
     </div>
     <div id="separation-bar"></div>
     <div class=form-add>
-        <?php $this->addmodal("form", $configForm); ?>
+        <?php $this->formView('configFormUser')?>
     </div>
 </div>

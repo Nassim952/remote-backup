@@ -38,24 +38,27 @@ class DashboardController extends Controller
             $movieManager = new MovieManager(Movie::class, 'movie');
             $movie = new Movie();
 
-            $movie->setTitle($_POST['title']);
-            $movie->setRelease($_POST['date']);
-            $movie->setDuration($_POST['duration']);
-            $movie->setSynopsis($_POST['synopsis']);
-            $movie->setKind($_POST['kind']);
-            $movie->setAge_require($_POST['age']);
-            $movie->setDirector($_POST['director']);
-            $movie->setMain_actor($_POST['actor']);
-            $movie->setNationality($_POST['nationality']);
-            $movie->setMovie_type($_POST['type']);
-            $movie->setImage_url($_POST['image_url']);
+            $movie->setTitle($_POST[$form->getName().'_title']);
+            $movie->setRelease($_POST[$form->getName().'_date']);
+            $movie->setDuration($_POST[$form->getName().'_duration']);
+            $movie->setSynopsis($_POST[$form->getName().'_synopsis']);
+            $movie->setKind($_POST[$form->getName().'_kind']);
+            $movie->setAge_require($_POST[$form->getName().'_age']);
+            $movie->setDirector($_POST[$form->getName().'_director']);
+            $movie->setMain_actor($_POST[$form->getName().'_actor']);
+            $movie->setNationality($_POST[$form->getName().'_nationality']);
+            $movie->setMovie_type($_POST[$form->getName().'_type']);
+            $movie->setImage_url($_POST[$form->getName().'_image_url']);
 
             $movieManager->save($movie);
+
+            var_dump($_POST);
         }
 
-        $this->render("login", "account", [
+        $this->render("add-film", "back", [
             "configFormUser" => $form
         ]);
+
     }
 
     public function deleteMovieAction(){
