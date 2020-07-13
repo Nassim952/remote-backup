@@ -80,7 +80,7 @@ class DashboardController extends Controller
         if( $_SERVER["REQUEST_METHOD"] == "POST"){
             $id = $_POST['id'];
             
-            Helpers::redirect('Dashboard','addFilm');
+            Helpers::redirect_to('Dashboard','addFilm');
         }
     }
 

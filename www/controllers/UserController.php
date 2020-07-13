@@ -137,22 +137,33 @@ class UserController extends Controller{
         ]);
     }
 	
-    // public function registerAction()
-    // {
-    //     $registerType = new RegisterType();
+    public function registerAction()
+    {
+        $form = $this->createForm(RegisterType::class);
+        $form->handle();
 
-    //     if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-    //         //Vérification des champs
-    //         $this->render("register", "account", [
-    //             "form" => $registerType,
-    //             "errors" => Validator::formRegisterValidate( $registerType, $_POST )
-    //         ]);
-    //     } else {
-    //         $this->render("register", "account", [
-    //             "form" => $registerType
-    //         ]);
-    //     }
-    // }
+        if($form->isSubmit() && $form->isValid())
+        { 
+            $userManager = new UserManager('user','user');
+           
+            if (!$userManager->read() || empty($userManager->read()))
+            {
+                $user = new User;
+                $user->setLogin($_POST['lastname']);
+                $user->setEmail($_POST['email']);
+                $user->setPassword($_POST['password']);
+                $user->setAllow('customer');
+                $user->setStatut(1);
+                $user->setToken(uniqid());
+                $userManager->save($user);
+            }
+           
+        }
+
+        $this->render("register", "account", [
+            "configFormUser" => $form
+        ]);
+    }
     
     public function buildPage()
     {

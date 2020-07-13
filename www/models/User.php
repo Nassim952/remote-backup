@@ -29,6 +29,11 @@ class User extends Model implements ModelInterface
         return $this;
     }
 
+    public function setLogin($login)
+    {
+        $this->login = $login;
+    }
+
     public function setPassword($password)
     {
         $this->password = $password;
@@ -66,6 +71,11 @@ class User extends Model implements ModelInterface
     {
         return $this->id;
     }
+    
+    public function getLogin()
+    {
+        return $this->login;
+    }
 
     public function getPassword()
     {
@@ -94,5 +104,10 @@ class User extends Model implements ModelInterface
     public function getFirstname()
     {
         return $this->firstname;
+    }
+
+    public function setToken($token)
+    {
+        $this->token = $token;
     }
 }

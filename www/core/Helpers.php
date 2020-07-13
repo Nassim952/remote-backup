@@ -18,7 +18,7 @@ class Helpers
         return "/";
     }
 
-    public function redirect_to(string $controller, string $action, array $params = null)
+    public static function redirect_to(string $controller, string $action, array $params = null)
     {
         $listOfRoutes = yaml_parse_file("routes.yml");
         foreach ($listOfRoutes as $url => $values) 
