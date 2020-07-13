@@ -68,7 +68,7 @@
                 ],
                 'required'=>true,
             ])
-            ->add('title', 'text', [
+            ->add('real', 'text', [
                 'attr'=>[
                     'placeholder'=>'Réalisateur',
                     'id'=>'real',
