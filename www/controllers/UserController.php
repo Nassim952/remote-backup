@@ -4,6 +4,7 @@ namespace cms\controllers;
 
 use cms\models\User;
 use cms\core\View;
+use cms\core\Mailer;
 use cms\core\Helpers;
 use cms\managers\UserManager;
 use cms\managers\MovieManager;
@@ -54,14 +55,15 @@ class UserController extends Controller{
             $errors = Validator::formValidate($configForm, $_POST);
             if(!empty($errors)){
                 print_r($errors);
-            }elseif(empty($errors)){            
+            }elseif(empty($errors)){  
+                $token = bin2hex(random_bytes(50));          
                 $user = new User;
                 $user->setLastname($_POST['lastname']);
                 $user->setFirstname($_POST['firstname']);
                 $user->setEmail($_POST['email']);
                 $user->setPassword($_POST['password']);
                 $user->setAllow('customer');
-                $user->setStatut(1);
+                $user->setToken($token);
                 $userManager->save($user);
 
                 // on vérifie si le save a bien été fait et on redirige le user

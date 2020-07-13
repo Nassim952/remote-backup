@@ -23,3 +23,6 @@ RUN a2enmod rewrite
 
 # Enable yaml
 #RUN a2enmod yaml
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

@@ -14,6 +14,7 @@ class User extends Model implements ModelInterface
     protected $email;
     protected $statut;
     protected $allow;
+    protected $token;
 
     public function initRelation(): array {
         return [
@@ -94,5 +95,25 @@ class User extends Model implements ModelInterface
     public function getFirstname()
     {
         return $this->firstname;
+    }
+
+    /**
+     * Get the value of token
+     */ 
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set the value of token
+     *
+     * @returnself
+     */ 
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
     }
 }
