@@ -3,28 +3,32 @@
 namespace cms\core;
 
 use cms\core\Builder\FormBuilder;
-use cms\core\Validator;
+use cms\core\Constraints\Validator;
 
 class Form
 {
-    private $builder;
-    private $config = [];
-    private $model;
-    private $name;
-    private $isSubmit = false;
-    private $isValid = false;
-    private $validator;
-    private $errors = [];
+    protected $builder;
+    protected $config = [];
+    protected $model;
+    protected $name;
+    protected $isSubmit = false;
+    protected $isValid = false;
+    protected $validator;
+    protected $errors = [];
 
     //Initialise le validator et mets les valeurs par défaut dans la config
     public function __construct()
     {
         $this->validator = new Validator();
+
         $this->config = [
             "method"=>"POST", 
             "action"=>"",
-            "attr" => [ ]       
+            "attr" => [ ]
+           
         ];
+
+        $this->builder = new FormBuilder();
     }
 
 
@@ -34,6 +38,7 @@ class Form
     // Si le getter de ce nom existe dans le model lié à la page on le modifie
     public function associateValue()
     {
+      
         foreach($this->builder->getElements() as $key => $element)
         {
             $method = 'get'.ucfirst($key);
@@ -43,6 +48,7 @@ class Form
                 $this->builder->setValue($key, $this->model->$method());
             }
         }
+
     }
 
     // Je l'utilise pour me simplifier la vie, il ne fait que récupèrer les élèments du builder
@@ -100,8 +106,10 @@ class Form
     {
         $this->isValid = true;
        
+
         foreach($_POST as $key => $value)
         {
+           
             if(FALSE !== strpos($key, $this->name))
             {
                 //testtype_firstname
@@ -131,7 +139,9 @@ class Form
     // Insere les valeurs du formulaire dans $model
     public function updateObject(): void
     {
-        foreach ($_POST as $key => $value) {   
+        foreach($_POST as $key => $value)
+        {
+           
             if(FALSE !== strpos($key, $this->name))
             {
                 $key = str_replace($this->name.'_', '', $key);

@@ -5,6 +5,7 @@ namespace cms\controllers;
 use cms\managers\MovieManager;
 use cms\core\Controller;
 use cms\core\View;
+use cms\forms\AddFilmType;
 use cms\managers\UserManager;
 use cms\models\Movie;
 use cms\models\User;
@@ -28,11 +29,12 @@ class DashboardController extends Controller
 
     public function addFilmAction()
     {
-        new View("add-film","back");
-        $movieManager = new MovieManager(Movie::class, 'movie');
+        $form = $this->createForm(AddFilmType::class);
+        $form->handle();
 
-        if( $_SERVER["REQUEST_METHOD"] == "POST"){
-
+        if($form->isSubmit() && $form->isValid())
+        {  
+            $movieManager = new MovieManager(Movie::class, 'movie');
             $movie = new Movie();
 
             $movie->setTitle($_POST['title']);
@@ -49,6 +51,10 @@ class DashboardController extends Controller
 
             $movieManager->save($movie);
         }
+
+        $this->render("login", "account", [
+            "configFormUser" => $form
+        ]);
     }
 
     public function deleteMovieAction(){
@@ -85,5 +91,4 @@ class DashboardController extends Controller
     public function horrairesAction(){
         new View("horraires","back");
     }
-
 }

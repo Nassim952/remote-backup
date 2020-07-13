@@ -9,8 +9,9 @@ use cms\managers\UserManager;
 use cms\managers\MovieManager;
 use cms\core\NotFoundException;
 use cms\core\Controller;
-use cms\forms\RegisterType;
 use cms\core\Validator;
+use cms\forms\LoginType;
+use cms\forms\RegisterType;
 
 class UserController extends Controller{
 
@@ -84,6 +85,7 @@ class UserController extends Controller{
         $users = $userManager->read();
         
         $userCheck = $userManager->checkLogin($this->email, $this->password, $users);
+        var_dump($userCheck);
         if($userCheck){
             $view = Helpers::getUrl("Dashboard", "dashboard");
             $newUrl = trim($view, "/");
@@ -114,22 +116,26 @@ class UserController extends Controller{
 
 	public function loginAction()
     {
+        $form = $this->createForm(LoginType::class);
+        $form->handle();
 
-        $registerType = new LoginType();
-
-        if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-            //Vérification des champs
-            $this->render("register", "account", [
-                "form" => $registerType,
-                "errors" => Validator::formLoginValidate( $registerType, $_POST )
-            ]);
-        } else {
-            $this->render("register", "account", [
-                "form" => $registerType
-            ]);
+        if($form->isSubmit() && $form->isValid())
+        {  
+            $userManager = new UserManager('user','user');
+            $users = $userManager->read();
+            
+            $userCheck = $userManager->checkLogin($this->email, $this->password, $users);
+            if($userCheck){
+                $view = Helpers::getUrl("Dashboard", "dashboard");
+                $newUrl = trim($view, "/");
+                header("Location: " . $newUrl);
+            }  
         }
-    
-	}
+
+        $this->render("login", "account", [
+            "configFormUser" => $form
+        ]);
+    }
 	
     // public function registerAction()
     // {
