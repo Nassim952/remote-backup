@@ -60,10 +60,10 @@
                     '-18'=>'-18'
                 ],
             ])
-            ->add('duration', 'time', [
+            ->add('date', 'date', [
                 'attr'=>[
-                    'placeholder'=>'Durée du film',
-                    'id'=>'duration',
+                    'placeholder'=>'Date de sortie du film',
+                    'id'=>'date',
                     'class'=>'input-form'
                 ],
                 'required'=>true,
@@ -110,6 +110,13 @@
                     'class'=>'input-form'
                 ],
                 'required'=>true,
+            ])
+            ->add('submit', 'submit', [
+                'attr' => [
+                    'value'=>'Ajouter le film',
+                    'id'=>'add-film',
+                    'class' => 'button',
+                ]
             ]);
     
                 return $this;
