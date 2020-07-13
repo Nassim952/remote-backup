@@ -11,6 +11,7 @@ class User extends Model implements ModelInterface
     protected $lastname;
     protected $firstname;
     protected $password;
+    protected $verified = false;
     protected $email;
     protected $statut;
     protected $allow;
@@ -64,6 +65,16 @@ class User extends Model implements ModelInterface
         $this->firstname = ucfirst($firstname);
     }
 
+    public function setVerified($verified)
+    {
+        $this->verified = ucfirst($verified);
+    }
+
+    public function setToken($token)
+    {
+         $this->token = $token;
+    }
+
     
 //GETTERS
 
@@ -106,8 +117,8 @@ class User extends Model implements ModelInterface
         return $this->firstname;
     }
 
-    public function setToken($token)
+    public function getVerified()
     {
-        $this->token = $token;
+        return $this->verified;
     }
 }

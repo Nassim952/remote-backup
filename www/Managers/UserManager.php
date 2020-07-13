@@ -93,31 +93,16 @@ class UserManager extends DB{
         }
     }
 
-    // public static function getTypeNameUser($typeUser = null)
-    // {
-    //     if(null === $typeUser)
-    //     {
-    //         $typeUser = getTypeUser();
-    //     }
-
-    //     switch ($i) {
-    //         case 1:
-    //             return "Candidat";;
-    //             break;
-    //         case 2:
-    //             return "Client";
-    //             break;
-    //         case 3:
-    //             return "Editeur";
-    //             break;
-    //         case 4:
-    //             return "Editeur d'utilisateur";
-    //             break;
-    //         case 5:
-    //             return "Correcteur";
-    //             break;
-    //     }
-
-    // }
+    public function getUserByToken($token)
+    {
+        $_SESSION['token'] = $token;
+        $query = (new QueryBuilder())
+                ->select()
+                ->from(DB_PREFIXE.'user', 'u')
+                ->where('u.token = :token')
+                ->setParameters('token', reset($_SESSION['token']));
+        return $query->getQuery()
+            ->getArrayResult(User::class);
+    }
 
 }

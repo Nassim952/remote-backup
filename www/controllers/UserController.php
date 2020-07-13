@@ -104,7 +104,7 @@ class UserController extends Controller{
 
 	public function getUserAction($params)
     {
-        $userManager = new UserManager();
+        $userManager = new UserManager('user', 'user');
 
         $user = $userManager->find($params['id']);
 
@@ -163,6 +163,17 @@ class UserController extends Controller{
         $this->render("register", "account", [
             "configFormUser" => $form
         ]);
+    }
+
+    public function accountAcitivation()
+    {
+        if ($_POST['token']) {
+            $user = (new UserManager('user','user'))->getUserByToken($_POST['token']);
+            if ($user) {
+                $user->setVerified(true);
+                (new UserManager('user','user'))->save($user);
+            }
+        }
     }
     
     public function buildPage()
