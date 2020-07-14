@@ -41,7 +41,7 @@ class DashboardController extends Controller
             $movie->setTitle($_POST[$form->getName().'_title']);
             $movie->setRelease($_POST[$form->getName().'_date']);
             $movie->setDuration($_POST[$form->getName().'_duration']);
-            /* $movie->setSynopsis($_POST[$form->getName().'_synopsis']); */
+            $movie->setSynopsis($_POST[$form->getName().'_synopsis']);
             $movie->setKind($_POST[$form->getName().'_kind']);
             $movie->setAge_require($_POST[$form->getName().'_age']);
             $movie->setDirector($_POST[$form->getName().'_director']);

@@ -127,7 +127,8 @@
                 'attr'=>[
                     'placeholder'=>'Synopsis',
                     'id'=>'synopsis',
-                    'class'=>'input-form'
+                    'class'=>'input-form',
+                    'rows'=>'600'
                 ],
                 'required'=>true,
             ])
