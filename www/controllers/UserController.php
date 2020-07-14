@@ -9,8 +9,9 @@ use cms\managers\UserManager;
 use cms\managers\MovieManager;
 use cms\core\NotFoundException;
 use cms\core\Controller;
-use cms\forms\RegisterType;
 use cms\core\Validator;
+use cms\forms\LoginType;
+use cms\forms\RegisterType;
 
 class UserController extends Controller{
 
@@ -84,6 +85,7 @@ class UserController extends Controller{
         $users = $userManager->read();
         
         $userCheck = $userManager->checkLogin($this->email, $this->password, $users);
+        var_dump($userCheck);
         if($userCheck){
             $view = Helpers::getUrl("Dashboard", "dashboard");
             $newUrl = trim($view, "/");
@@ -102,7 +104,7 @@ class UserController extends Controller{
 
 	public function getUserAction($params)
     {
-        $userManager = new UserManager();
+        $userManager = new UserManager('user', 'user');
 
         $user = $userManager->find($params['id']);
 
@@ -114,39 +116,65 @@ class UserController extends Controller{
 
 	public function loginAction()
     {
+        $form = $this->createForm(LoginType::class);
+        $form->handle();
 
-        $registerType = new LoginType();
-
-        if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-            //Vérification des champs
-            $this->render("register", "account", [
-                "form" => $registerType,
-                "errors" => Validator::formLoginValidate( $registerType, $_POST )
-            ]);
-        } else {
-            $this->render("register", "account", [
-                "form" => $registerType
-            ]);
+        if($form->isSubmit() && $form->isValid())
+        {  
+            $userManager = new UserManager('user','user');
+            $users = $userManager->read();
+            
+            $userCheck = $userManager->checkLogin($this->email, $this->password, $users);
+            if($userCheck){
+                $view = Helpers::getUrl("Dashboard", "dashboard");
+                $newUrl = trim($view, "/");
+                header("Location: " . $newUrl);
+            }  
         }
-    
-	}
-	
-    // public function registerAction()
-    // {
-    //     $registerType = new RegisterType();
 
-    //     if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-    //         //Vérification des champs
-    //         $this->render("register", "account", [
-    //             "form" => $registerType,
-    //             "errors" => Validator::formRegisterValidate( $registerType, $_POST )
-    //         ]);
-    //     } else {
-    //         $this->render("register", "account", [
-    //             "form" => $registerType
-    //         ]);
-    //     }
-    // }
+        $this->render("login", "account", [
+            "configFormUser" => $form
+        ]);
+    }
+	
+    public function registerAction()
+    {
+        $form = $this->createForm(RegisterType::class);
+        $form->handle();
+
+        if($form->isSubmit() && $form->isValid())
+        { 
+            $userManager = new UserManager('user','user');
+           
+            if (!$userManager->read() || empty($userManager->read()))
+            {
+                $user = new User;
+                $user->setLogin($_POST['lastname']);
+                $user->setEmail($_POST['email']);
+                $user->setPassword($_POST['password']);
+                $user->setAllow('customer');
+                $user->setStatut(1);
+                $user->setToken(uniqid());
+                $userManager->save($user);
+            }
+           
+        }
+
+        $this->render("register", "account", [
+            "configFormUser" => $form
+        ]);
+    }
+
+    public function accountAcitivation()
+    {
+        if ($_POST['token']) {
+            $user = (new UserManager('user','user'))->getUserByToken($_POST['token']);
+            if ($user) {
+                $user->setVerified(true);
+                (new UserManager('user','user'))->save($user);
+            }
+        }
+    }
     
     public function buildPage()
     {
