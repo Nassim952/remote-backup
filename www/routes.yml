@@ -93,14 +93,36 @@
   controller: Comment
   action: deleteComment
 
+/edition-Comment:
+  controller: Comment
+  action: editComment
+
+
 ########### page.php #############
 
 /pages:
-  controller: page
-  action: page
+  controller: Page
+  action: Page
+
+/delete-page:
+  controller: Page
+  action: deletePage
+
+/edition-page:
+  controller: Page
+  action: editPage
+
 
 ########### Component.php #############
 
 /components:
   controller: component
   action: component
+
+/delete-component:
+  controller: Component
+  action: deleteComponent
+
+/edition-component:
+  controller: Component
+  action: editComponent
