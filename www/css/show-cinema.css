@@ -1,0 +1,24 @@
+.show-cinema-fit-img{
+    width: 308px;
+    height: 104px;
+}
+
+.show-cinema-full-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+}
+
+.show-cinema-container{
+    width: 360px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.show-cinema-upper-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

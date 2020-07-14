@@ -73,12 +73,19 @@ class UserManager extends DB{
     }
 
     
-    public function checkLogin($email, $password, $users)
+    public function checkUserInDb($email, $password, $users)
+    {
+        foreach ($users as $user) {
+            if ($user->getEmail() == $email && $user->getPassword() == $password) {
+                return $user;
+            }
+        }
+    }
+
+    public function checkSave($email, $password, $users)
     {
         foreach ($users as $value) {
             if ($value->getEmail() == $email && $value->getPassword() == $password) {
-                session_start();
-                $_SESSION['user'] = $value;
                 return true;
             }
         }
@@ -95,12 +102,11 @@ class UserManager extends DB{
 
     public function getUserByToken($token)
     {
-        $_SESSION['token'] = $token;
         $query = (new QueryBuilder())
                 ->select()
                 ->from(DB_PREFIXE.'user', 'u')
                 ->where('u.token = :token')
-                ->setParameters('token', reset($_SESSION['token']));
+                ->setParameters('token', $token);
         return $query->getQuery()
             ->getArrayResult(User::class);
     }

@@ -11,10 +11,11 @@ class User extends Model implements ModelInterface
     protected $lastname;
     protected $firstname;
     protected $password;
-    protected $verified = false;
+    protected $verified = 0;
     protected $email;
     protected $statut;
     protected $allow;
+    protected $token;
 
     public function initRelation(): array {
         return [
@@ -67,7 +68,7 @@ class User extends Model implements ModelInterface
 
     public function setVerified($verified)
     {
-        $this->verified = ucfirst($verified);
+        $this->verified = $verified;
     }
 
     public function setToken($token)
@@ -115,6 +116,14 @@ class User extends Model implements ModelInterface
     public function getFirstname()
     {
         return $this->firstname;
+    }
+
+    /**
+     * Get the value of token
+     */ 
+    public function getToken()
+    {
+        return $this->token;
     }
 
     public function getVerified()

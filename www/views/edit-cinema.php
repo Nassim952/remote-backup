@@ -1,38 +1,28 @@
 <head>
-    <title>Edition d'un cinema</title>
+    <title>Editer un cinéma</title>
 </head>
 
-
+<?php
+    foreach($myCinema as $cinema):
+?>
 <div class="site-content">
     <div id="head-title">
-        <h2 style="font-size:32px;">Edition d'un cinema</h2>
+        <h2>Editer un cinéma</h2>
     </div>
     <div id="separation-bar"></div>
-    <div class="lists-film">
-        <table class="table-wrapper">
-            <tr class="tr-container">
-                <?php
-                    foreach($cinemas as $cinema):
-                    ?>
-                <td class="td-dashboard-wrapper">
-                    <div class="pretty p-default p-curve p-bigger cb-fixer">
-                        <input type="checkbox">
-                        <div class="state p-danger">
-                            <label></label>
-                        </div>
-                    </div>
-                    <p id="text-wrappe"><?= $cinema->getName(); ?></p>
-                    |
-                    <p id="hour-wrappe"><?= $cinema->getPlace(); ?></p>
-                    <form name='delete-cinema' method="POST">
-                        <input	type="hidden" name="id" value="<?= $cinema->getId() ?>">
-                        <div class="icons-wrapper">
-                            <button type="submit" class="fas fa-edit fa-lg"></button>
-                        </div>
-                    </form>
-                </td>
-                <?php endforeach; ?>
-            </tr>
-        </table>
+    <div class=form-add style='margin-top: 50px;'>
+        <form class=add-film method="post">
+            <input class="input-form cinema-title" type="text" name="name" value="<?= $cinema->getName(); ?>"></input>
+            <div class="flex-form-container">
+                <div class="flex-form-content-left">
+                    <input class=input-form  type="text" name="city" value="<?= $cinema->getPlace(); ?>">
+                    <input class=input-form type="number" name="number_rooms" value="<?= $cinema->getNumber_rooms(); ?>">
+                <div class="flex-form-content-right">
+                    <input class="input-form affiche" type="url" name="image_url" value="<?= $cinema->getImage_url() ?>"></input>
+                </div>
+            </div>
+            <input type="submit" class="input-form submit-addfilm" value="Valider"></input>
+        </form>
     </div>
-    </body>
+</div>
+<?php endforeach; ?>

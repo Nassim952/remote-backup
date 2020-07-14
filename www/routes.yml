@@ -4,10 +4,6 @@
   controller: Dashboard
   action: dashboard
 
-/suppression-film:
-  controller: Dashboard
-  action: deleteMovie
-
 /edition-film:
   controller: Dashboard
   action: editMovie
@@ -16,10 +12,6 @@
   controller: Dashboard
   action: stat
 
-/ajout-film:
-  controller: Dashboard
-  action: addFilm
-
 /users:
   controller: Dashboard
   action: users
@@ -27,10 +19,6 @@
 /horaires:
   controller: Dashboard
   action: horraires
-
-/addFilm:
-  controller: Dashboard
-  action: addFilm
 
 ############ User ############
 
@@ -58,8 +46,16 @@
   controller: User
   action: template
 
+/user-verif:
+  controller: User
+  action: accountActivation
 
-########### Cinema.php #############
+/mail-not-checked:
+  controller: User
+  action: mailNotChecked
+
+
+########### Cinema #############
 
 /salles:
   controller: Cinema
@@ -77,14 +73,29 @@
   controller: Cinema
   action: editCinema
 
-/edit-cinema-id:
-  controller: Cinema
-  action: editCinemaId
-
 /delete-cinema:
   controller: Cinema
   action: deleteCinema
 
-/show-movie:
+/show-cinema:
   controller: Cinema
+  action: showCinema
+
+
+######## Movie #########
+
+/ajout-film:
+  controller: Movie
+  action: addFilm
+
+/show-movie:
+  controller: Movie
   action: showMovie
+
+/delete-movie:
+  controller: Movie
+  action: deleteMovie
+
+/edit-movie:
+  controller: Movie
+  action: editMovie

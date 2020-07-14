@@ -20,7 +20,6 @@ class PDOResult implements ResultInterface
     public function getArrayResult(string $class = null): array
     {
         $result =  $this->statement->fetchAll(PDO::FETCH_ASSOC);
-
         if($class) {
             // $class = "cms\\models\\".$class;
             $results = [];

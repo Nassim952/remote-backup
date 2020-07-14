@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+	isset($_SESSION['user']) ? session_destroy() : '' ;
+?>
 <head>
 	<title>NEAR BY - Inscription</title>
 </head>
