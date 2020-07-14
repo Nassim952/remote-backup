@@ -2,8 +2,8 @@
 
 namespace cms\core;
 
-class Helpers{
-
+class Helpers
+{
     public static function getUrl($controller, $action)
     {
         $listOfRoutes = yaml_parse_file("routes.yml");
@@ -16,22 +16,23 @@ class Helpers{
             }
         }
         return "/";
-    }    
+    }
 
-    public static function getTypeNameUser($typeUser){
-        if ($typeUser == 1) {
-            return "Candidat";
-        }elseif ($typeUser == 2) {
-            return "Client";
-        }elseif ($typeUser == 3) {
-            return "Editeur";
-        }elseif($typeUser == 4){
-            return "Editeur d'utilisateur";
-        }elseif($typeUser == 5){
-            return "Correcteur";
+    public function redirect_to(string $controller, string $action, array $params = null)
+    {
+        $listOfRoutes = yaml_parse_file("routes.yml");
+        foreach ($listOfRoutes as $url => $values) 
+        {
+            if($values["controller"]==$controller && $values["action"]==$action)
+            {
+                $controller.='Controller';
+                $action.='Action';
+                
+                (new $controller())->$action(implode(',',$params));
+            }
         }
     }
-    
+
     public static function implodeArrayKeys($array) {
         return implode(", ",array_keys($array));
     }
@@ -43,21 +44,21 @@ class Helpers{
         };
     }
 
-    function displayStarsEdition($levelString) {
+    public function displayStarsEdition($levelString) {
         $level = intval($levelString);
         for ($i = 1; $i <= $level; $i++) { 
             echo "<img class='star_home_edition' src='public/images/favorite.png'/>"; 
         };
     }
 
-    function displayStarsEditionRead($levelString) {
+    public function displayStarsEditionRead($levelString) {
         $level = intval($levelString);
         for ($i = 1; $i <= $level; $i++) { 
             echo "<img class='star_home_edition_read' src='public/images/favorite.png'/>"; 
         };
     }
 
-    function displayState($number_state) {
+    public function displayState($number_state) {
         switch ($number_state) {
             case 1:
                 echo "Pas fait";

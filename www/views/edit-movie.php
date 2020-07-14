@@ -1,20 +1,12 @@
 <head>
-    <title>Dashboard</title>
+    <title>Suprressiod'un film</title>
 </head>
-
 
 <div class="site-content">
     <div id="head-title">
-        <h2 style="font-size:32px;">Films</h2>
+        <h2 style="font-size:32px;">Edition d'un film</h2>
     </div>
     <div id="separation-bar"></div>
-    <div class="quick-tools">
-        <div id="space-icons">
-            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","addFilm") ?>" class="fas fa-plus fa-lg"></a>
-            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","editMovie") ?>" class="fas fa-edit fa-lg"></a>
-            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","deleteMovie") ?>" class="fas fa-trash-alt fa-lg"></a>
-        </div>
-    </div>
     <div class="lists-film">
         <table class="table-wrapper">
             <tr class="tr-container">
@@ -31,9 +23,15 @@
                         <p id="text-wrappe"><?= $movie->getTitle() ?></p>
                         |
                         <p id="hour-wrappe"><?= $movie->getDuration() ?></p>
+                        <form name='form-delete-movie' method="POST">
+                            <input type="hidden" name="id" value="<?=$movie->getId() ?>">
+                            <div class="icons-wrapper">
+                                <button type="submit" class="fas fa-edit fa-lg"></a>
+                            </div>
+                        </form>
                     </td>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
             </tr>
         </table>
-    </div>
-    </body>
+</div>
+

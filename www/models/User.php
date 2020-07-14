@@ -2,20 +2,18 @@
 
 namespace cms\models;
 
-use cms\core\Helpers;
 use cms\core\Model;
 use cms\core\ModelInterface;
-use cms\core\DB;
 
 class User extends Model implements ModelInterface
 {
     protected $id = null;
-    protected $login;
+    protected $lastname;
+    protected $firstname;
     protected $password;
     protected $email;
     protected $statut;
     protected $allow;
-    protected $identity_id = null;
 
     public function initRelation(): array {
         return [
@@ -28,12 +26,6 @@ class User extends Model implements ModelInterface
     public function setId($id)
     {
         $this->id = $id;
-        return $this;
-    }
-
-    public function setLogin($login)
-    {
-        $this->login = $login;
         return $this;
     }
 
@@ -57,9 +49,14 @@ class User extends Model implements ModelInterface
         $this->allow = $allow;
     }
 
-    public function setIdentity($identity_id)
+    public function setLastname($lastname)
     {
-        $this->identity_id = $identity_id;
+        $this->lastname = ucfirst($lastname);
+    }
+
+    public function setFirstname($firstname)
+    {
+        $this->firstname = ucfirst($firstname);
     }
 
     
@@ -68,11 +65,6 @@ class User extends Model implements ModelInterface
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getLogin()
-    {
-        return $this->login;
     }
 
     public function getPassword()
@@ -94,8 +86,13 @@ class User extends Model implements ModelInterface
         return $this->allow;
     }
 
-    public function getIdentity()
+    public function getLastname()
     {
-        return $this->identity;
+        return $this->lastname;
+    }
+
+    public function getFirstname()
+    {
+        return $this->firstname;
     }
 }

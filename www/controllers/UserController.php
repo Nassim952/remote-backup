@@ -6,9 +6,9 @@ use cms\models\User;
 use cms\core\View;
 use cms\core\Helpers;
 use cms\managers\UserManager;
+use cms\managers\MovieManager;
 use cms\core\NotFoundException;
 use cms\core\Controller;
-use cms\core\Request;
 use cms\forms\RegisterType;
 use cms\core\Validator;
 
@@ -21,10 +21,6 @@ class UserController extends Controller{
     {
         isset($_POST['email']) ? $this->email = $_POST['email'] : null;
         isset($_POST['password']) ? $this->password = $_POST['password'] : null;
-    }
-
-    public function dashboardAction(){
-        new View("dashboard","back");
     }
 
 	public function landingAction(){
@@ -49,18 +45,19 @@ class UserController extends Controller{
 
     public function signupAction(){
         new View("signup","front");
-        $userManager = new UserManager('user','user');
+        $userManager = new UserManager(User::class,'user');
 
         $configForm  = RegisterType::getForm();
 
         if( $_SERVER["REQUEST_METHOD"] == "POST"){
             //Vérification des champs
-            $errors = Validator::formValidate( $configForm, $_POST );
+            $errors = Validator::formValidate($configForm, $_POST);
             if(!empty($errors)){
                 print_r($errors);
             }elseif(empty($errors)){            
                 $user = new User;
-                $user->setLogin($_POST['lastname']);
+                $user->setLastname($_POST['lastname']);
+                $user->setFirstname($_POST['firstname']);
                 $user->setEmail($_POST['email']);
                 $user->setPassword($_POST['password']);
                 $user->setAllow('customer');
@@ -83,7 +80,7 @@ class UserController extends Controller{
     public function signinAction(){
         new View('signin','front');
 
-        $userManager = new UserManager('user','user');
+        $userManager = new UserManager(User::class,'user');
         $users = $userManager->read();
         
         $userCheck = $userManager->checkLogin($this->email, $this->password, $users);
@@ -94,13 +91,13 @@ class UserController extends Controller{
         }
     }
 
+    public function deleteMovieAction($id){
+        $userManager = new MovieManager(Movie::class, 'movie');
+        $userManager->deleteMovie($id);
+    } 
+
     public function forgetPwdAction(){
         new View("forgetPwd", "account");
-    }
-
-    public function addFilmAction()
-    {
-        new View("addfilm","back");
     }
 
 	public function getUserAction($params)

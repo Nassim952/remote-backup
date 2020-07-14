@@ -1,14 +1,5 @@
 <?php
 
-// function myAutoload($class){
-// 	if(file_exists("core/".$class.".php")){
-// 		include "core/".$class.".php";
-
-// 	}else if(file_exists("models/".$class.".php")){
-// 		include "models/".$class.".php";
-// 	}
-// }
-
 function myAutoload($class)
 {
 	$class = str_replace("cms", "", $class);
@@ -22,7 +13,6 @@ function myAutoload($class)
 	}
 	
 }
-
 spl_autoload_register("myAutoload");
 
 use cms\core\ConstLoader;

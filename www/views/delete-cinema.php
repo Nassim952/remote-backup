@@ -1,20 +1,13 @@
 <head>
-    <title>Cinema</title>
+    <title>Suppression d'un cinema</title>
 </head>
 
 
 <div class="site-content">
     <div id="head-title">
-        <h2 style="font-size:32px;">Cinema</h2>
+        <h2 style="font-size:32px;">Suppression d'un cinema</h2>
     </div>
     <div id="separation-bar"></div>
-    <div class="quick-tools">
-        <div id="space-icons">
-            <a href="<?= cms\core\Helpers::getUrl('Cinema','addCinema') ?>" class="fas fa-plus fa-lg"></a>
-            <a href="<?= \cms\core\Helpers::getUrl("Cinema","editCinema") ?>" class="fas fa-edit fa-lg"></a>
-            <a href="<?= \cms\core\Helpers::getUrl("Cinema","deleteCinema") ?>" class="fas fa-trash-alt fa-lg"></a>
-        </div>
-    </div>
     <div class="lists-film">
         <table class="table-wrapper">
             <tr class="tr-container">
@@ -31,6 +24,12 @@
                     <p id="text-wrappe"><?= $cinema->getName(); ?></p>
                     |
                     <p id="hour-wrappe"><?= $cinema->getPlace(); ?></p>
+                    <form name='delete-cinema' method="POST">
+                        <input	type="hidden" name="id" value="<?= $cinema->getId() ?>">
+                        <div class="icons-wrapper">
+                            <button type="submit" class="fas fa-trash-alt fa-lg"></button>
+                        </div>
+                    </form>
                 </td>
                 <?php endforeach; ?>
             </tr>

@@ -72,7 +72,7 @@ table td:nth-child(odd) {
 }
 
 #space-icons {
-  width: 5%;
+  width: 8%;
   display: flex;
   justify-content: space-between;
 }
