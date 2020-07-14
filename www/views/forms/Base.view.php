@@ -51,7 +51,7 @@ name="<?= $form->getName() ?>"
             <?php endif;?>
             <!---------------TEXT --->
             <?php if($field->getType() == "text"):?>
-              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+              <?php if(!empty($field->getOptions()["label"])):?>
                 <label
                     <?php 
                     if(isset($field->getOptions()['attr_label'])) {
@@ -86,7 +86,7 @@ name="<?= $form->getName() ?>"
 
              <!---------------TIME --->
              <?php if($field->getType() == "time"):?>
-              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+              <?php if(!empty($field->getOptions()["label"])):?>
                 <label
                     <?php 
                     if(isset($field->getOptions()['attr_label'])) {
@@ -121,7 +121,7 @@ name="<?= $form->getName() ?>"
 
             <!---------------SELECT --->
             <?php if($field->getType() == "select"):?>
-              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+              <?php if(!empty($field->getOptions()["label"])):?>
                 <div class="label-password">
                   <label
                       <?php 
@@ -160,7 +160,7 @@ name="<?= $form->getName() ?>"
               
               <!---------------EMAIL --->
             <?php if($field->getType() == "email"):?>
-              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+              <?php if(!empty($field->getOptions()["label"])):?>
                 <div class="label-password">
                   <label
                       <?php 
