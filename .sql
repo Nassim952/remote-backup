@@ -43,19 +43,20 @@ CREATE TABLE IF NOT EXISTS bape_user(
     password VARCHAR(255) NOT NULL,
     statut INT NOT NULL DEFAULT 0,
     allow VARCHAR(255) NOT NULL,
-    token varchar(255) DEFAULT NULL
+    token varchar(255) DEFAULT NULL,
+    verified boolean DEFAULT 0
 );
 
 -- 
 -- Chargement des donnees de la table user
 -- 
 
-INSERT INTO bape_user (lastname, firstname, email, password, statut, allow) VALUES
-('DeSouza', 'Eyram', 'eyram@nearby.com', 'password', 1, 'admin'),
-('Mbiya','Randy', 'randy@nearby.com','password', 1, 'admin'),
-('Mmadi','Nassim','nassim@nearby.com','password', 1, 'admin'),
-('Belatoui', 'Bilal','bilal@nearby.com','password', 1, 'admin'),
-('Mondor', 'Andrew','andrew@nearby.com', 'password', 1, 'admin');
+INSERT INTO bape_user (lastname, firstname, email, password, statut, allow, verified) VALUES
+('DeSouza', 'Eyram', 'eyram@nearby.com', 'password', 1, 'admin',1),
+('Mbiya','Randy', 'randy@nearby.com','password', 1, 'admin',1),
+('Mmadi','Nassim','nassim@nearby.com','password', 1, 'admin',1),
+('Belatoui', 'Bilal','bilal@nearby.com','password', 1, 'admin',1),
+('Mondor', 'Andrew','andrew@nearby.com', 'password', 1, 'admin',1);
 
 
 --

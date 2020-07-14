@@ -11,7 +11,7 @@ class User extends Model implements ModelInterface
     protected $lastname;
     protected $firstname;
     protected $password;
-    protected $verified = false;
+    protected $verified = 0;
     protected $email;
     protected $statut;
     protected $allow;
@@ -68,7 +68,7 @@ class User extends Model implements ModelInterface
 
     public function setVerified($verified)
     {
-        $this->verified = ucfirst($verified);
+        $this->verified = $verified;
     }
 
     public function setToken($token)

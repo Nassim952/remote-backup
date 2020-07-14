@@ -27,36 +27,6 @@ class DashboardController extends Controller
         $this->render("users", "back", ['users' => $users]);
     }
 
-    public function addFilmAction()
-    {
-        $form = $this->createForm(AddFilmType::class);
-        $form->handle();
-
-        if($form->isSubmit() && $form->isValid())
-        {  
-            $movieManager = new MovieManager(Movie::class, 'movie');
-            $movie = new Movie();
-
-            $movie->setTitle($_POST['title']);
-            $movie->setRelease($_POST['date']);
-            $movie->setDuration($_POST['duration']);
-            $movie->setSynopsis($_POST['synopsis']);
-            $movie->setKind($_POST['kind']);
-            $movie->setAge_require($_POST['age']);
-            $movie->setDirector($_POST['director']);
-            $movie->setMain_actor($_POST['actor']);
-            $movie->setNationality($_POST['nationality']);
-            $movie->setMovie_type($_POST['type']);
-            $movie->setImage_url($_POST['image_url']);
-
-            $movieManager->save($movie);
-        }
-
-        $this->render("login", "account", [
-            "configFormUser" => $form
-        ]);
-    }
-
     public function deleteMovieAction(){
         $movieManager = new MovieManager(Movie::class, 'movie');
         $movies = $movieManager->read();

@@ -150,7 +150,6 @@ class DB
                 $sqlUpdate[] = $column."=:".$column;
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id;";
-            echo $sql;
         }
         $this->connection->query($sql, $params);    
     }
