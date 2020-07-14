@@ -30,36 +30,46 @@ class CinemaController extends Controller
 
             $cinemaManager = new cinemaManager(Cinema::class,'cinema');
             $cinemaManager->save($cinema);
+
+            echo "<script>alert('Cinema ajouté avec succès');</script>";
         }
     }
 
-    public function deleteCinemaAction(){
+    public function deleteCinemaAction($id){
+        new View('confirm-page','back');
         $cinemaManager = new cinemaManager(Cinema::class,'cinema');
-        $cinemas = $cinemaManager->read();
 
-        $this->render("delete-cinema", "back", ['cinemas' => $cinemas]);
+        $cinemaManager->delete($id);
+        echo "<script>alert('Cinema supprimé avec succès');</script>";
+    }
 
-        if ( $_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_POST['id'];
+    public function editCinemaAction($id){
+        $cinemaManager = new cinemaManager(Cinema::class,'cinema');
+        $cinema = $cinemaManager->read($id);
 
-            $cinemaManager = new CinemaManager(Cinema::class, 'cinema');
-            $cinemaManager->delete($id);
+        $this->render("edit-cinema", "back", ['myCinema' => $cinema]);
 
-            echo("<meta http-equiv='refresh' content='1'>");
+        if( $_SERVER["REQUEST_METHOD"] == "POST"){
+
+            $cinema = new Cinema();
+
+            $cinema->setId($id);
+            $cinema->setName($_POST['name']);
+            $cinema->setPlace($_POST['city']);
+            $cinema->setNumber_rooms($_POST['number_rooms']);
+            $cinema->setImage_url($_POST['image_url']);
+
+            $cinemaManager->save($cinema);
+
+            echo "<script>alert('Film modifié avec succès');</script>";
         }
     }
 
-    public function editCinemaAction(){
+    public function showCinemaAction($id){
         $cinemaManager = new cinemaManager(Cinema::class,'cinema');
-        $cinemas = $cinemaManager->read();
+        $cinema = $cinemaManager->read($id);
 
-        $this->render("edit-cinema", "back", ['cinemas' => $cinemas]);
-
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $cinema = $cinemaManager->findBy(['id' => $_POST['id']]);
-
-            $this->render('edit-cinema-id','empty', ['cinema' => $cinema]);
-        }
+        $this->render("show-cinema", "back", ['myCinema' => $cinema]);
     }
 
     public function sallesAction(){

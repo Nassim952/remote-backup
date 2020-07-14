@@ -16,7 +16,7 @@ class CinemaManager extends DB{
         {
             $query = (new QueryBuilder())
                 ->select('*')
-                ->from(DB_PREFIXE.'cinema', ' ');
+                ->from(DB_PREFIXE.'cinema', 'c');
             
                 if(isset($id)){
                     $query->where('c.id = :idcinema')

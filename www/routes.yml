@@ -4,10 +4,6 @@
   controller: Dashboard
   action: dashboard
 
-/suppression-film:
-  controller: Dashboard
-  action: deleteMovie
-
 /edition-film:
   controller: Dashboard
   action: editMovie
@@ -77,13 +73,13 @@
   controller: Cinema
   action: editCinema
 
-/edit-cinema-id:
-  controller: Cinema
-  action: editCinemaId
-
 /delete-cinema:
   controller: Cinema
   action: deleteCinema
+
+/show-cinema:
+  controller: Cinema
+  action: showCinema
 
 
 ######## Movie #########

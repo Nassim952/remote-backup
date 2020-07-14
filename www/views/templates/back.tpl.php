@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../../css/salles.css">
     <link rel="stylesheet" href="../../css/addfilm.css">
     <link rel="stylesheet" href="../../css/show-movie.css">
+    <link rel="stylesheet" href="../../css/show-cinema.css">
     <link rel="stylesheet" href="../../css/horraires.css">
     <link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css'>

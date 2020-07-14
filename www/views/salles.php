@@ -8,11 +8,6 @@
         <h2 style="font-size:32px;">Salles</h2>
     </div>
     <div id="separation-bar"></div>
-    <div class="quick-tools">
-        <div id="space-icons">
-            <a href="" class="fas fa-plus fa-lg"></a>
-        </div>
-    </div>
 
     <div class="page_wrapper_flex">
         <?php
@@ -27,7 +22,7 @@
                     <span class="nombre-salle">Nombre de salles :</span>
                     <span class="number-room-info"><?= $cinema_room->getNumber_rooms() ?></span>
                 </div>
-                <a href="#" class="Button">Sélectionner</a>
+                <a href="<?= cms\core\Helpers::getUrl("Cinema","editCinema").'/'.$cinema_room->getId() ?>" class="Button">Editer</a>
             </div>
         <?php endforeach; ?>
     </div>
