@@ -1,0 +1,25 @@
+.show-movie-container
+{
+    display: flex;
+    width: 705px;
+    height: 585px;
+    flex-wrap: wrap;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.show-fit-pic{
+    width: 307px;
+    height: 434px;
+}
+
+.show-title-movie{
+    height: 70px;
+    background-color: #CE0A0B;
+    width: 100%;
+}
+
+.show-title-style{
+    color:white;
+    
+}

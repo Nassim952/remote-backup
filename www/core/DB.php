@@ -62,7 +62,7 @@ class DB
 
     public function findBy(array $params,array $order = null): array
     {
-        $sql = "SELECT email FROM $this->table WHERE ";
+        $sql = "SELECT * FROM $this->table WHERE ";
         // Select * FROM users WHERE firstname LIKE :firstname ORDER BY id desc
 
         foreach($params as $key => $value)
@@ -117,8 +117,9 @@ class DB
         $objectArray =  $objectToSave->__toArray();
 
         $columnsData = array_values($objectArray);
+
         $columns = array_keys($objectArray);
-        
+
         // On met 2 points devant chaque clé du tableau
         $params = [];
         foreach($objectArray as $key => $value)
@@ -132,28 +133,29 @@ class DB
             }
         }
 
+        array_pop($columns);
+        array_pop($params);
+
         if (!is_numeric($objectToSave->getId())) {
+
+            //remove the last array index [class] 
             array_shift($columns);
             array_shift($params);
 
-            // retire le dernier index identity
-            array_pop($columns);
-            array_pop($params);
-            
             //INSERT
             $sql = "INSERT INTO ".$this->table." (".implode(",", $columns).") VALUES (:".implode(",:", $columns).");";
-            //foreach()
         } else {
             //UPDATE
             foreach ($columns as $column) {
                 $sqlUpdate[] = $column."=:".$column;
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id;";
+            echo $sql;
         }
         $this->connection->query($sql, $params);    
     }
 
-    public function delete(int $id): bool
+    public function delete($id)
     {
         $sql = "DELETE FROM $this->table where id = :id";
         $this->connection->query($sql, [':id' => $id]);

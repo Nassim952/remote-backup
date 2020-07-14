@@ -1,8 +1,8 @@
 <?php
 
-namespace www\models;
+namespace cms\models;
 
-use www\core\Model;
+use cms\core\Model;
 
 class Room extends Model
 {
