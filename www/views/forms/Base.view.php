@@ -156,7 +156,6 @@ name="<?= $form->getName() ?>"
                     <option value="<?= $key?>"> <?=$option?></option>
                   <?php endforeach;?> 
                 </select>
-              </div>
             <?php endif;?> 
               
               <!---------------EMAIL --->
