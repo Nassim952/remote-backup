@@ -4,16 +4,18 @@ namespace cms\forms;
 
 use cms\forms;
 
+use cms\core\Helpers;
+use cms\core\Constraints\Length;
+use cms\core\Constraints\Password;
 use cms\core\Form;
-use cms\core\Helper;
 
 
 class AddFilmType extends Form {
     
-    public static function initForm()
+    public function initForm()
     {
         return $this->builder
-                ->add("name", "text", [
+                ->add("title", "text", [
                     "attr"=>[
                         "placeholder"=>"Nom de la page",
                         "id"=>"title",
@@ -24,10 +26,10 @@ class AddFilmType extends Form {
                         new Length(2,50, 'Le nom de la page doit faire entre 2 et 200 caractères')
                     ]
                 ])
-                ->add("content", "select", [
+                ->add("content_size", "select", [
                     "attr"=>[
                         "placeholder"=>"Taille du contenu",
-                        "id"=>"content",
+                        "id"=>"content_size",
                         "class"=>"input-form"
                     ],
                     "required"=>true,
@@ -40,10 +42,10 @@ class AddFilmType extends Form {
                         "col-12"=>"12 colonnes"
                     ]
                 ])
-                ->add("bg-color", "select", [
+                ->add("background_color", "select", [
                     "attr"=>[
                         "placeholder"=>"Couleur du fond",
-                        "id"=>"bg-color",
+                        "id"=>"background_color",
                         "class"=>"input-form"
                     ],
                     "required"=>true,
@@ -86,12 +88,12 @@ class AddFilmType extends Form {
     public function configureOptions(): void
     {
         $this
-            ->addConfig('class', Page::class)
+            ->addConfig('class', User::class)
             ->setName('AddPage')
             ->addConfig('attr', [
                 "method" => "POST",
-                "id"=>"formAddPage",
-                "class"=>"page",
+                "id"=>"formLoginUser",
+                "class"=>"user",
             ]);
     }
 }

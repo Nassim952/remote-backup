@@ -8,8 +8,6 @@
     </div>
     <div id="separation-bar"></div>
     <div class=form-addpage>
-        <form action="" class=add-page>
-
-        </form>
+            <?php $this->formView('configFormUser')?>
     </div>
 </div>

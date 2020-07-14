@@ -28,9 +28,13 @@
   controller: Dashboard
   action: horraires
 
-/addFilm:
+/addfilm:
   controller: Dashboard
   action: addFilm
+
+/addpage:
+  controller: Dashboard
+  action: addPage
 
 ############ User ############
 
@@ -76,10 +80,6 @@
 /edit-cinema:
   controller: Cinema
   action: editCinema
-
-/addpage:
-  controller: User
-  action: addpage
 
 /horraires:
   controller: Dashboard

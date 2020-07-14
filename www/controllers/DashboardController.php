@@ -84,6 +84,32 @@ class DashboardController extends Controller
         }
     }
 
+    public function addPageAction()
+    {
+        $form = $this->createForm(AddPageType::class);
+        $form->handle();
+
+        if($form->isSubmit() && $form->isValid())
+        {  
+            $pageManager = new PageManager(Page::class, 'page');
+            $page = new Page();
+
+            $page->setTitle($_POST[$form->getName().'_title']);
+            $page->setBackgroundColor($_POST[$form->getName().'_background_color']);
+            $page->setContentSize($_POST[$form->getName().'_content_size']);
+            $page->setFont($_POST[$form->getName().'_font']);
+            $page->setFontColor($_POST[$form->getName().'_font-color']);
+
+            $pageManager->save($page);
+
+            echo "<script>alert('Page crée avec succès');</script>";
+        }
+
+        $this->render("addpage", "back", [
+            "configFormUser" => $form
+        ]);
+    }
+
     public function statAction(){
         new View("stat","back");
     }

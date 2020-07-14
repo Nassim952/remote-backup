@@ -65,6 +65,22 @@ class Page extends Model
         $this->background_image = $background_image;
     }
 
+    public function setBackgroundColor($background_color){
+        $this->background_color = $background_color;
+    }
+    
+    public function setFont($font){
+        $this->font = $font;
+    }
+
+    public function setFontColor($font_color){
+        $this->font = $font_color;
+    }
+
+    public function setContentSize($content_size){
+        $this->content_size = $content_size;
+    }
+
 //GETTERS
 
     public function getId()
@@ -94,5 +110,21 @@ class Page extends Model
 
     public function getBackground(){
         return $this->background_image;
+    }
+
+    public function getBackgroundColor(){
+        return $this->background_color;
+    }
+    
+    public function getFont(){
+        return $this->font;
+    }
+
+    public function getFontColor(){
+        return $this->font;
+    }
+
+    public function getContentSize(){
+        return $this->content_size;
     }
 }
