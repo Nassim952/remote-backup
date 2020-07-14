@@ -4,6 +4,7 @@ namespace cms\models;
 
 use cms\core\Model;
 use cms\core\ModelInterface;
+use cms\managers\PageManager;
 
 class Page extends Model implements ModelInterface
 {

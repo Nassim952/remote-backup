@@ -1,4 +1,23 @@
-<?php
+<head>
+    <title>Pages</title>
+</head>
+
+
+<div class="site-content">
+    <div id="head-title">
+        <h2 style="font-size:32px;">Pages</h2>
+    </div>
+    <div id="separation-bar"></div>
+    <div class="quick-tools">
+        <div id="space-icons">
+            <a href="<?= cms\core\Helpers::getUrl('Page','addPage') ?>" class="fas fa-plus fa-lg"></a>
+            <a href="<?= \cms\core\Helpers::getUrl("Page","editPage") ?>" class="fas fa-edit fa-lg"></a>
+            <a href="<?= \cms\core\Helpers::getUrl("Page","deletePage") ?>" class="fas fa-trash-alt fa-lg"></a>
+        </div>
+    </div>
+    <div class="lists-film">
+        <table class="table-wrapper">
+            <tr class="tr-container"><?php
 
     foreach($pages as $page):
         // var_dump($page);

@@ -4,6 +4,7 @@ namespace cms\models;
 
 use cms\core\Model;
 use cms\core\ModelInterface;
+use cms\managers\ComponentManager;
 
 class Component extends Model implements ModelInterface
 { 
@@ -20,7 +21,11 @@ class Component extends Model implements ModelInterface
         
         ];
     }
+    public function delete($id){
+        $componentManager = new componentManager(Component::class, 'component');
 
+        $componentManager->deleteComponent($id);
+    }
     //SETTERS
 
     public function setId($id)

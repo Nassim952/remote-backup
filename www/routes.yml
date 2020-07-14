@@ -89,13 +89,19 @@
   controller: Comment
   action: comment
 
-/delete-comment:
+/ajout-commentaire:
+  controller: Comment
+  action: addComment
+
+/delete-commentaire:
   controller: Comment
   action: deleteComment
 
-/edition-Comment:
+/edition-commentaire:
   controller: Comment
   action: editComment
+
+  
 
 
 ########### page.php #############
@@ -103,6 +109,10 @@
 /pages:
   controller: Page
   action: Page
+
+/ajout-page:
+  controller: Page
+  action: addPage
 
 /delete-page:
   controller: Page
@@ -118,6 +128,10 @@
 /components:
   controller: component
   action: component
+
+/ajout-component:
+    controller: Component
+    action: addComponent
 
 /delete-component:
   controller: Component
