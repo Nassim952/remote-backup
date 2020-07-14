@@ -93,9 +93,14 @@
   controller: Comment
   action: deleteComment
 
-  ########### page.php #############
+########### page.php #############
 
 /pages:
   controller: page
   action: page
 
+########### Component.php #############
+
+/components:
+  controller: component
+  action: component

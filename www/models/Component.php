@@ -55,24 +55,34 @@ class Component extends Model implements ModelInterface
 
 //GETTERS
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle()
+    public function getTitle()	
     {
        return $this->title;
     }
 
     public function getClass()
     {
-        return $this->title;
+        return $this->class;
     }
 
     public function getPassword($type)
     {
         return $this->type;
+    }
+
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    public function getData()
+    {
+        return $this->data;
     }
 
     public function getStyle($style)
