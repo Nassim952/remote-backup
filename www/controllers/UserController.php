@@ -49,8 +49,10 @@ class UserController extends Controller{
         new View("signup","front");
         $userManager = new UserManager(User::class,'user');
 
-        $configForm  = RegisterType::getForm();
-
+        $registerForm  = new RegisterType();
+        
+        $configForm = $registerForm->initForm();
+        
         if( $_SERVER["REQUEST_METHOD"] == "POST"){
             //Vérification des champs
             $errors = Validator::formValidate($configForm, $_POST);

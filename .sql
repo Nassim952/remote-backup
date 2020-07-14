@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS bape_user(
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     statut INT NOT NULL DEFAULT 0,
-    allow VARCHAR(255) NOT NULL
-    token varchar(255) DEFAULT NULL,
+    allow VARCHAR(255) NOT NULL,
+    token varchar(255) DEFAULT NULL
 );
 
 -- 
