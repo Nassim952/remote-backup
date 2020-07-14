@@ -18,9 +18,6 @@ spl_autoload_register("myAutoload");
 use cms\core\ConstLoader;
 
 new ConstLoader();
-// $test= $_ENV["HOST_DB"];
-// var_dump($test);
-//  print_r(get_defined_constants(true));
 
 $uri = $_SERVER["REQUEST_URI"];
 
