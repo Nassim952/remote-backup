@@ -34,19 +34,23 @@ name="<?= $form->getName() ?>"
             <?php if($field->getType() == "submit"):?>
               <div class="button_wrapper">
 							
-                <input
+              <input 
+                value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
+                type="submit"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
                 <?php 
-                  if(isset($field->getOptions()['attr'])) {
-                    foreach($field->getOptions()['attr'] as $attr => $value)
-                      {
-                        echo "$attr = '$value' ";
-                      }
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
                     }
-                    ?>
-                >
-                  
-                <?= $field->getOptions()["label"]??'' ?>
-                  </input>
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
+                <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+                </input>
             </div>
             <?php endif;?>
             <!---------------TEXT --->
@@ -115,8 +119,7 @@ name="<?= $form->getName() ?>"
                 
                 <?=(!empty($field->getOptions()["required"]))?"required='required'":''?>
                 <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
-                Synospsis
-                </textarea>
+              </textarea>
             <?php endif;?>  
 
              <!---------------TIME --->

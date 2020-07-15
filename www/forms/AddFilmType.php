@@ -136,7 +136,7 @@
                 'attr' => [
                     'value'=>'Ajouter le film',
                     'id'=>'add-film',
-                    'class' => 'button',
+                    'class' => 'input-form submit-addfilm',
                 ]
             ]);
                 return $this;
@@ -150,7 +150,7 @@
                 ->addConfig('attr', [
                     "method" => "POST",
                     "id"=>"formLoginUser",
-                    "class"=>"user",
+                    "class"=>"add-film",
                 ]);
         }
     }

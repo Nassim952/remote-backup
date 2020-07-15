@@ -87,6 +87,7 @@ class AddPageType extends Form {
                         'class' => 'input-form submit-addfilm',
                     ]   
                 ]);
+                return $this;
     }
 
     public function configureOptions(): void

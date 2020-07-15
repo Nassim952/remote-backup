@@ -49,16 +49,12 @@ class Page extends Model
         $this->gabarit = $gabarit;
     }
 
-    public function setDate($creation_date){
+    public function setCreationDate($creation_date){
         $this->creation_date = $creation_date;
     }
 
     public function setTheme($theme){
         $this->theme = $theme;
-    }
-
-    public function setBackgroundColor($background_color){
-        $this->background_color = $background_color;
     }
     
     public function setFont($font){
