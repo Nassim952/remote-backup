@@ -84,6 +84,41 @@ name="<?= $form->getName() ?>"
                 </input>
             <?php endif;?>  
 
+            <!---------------TEXTAREA --->
+            <?php if($field->getType() == "textarea"):?>
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <label
+                    <?php 
+                    if(isset($field->getOptions()['attr_label'])) {
+                      foreach($field->getOptions()['attr_label'] as $attr => $value)
+                        {
+                          echo "$attr = '$value' ";
+                        }
+                    }
+                    
+                      ?>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+              <?php endif ?> 
+              
+              <textarea 
+                value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?>
+                <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+                Synospsis
+                </textarea>
+            <?php endif;?>  
+
              <!---------------TIME --->
              <?php if($field->getType() == "time"):?>
               <?php if(!empty($field->getOptions()["label"]) == "select"):?>
@@ -117,7 +152,42 @@ name="<?= $form->getName() ?>"
                 <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
                 <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
                 </input>
-            <?php endif;?>  
+            <?php endif;?> 
+            
+            <!---------------DATE --->
+            <?php if($field->getType() == "date"):?>
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <label
+                    <?php 
+                    if(isset($field->getOptions()['attr_label'])) {
+                      foreach($field->getOptions()['attr_label'] as $attr => $value)
+                        {
+                          echo "$attr = '$value' ";
+                        }
+                    }
+                    
+                      ?>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+              <?php endif ?> 
+              
+              <input 
+                value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
+                type="date"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
+                <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+                </input>
+            <?php endif;?> 
 
             <!---------------SELECT --->
             <?php if($field->getType() == "select"):?>

@@ -33,7 +33,11 @@
             </div>
             <div class="name-container">
                 <span id="dot"></span>
+<<<<<<< HEAD
+                <p></p>
+=======
                 <p><?=ucFirst($_SESSION['user']->getFirstname());?></p>
+>>>>>>> 0a3d178781113fbabbd5ab4e98bd25f2dd05ea28
             </div>
             <div class="nav-content">
                 <h2 id="text-submenu-fixer">Gestion film</h2>

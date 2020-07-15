@@ -16,10 +16,6 @@
   controller: Dashboard
   action: stat
 
-/ajout-film:
-  controller: Dashboard
-  action: addFilm
-
 /users:
   controller: Dashboard
   action: users

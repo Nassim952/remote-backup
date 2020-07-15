@@ -20,7 +20,7 @@ class ConstLoader{
         //.dev ou .prod
         $this->text = trim(file_get_contents(".".$this->extend));
         //.env
-        $this->text .= "\r\n".trim(file_get_contents(".env"));
+        $this->text .= "\n".trim(file_get_contents(".env"));
     }
 
     public function checkFiles(){
@@ -33,12 +33,13 @@ class ConstLoader{
     }
 
     public function load(){
-        $lines = explode("\n",$this->text);
+        $lines = explode("\n", $this->text);
         foreach ($lines as $line) {
-            $data = explode ("=", $line);
-            if(!defined($data[0]) && isset($data[1])){
-                define($data[0], $data[1]);
+            $data = explode("=", $line);
+                if (!defined($data[0]) && isset($data[1])) {
+                define($data[0], ($data[1]));
             }
         }
     }
+    
 }

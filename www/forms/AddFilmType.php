@@ -31,7 +31,7 @@
                 ],
                 'required'=>true,
             ])
-            ->add('genre', 'select', [
+            ->add('kind', 'select', [
                 'attr'=>[
                     'placeholder'=>'Genre',
                     'id'=>'genre',
@@ -60,18 +60,18 @@
                     '-18'=>'-18'
                 ],
             ])
-            ->add('duration', 'time', [
+            ->add('date', 'date', [
                 'attr'=>[
-                    'placeholder'=>'Durée du film',
-                    'id'=>'duration',
+                    'placeholder'=>'Date de sortie du film',
+                    'id'=>'date',
                     'class'=>'input-form'
                 ],
                 'required'=>true,
             ])
-            ->add('real', 'text', [
+            ->add('director', 'text', [
                 'attr'=>[
                     'placeholder'=>'Réalisateur',
-                    'id'=>'real',
+                    'id'=>'director',
                     'class'=>'input-form'
                 ],
                 'required'=>true,
@@ -103,13 +103,41 @@
                     'es'=>'Espagne'
                 ],
             ])
-            ->add('poster', 'url', [
+            ->add('type', 'select', [
                 'attr'=>[
-                    'placeholder'=>'Affiche du film',
-                    'id'=>'poster',
+                    'placeholder'=>'Type',
+                    'id'=>'type',
                     'class'=>'input-form'
                 ],
                 'required'=>true,
+                'options'=>[
+                    'lm'=>'Long metrage', 
+                    'cm'=>'Court metrage'
+                ],
+            ])
+            ->add('image_url', 'url', [
+                'attr'=>[
+                    'placeholder'=>'Affiche du film',
+                    'id'=>'image_url',
+                    'class'=>'input-form'
+                ],
+                'required'=>true,
+            ])
+            ->add('synopsis', 'textarea', [
+                'attr'=>[
+                    'placeholder'=>'Synopsis',
+                    'id'=>'synopsis',
+                    'class'=>'input-form',
+                    'rows'=>'600'
+                ],
+                'required'=>true,
+            ])
+            ->add('add-film', 'submit', [
+                'attr' => [
+                    'value'=>'Ajouter le film',
+                    'id'=>'add-film',
+                    'class' => 'button',
+                ]
             ]);
                 return $this;
         }
@@ -118,7 +146,7 @@
         {
             $this
                 ->addConfig('class', User::class)
-                ->setName('Login')
+                ->setName('AddFilm')
                 ->addConfig('attr', [
                     "method" => "POST",
                     "id"=>"formLoginUser",
