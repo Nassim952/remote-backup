@@ -75,7 +75,7 @@ class MovieController extends Controller
             $movie->setMain_actor($_POST['actor']);
             $movie->setNationality($_POST['nationality']);
             $movie->setMovie_type($_POST['type']);
-            $movie->setImage_url($_POST['image_url']);
+            $movie->setImage_poster($_POST['image_url']);
 
             $movieManager->save($movie);
 

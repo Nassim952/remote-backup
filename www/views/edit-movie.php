@@ -59,7 +59,7 @@
                 </div>
                 <div class="flex-form-content-right">
                 <label>Lien image url</label>
-                    <input class="input-form affiche" type="url" value="<?= $myMovie->getImage_url() ?>" name="image_url" id="poster" placeholder="url image"></input>
+                    <input class="input-form affiche" type="file" value="<?= $myMovie->getImage_poster() ?>" name="image_url" id="poster" placeholder="url image"></input>
                 </div>
             </div>
             <label>Synopsis</label>

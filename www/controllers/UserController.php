@@ -130,6 +130,12 @@ class UserController extends Controller{
         new View("forgetPwd", "account");
     }
 
+
+    public function addPageAction()
+    {
+        new view("addpage","back");
+    }
+
 	public function getUserAction($params)
     {
         $userManager = new UserManager('user', 'user');

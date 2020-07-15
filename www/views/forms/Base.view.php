@@ -21,8 +21,6 @@ name="<?= $form->getName() ?>"
          
         }
       }
-
-      echo "<br><br>";
 ?>
 
 
@@ -34,19 +32,22 @@ name="<?= $form->getName() ?>"
             <?php if($field->getType() == "submit"):?>
               <div class="button_wrapper">
 							
-                <button
+              <input 
+                type="submit"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
                 <?php 
-                  if(isset($field->getOptions()['attr'])) {
-                    foreach($field->getOptions()['attr'] as $attr => $value)
-                      {
-                        echo "$attr = '$value' ";
-                      }
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
                     }
-                    ?>
-                >
-                  
-                <?= $field->getOptions()["label"]??'' ?>
-              </button>
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
+                <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+                </input>
             </div>
             <?php endif;?>
             <!---------------TEXT --->
@@ -62,7 +63,7 @@ name="<?= $form->getName() ?>"
                     }
                     
                       ?>
-                ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?></label>
               <?php endif ?> 
               
               <input 
@@ -84,6 +85,73 @@ name="<?= $form->getName() ?>"
                 </input>
             <?php endif;?>  
 
+            <!---------------FILE --->
+            <?php if($field->getType() == "file"):?>
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <label
+                    <?php 
+                    if(isset($field->getOptions()['attr_label'])) {
+                      foreach($field->getOptions()['attr_label'] as $attr => $value)
+                        {
+                          echo "$attr = '$value' ";
+                        }
+                    }
+                    
+                      ?>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?></label>
+              <?php endif ?> 
+              
+              <input 
+                type="file"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?>> 
+                </input>
+            <?php endif;?>
+
+            <!---------------TEXTAREA --->
+            <?php if($field->getType() == "textarea"):?>
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <label
+                    <?php 
+                    if(isset($field->getOptions()['attr_label'])) {
+                      foreach($field->getOptions()['attr_label'] as $attr => $value)
+                        {
+                          echo "$attr = '$value' ";
+                        }
+                    }
+                    
+                      ?>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?> </label>
+              <?php endif ?> 
+              
+              <textarea 
+                value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?>
+                <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+              </textarea>
+            <?php endif;?>  
+
              <!---------------TIME --->
              <?php if($field->getType() == "time"):?>
               <?php if(!empty($field->getOptions()["label"])):?>
@@ -97,7 +165,7 @@ name="<?= $form->getName() ?>"
                     }
                     
                       ?>
-                ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?> </label>
               <?php endif ?> 
               
               <input 
@@ -117,7 +185,42 @@ name="<?= $form->getName() ?>"
                 <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
                 <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
                 </input>
-            <?php endif;?>  
+            <?php endif;?> 
+            
+            <!---------------DATE --->
+            <?php if($field->getType() == "date"):?>
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <label
+                    <?php 
+                    if(isset($field->getOptions()['attr_label'])) {
+                      foreach($field->getOptions()['attr_label'] as $attr => $value)
+                        {
+                          echo "$attr = '$value' ";
+                        }
+                    }
+                    
+                      ?>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?> </label>
+              <?php endif ?> 
+              
+              <input 
+                value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
+                type="date"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
+                <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+                </input>
+            <?php endif;?> 
 
             <!---------------SELECT --->
             <?php if($field->getType() == "select"):?>
@@ -133,7 +236,7 @@ name="<?= $form->getName() ?>"
                       }
                       
                         ?>
-                  ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+                  ><?= (!empty($field->getOptions()["label"]))?'':''?> </label>
                 <?php endif;?>
               
                 <select 
@@ -172,7 +275,7 @@ name="<?= $form->getName() ?>"
                       }
                       
                         ?>
-                  ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+                  ><?= (!empty($field->getOptions()["label"]))?'':''?> </label>
               <?php endif;?>  
                 
                 <input 
@@ -205,7 +308,38 @@ name="<?= $form->getName() ?>"
                   }
                   
                     ?>
-              ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+              ><?= (!empty($field->getOptions()["label"]))?'':''?> </label>
+              
+              
+              <input 
+                value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
+                type="password"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
+                <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+                <?php endif;?>
+            <!---------------CONFIRM PASSWORD --->
+            <?php if($field->getType() == "confirmPassword"):?>
+              <label
+                  <?php 
+                  if(isset($field->getOptions()['attr_label'])) {
+                    foreach($field->getOptions()['attr_label'] as $attr => $value)
+                      {
+                        echo "$attr = '$value' ";
+                      }
+                  }
+                  
+                    ?>
+              ><?= (!empty($field->getOptions()["label"]))?'':''?> </label>
               
               
               <input 
@@ -225,12 +359,10 @@ name="<?= $form->getName() ?>"
                 <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
                 <div class="label-password">
                     <input type="checkbox"/>
-                    <span style="margin-right: 30%; padding: 9px;">Se souvenir de moi</span>
-                    <span>Mot de passe oublié ?</span>
-                  </div>
-                <?php endif;?>  
-              
+                </div>
+                <?php endif;?>
           </div>
       </div>
       <?php endforeach;?>
+      <!-- <span>Mot de passe oublié ?</span> -->
 </form>

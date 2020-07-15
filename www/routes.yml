@@ -20,6 +20,14 @@
   controller: Dashboard
   action: horraires
 
+/addfilm:
+  controller: Dashboard
+  action: addFilm
+
+/addpage:
+  controller: Dashboard
+  action: addPage
+
 ############ User ############
 
 /:
@@ -37,6 +45,10 @@
 /login:
   controller: User
   action: login
+
+/register:
+  controller: User
+  action: register
 
 /home:
   controller: User
@@ -73,6 +85,10 @@
   controller: Cinema
   action: editCinema
 
+/horraires:
+  controller: Dashboard
+  action: horraires
+
 /delete-cinema:
   controller: Cinema
   action: deleteCinema
@@ -83,10 +99,6 @@
 
 
 ######## Movie #########
-
-/ajout-film:
-  controller: Movie
-  action: addFilm
 
 /show-movie:
   controller: Movie
@@ -123,10 +135,6 @@
 /pages:
   controller: Page
   action: Page
-
-/ajout-page:
-  controller: Page
-  action: addPage
 
 /delete-page:
   controller: Page

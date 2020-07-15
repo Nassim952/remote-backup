@@ -31,7 +31,7 @@
                 ],
                 'required'=>true,
             ])
-            ->add('genre', 'select', [
+            ->add('kind', 'select', [
                 'attr'=>[
                     'placeholder'=>'Genre',
                     'id'=>'genre',
@@ -39,11 +39,11 @@
                 ],
                 'required'=>true,
                 'options'=>[
-                    'action'=>'Action', 
-                    'aventure'=>'Aventure', 
-                    'horreur'=>'Horreur', 
-                    'animation'=>'Animation', 
-                    'comedie'=>'Comedie'
+                    'Action'=>'Action', 
+                    'Aventure'=>'Aventure', 
+                    'Horreur'=>'Horreur', 
+                    'Animation'=>'Animation', 
+                    'Comedie'=>'Comedie'
                 ],
             ])
             ->add('age', 'select', [
@@ -60,18 +60,18 @@
                     '-18'=>'-18'
                 ],
             ])
-            ->add('duration', 'time', [
+            ->add('date', 'date', [
                 'attr'=>[
-                    'placeholder'=>'Durée du film',
-                    'id'=>'duration',
+                    'placeholder'=>'Date de sortie du film',
+                    'id'=>'date',
                     'class'=>'input-form'
                 ],
                 'required'=>true,
             ])
-            ->add('real', 'text', [
+            ->add('director', 'text', [
                 'attr'=>[
                     'placeholder'=>'Réalisateur',
-                    'id'=>'real',
+                    'id'=>'director',
                     'class'=>'input-form'
                 ],
                 'required'=>true,
@@ -98,20 +98,48 @@
                 ],
                 'required'=>true,
                 'options'=>[
-                    'fr'=>'France', 
-                    'usa'=>'Etat-Unis', 
-                    'es'=>'Espagne'
+                    'France'=>'France', 
+                    'Etats-Unis'=>'Etat-Unis', 
+                    'Espagne'=>'Espagne',
+                    'Japon'=>'Japon'
                 ],
             ])
-            ->add('poster', 'url', [
+            ->add('type', 'select', [
                 'attr'=>[
-                    'placeholder'=>'Affiche du film',
-                    'id'=>'poster',
+                    'placeholder'=>'Type',
+                    'id'=>'type',
                     'class'=>'input-form'
                 ],
                 'required'=>true,
+                'options'=>[
+                    'long-metrage'=>'Long metrage', 
+                    'court-metrage'=>'Court metrage'
+                ],
+            ])
+            ->add('image', 'file', [
+                'attr'=>[
+                    'id'=>'image',
+                    'class'=>'input-form',
+                    'accept'=>'image/png, image/jpeg'
+                ],
+                'required'=>true,
+            ])
+            ->add('synopsis', 'textarea', [
+                'attr'=>[
+                    'placeholder'=>'Synopsis',
+                    'id'=>'synopsis',
+                    'class'=>'input-form',
+                    'rows'=>'600'
+                ],
+                'required'=>true,
+            ])
+            ->add('add-film', 'submit', [
+                'attr' => [
+                    'value'=>'Ajouter le film',
+                    'id'=>'add-film',
+                    'class' => 'input-form submit-addfilm',
+                ]
             ]);
-    
                 return $this;
         }
     
@@ -119,11 +147,12 @@
         {
             $this
                 ->addConfig('class', User::class)
-                ->setName('Login')
+                ->setName('AddFilm')
                 ->addConfig('attr', [
                     "method" => "POST",
                     "id"=>"formLoginUser",
-                    "class"=>"user",
+                    "class"=>"add-film",
+                    "enctype"=>"multipart/form-data"
                 ]);
         }
     }

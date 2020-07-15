@@ -46,6 +46,12 @@
                             <a href="<?=\cms\core\Helpers::getUrl("Dashboard", "dashboard")?>" id="text-white"><span>Films</span></a>
                         </div>
                     </div>
+                    <div class="sidebar-sub-headers">
+                        <div class="fas fa-film fa-lg"></div>
+                        <div id="submenu-wrapper">
+                            <a href="<?=\cms\core\Helpers::getUrl("Dashboard", "addPage")?>" id="text-white"><span>Pages</span></a>
+                        </div>
+                    </div>
                 </div>
                 <h2 id="text-submenu-fixer">Diffusion</h2>
                 <div class="dashboard-menu">

@@ -47,7 +47,7 @@ class RegisterType extends Form {
                 "errorMsg"=>"Votre mot de passe doit faire entre 6 et 20 caractères avec une minuscule et une majuscule",
                 "label"=>"Mot de passe"
             ])
-            ->add("pwdConfirm", "password", [
+            ->add("pwdConfirm", "confirmPassword", [
                 "placeholder"=>"Confirmation",
                 "class"=>"form-control form-control-user",
                 "id"=>"",
@@ -143,7 +143,7 @@ class RegisterType extends Form {
             ->setName('Register')
             ->addConfig('attr', [
                 "id"=>"formRegisterUser",
-                "class"=>"user",
+                "class"=>"user col-sm-4",
             ]);
     }
 }

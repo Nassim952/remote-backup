@@ -19,7 +19,7 @@ foreach($myMovie as $movie): ?>
     </div>
     <div class="show-desc-container">
         <div class='show-left-img'>
-            <img class="show-fit-pic" src="<?= $movie->getImage_url() ?>"></img>
+            <img class="show-fit-pic" src="../public/images/<?= $movie->getImage_poster() ?>"></img>
         </div>
         <div class="show-right-desc">
             <div class="show-sub-wrapper">

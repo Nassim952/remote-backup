@@ -94,9 +94,9 @@ CREATE TABLE IF NOT EXISTS bape_page(
     title VARCHAR(100),
     gabarit INT NOT NULL,
     creation_date TIMESTAMP,
-    theme INT,
-    background_image INT,
-    FOREIGN KEY (background_image) REFERENCES bape_image(id) ON DELETE CASCADE
+    theme VARCHAR(100),
+    font VARCHAR(100),
+    font_color VARCHAR(100)
 );
 
 --
@@ -175,7 +175,7 @@ CREATE TABLE IF NOT EXISTS bape_movie(
     movie_type VARCHAR(255),
     release_date VARCHAR(255),
     duration TIME,
-    image_url VARCHAR(255),
+    image_poster VARCHAR(255),
     synopsis TEXT
 );
 
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS bape_movie(
 -- Chargement des donnees de la table movie
 -- 
 
-INSERT INTO bape_movie (title, release_date, duration, kind, age_require, director, main_actor, nationality, movie_type, image_url, synopsis) VALUES
+INSERT INTO bape_movie (title, release_date, duration, kind, age_require, director, main_actor, nationality, movie_type, image_poster, synopsis) VALUES
 ('Spider-Man New Generation', '2021-01-06', '03:02', 'Action', 12, 'Sam Raimi', 'Miles Morales', 'American', 'Animation', 'https://fr.web.img6.acsta.net/pictures/18/11/13/11/42/1696141.jpg', 'Spider-Man : New Generation suit les aventures de Miles Morales, un adolescent afro-americain et portoricain qui vit à Brooklyn et s’efforce de s’integrer dans son nouveau college à Manhattan.'),
 ('Bad Boys For Life', '2022-01-02', '02:04','Action', 16, 'Bilal Fallah','Will Smith','American','Long-metrage','https://fr.web.img6.acsta.net/pictures/19/11/22/09/44/3027567.jpg', 'Si Mike Lowrey est un seducteur invetere, heritier dune fortune et policier par passion, son collegue et ami Marcus Burnett est un homme range, marie et pere de famille..'),
 ('Suicide Squad', '2020-01-02', '02:03','Action', 16, 'David Ayer','Will Smith','American','Long-metrage','https://images-na.ssl-images-amazon.com/images/I/A1gFCETVqVL._AC_SL1500_.jpg', 'Cest tellement jouissif dêtre un salopard ! Face à une menace aussi enigmatique quinvincible, lagent secret Amanda Waller reunit une armada de crapules de la pire espece.'),

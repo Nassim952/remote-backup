@@ -19,7 +19,7 @@ class Movie extends Model implements ModelInterface
     protected $main_actor;
     protected $nationality;
     protected $movie_type;
-    protected $image_url;
+    protected $image_poster;
 
     public function initRelation(): array {
         return [
@@ -192,9 +192,9 @@ class Movie extends Model implements ModelInterface
     /**
      * Get the value of image_url
      */ 
-    public function getImage_url()
+    public function getImage_poster()
     {
-        return $this->image_url;
+        return $this->image_poster;
     }
 
     /**
@@ -202,9 +202,9 @@ class Movie extends Model implements ModelInterface
      *
      * @returnself
      */ 
-    public function setImage_url($image_url)
+    public function setImage_poster($image_poster)
     {
-        $this->image_url = $image_url;
+        $this->image_poster = $image_poster;
 
         return $this;
     }
