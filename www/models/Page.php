@@ -45,10 +45,6 @@ class Page extends Model
         $this->title = $title;
     }
 
-    public function setPassword(string $type){
-        $this->type = $type;
-    }
-
     public function setGabarit($gabarit){
         $this->gabarit = $gabarit;
     }
@@ -59,10 +55,6 @@ class Page extends Model
 
     public function setTheme($theme){
         $this->theme = $theme;
-    }
-
-    public function setBackground($background_image){
-        $this->background_image = $background_image;
     }
 
     public function setBackgroundColor($background_color){
@@ -77,10 +69,6 @@ class Page extends Model
         $this->font = $font_color;
     }
 
-    public function setContentSize($content_size){
-        $this->content_size = $content_size;
-    }
-
 //GETTERS
 
     public function getId()
@@ -92,12 +80,8 @@ class Page extends Model
         return $this->title;
     }
 
-    public function getPassword(){
-        return $this->type;
-    }
-
     public function getGabarit(){
-        return $this->gabarit = $gabarit;
+        return $this->gabarit;
     }
 
     public function getDate(){
@@ -110,10 +94,6 @@ class Page extends Model
 
     public function getBackground(){
         return $this->background_image;
-    }
-
-    public function getBackgroundColor(){
-        return $this->background_color;
     }
     
     public function getFont(){

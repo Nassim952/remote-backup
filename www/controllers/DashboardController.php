@@ -5,7 +5,7 @@ namespace cms\controllers;
 use cms\managers\MovieManager;
 use cms\core\Controller;
 use cms\core\View;
-use cms\forms\AddFilmType;
+use cms\forms\AddPageType;
 use cms\managers\UserManager;
 use cms\models\Movie;
 use cms\models\User;
@@ -95,8 +95,8 @@ class DashboardController extends Controller
             $page = new Page();
 
             $page->setTitle($_POST[$form->getName().'_title']);
-            $page->setBackgroundColor($_POST[$form->getName().'_background_color']);
-            $page->setContentSize($_POST[$form->getName().'_content_size']);
+            $page->setTheme($_POST[$form->getName().'_theme']);
+            $page->setGabarit($_POST[$form->getName().'_gabarit']);
             $page->setFont($_POST[$form->getName().'_font']);
             $page->setFontColor($_POST[$form->getName().'_font-color']);
 

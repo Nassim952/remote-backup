@@ -3,7 +3,8 @@
 }
 
 .input-form{
-    height: 50px;
+    height: 40px;
+    width: 500px;
     border-radius: 10px;
     border: none;
     background-color: white;
@@ -56,10 +57,12 @@
 }
 
 .submit-addfilm{
-    width: 50%;
+    width: 200px;
+    margin-left: 150px;
     background-color: tomato;
     color: white;
-    align-self: center;
+    text-align: center;
+    cursor: pointer;
 }
 
 .submit-addfilm:hover{

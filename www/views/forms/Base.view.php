@@ -34,7 +34,7 @@ name="<?= $form->getName() ?>"
             <?php if($field->getType() == "submit"):?>
               <div class="button_wrapper">
 							
-                <button
+                <input
                 <?php 
                   if(isset($field->getOptions()['attr'])) {
                     foreach($field->getOptions()['attr'] as $attr => $value)
@@ -46,7 +46,7 @@ name="<?= $form->getName() ?>"
                 >
                   
                 <?= $field->getOptions()["label"]??'' ?>
-              </button>
+                  </input>
             </div>
             <?php endif;?>
             <!---------------TEXT --->
@@ -156,7 +156,6 @@ name="<?= $form->getName() ?>"
                     <option value="<?= $key?>"> <?=$option?></option>
                   <?php endforeach;?> 
                 </select>
-              </div>
             <?php endif;?> 
               
               <!---------------EMAIL --->

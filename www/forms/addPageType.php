@@ -10,7 +10,7 @@ use cms\core\Constraints\Password;
 use cms\core\Form;
 
 
-class AddFilmType extends Form {
+class AddPageType extends Form {
     
     public function initForm()
     {
@@ -26,30 +26,27 @@ class AddFilmType extends Form {
                         new Length(2,50, 'Le nom de la page doit faire entre 2 et 200 caractères')
                     ]
                 ])
-                ->add("content_size", "select", [
+                ->add("gabarit", "select", [
                     "attr"=>[
                         "placeholder"=>"Taille du contenu",
-                        "id"=>"content_size",
+                        "id"=>"gabarit",
                         "class"=>"input-form"
                     ],
                     "required"=>true,
-                    "option"=>[
-                        "col-1"=>"1 colonne", 
-                        "col-2"=>"2 colonnes", 
-                        "col-3"=>"3 colonnes", 
-                        "col-4"=>"4 colonnes", 
-                        "col-6"=>"6 colonnes",
-                        "col-12"=>"12 colonnes"
+                    "options"=>[
+                        "row"=>"1 row", 
+                        "row-2"=>"2 row", 
+                        "row-3"=>"3 row"
                     ]
                 ])
-                ->add("background_color", "select", [
+                ->add("theme", "select", [
                     "attr"=>[
-                        "placeholder"=>"Couleur du fond",
-                        "id"=>"background_color",
+                        "placeholder"=>"Couleur du theme",
+                        "id"=>"theme",
                         "class"=>"input-form"
                     ],
                     "required"=>true,
-                    "option"=>[
+                    "options"=>[
                         "blue"=>"Bleu", 
                         "red"=>"Rouge", 
                         "grey"=>"Gris", 
@@ -59,11 +56,11 @@ class AddFilmType extends Form {
                 ->add("font", "select", [
                     "attr"=>[
                         "placeholder"=>"Police d'écriture",
-                        "id"=>"bg-color",
-                        "class"=>"font"
+                        "id"=>"font",
+                        "class"=>"input-form"
                     ],
                     "required"=>true,
-                    "option"=>[
+                    "options"=>[
                         "roboto"=>"Roboto", 
                         "raleway"=>"Raleway", 
                         "fondamento"=>"Fondamento"
@@ -72,16 +69,23 @@ class AddFilmType extends Form {
                 ->add("font-color", "select", [
                     "attr"=>[
                         "placeholder"=>"Couleur de police",
-                        "id"=>"bg-color",
-                        "class"=>"font-color"
+                        "id"=>"font-color",
+                        "class"=>"input-form"
                     ],
                     "required"=>true,
-                    "option"=>[
+                    "options"=>[
                         "blue"=>"Bleu", 
                         "red"=>"Rouge", 
                         "grey"=>"Gris", 
                         "white"=>"Blanc"
                     ]
+                ])
+                ->add('add-page', 'submit', [
+                    'attr' => [
+                        'value'=>'Ajouter la page',
+                        'id'=>'add-page',
+                        'class' => 'input-form submit-addfilm',
+                    ]   
                 ]);
     }
 
@@ -93,7 +97,7 @@ class AddFilmType extends Form {
             ->addConfig('attr', [
                 "method" => "POST",
                 "id"=>"formLoginUser",
-                "class"=>"user",
+                "class"=>"add-film",
             ]);
     }
 }
