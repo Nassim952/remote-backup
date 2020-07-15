@@ -35,7 +35,6 @@ name="<?= $form->getName() ?>"
               <div class="button_wrapper">
 							
               <input 
-                value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
                 type="submit"
                 name="<?= $form->getName().'_'.$field->getName() ?>"
                
