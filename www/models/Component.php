@@ -2,9 +2,11 @@
 
 namespace cms\models;
 
-use cms\core\DB;
+use cms\core\Model;
+use cms\core\ModelInterface;
+use cms\managers\ComponentManager;
 
-class Component extends DB
+class Component extends Model implements ModelInterface
 { 
     protected $id;
     protected $title;
@@ -14,13 +16,17 @@ class Component extends DB
     protected $position;
     protected $style;
 
-    public function __Construct($id)
-    {
-        $component = new ComponentManager();
-        $component->find($id);
+    public function initRelation(): array {
+        return [
+        
+        ];
     }
+    public function delete($id){
+        $componentManager = new componentManager(Component::class, 'component');
 
-//SETTERS
+        $componentManager->deleteComponent($id);
+    }
+    //SETTERS
 
     public function setId($id)
     {
@@ -54,24 +60,34 @@ class Component extends DB
 
 //GETTERS
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle()
+    public function getTitle()	
     {
        return $this->title;
     }
 
     public function getClass()
     {
-        return $this->title;
+        return $this->class;
     }
 
     public function getPassword($type)
     {
         return $this->type;
+    }
+
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    public function getData()
+    {
+        return $this->data;
     }
 
     public function getStyle($style)

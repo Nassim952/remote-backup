@@ -99,3 +99,57 @@
 /edit-movie:
   controller: Movie
   action: editMovie
+
+########### Comment #############
+
+/comments:
+  controller: Comment
+  action: comment
+
+/ajout-commentaire:
+  controller: Comment
+  action: addComment
+
+/delete-commentaire:
+  controller: Comment
+  action: deleteComment
+
+/edition-commentaire:
+  controller: Comment
+  action: editComment
+
+########### page.php #############
+
+/pages:
+  controller: Page
+  action: Page
+
+/ajout-page:
+  controller: Page
+  action: addPage
+
+/delete-page:
+  controller: Page
+  action: deletePage
+
+/edition-page:
+  controller: Page
+  action: editPage
+
+########### Component.php #############
+
+/components:
+  controller: component
+  action: component
+
+/ajout-component:
+  controller: Component
+  action: addComponent
+
+/delete-component:
+  controller: Component
+  action: deleteComponent
+
+/edition-component:
+  controller: Component
+  action: editComponent

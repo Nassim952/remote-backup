@@ -4,6 +4,7 @@ namespace cms\Managers;
 
 use cms\core\DB;
 use cms\core\builder\QueryBuilder;
+use cms\models\Comment;
 
 class CommentManager extends DB{
 
@@ -24,5 +25,27 @@ class CommentManager extends DB{
             }
             return $query->getQuery()
             ->getArrayResult(Post::class);
+    }
+
+    public function read($id = null){
+        {
+            $query = (new QueryBuilder())
+                ->select('*')
+                ->from(DB_PREFIXE.'comment', 'c');
+            
+                if(isset($id)){
+                    $query->where('c.id = :idcomment')
+                    ->setParameters('idcomment', $id);
+                }
+                return $query->getQuery()
+                ->getArrayResult(Comment::class);
+           
+        }
+    }
+    
+    // fonction qui supprime un element de la base de donnée
+    public function deleteComment($id)
+    {
+        $this->delete($id);
     }
 }

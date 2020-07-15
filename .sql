@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS bape_component(
 DROP TABLE IF EXISTS bape_page;
 CREATE TABLE IF NOT EXISTS bape_page(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    nom VARCHAR(100),
+    title VARCHAR(100),
     gabarit INT NOT NULL,
     creation_date TIMESTAMP,
     theme INT,
