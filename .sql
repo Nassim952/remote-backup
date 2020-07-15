@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS bape_movie(
     movie_type VARCHAR(255),
     release_date VARCHAR(255),
     duration TIME,
-    image_url VARCHAR(255),
+    image_poster VARCHAR(255),
     synopsis TEXT
 );
 

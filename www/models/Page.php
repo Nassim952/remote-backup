@@ -9,12 +9,11 @@ class Page extends Model
     protected $builder;
     protected $id = null;
     protected $title;
-    protected $type;
     protected $gabarit;
-    protected $section = [];
     protected $creation_date;
     protected $theme;
-    protected $background_image;
+    protected $font;
+    protected $font_color;
 
     public function __Construct()
     {
@@ -62,7 +61,7 @@ class Page extends Model
     }
 
     public function setFontColor($font_color){
-        $this->font = $font_color;
+        $this->font_color = $font_color;
     }
 
 //GETTERS
@@ -87,20 +86,12 @@ class Page extends Model
     public function getTheme(){
         return $this->theme;
     }
-
-    public function getBackground(){
-        return $this->background_image;
-    }
     
     public function getFont(){
         return $this->font;
     }
 
     public function getFontColor(){
-        return $this->font;
-    }
-
-    public function getContentSize(){
-        return $this->content_size;
+        return $this->font_color;
     }
 }

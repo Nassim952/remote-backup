@@ -115,11 +115,11 @@
                     'cm'=>'Court metrage'
                 ],
             ])
-            ->add('image_url', 'url', [
+            ->add('image', 'file', [
                 'attr'=>[
-                    'placeholder'=>'Affiche du film',
-                    'id'=>'image_url',
-                    'class'=>'input-form'
+                    'id'=>'image',
+                    'class'=>'input-form',
+                    'accept'=>'image/png, image/jpeg'
                 ],
                 'required'=>true,
             ])
@@ -151,6 +151,7 @@
                     "method" => "POST",
                     "id"=>"formLoginUser",
                     "class"=>"add-film",
+                    "enctype"=>"multipart/form-data"
                 ]);
         }
     }

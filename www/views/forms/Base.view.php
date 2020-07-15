@@ -88,6 +88,39 @@ name="<?= $form->getName() ?>"
                 </input>
             <?php endif;?>  
 
+            <!---------------FILE --->
+            <?php if($field->getType() == "file"):?>
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <label
+                    <?php 
+                    if(isset($field->getOptions()['attr_label'])) {
+                      foreach($field->getOptions()['attr_label'] as $attr => $value)
+                        {
+                          echo "$attr = '$value' ";
+                        }
+                    }
+                    
+                      ?>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?><br><br></label>
+              <?php endif ?> 
+              
+              <input 
+                type="file"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?>> 
+                </input>
+            <?php endif;?>
+
             <!---------------TEXTAREA --->
             <?php if($field->getType() == "textarea"):?>
               <?php if(!empty($field->getOptions()["label"]) == "select"):?>

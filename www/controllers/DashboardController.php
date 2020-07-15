@@ -54,9 +54,12 @@ class DashboardController extends Controller
             $movie->setMain_actor($_POST[$form->getName().'_actor']);
             $movie->setNationality($_POST[$form->getName().'_nationality']);
             $movie->setMovie_type($_POST[$form->getName().'_type']);
-            /* $movie->setImage_url($_POST[$form->getName().'_image_url']); */
 
-
+            $data_image = $this->uploadImage();
+            if(isset($data_image) && !empty($data_image['image'])){
+                $movie->setImage_poster($data_image['image']);
+            }
+            
             $movieManager->save($movie);
 
             echo "<script>alert('Film ajputé avec succès');</script>";
@@ -67,6 +70,28 @@ class DashboardController extends Controller
             "configFormUser" => $form
         ]);
 
+    }
+
+    public function uploadImage(){
+
+        if(isset($_POST['AddFilm_add-film']))
+        {
+            $output_dir = "public/images";//Path for file upload
+            $RandomNum = time();
+            $ImageName = str_replace(' ','-',strtolower($_FILES['AddFilm_image']['name']));
+            $ImageType = $_FILES['AddFilm_image']['type']; //"image/png", image/jpeg etc.
+            $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
+            $ImageExt = str_replace('.','',$ImageExt);
+            $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
+            $NewImageName = $ImageName.'-'.$RandomNum.'.'.$ImageExt;
+            $ret[$NewImageName]= $output_dir.$NewImageName;
+            move_uploaded_file($_FILES["AddFilm_image"]["tmp_name"],$output_dir."/".$NewImageName );
+            $data = array(
+            'image' =>$NewImageName
+            );
+            return $data;
+        }
+        return FALSE;
     }
 
     public function deleteMovieAction(){

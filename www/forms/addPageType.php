@@ -34,9 +34,9 @@ class AddPageType extends Form {
                     ],
                     "required"=>true,
                     "options"=>[
-                        "row"=>"1 row", 
-                        "row-2"=>"2 row", 
-                        "row-3"=>"3 row"
+                        1=>"1 row", 
+                        2=>"2 row", 
+                        3=>"3 row"
                     ]
                 ])
                 ->add("theme", "select", [
