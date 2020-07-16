@@ -21,7 +21,6 @@ class CommentController extends Controller{
     public function showCommentAction($id){
         $commentManager = new commentManager(Comment::class,'comment');
         $comment = $commentManager->read($id);
-
         $this->render("show-comment", "back", ['myComment' => $comment]);
     }
 
@@ -42,37 +41,39 @@ class CommentController extends Controller{
 
 
     //on testing
-    public function deleteCommentAction(){
+    public function deleteCommentAction($id){
 
-        $commentManager = new CommentManager(Comment::class, 'Comment');
-        $comments = $commentManager->read();
-        // This send comment data to the view thanks to the Commentmanager read function
-        $this->render("comment", "back", ['comments'=> $comments ]);
+        new View('confirm-page','back');
 
-        if ( $_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_POST['id'];
+        $commentManager = new CommentManager(Comment::class,'comment');
+        $commentManager->delete($id);
 
-            $commentManager = new CommentManager(Comment::class, 'comment');
-            $commentManager->delete($id);
-            // refresh the page after delete
-            echo("<meta http-equiv='refresh' content='1'>");
-        }
+        echo "<script>alert('Commentaire supprimé avec succès');</script>";
        
     }
 
 
-    public function editCommentAction(){
-        $commentManager = new CommentManager(Comment::class,'comment');
-        $comments = $commentManager->read();
+    public function editCommentAction($id){
+        $commentManager = new commentManager(comment::class,'comment');
+        $comment = $commentManager->read($id);
 
-        $this->render("edit-comment", "back", ['comments' => $comments]);
+        $this->render('edit-comment','back', ['myComment' => $comment]);
 
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $comment = $commentManager->findBy(['id' => $_POST['id']]);
+        if( $_SERVER["REQUEST_METHOD"] == "POST"){
 
-            $this->render('edit-comment-id','empty', ['comment' => $comment]);
+            $comment = new comment();
+
+            $comment->setId($id);
+            $comment->setComment($_POST['comment']);
+            $comment->setPost_date($_POST['date']);
+            $comment->setAuthor($_POST['author']);
+            $comment->setUser_id($_POST['user_id']);
+
+            $commentManager->save($comment);
+
+            echo "<script>alert('Film modifié avec succès');</script>";
+    
         }
     }
-
    
 }

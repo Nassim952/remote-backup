@@ -20,7 +20,7 @@
                     <span id="show-label-bold">Comment :</span> <?= $comment->getComment() ?>
                 </li>
                 <li class="show-li-wrapper">
-                    <span id="show-label-bold">Date :</span> <?= $comment->getPostDate() ?>
+                    <span id="show-label-bold">Date :</span> <?= $comment->getPost_date() ?>
                 </li>
                 <li class="show-li-wrapper">
                     <span id="show-label-bold">Auteur :</span> <?= $comment->getAuthor() ?>

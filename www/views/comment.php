@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <a href="show-comment/<?= $comment->getId() ?>" id="text-wrappe"><?= $comment->getComment(); ?></a>
-                    <p id="hour-wrappe"><?= $comment->getPostDate() ?></p>
+                    <p id="hour-wrappe"><?= $comment->getPost_date() ?></p>
                 </td>
                 <?php endforeach; ?>
             </tr>
