@@ -75,8 +75,10 @@ class UserManager extends DB{
     
     public function checkUserInDb($email, $password, $users)
     {
-        foreach ($users as $user) {
-            if ($user->getEmail() == $email && $user->getPassword() == $password) {
+        foreach ($users as $user) 
+        {
+            if ($user->getEmail() == $email && $user->getPassword() == $password) 
+            {
                 return $user;
             }
         }

@@ -103,37 +103,42 @@ class UserController extends Controller{
         new View('mail-not-checked', 'front');
     }
 
-    public function signinAction(){
-        new View('signin','front');
-
-        $userManager = new UserManager(User::class,'user');
-        $users = $userManager->read();
+    public function loginAction(){
+        $form = $this->createForm(LoginType::class);
+        $form->handle();
         
-        $userCheck = $userManager->checkUserInDb($this->email, $this->password, $users);
-        if($userCheck){
-            if($userCheck->getVerified() == 1){
-                session_start();
-                $_SESSION['user'] = $userCheck;
+        $this->render("login", "account", [
+            "configFormUser" => $form
+        ]);
 
-                $view = Helpers::getUrl("Dashboard", "dashboard");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
-            }else{
-                $view = Helpers::getUrl("User", "mailNotChecked");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
+        
+
+        if($form->isSubmit() && $form->isValid())
+        {
+            $userManager = new UserManager(User::class,'user');
+            $users = $userManager->read();
+
+            $userChecked = $userManager->checkUserInDb($_POST['Login_username'], $_POST['Login_pwd'], $users);
+            if(!empty($userChecked))
+            {
+                if($userChecked->getVerified() == 1){
+                    $_SESSION['user'] = $userChecked;
+                    
+                    $view = Helpers::getUrl("Dashboard", "dashboard");
+                    $newUrl = trim($view, "/");
+                    echo "<meta http-equiv='refresh' content='0;url='.$newUrl />";
+                }else{
+                    $view = Helpers::getUrl("User", "mailNotChecked");
+                    $newUrl = trim($view, "/");
+                    echo "<meta http-equiv='refresh' content='0;url='.$newUrl />";
+                }
             }
         }
+        
     }
 
     public function forgetPwdAction(){
         new View("forgetPwd", "account");
-    }
-
-
-    public function addPageAction()
-    {
-        new view("addpage","back");
     }
 
 	public function getUserAction($params)
@@ -148,7 +153,7 @@ class UserController extends Controller{
         return $user;
     }
 
-	public function loginAction()
+	public function testLogin()
     {
         $form = $this->createForm(LoginType::class);
         $form->handle();
