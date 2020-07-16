@@ -51,9 +51,13 @@ class Controller implements \SplSubject
 
         $myView = new View($view, $template);
         // print_r($myView);
-        foreach($params as $key => $param) {
-            $myView->assign($key, $param);
+        if (null !== $params && !empty($params))
+        {
+            foreach($params as $key => $param) {
+                $myView->assign($key, $param);
+            }
         }
+        
     }
 
     public function attach(SplObserver $observer)

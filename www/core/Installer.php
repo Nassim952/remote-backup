@@ -1,60 +1,67 @@
 <?php
 
+namespace cms\core;
+
+use PDOException;
+use Exception;
+use PDO;
 
 class Installer
 {
-    public  function init()
-    {
-
-		$view = new View("installation","front");
-		$view->assign('config',$this->configFormInstall());
-		$view->assign('form','form');
-		$view->assign('values',['dbhost' => 'localhost']);
-	}
-
     public  function connectDatabase()
     {
-
 		$dbhost = '';
 		$dbname = '';
 		$dbuser = '';
 		$dbpassword = '';
 		$error = false;
 		
-		if(isset($_POST['dhhost'])){
-			$dbhost = $_POST['dhhost'];
+		if(isset($_POST['Installer_dbhost'])){
+			$dbhost = $_POST['Installer_dbhost'];
 		}
 		
-		if(isset($_POST['dbname'])){
-			$dbname = $_POST['dbname'];
+		if(isset($_POST['Installer_dbname'])){
+			$dbname = $_POST['Installer_dbname'];
 		}
 		
-		if(isset($_POST['dbuser'])){
-			$dbuser = $_POST['dbuser'];
+		if(isset($_POST['Installer_dbuser'])){
+			$dbuser = $_POST['Installer_dbuser'];
 		}
 
-		if(isset($_POST['dbpassword'])){
-			$dbpassword = $_POST['dbpassword'];
+		if(isset($_POST['Installer_dbpassword'])){
+			$dbpassword = $_POST['Installer_dbpassword'];
 		}
 
 		try {
 			$pdo = new PDO("mysql:host=".$dbhost.";dbname=".$dbname,$dbuser,$dbpassword);
-		} catch(Exception $e){
+
+		} catch(PDOException $e){
+			syslog(LOG_ERR, "PDO Error : ".$e->getMessage());
 			$error = true;
 		}
 
 	    if($error){
-            $msg = array("status"=> 'error',    "message"=>'Informations non valide');
+            return false;
         } else {
-            $msg = array("status"=> 'success',    "message"=>'Information correcte');
 
-	        //Installation de la base de données
-	        $sql=file_get_contents("datas/default_database.sql");
-	       
-	        $pdo->query($sql);
+			//Installation de la base de données
+			if(file_exists(".sql"))
+			{
+				try {
+					// var_dump(file_get_contents(".sql"));
+					$stmt = $pdo->prepare(file_get_contents(".sql"));
+					$stmt->execute();
+				} catch(PDOException $e){
+					print_r($e->getMessage());
+					syslog(LOG_ERR, "PDO Error : ".$e->getMessage());
+				}	
+				
+			} else {
+				throw new Exception("File Exeption");
+			}
 
 			//Création de la conf
-			$conf = file('conf.inc.default.php');
+			$conf = file('.prod');
 			foreach ($conf as $key => $line) {
 			    if( strpos($line, 'DBUSER') !== FALSE )
 			            $conf[$key] = 'define("DBUSER","'. $dbuser .'");'. "\n";
@@ -68,43 +75,9 @@ class Installer
 			            $conf[$key] = 'define("DBPORT","'. '3306' .'");'. "\n";
 			}
 			$conf[] =  'define("APP_INSTALLED",true);'. "\n";
+			file_put_contents('.prod', $conf);
 
-			file_put_contents('conf.inc.php', $conf);
-
+			return true;
         }
-        print_r(json_encode($msg)) ;
-
 	}
-
-
-    private function configFormInstall()
-    {
-        return [
-            "config"=>["method"=>"POST",  "action"=>"/webdrivingschool/install", "value"=>"Enregistrer","back" =>"","type" => "button"],
-            "input"=>[
-                "dbhost" =>[
-                    "type" =>"text",
-                    "placeholder"=>"Nom de l'hôte",
-                    "required"=>true,
-                    "label"=>" Hôte"
-                ],
-                "dbname" =>[
-                    "type" =>"text",
-                    "placeholder"=>"Nom de la base de données",
-                    "required"=>true,
-                    "label"=>"Database"
-                ],
-                "dbuser" =>[
-                    "type" =>"text",
-                    "placeholder"=>"Nom de l'utilisateur",
-                    "label"=>"Utilisateur"
-                ],
-                "dbpassword" =>[
-                    "type" =>"password",
-                    "placeholder"=>"Mot de passe de l'utilisateur",
-                    "label"=>"Mot de passe"
-                ],
-            ]
-        ];
-    }
 }
