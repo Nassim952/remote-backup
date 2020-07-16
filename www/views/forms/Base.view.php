@@ -118,6 +118,40 @@ name="<?= $form->getName() ?>"
                 </input>
             <?php endif;?>
 
+            <!---------------CAPTCHA---------------->
+            <?php if($field->getType() == "captcha"):?>
+                    <img src="script/captcha.php" width="300px">
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <label
+                    <?php 
+                    if(isset($field->getOptions()['attr_label'])) {
+                      foreach($field->getOptions()['attr_label'] as $attr => $value)
+                        {
+                          echo "$attr = '$value' ";
+                        }
+                    }
+                    
+                      ?>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?></label>
+              <?php endif ?> 
+              
+              <input 
+                type="captcha"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?>> 
+                </input>
+            <?php endif;?>
+
             <!---------------TEXTAREA --->
             <?php if($field->getType() == "textarea"):?>
               <?php if(!empty($field->getOptions()["label"]) == "select"):?>

@@ -56,6 +56,15 @@ class RegisterType extends Form {
                 "errorMsg"=>"Votre mot de passe de confirmation ne correspond pas",
                 "label"=>"Confirmation de mot de passe"
             ])
+            ->add("captcha", "captcha", [
+                "placeholder"=>"Veuillez saisir les caractères",
+                "class"=>"form-control form-control-user",
+                "id"=>"captcha",
+                "required"=>true,
+                "confirmWith"=>"pwd",
+                "errorMsg"=>"Captcha incorrect",
+                "label"=>"Captcha"
+            ])
             ->add('submit', 'submit', [
                 'label' => 'S\'inscrire',
                 'attr' => [
@@ -126,7 +135,7 @@ class RegisterType extends Form {
                          "captcha"=>[
                                  "type"=>"captcha",
                                  "class"=>"form-control form-control-user",
-                                 "id"=>"",
+                                 "id"=>"captcha",
                                  "required"=>true,
                                  "placeholder"=>"Veuillez saisir les caractères",
                                  "errorMsg"=>"Captcha incorrect"

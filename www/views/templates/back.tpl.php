@@ -49,7 +49,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-film fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?=\cms\core\Helpers::getUrl("Dashboard", "addPage")?>" id="text-white"><span>Pages</span></a>
+                            <a href="<?=\cms\core\Helpers::getUrl("Page", "addPage")?>" id="text-white"><span>Pages</span></a>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-user-shield fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?=\cms\core\Helpers::getUrl("User","signin")?>" id="text-white"><span>Déconnexion</span></a>
+                            <a href="<?=\cms\core\Helpers::getUrl("User","login")?>" id="text-white"><span>Déconnexion</span></a>
                         </div>
                     </div>
                 </div>

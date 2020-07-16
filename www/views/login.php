@@ -15,10 +15,11 @@
 			<br>
 			<br>
 			<div class="divInput">
-
-              <?php $this->formView('configFormUser')?>
-              
-            </div>
+				<?php $this->formView('configFormUser')?>
+			</div>
+			<div class="button_wrapper">
+				<a href="<?= \cms\core\Helpers::getUrl("User", "register") ?>" class="button" style="margin-top: 20px;">Pas de compte ?</a>
+			</div>
 		</section>
 	</section>
 </main>

@@ -9,7 +9,7 @@
     </div>
     <div id="separation-bar"></div>
     <div class=form-add>
-        <form class=add-film method="post">
+        <form enctype="multipart/form-data" class=add-film method="post">
             <input class="input-form film-title" type="text" id="title" value="<?= $myMovie->getTitle() ?>" name="title" placeholder="titre du film"></input>
             <div class="flex-form-container">
                 <div class="flex-form-content-left">
@@ -58,8 +58,7 @@
                     </select>
                 </div>
                 <div class="flex-form-content-right">
-                <label>Lien image url</label>
-                    <input class="input-form affiche" type="file" value="<?= $myMovie->getImage_poster() ?>" name="image_url" id="poster" placeholder="url image"></input>
+                    <input type="file" name="Movie_image" id="image" class="input-form" accept="image/png, image/jpeg" value="<?= $myMovie->getImage_poster() ?>"></input>
                 </div>
             </div>
             <label>Synopsis</label>
