@@ -18,6 +18,13 @@ class CommentController extends Controller{
 
     }
 
+    public function showCommentAction($id){
+        $commentManager = new commentManager(Comment::class,'comment');
+        $comment = $commentManager->read($id);
+
+        $this->render("show-comment", "back", ['myComment' => $comment]);
+    }
+
     public function addCommentAction(){
         new View('add-comment');
         if ($_SERVER["REQUEST_METHOD"] == "POST"){

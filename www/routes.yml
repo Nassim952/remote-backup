@@ -118,6 +118,10 @@
   controller: Comment
   action: comment
 
+/show-comment: 
+  controller: Comment
+  action: showComment
+
 /ajout-commentaire:
   controller: Comment
   action: addComment
