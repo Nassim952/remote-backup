@@ -48,7 +48,7 @@ class Installer
 			if(file_exists(".sql"))
 			{
 				try {
-					// var_dump(file_get_contents(".sql"));
+					var_dump(file_get_contents(".sql"));
 					$stmt = $pdo->prepare(file_get_contents(".sql"));
 					$stmt->execute();
 				} catch(PDOException $e){

@@ -1,6 +1,9 @@
 
-DROP DATABASE IF EXISTS cinedata
+DROP DATABASE IF EXISTS cinedata;
+
 CREATE DATABASE IF NOT EXISTS cinedata;
+
+USE cinedata;
 
 DROP TABLE IF EXISTS bape_identity;
 
