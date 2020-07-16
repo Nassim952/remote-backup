@@ -111,15 +111,13 @@ class UserController extends Controller{
             "configFormUser" => $form
         ]);
 
-        
-
         if($form->isSubmit() && $form->isValid())
         {
             $userManager = new UserManager(User::class,'user');
             $users = $userManager->read();
 
             $userChecked = $userManager->checkUserInDb($_POST['Login_username'], $_POST['Login_pwd'], $users);
-            if(!empty($userChecked))
+            if($userChecked)
             {
                 if($userChecked->getVerified() == 1){
                     $_SESSION['user'] = $userChecked;
@@ -134,7 +132,6 @@ class UserController extends Controller{
                 }
             }
         }
-        
     }
 
     public function forgetPwdAction(){
@@ -152,29 +149,6 @@ class UserController extends Controller{
 		}
         return $user;
     }
-
-	public function testLogin()
-    {
-        $form = $this->createForm(LoginType::class);
-        $form->handle();
-
-        if($form->isSubmit() && $form->isValid())
-        {  
-            $userManager = new UserManager('user','user');
-            $users = $userManager->read();
-            
-            $userCheck = $userManager->checkLogin($this->email, $this->password, $users);
-            if($userCheck){
-                $view = Helpers::getUrl("Dashboard", "dashboard");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
-            }  
-        }
-
-        $this->render("login", "account", [
-            "configFormUser" => $form
-        ]);
-    }
 	
     public function registerAction()
     {
@@ -183,20 +157,34 @@ class UserController extends Controller{
 
         if($form->isSubmit() && $form->isValid())
         { 
-            $userManager = new UserManager('user','user');
-           
-            if (!$userManager->read() || empty($userManager->read()))
-            {
-                $user = new User;
-                $user->setLogin($_POST['lastname']);
-                $user->setEmail($_POST['email']);
-                $user->setPassword($_POST['password']);
-                $user->setAllow('customer');
-                $user->setStatut(1);
-                $user->setToken(uniqid());
-                $userManager->save($user);
+            $userManager = new UserManager(User::class,'user');
+
+            // on peuple l'objet user et on save
+            $token = bin2hex(random_bytes(50)); 
+            $user = new User;
+            $user->setLastname($_POST['Register_lastname']);
+            $user->setFirstname($_POST['Register_firstname']);
+            $user->setEmail($_POST['Register_email']);
+            $user->setPassword($_POST['Register_pwd']);
+            $user->setAllow('customer');
+            $user->setStatut(1);
+            $user->setToken($token);
+
+            $userManager->save($user);
+
+            // on vérifie que le save a bien été fait et on envoie le mail
+            $users = $userManager->read();
+            $userCheck = $userManager->checkSave($this->email, $this->password, $users);
+            if($userCheck){
+                $mail = new Mailer();
+                $result = $mail->sendVerifAuth($_POST['email'], $token, $_POST['firstname']);
+                if(!$result){
+                    echo "<script>alert('Confirmer votre adresse en cliquant sur le lien envoyé par mail !');</script>";
+                }else {
+                    print_r($result);
+                }
             }
-           
+            
         }
 
         $this->render("register", "account", [

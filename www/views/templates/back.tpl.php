@@ -1,7 +1,7 @@
 <?php 
-    session_start();
-    (!isset($_SESSION['user'])) ? header('Location: localhost:8081/connexion') : '';
-    ($_SESSION['user']->getVerified()) == 0 ? header('Location: localhost:8081/mail-not-checked') : '';
+    
+    
+    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -35,7 +35,7 @@
             </div>
             <div class="name-container">
                 <span id="dot"></span>
-                <p><?=ucFirst($_SESSION['user']->getFirstname());?></p>
+                <p></p>
             </div>
             <div class="nav-content">
                 <h2 id="text-submenu-fixer">Gestion film</h2>
