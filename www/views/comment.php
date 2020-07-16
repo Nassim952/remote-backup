@@ -26,7 +26,13 @@
                             <label></label>
                         </div>
                     </div>
-                    <a href="show-comment/<?= $comment->getId() ?>" id="text-wrappe"><?= $comment->getComment(); ?></a>
+                    <?php 
+
+                    $commentReduced = $comment->getComment();
+                    //Limits string length to 70
+                    $commentReduced= substr($commentReduced, 0,70);
+                    ?>
+                    <a href="show-comment/<?= $comment->getId() ?>" id="text-wrappe"><?= $commentReduced ?></a>
                     <p id="hour-wrappe"><?= $comment->getPost_date() ?></p>
                 </td>
                 <?php endforeach; ?>
