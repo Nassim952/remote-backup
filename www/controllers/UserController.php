@@ -19,11 +19,11 @@ class UserController extends Controller{
     private $email;
     private $password;
 
-    public function __construct()
-    {
-        isset($_POST['email']) ? $this->email = $_POST['email'] : null;
-        isset($_POST['password']) ? $this->password = $_POST['password'] : null;
-    }
+    // public function __construct()
+    // {
+    //     isset($_POST['email']) ? $this->email = $_POST['email'] : null;
+    //     isset($_POST['password']) ? $this->password = $_POST['password'] : null;
+    // }
 
 	public function landingAction(){
         new View("landing-page","front");
@@ -103,37 +103,6 @@ class UserController extends Controller{
         new View('mail-not-checked', 'front');
     }
 
-    public function loginAction(){
-        $form = $this->createForm(LoginType::class);
-        $form->handle();
-        
-        $this->render("login", "account", [
-            "configFormUser" => $form
-        ]);
-
-        if($form->isSubmit() && $form->isValid())
-        {
-            $userManager = new UserManager(User::class,'user');
-            $users = $userManager->read();
-
-            $userChecked = $userManager->checkUserInDb($_POST['Login_username'], $_POST['Login_pwd'], $users);
-            if($userChecked)
-            {
-                if($userChecked->getVerified() == 1){
-                    $_SESSION['user'] = $userChecked;
-                    
-                    $view = Helpers::getUrl("Dashboard", "dashboard");
-                    $newUrl = trim($view, "/");
-                    echo "<meta http-equiv='refresh' content='0;url='.$newUrl />";
-                }else{
-                    $view = Helpers::getUrl("User", "mailNotChecked");
-                    $newUrl = trim($view, "/");
-                    echo "<meta http-equiv='refresh' content='0;url='.$newUrl />";
-                }
-            }
-        }
-    }
-
     public function forgetPwdAction(){
         new View("forgetPwd", "account");
     }
@@ -149,6 +118,48 @@ class UserController extends Controller{
 		}
         return $user;
     }
+
+	public function loginAction()
+    {
+        
+        $form = $this->createForm(LoginType::class);
+        $form->handle();
+
+        if($form->isSubmit() && $form->isValid())
+        { 
+            
+            $userManager = new UserManager(User::class,'user');
+            $users = $userManager->read();
+            
+            $userCheck = $userManager->checkUserInDb($_POST[$form->getName().'_email'] ,$_POST[$form->getName().'_password'], $users);
+            // var_dump($userCheck);
+            if($userCheck){
+                if($userCheck->getVerified() == 1){
+                    session_start();
+                    $_SESSION['user'] = $userCheck;
+                    $view = Helpers::getUrl("Dashboard", "dashboard");
+                    $newUrl = trim($view, "/");
+                    header("Location: " . $newUrl);
+                }else{
+                    $view = Helpers::getUrl("User", "mailNotChecked");
+                    $newUrl = trim($view, "/");
+                    header("Location: " . $newUrl);
+                }
+            }
+            else
+            {
+                $this->render("login", "account", [
+                    "configFormUser" => $form
+                ]);
+            }
+        }
+        else
+        {
+            $this->render("login", "account", [
+                "configFormUser" => $form
+            ]);
+        }
+    }
 	
     public function registerAction()
     {
@@ -158,38 +169,44 @@ class UserController extends Controller{
         if($form->isSubmit() && $form->isValid())
         { 
             $userManager = new UserManager(User::class,'user');
+           
+            if (!$userManager->findBy(["email"=>$_POST[$form->getName().'_email']]))
+            {
+                $token = bin2hex(random_bytes(50));          
+                $user = new User;
+                $user->setLastname($_POST[$form->getName().'_lastname']);
+                $user->setFirstname($_POST[$form->getName().'_firstname']);
+                $user->setEmail($_POST[$form->getName().'_email']);
+                $user->setPassword($_POST[$form->getName().'_password']);
+                $user->setAllow('customer');
+                $user->setToken($token);
+                $user->setStatut(1);
 
-            // on peuple l'objet user et on save
-            $token = bin2hex(random_bytes(50)); 
-            $user = new User;
-            $user->setLastname($_POST['Register_lastname']);
-            $user->setFirstname($_POST['Register_firstname']);
-            $user->setEmail($_POST['Register_email']);
-            $user->setPassword($_POST['Register_pwd']);
-            $user->setAllow('customer');
-            $user->setStatut(1);
-            $user->setToken($token);
-
-            $userManager->save($user);
-
-            // on vérifie que le save a bien été fait et on envoie le mail
-            $users = $userManager->read();
-            $userCheck = $userManager->checkSave($this->email, $this->password, $users);
-            if($userCheck){
-                $mail = new Mailer();
-                $result = $mail->sendVerifAuth($_POST['email'], $token, $_POST['firstname']);
-                if(!$result){
-                    echo "<script>alert('Confirmer votre adresse en cliquant sur le lien envoyé par mail !');</script>";
-                }else {
-                    print_r($result);
+                $userManager->save($user);
+                // on vérifie si le save a bien été fait et on envoie un mail
+                $users = $userManager->read();
+                $userCheck = $userManager->checkSave($_POST[$form->getName().'_email'], $_POST[$form->getName().'_password'], $users);
+                if($userCheck){
+                    $mail = new Mailer();
+                    $result = $mail->sendVerifAuth($_POST[$form->getName().'_email'], $token, $_POST[$form->getName().'_firstname']);
+                    if(!$result){
+                        echo "<script>alert('Confirmer votre adresse en cliquant sur le lien envoyé par mail !');</script>";
+                    }else {
+                        print_r($result);
+                    }
                 }
+            } else {
+                $this->render("register", "account", [
+                    "configFormUser" => $form
+                ]);
             }
-            
         }
-
-        $this->render("register", "account", [
-            "configFormUser" => $form
-        ]);
+        else
+        {
+            $this->render("register", "account", [
+                "configFormUser" => $form
+            ]);
+        }   
     }
     
     public function buildPage()

@@ -66,9 +66,7 @@ class View
         if (!file_exists("views/forms/".$formTemplate.".view.php")) {
             throw new NotFoundException("Le template de formulaire n'existe pas!!!");
         }
-
         $form = $this->data[$formName];// Objet Form
-
         include "views/forms/".$formTemplate.".view.php";
     }
 

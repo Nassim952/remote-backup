@@ -122,7 +122,7 @@
   controller: Comment
   action: editComment
 
-########### page.php #############
+########### Page #############
 
 /pages:
   controller: Page
@@ -140,7 +140,7 @@
   controller: Page
   action: addPage
 
-########### Component.php #############
+########### Component #############
 
 /components:
   controller: component
@@ -157,3 +157,9 @@
 /edition-component:
   controller: Component
   action: editComponent
+
+  ########### Installer #############
+
+/installation:
+  controller: installer
+  action: installer

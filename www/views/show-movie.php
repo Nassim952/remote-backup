@@ -40,7 +40,7 @@ foreach($myMovie as $movie): ?>
                         <span id="show-label-bold">Type de film :</span> <?= $movie->getMovie_type() ?>
                     </li>
                     <li class="show-li-wrapper">
-                        <span id="show-label-bold">Date de sortie :</span> <?= $movie->getRelease() ?>
+                        <span id="show-label-bold">Date de sortie :</span> <?= $movie->getRelease_date() ?>
                     </li>
                     <li class="show-li-wrapper">
                         <span id="show-label-bold">Durée :</span> <?= $movie->getDuration() ?>

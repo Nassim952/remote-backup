@@ -11,7 +11,7 @@ class FormBuilder implements FormBuilderInterface
     private $elements = [];
 
 
-    public function add(string $name, string $type = "text", array $options = []): FormBuilderInterface
+    public function add(string $name, string $type , array $options = []): FormBuilderInterface
     {
         $this->elements[$name] = 
             (new ElementFormBuilder())

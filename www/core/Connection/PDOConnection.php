@@ -19,8 +19,8 @@ class PDOConnection implements BDDInterface{
     {
         try {
             $this->pdo = new PDO(DRIVER_DB.":host=".HOST_DB.";dbname=".NAME_DB, USER_DB, PWD_DB);
-        } catch(Throwable $e) {
-            echo("SQL Error : ".$e->getMessage());
+        } catch(PDOException $e) {
+            syslog(LOG_ERR, "SQL Error : ".$e->getMessage());
         }
 
     }
@@ -32,7 +32,8 @@ class PDOConnection implements BDDInterface{
             try{
                 $queryPrepared->execute($parameters);
             } catch(PDOException $p) {
-                $p->getMessage();
+                syslog(LOG_ERR, "PDO Error : ".$p->getMessage());
+                
             }
             return new PDOResult($queryPrepared);
         } else {
