@@ -3,22 +3,24 @@
 namespace cms\models;
 
 use cms\core\Model;
+use cms\core\ModelInterface;
+use cms\managers\PageManager;
 
-class Page extends Model
+class Page extends Model implements ModelInterface
 {
     protected $builder;
     protected $id = null;
     protected $title;
-    protected $type;
     protected $gabarit;
-    protected $section = [];
     protected $creation_date;
     protected $theme;
-    protected $background_image;
+    protected $font;
+    protected $font_color;
 
-    public function __Construct()
-    {
-
+    public function initRelation(): array {
+        return [
+        
+        ];
     }
 
     public function associateValue()
@@ -34,6 +36,13 @@ class Page extends Model
         }
     }
 
+    public function delete($id){
+        $pageManager = new PageManager(Page::class, 'page');
+
+        $pageManager->deletePage($id);
+    }
+
+
 //SETTERS
 
     public function setId($id)
@@ -45,29 +54,29 @@ class Page extends Model
         $this->title = $title;
     }
 
-    public function setPassword(string $type){
-        $this->type = $type;
-    }
-
     public function setGabarit($gabarit){
         $this->gabarit = $gabarit;
     }
 
-    public function setDate($creation_date){
+    public function setCreationDate($creation_date){
         $this->creation_date = $creation_date;
     }
 
     public function setTheme($theme){
         $this->theme = $theme;
     }
+    
+    public function setFont($font){
+        $this->font = $font;
+    }
 
-    public function setBackground($background_image){
-        $this->background_image = $background_image;
+    public function setFontColor($font_color){
+        $this->font_color = $font_color;
     }
 
 //GETTERS
 
-    public function getId()
+    public function getId(): ?int
     {
        return $this->id;
     }
@@ -76,12 +85,8 @@ class Page extends Model
         return $this->title;
     }
 
-    public function getPassword(){
-        return $this->type;
-    }
-
     public function getGabarit(){
-        return $this->gabarit = $gabarit;
+        return $this->gabarit;
     }
 
     public function getDate(){
@@ -91,8 +96,12 @@ class Page extends Model
     public function getTheme(){
         return $this->theme;
     }
+    
+    public function getFont(){
+        return $this->font;
+    }
 
-    public function getBackground(){
-        return $this->background_image;
+    public function getFontColor(){
+        return $this->font_color;
     }
 }

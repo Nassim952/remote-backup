@@ -85,6 +85,5 @@ class QueryBuilder
         $result =  $this->connection->query($this->query, $this->parameters);
 
         return $result;
-        
     }
 }

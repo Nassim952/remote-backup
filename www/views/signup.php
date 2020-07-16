@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+	isset($_SESSION['user']) ? session_destroy() : '' ;
+?>
 <head>
 	<title>NEAR BY - Inscription</title>
 </head>
@@ -19,8 +23,8 @@
 			<br>
 			<div class="divInput">
 			<form name="form_inscription" action="" method="post">
-					<input type="text" name="firstname" id="firstname" placeholder="Nom">
-					<input type="text" name="lastname" id="lastname" placeholder="Prenom">
+					<input type="text" name="firstname" id="firstname" placeholder="Prenom">
+					<input type="text" name="lastname" id="lastname" placeholder="Nom">
 					<br>
 					<input type="email" name="email" id="email" placeholder="Email">
 					<br>

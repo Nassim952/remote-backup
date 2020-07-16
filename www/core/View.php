@@ -2,6 +2,8 @@
 
 namespace cms\core;
 
+use Exception;
+
 class View
 {
 	private $view;
@@ -53,19 +55,22 @@ class View
 	public function addSection(string $section, array $data)
 	{
 		if (!file_exists("views/sections/".$section.".gab.php")) {
-			throw new Exception("ce gabarit de section  n'existe pas");
+			throw new NotFoundException("ce gabarit de section  n'existe pas");
 		}
 		include "views/sections/".$section.".gab.php";
 	}
 
 	//inclue une section si elle existe
-	public function addForm(string $formName, string $formTemplate = "base")
-	{
-		if (!file_exists("views/forms/".$section.".view.php")) {
-			throw new Exception("ce template de formulaire n'existe pas");
-		}
-		include "views/forms/".$formTemplate.".view.php";
-	}
+	public function formView(string $formName, string $formTemplate = "base")
+    {
+        if (!file_exists("views/forms/".$formTemplate.".view.php")) {
+            throw new NotFoundException("Le template de formulaire n'existe pas!!!");
+        }
+
+        $form = $this->data[$formName];// Objet Form
+
+        include "views/forms/".$formTemplate.".view.php";
+    }
 
 		
 	// affiche le template et ce qui va avec

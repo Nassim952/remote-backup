@@ -2,9 +2,11 @@
 
 namespace cms\models;
 
-use cms\core\DB;
+use cms\core\Model;
+use cms\core\ModelInterface;
+use cms\managers\CommentManager;
 
-class Comment extends DB
+class Comment extends Model implements ModelInterface
 { 
     protected $id;
     protected $comment;
@@ -14,16 +16,33 @@ class Comment extends DB
     protected $user_id;
     protected $author;
 
-    public function __Construct()
-    {
-         
+    public function initRelation(): array {
+        return [
+        
+        ];
     }
 
-//SETTERS
+    public function delete($id){
+        $commentManager = new CommentManager(Comment::class, 'comment');
 
+        $commentManager->deleteComment($id);
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
     }
 
     public function setComment($comment)
@@ -53,12 +72,7 @@ class Comment extends DB
 
 
 
-//GETTERS
-
-    public function getId()
-    {
-        return $this->id;
-    }
+    //GETTERS
 
     public function getComment()
     {
@@ -67,12 +81,14 @@ class Comment extends DB
 
     public function getPostDate()
     {
+        
         return $this->post_date;
+        
     }
 
     public function getTarget()
     {
-        return $this->target = $target;
+        return $this->target;
     }
 
     public function getTargetType()
@@ -83,13 +99,6 @@ class Comment extends DB
     public function getAuthor()
     {
         return $this->author;
-    }
-
-    public function initRealation():array
-    {
-        return [
-            'author' => User::class
-        ];
     }
 
 }

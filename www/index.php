@@ -1,14 +1,5 @@
 <?php
 
-// function myAutoload($class){
-// 	if(file_exists("core/".$class.".php")){
-// 		include "core/".$class.".php";
-
-// 	}else if(file_exists("models/".$class.".php")){
-// 		include "models/".$class.".php";
-// 	}
-// }
-
 function myAutoload($class)
 {
 	$class = str_replace("cms", "", $class);
@@ -22,7 +13,6 @@ function myAutoload($class)
 	}
 	
 }
-
 spl_autoload_register("myAutoload");
 
 use cms\core\ConstLoader;
@@ -31,27 +21,37 @@ new ConstLoader();
 
 $uri = $_SERVER["REQUEST_URI"];
 
+//recupère l'id de l'url si il existe # /show-movie/{{id}}
+$id = substr($uri, strrpos($uri, '/') +1);
+
+// nettoie l'uri pour retirer le param # /show-movie/2 -> /show-movie
+$newUri = explode('/', $uri)[1];
+$newUri = '/'.$newUri;
+
 try{
 	$listOfRoutes = yaml_parse_file("routes.yml");
 
-	if( !empty($listOfRoutes[$uri]) ){
-		$c = 'cms\controllers\\'.ucfirst($listOfRoutes[$uri]["controller"]."Controller");
-		$a = $listOfRoutes[$uri]["action"]."Action";
+	if( !empty($listOfRoutes[$newUri]) ){
+		$c = 'cms\controllers\\'.ucfirst($listOfRoutes[$newUri]["controller"]."Controller");
+		$a = $listOfRoutes[$newUri]["action"]."Action";
 
 			// include "controllers/".$c.".php";
 			if( class_exists($c)){
 
 				$controller = new $c();
-				if( method_exists($controller, $a)){
 
-					$controller->$a();
-					
+				if( method_exists($controller, $a)){
+					try{
+						$controller->$a($id);
+					}catch(Exception $e){
+						$controller->$a();
+					}
 				} else {
 					throw new Exception("L'action n'existe pas");
 				}
 			
 			} else {
-				throw new Exception("Le class controller".$c." n'existe pas");
+				throw new Exception("La class controller ".$c." n'existe pas");
 			}
 
 	} else {

@@ -112,5 +112,31 @@ class Validator
 			return true;
 		}
 	}
+
+	public static function formAddFilmValidate( $config, $data){
+		$listOfErrors = [];
+
+		//Vérification du bon nb de input
+		if(count($config["fields"]) == count($data)) {
+			foreach($config["fields"] as $name => $configField){
+				//Vérifier que les names existent et Vérifier les required
+				if (isset($data[$name]) 
+					&& ($configField["required"] && !empty($data[$name]))) {
+					//Vérifier le format de l'email
+					if (($configField["id"] == "title") && empty(UserManager::findBy(["title" => $data[$name]]))) {			
+							$listOfErrors[] = $configField["errorMsg"];	
+					} elseif($configField["type"] = "password" && !self::pwdValidate($data[$name])) {
+						$listOfErrors[] = $configField["errorMsg"];
+					}
+					//Vérifier le captcha
+				} else {
+					return ["Tentative de hack !!!"];
+				}
+			}
+		} else {
+			return ["Tentative de hack !!!"];
+		}
+		return $listOfErrors;
+	}
 }
 

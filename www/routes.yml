@@ -1,26 +1,38 @@
-/:
-  controller: User
-  action: home
-
-/login:
-  controller: User
-  action: login
-
-/home:
-  controller: User
-  action: home
-
-/template:
-  controller: User
-  action: template
+############ Dashboard ###########
 
 /dashboard:
   controller: Dashboard
   action: dashboard
 
+/edition-film:
+  controller: Dashboard
+  action: editMovie
+
 /statistiques:
   controller: Dashboard
   action: stat
+
+/users:
+  controller: Dashboard
+  action: users
+
+/horaires:
+  controller: Dashboard
+  action: horraires
+
+/addfilm:
+  controller: Dashboard
+  action: addFilm
+
+/addpage:
+  controller: Dashboard
+  action: addPage
+
+############ User ############
+
+/:
+  controller: User
+  action: home
 
 /inscription:
   controller: User
@@ -30,22 +42,122 @@
   controller: User
   action: signin
 
-/cinema:
-  controller: Dashboard
-  action: cinema
+/login:
+  controller: User
+  action: login
+
+/register:
+  controller: User
+  action: register
+
+/home:
+  controller: User
+  action: home
+
+/template:
+  controller: User
+  action: template
+
+/user-verif:
+  controller: User
+  action: accountActivation
+
+/mail-not-checked:
+  controller: User
+  action: mailNotChecked
+
+
+########### Cinema #############
 
 /salles:
-  controller: Dashboard
+  controller: Cinema
   action: salles
-  
-/addfilm:
-  controller: Dashboard
-  action: addfilm
 
-/users:
-  controller: Dashboard
-  action: users
+/cinema:
+  controller: Cinema
+  action: cinema
+
+/ajout-cinema:
+  controller: Cinema
+  action: addCinema
+
+/edit-cinema:
+  controller: Cinema
+  action: editCinema
 
 /horraires:
   controller: Dashboard
   action: horraires
+
+/delete-cinema:
+  controller: Cinema
+  action: deleteCinema
+
+/show-cinema:
+  controller: Cinema
+  action: showCinema
+
+
+######## Movie #########
+
+/show-movie:
+  controller: Movie
+  action: showMovie
+
+/delete-movie:
+  controller: Movie
+  action: deleteMovie
+
+/edit-movie:
+  controller: Movie
+  action: editMovie
+
+########### Comment #############
+
+/comments:
+  controller: Comment
+  action: comment
+
+/ajout-commentaire:
+  controller: Comment
+  action: addComment
+
+/delete-commentaire:
+  controller: Comment
+  action: deleteComment
+
+/edition-commentaire:
+  controller: Comment
+  action: editComment
+
+########### page.php #############
+
+/pages:
+  controller: Page
+  action: Page
+
+/delete-page:
+  controller: Page
+  action: deletePage
+
+/edition-page:
+  controller: Page
+  action: editPage
+
+########### Component.php #############
+
+/components:
+  controller: component
+  action: component
+
+/ajout-component:
+  controller: Component
+  action: addComponent
+
+/delete-component:
+  controller: Component
+  action: deleteComponent
+
+/edition-component:
+  controller: Component
+  action: editComponent
