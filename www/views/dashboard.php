@@ -10,7 +10,7 @@
     <div id="separation-bar"></div>
     <div class="quick-tools">
         <div id="space-icons">
-            <a href="<?= \cms\core\Helpers::getUrl("Dashboard","addFilm") ?>" class="fas fa-plus fa-lg"></a>
+            <a href="<?= \cms\core\Helpers::getUrl("Movie","addFilm") ?>" class="fas fa-plus fa-lg"></a>
         </div>
     </div>
     <div class="lists-film">

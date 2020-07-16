@@ -4,10 +4,6 @@
   controller: Dashboard
   action: dashboard
 
-/edition-film:
-  controller: Dashboard
-  action: editMovie
-
 /statistiques:
   controller: Dashboard
   action: stat
@@ -19,14 +15,6 @@
 /horaires:
   controller: Dashboard
   action: horraires
-
-/addfilm:
-  controller: Dashboard
-  action: addFilm
-
-/addpage:
-  controller: Dashboard
-  action: addPage
 
 ############ User ############
 
@@ -112,6 +100,10 @@
   controller: Movie
   action: editMovie
 
+/addfilm:
+  controller: Movie
+  action: addFilm
+
 ########### Comment #############
 
 /comments:
@@ -143,6 +135,10 @@
 /edition-page:
   controller: Page
   action: editPage
+
+/addpage:
+  controller: Page
+  action: addPage
 
 ########### Component.php #############
 

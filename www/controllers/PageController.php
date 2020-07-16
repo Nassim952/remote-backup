@@ -6,11 +6,10 @@ use cms\core\Controller;
 use cms\managers\PageManager;
 use cms\models\Page;
 use cms\core\View;
+use cms\forms\AddPageType;
 
 class PageController extends Controller
-{
-    private $pages;
-    
+{   
     // page action callling the view
     public function pageAction(){
         $pageManager = new PageManager(Page::class, 'Page');
@@ -20,51 +19,48 @@ class PageController extends Controller
         $this->render("page", "back", ['pages'=> $pages ]);
     }
 
-    public function addPageAction(){
-        new View('add-page');
-        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    public function addPageAction()
+    {
+        $form = $this->createForm(AddPageType::class);
+        $form->handle();
+
+        if($form->isSubmit() && $form->isValid())
+        {  
+            $pageManager = new PageManager(Page::class, 'page');
             $page = new Page();
 
-            $page->setTitle($_POST['title']);
-            $page->setGabarit($_POST['gabarit']);
-            // replace by curentdate
-            $page->setDate($_POST['date']);
-            $page->setTheme($_POST['theme']);
+            $page->setTitle($_POST[$form->getName().'_title']);
+            $page->setTheme($_POST[$form->getName().'_theme']);
+            $page->setGabarit($_POST[$form->getName().'_gabarit']);
+            $page->setFont($_POST[$form->getName().'_font']);
+            $page->setFontColor($_POST[$form->getName().'_font-color']);
 
-            $pageManager = new pageManager(Page::class,'page');
             $pageManager->save($page);
+
+            echo "<script>alert('Page crée avec succès');</script>";
         }
+
+        $this->render("addpage", "back", [
+            "configFormUser" => $form
+        ]);
     }
 
 
     //deleting data in the database
-    public function deletepageAction(){
+    public function deletepageAction($id){
+        new View('confirm-page','back');
+
         $pageManager = new pageManager(Page::class,'page');
-        $pages = $pageManager->read();
+        $pageManager->delete($id);
 
-        $this->render("delete-page", "back", ['pages' => $pages]);
-
-        if ( $_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_POST['id'];
-
-            $pageManager = new pageManager(Page::class, 'page');
-            $pageManager->delete($id);
-
-            echo("<meta http-equiv='refresh' content='1'>");
-        }
+        echo "<script>alert('Page supprimé avec succès');</script>";
     }
     //editing a row in the database by id
-    public function editpageAction(){
+    public function editpageAction($id){
         $pageManager = new pageManager(Page::class,'page');
-        $pages = $pageManager->read();
+        $pages = $pageManager->read($id);
 
         $this->render("edit-page", "back", ['pages' => $pages]);
-
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $page = $pageManager->findBy(['id' => $_POST['id']]);
-
-            $this->render('edit-page-id','empty', ['page' => $page]);
-        }
     }
 
 
@@ -117,13 +113,4 @@ class PageController extends Controller
             ]);
         }
     }
-
-    public function forgetPwdAction()
-    {
-		$myView = new View("forgetPwd", "account");
-    } 
-
-   
-
-
 }
