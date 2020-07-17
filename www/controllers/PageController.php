@@ -2,9 +2,11 @@
 
 namespace cms\controllers;
 
+use cms\core\Builder\ElementPageBuilder;
+use cms\core\Builder\PageBuilder;
 use cms\core\Controller;
 use cms\managers\PageManager;
-use cms\models\Page;
+use cms\core\Page;
 use cms\core\View;
 
 class PageController extends Controller
@@ -70,60 +72,25 @@ class PageController extends Controller
 
     public function buildPageAction($params)
     {
-        $pageManager = new pageManager();
-        $page = $pageManager->find($params['id']);
+        // $pageManager = new pageManager();
+        // $page = $pageManager->find($params['id']);
 
-        if (!$page) {
-            throw new NotFoundException("page not found");
-        }
+        // if (!$page) {
+        //     throw new NotFoundException("page not found");
+        // }
 
+        // recuperation  en BDD
+        $page = new Page();//find page PageManager()
+
+        $sections = new ElementPageBuilder(); //sectionManager return Element page builder
+        ///
+        
+        $page->setBuilder(((new PageBuilder()->setSections($sections))));
+        
         $this->render("default", "front", [
             "page" => $page
         ]);
     }
-
-
-
-	public function loginAction()
-    {
-        $registerType = new LoginType();
-
-        if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-            //Vérification des champs
-            $this->render("register", "account", [
-                "form" => $registerType,
-                "errors" => Validator::formLoginValidate( $registerType, $_POST )
-            ]);
-        } else {
-            $this->render("register", "account", [
-                "form" => $registerType
-            ]);
-        }
-	}
-	
-    public function registerAction()
-    {
-        $registerType = new RegisterType();
-
-        if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-            //Vérification des champs
-            $this->render("register", "account", [
-                "form" => $registerType,
-                "errors" => Validator::formRegisterValidate( $registerType, $_POST )
-            ]);
-        } else {
-            $this->render("register", "account", [
-                "form" => $registerType
-            ]);
-        }
-    }
-
-    public function forgetPwdAction()
-    {
-		$myView = new View("forgetPwd", "account");
-    } 
-
-   
 
 
 }

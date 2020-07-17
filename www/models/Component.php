@@ -10,7 +10,7 @@ class Component extends Model implements ModelInterface
 { 
     protected $id;
     protected $title;
-    protected $class;
+    protected $column;
     protected $type;
     protected $data = [];
     protected $position;
@@ -33,14 +33,14 @@ class Component extends Model implements ModelInterface
         $this->id = $id;
     }
 
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
-    public function setClass($class)
+    public function setColumn(int $column)
     {
-        $this->title = $class;
+        $this->column = $column;
     }
 
     public function setPosition($type)
@@ -70,7 +70,7 @@ class Component extends Model implements ModelInterface
        return $this->title;
     }
 
-    public function getClass()
+    public function getColumn()
     {
         return $this->class;
     }

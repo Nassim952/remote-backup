@@ -1,33 +1,36 @@
 <?php
 
-namespace App\Core\Builder;
+namespace cms\Core\Builder;
 
-class ElementFormBuilder implements ElementPageBuilderInterface
+use cms\models\Component;
+use cms\Core\Builder\ElementPageBuilderInterface;
+
+class ElementPageBuilder implements ElementPageBuilderInterface
 {
     private $components = [];
 
     private $size;
 
-    private $class;
-
     private $page_id = null;
 
     private $position = null;
 
-    private $type;
-
-    public function __construct(int $id)
+    public function __construct()
     {
-        $gabarit = parent::_construct(Gabarit::class,'gabarit');
-        $gabarit->find($id);
+        
     }
 
-    public function setType(string $type): ElementPageBuilder
+    public function setType(string $type)
     {
         $this->type = $type;
     }
 
-    private function setSize(int $size)
+    public function setPage(int $id)
+    {
+        $this->page_id = $id;
+    }
+
+    public function setSize(int $size)
     {
         $this->size = $size;
     }
@@ -42,6 +45,7 @@ class ElementFormBuilder implements ElementPageBuilderInterface
     public function addComponent(Component $component): ElementPageBuilder
     {
         $component->setPosition(count($this->components));
+        $component->setColumn($this->size);
         $this->components[] = $component;
         
         return $this;
