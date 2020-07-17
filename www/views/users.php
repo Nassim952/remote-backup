@@ -41,14 +41,14 @@
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Email</th>
+                    <th>Permission</th>
                     <th>Statut</th>
-                    <th><a href="#" class="fas fa-plus fa-lg"></a></th>
-                    <th><a href="#" class="fas fa-trash-alt fa-lg"></a></th>
                 </tr>
             </thead>
 
             <tbody>
                 <?php
+                use cms\core\Helpers;
                     foreach($users as $user):
                 ?> 
                 <tr>
@@ -64,9 +64,10 @@
                     <td><?= $user->getLastname(); ?></td>
                     <td><?= $user->getFirstname(); ?></td>
                     <td><?= $user->getEmail(); ?></td>
+                    <td><?= $user->getAllow(); ?></td>
                     <td><?= $user->getStatut(); ?></td>
-                    <td><a href="#" class="fas fa-edit fa-lg"></a></td>
-                    <td><a href="#" class="fas fa-trash-alt fa-lg"></a></td>
+                    <td><a href="<?= Helpers::getUrl('User', 'editUser').'/'.$user->getId() ?>" class="fas fa-edit fa-lg"></a></td>
+                    <td><a href="<?= Helpers::getUrl('User', 'deleteUser').'/'.$user->getId() ?>" class="fas fa-trash-alt fa-lg"></a></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

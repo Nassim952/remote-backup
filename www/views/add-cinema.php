@@ -19,7 +19,7 @@
                     <input class="input-form affiche" type="file" name="image_url" placeholder="Uploader votre logo"></input>
                 </div>
             </div>
-            <input type="submit" class="input-form submit-addfilm" value="Ajouter le film"></input>
+            <input type="submit" class="input-form submit-addfilm" value="Valider"></input>
         </form>
     </div>
 </div>

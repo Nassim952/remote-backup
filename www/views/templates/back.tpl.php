@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="name-container">
-                <span id="dot"></span>
+                <img src="../public/images/<?= $_SESSION['user']->getImage_profile() ?>" id="dot"/>
                 <p><?=ucFirst($_SESSION['user']->getFirstname());?></p>
             </div>
             <div class="nav-content">
@@ -92,7 +92,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-users fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?=\cms\core\Helpers::getUrl("Dashboard","users")?>" id="text-white"><span>Users</span></a>
+                            <a href="<?=\cms\core\Helpers::getUrl("User","users")?>" id="text-white"><span>Users</span></a>
                         </div>
                     </div>
                 </div>

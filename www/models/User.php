@@ -15,6 +15,7 @@ class User extends Model implements ModelInterface
     protected $email;
     protected $statut;
     protected $allow;
+    protected $image_profile;
     protected $token;
 
     public function initRelation(): array {
@@ -129,5 +130,25 @@ class User extends Model implements ModelInterface
     public function getVerified()
     {
         return $this->verified;
+    }
+
+    /**
+     * Get the value of image_profile
+     */ 
+    public function getImage_profile()
+    {
+        return $this->image_profile;
+    }
+
+    /**
+     * Set the value of image_profile
+     *
+     * @returnself
+     */ 
+    public function setImage_profile($image_profile)
+    {
+        $this->image_profile = $image_profile;
+
+        return $this;
     }
 }

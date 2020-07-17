@@ -159,8 +159,8 @@ CREATE TABLE IF NOT EXISTS bape_cinema(
 );
 
 INSERT INTO bape_cinema (id, name, place, number_rooms, image_url) VALUES
-(1, 'Gaumont P.', 'Paris 6eme', 11, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Gaumont_logo.svg/1280px-Gaumont_logo.svg.png'),
-(2, 'UGC', 'Enghien-les-Bains', 7, 'https://www.biodegrad.com/wp-content/uploads/2016/04/logo-ugc.png'),
-(3, 'Paramount', 'Paris 13eme', 12, 'https://upload.wikimedia.org/wikipedia/fr/thumb/5/59/Paramount_Channel.svg/1200px-Paramount_Channel.svg.png'),
-(4, 'Universal', 'Sarcelles', 6, 'https://upload.wikimedia.org/wikipedia/fr/thumb/5/5c/Universal_logo.svg/1200px-Universal_logo.svg.png'),
-(5, 'Mega CGR', 'Epinay Villetaneuse', 11, 'https://www.cgrcinemas.fr/image/2017/logo.png')
+(1, 'Gaumont P.', 'Paris 6eme', 11, 'gaumont-1594990395.jpg'),
+(2, 'UGC', 'Enghien-les-Bains', 7, 'ugc-1594990410.jpg'),
+(3, 'Paramount', 'Paris 13eme', 12, 'paramount_pictures-1594990401.jpg'),
+(4, 'Universal', 'Sarcelles', 6, 'universal-1594990415.jpg'),
+(5, 'Mega CGR', 'Epinay Villetaneuse', 11, 'cinemas-cgr-1594990366.jpg')

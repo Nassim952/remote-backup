@@ -27,13 +27,6 @@ class DashboardController extends Controller
         $this->render("dashboard", "back", ['movies' => $movies]);
     }
 
-    public function usersAction(){
-        $userManager = new UserManager(User::class,'user');
-        $users = $userManager->read();
-
-        $this->render("users", "back", ['users' => $users]);
-    }
-
     public function statAction(){
         new View("stat","back");
     }

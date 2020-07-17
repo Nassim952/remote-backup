@@ -42,7 +42,71 @@ class UserController extends Controller{
     }
 
     public function usersAction(){
-        new View("users","back");
+        $userManager = new UserManager(User::class,'user');
+        $users = $userManager->read();
+
+        $this->render("users", "back", ['users' => $users]);
+    }
+
+    public function editUserAction($id){
+        $userManager = new UserManager(User::class,'user');
+        $userId = $userManager->read($id);
+
+        $this->render("edit-user", "back", ['myUser' => $userId]);
+
+        if( $_SERVER["REQUEST_METHOD"] == "POST"){
+            $user = new User();
+            
+            $user->setId($id);
+            $user->setLastname($_POST['lastname']);
+            $user->setFirstname($_POST['firstname']);
+            $user->setStatut($_POST['statut']);
+            $user->setAllow($_POST['allow']);
+            $user->setPassword(reset($userId)->getPassword());
+            $user->setEmail(reset($userId)->getEmail());
+
+            if(!empty($_FILES['image_profile']['name'])){
+                $data_image = $this->uploadImage();
+                if(isset($data_image) && !empty($data_image['image'])){
+                    $user->setImage_profile($data_image['image']);
+                }
+            }else{
+                $user->setImage_profile(reset($userId)->getImage_profile());
+            }
+
+            $userManager->save($user);
+
+            echo "<script>alert('User modifié avec succès');</script>";
+        }
+    }
+
+    public function deleteUserAction($id){
+        new View('confirm-page','back');
+
+        $userManager = new UserManager(User::class,'user');
+        $userManager->delete($id);
+
+        echo "<script>alert('User supprimé avec succès');</script>";
+    }
+
+    public function uploadImage()
+    {
+        if(isset($_FILES['image_profile'])){
+            $output_dir = "public/images";//Path for file upload
+            $RandomNum = time();
+            $ImageName = str_replace(' ','-',strtolower($_FILES['image_profile']['name']));
+            $ImageType = $_FILES['image_profile']['type']; //"image/png", image/jpeg etc.
+            $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
+            $ImageExt = str_replace('.','',$ImageExt);
+            $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
+            $NewImageName = $ImageName.'-'.$RandomNum.'.'.$ImageExt;
+            $ret[$NewImageName]= $output_dir.$NewImageName;
+            move_uploaded_file($_FILES["image_profile"]["tmp_name"],$output_dir."/".$NewImageName );
+            $data = array(
+            'image' =>$NewImageName
+            );
+            return $data;
+        }
     }
 
     public function accountActivationAction($token)

@@ -8,10 +8,6 @@
   controller: Dashboard
   action: stat
 
-/users:
-  controller: Dashboard
-  action: users
-
 /horaires:
   controller: Dashboard
   action: horraires
@@ -21,6 +17,22 @@
 /:
   controller: User
   action: home
+
+/users:
+  controller: User
+  action: users
+
+/delete-user:
+  controller: User
+  action: deleteUser
+
+/edit-user:
+  controller: User
+  action: editUser
+
+/show-user:
+  controller: User
+  action: showUser
 
 /login:
   controller: User
