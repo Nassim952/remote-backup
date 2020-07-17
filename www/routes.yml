@@ -58,6 +58,14 @@
   controller: User
   action: mailNotChecked
 
+/session-not-start:
+  controller: User
+  action: sessionNotStart
+
+/no-permission:
+  controller: User
+  action: noPermission
+
 
 ########### Cinema #############
 

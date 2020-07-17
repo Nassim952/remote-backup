@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS bape_user(
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     statut INT NOT NULL DEFAULT 0,
-    allow VARCHAR(255) NOT NULL,
+    allow INT NOT NULL,
     image_profile VARCHAR(255),
     token varchar(255) DEFAULT NULL,
     verified boolean DEFAULT 0
@@ -55,13 +55,13 @@ CREATE TABLE IF NOT EXISTS bape_user(
 -- 
 
 INSERT INTO bape_user (lastname, firstname, email, password, statut, allow, image_profile, verified) VALUES
-('DeSouza', 'Eyram', 'eyram@nearby.com', 'password', 1, 'owner', 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Mbiya','Randy', 'randy@nearby.com','password', 1, 'owner', 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Mmadi','Nassim','nassim@nearby.com','password', 1, 'owner', 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Belatoui', 'Bilal','bilal@nearby.com','password', 1, 'owner', 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Drizzy', 'Drake','drake@nearby.com','password', 1, 'admin', 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Scott', 'Travis','scott@nearby.com','password', 1, 'customer', 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Mondor', 'Andrew','andrew@nearby.com', 'password', 1, 'owner', 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1);
+('DeSouza', 'Eyram', 'eyram@nearby.com', 'password', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Mbiya','Randy', 'randy@nearby.com','password', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Mmadi','Nassim','nassim@nearby.com','password', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Belatoui', 'Bilal','bilal@nearby.com','password', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Drizzy', 'Drake','drake@nearby.com','password', 1, 2, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Scott', 'Travis','scott@nearby.com','password', 1, 1, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Mondor', 'Andrew','andrew@nearby.com', 'password', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1);
 
 
 --

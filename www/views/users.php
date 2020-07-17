@@ -64,10 +64,12 @@
                     <td><?= $user->getLastname(); ?></td>
                     <td><?= $user->getFirstname(); ?></td>
                     <td><?= $user->getEmail(); ?></td>
-                    <td><?= $user->getAllow(); ?></td>
+                    <td><?= Helpers::getPermission($user->getAllow()) ?></td>
                     <td><?= $user->getStatut(); ?></td>
-                    <td><a href="<?= Helpers::getUrl('User', 'editUser').'/'.$user->getId() ?>" class="fas fa-edit fa-lg"></a></td>
-                    <td><a href="<?= Helpers::getUrl('User', 'deleteUser').'/'.$user->getId() ?>" class="fas fa-trash-alt fa-lg"></a></td>
+                    <?php if(reset($current_user)->getAllow() >= 2): ?>
+                        <td><a href="<?= Helpers::getUrl('User', 'editUser').'/'.$user->getId() ?>" class="fas fa-edit fa-lg"></a></td>
+                        <td><a href="<?= Helpers::getUrl('User', 'deleteUser').'/'.$user->getId() ?>" class="fas fa-trash-alt fa-lg"></a></td>
+                    <?php endif; ?>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

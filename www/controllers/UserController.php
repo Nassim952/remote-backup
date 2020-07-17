@@ -41,6 +41,10 @@ class UserController extends Controller{
         new View("stat","back");
     }
 
+    public function noPermissionAction(){
+        new View("no-permission", "front");
+    }
+
     public function usersAction(){
         $userManager = new UserManager(User::class,'user');
         $users = $userManager->read();
@@ -125,6 +129,10 @@ class UserController extends Controller{
         new View('mail-not-checked', 'front');
     }
 
+    public function sessionNotStartAction(){
+        new View('session-not-start','front');
+    }
+
     public function forgetPwdAction(){
         new View("forgetPwd", "account");
     }
@@ -154,11 +162,10 @@ class UserController extends Controller{
             $users = $userManager->read();
             
             $userCheck = $userManager->checkUserInDb($_POST[$form->getName().'_email'] ,$_POST[$form->getName().'_password'], $users);
-            // var_dump($userCheck);
             if($userCheck){
                 if($userCheck->getVerified() == 1){
                     session_start();
-                    $_SESSION['user'] = $userCheck;
+                    $_SESSION['userId'] = $userCheck->getId();
                     $view = Helpers::getUrl("Dashboard", "dashboard");
                     $newUrl = trim($view, "/");
                     header("Location: " . $newUrl);

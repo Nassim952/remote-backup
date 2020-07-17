@@ -10,7 +10,9 @@
     <div id="separation-bar"></div>
     <div class="quick-tools">
         <div id="space-icons">
-            <a href="<?= cms\core\Helpers::getUrl('Cinema','addCinema') ?>" class="fas fa-plus fa-lg"></a>
+            <?php if(reset($current_user)->getAllow() >= 2): ?>
+                <a href="<?= cms\core\Helpers::getUrl('Cinema','addCinema') ?>" class="fas fa-plus fa-lg"></a>
+            <?php endif;?>
         </div>
     </div>
     <div class="lists-film">

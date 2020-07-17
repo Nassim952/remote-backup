@@ -22,7 +22,9 @@
                     <span class="nombre-salle">Nombre de salles :</span>
                     <span class="number-room-info"><?= $cinema_room->getNumber_rooms() ?></span>
                 </div>
-                <a href="<?= cms\core\Helpers::getUrl("Cinema","editCinema").'/'.$cinema_room->getId() ?>" class="Button">Editer</a>
+                <?php if(reset($current_user)->getAllow() >= 2): ?>
+                    <a href="<?= cms\core\Helpers::getUrl("Cinema","editCinema").'/'.$cinema_room->getId() ?>" class="Button">Editer</a>
+                <?php endif;?>
             </div>
         <?php endforeach; ?>
     </div>

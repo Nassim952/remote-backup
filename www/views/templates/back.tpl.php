@@ -1,7 +1,16 @@
-<?php 
+<?php
+    use cms\managers\UserManager;
     session_start();
-    (!isset($_SESSION['user'])) ? header('Location: localhost:8081/connexion') : '';
-    ($_SESSION['user']->getVerified()) == 0 ? header('Location: localhost:8081/mail-not-checked') : '';
+    (!isset($_SESSION['userId'])) ? header('Location: /session-not-start') : '';
+    if(isset($_SESSION['userId'])){
+        $current_user = (new UserManager(User::class, 'user'))->read($_SESSION['userId']);
+        if(reset($current_user)->getAllow() == 'customer'){
+            header('Location: /no-permission');
+        }
+        if(reset($current_user)->getVerified() == 0){
+            header('Location: /mail-not-checked');
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -34,8 +43,8 @@
                 </div>
             </div>
             <div class="name-container">
-                <img src="../public/images/<?= $_SESSION['user']->getImage_profile() ?>" id="dot"/>
-                <p><?=ucFirst($_SESSION['user']->getFirstname());?></p>
+                <img src="../public/images/<?= reset($current_user)->getImage_profile() ?>" id="dot"/>
+                <p><?=ucFirst(reset($current_user)->getFirstname());?></p>
             </div>
             <div class="nav-content">
                 <h2 id="text-submenu-fixer">Gestion film</h2>
