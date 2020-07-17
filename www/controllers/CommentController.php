@@ -21,7 +21,14 @@ class CommentController extends Controller{
     public function showCommentAction($id){
         $commentManager = new commentManager(Comment::class,'comment');
         $comment = $commentManager->read($id);
-        $this->render("show-comment", "back", ['myComment' => $comment]);
+        //envoyer l'author
+        $author = $commentManager->getAuthor(reset($comment)->getUser_id());
+       
+        $this->render("show-comment", "back", [
+            'myComment' => $comment,
+            'myAuthor'=> $author
+            ]);
+
     }
 
     public function addCommentAction(){

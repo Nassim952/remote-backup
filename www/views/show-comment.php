@@ -22,9 +22,9 @@
                 <li class="show-li-wrapper">
                     <span id="show-label-bold">Date :</span> <?= $comment->getPost_date() ?>
                 </li>
-                <li class="show-li-wrapper">
-                    <span id="show-label-bold">Auteur :</span> <?= $comment->getAuthor() ?>
-                </li>
+                <!-- <li class="show-li-wrapper">
+                    <span id="show-label-bold">Auteur :</span>  // $myAuthor->getName() 
+                </li> -->
             </ul>
             <div class='show-button-wrapper'>
             <a class="Button" href="<?= Helpers::getUrl("Comment", "editComment").'/'.$comment->getId() ?>">Modifier</button>
