@@ -1,5 +1,6 @@
 <?php
     use cms\managers\UserManager;
+    use cms\core\Helpers;
     session_start();
     (!isset($_SESSION['userId'])) ? header('Location: /session-not-start') : '';
     if(isset($_SESSION['userId'])){
@@ -9,6 +10,9 @@
         }
         if(reset($current_user)->getVerified() == 0){
             header('Location: /mail-not-checked');
+        }
+        if(reset($current_user)->getStatut() == 0){
+            header('Location: /no-permission');
         }
     }
 ?>
@@ -42,10 +46,12 @@
                     <h3 id="text-white" style="font-size:20px;">Dashboard</h3>
                 </div>
             </div>
-            <div class="name-container">
-                <img src="../public/images/<?= reset($current_user)->getImage_profile() ?>" id="dot"/>
-                <p><?=ucFirst(reset($current_user)->getFirstname());?></p>
-            </div>
+            <a href="<?= Helpers::getUrl('User','showUser').'/'.reset($current_user)->getId() ?>" style="width: -webkit-fill-available;">
+                <div class="name-container">
+                    <img src="../public/images/<?= reset($current_user)->getImage_profile() ?>" id="dot"/>
+                    <p><?=ucFirst(reset($current_user)->getFirstname());?></p>
+                </div>
+            </a>
             <div class="nav-content">
                 <h2 id="text-submenu-fixer">Gestion film</h2>
                 <div class="dashboard-menu">

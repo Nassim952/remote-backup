@@ -64,8 +64,19 @@ class UserController extends Controller{
             $user->setId($id);
             $user->setLastname($_POST['lastname']);
             $user->setFirstname($_POST['firstname']);
-            $user->setStatut($_POST['statut']);
-            $user->setAllow($_POST['allow']);
+
+            if(empty($_POST['statut'])){
+                $user->setStatut(reset($userId)->getStatut());
+            }else{
+                $user->setStatut($_POST['statut']);
+            }
+
+            if(empty($_POST['allow'])){
+                $user->setAllow(reset($userId)->getAllow());
+            }else{
+                $user->setAllow($_POST['allow']);
+            }
+            $user->setVerified(1);            
             $user->setPassword(reset($userId)->getPassword());
             $user->setEmail(reset($userId)->getEmail());
 
@@ -77,7 +88,6 @@ class UserController extends Controller{
             }else{
                 $user->setImage_profile(reset($userId)->getImage_profile());
             }
-
             $userManager->save($user);
 
             echo "<script>alert('User modifié avec succès');</script>";
@@ -148,6 +158,13 @@ class UserController extends Controller{
             throw new NotFoundException("User not found");
 		}
         return $user;
+    }
+
+    public function showUserAction($id){
+        $user = new UserManager(User::class, 'user');
+        $user_id = $user->read($id);
+
+        $this->render('show-user','back', ['myUser' => $user_id]);
     }
 
 	public function loginAction()

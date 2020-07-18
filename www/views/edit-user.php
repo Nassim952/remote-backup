@@ -3,6 +3,7 @@
 </head>
 
 <?php
+    use cms\core\Helpers;
     foreach($myUser as $user):
 ?>
 <div class="site-content">
@@ -18,22 +19,30 @@
                 <div class="flex-form-content-left">
                     <label>Prénom :</label>
                     <input class=input-form  type="text" name="firstname" value="<?= $user->getFirstname(); ?>">
-                    <label>Statut :</label>
-                    <select class=input-form type="select" name="statut" value="<?= $user->getStatut(); ?>">
-                        <option value="<?= $user->getStatut() ?>"><?= $user->getStatut() ?></option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
-                <div class="flex-form-content-right">
-                <select class=input-form type="select" name="allow" placeholder="permission">
-                        <option value="<?= $user->getAllow() ?>"><?= $user->getAllow() ?></option>
-                        <option value="SuperAdmin">SuperAdmin</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Customer">Customer</option>
-                    </select>
-                </div>
+                    <?php if(reset($current_user)->getAllow() >= 2): ?>
+                        <?php if(reset($current_user)->getAllow() == 3): ?>
+                            <label>Statut :</label>
+                            <select class=input-form type="select" name="statut" value="<?= $user->getStatut(); ?>">
+                                <option value="<?= $user->getStatut() ?>"><?= $user->getStatut() ?></option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        <?php endif; ?>
+                    <div class="flex-form-content-right">
+                    <select class=input-form type="select" name="allow" placeholder="permission">
+                            <option value="<?= $user->getAllow() ?>"><?= Helpers::getPermission($user->getAllow()) ?></option>
+                            <?php if(reset($current_user)->getAllow() == 3): ?>
+                                <option value="2">SuperAdmin</option>
+                            <?php endif; ?>
+                            <option value="1">Admin</option>
+                            <option value="0">Customer</option>
+                        </select>
+                    </div>
+                <?php endif;?>
+                <?php if(reset($current_user)->getId() == $user->getId()): ?>
                 <label>Photo de profil :</label>
-                <input class="input-form affiche" type="file" name="image_profile" value="<?= $user->getImage_profile() ?>"></input>
+                    <input class="input-form affiche" type="file" name="image_profile" value="<?= $user->getImage_profile() ?>"></input>
+                <?php endif; ?>
             </div>
             <input type="submit" class="input-form submit-addfilm" value="Valider"></input>
         </form>

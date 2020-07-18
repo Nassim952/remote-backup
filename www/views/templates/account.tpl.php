@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	isset($_SESSION['user']) ? session_destroy() : '' ;
+	isset($_SESSION['userId']) ? session_destroy() : '' ;
 ?>
 <head>
 	<title>NEAR BY - Account</title>
