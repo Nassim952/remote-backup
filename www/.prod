@@ -1,3 +1,11 @@
 define("APP_INSTALLED",true);
 
 define("APP_INSTALLED",true);
+
+DB_PREFIXE=bape_
+DRIVER_DB=mysql
+NAME_DB=cinedata
+USER_DB=admin
+PWD_DB=Password95230
+HOST_DB=nearby.cghi2cyckn5c.eu-west-3.rds.amazonaws.com
+SEPARATOR=@ndk
