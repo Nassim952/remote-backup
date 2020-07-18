@@ -4,7 +4,7 @@
     (!isset($_SESSION['userId'])) ? header('Location: /session-not-start') : '';
     if(isset($_SESSION['userId'])){
         $current_user = (new UserManager(User::class, 'user'))->read($_SESSION['userId']);
-        if(reset($current_user)->getAllow() == 'customer'){
+        if(reset($current_user)->getAllow() == 0){
             header('Location: /no-permission');
         }
         if(reset($current_user)->getVerified() == 0){

@@ -84,6 +84,18 @@ class UserManager extends DB{
         }
     }
 
+    public function checkIfMailExist($email)
+    {
+        $users = $this->read();
+        foreach ($users as $user) 
+        {
+            if ($user->getEmail() == $email) 
+            {
+                return true;
+            }
+        }
+    }
+
     public function checkSave($email, $password, $users)
     {
         foreach ($users as $value) {

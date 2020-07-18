@@ -122,6 +122,7 @@ class UserController extends Controller{
             new View('mail-check', 'front');
         }else{
             echo "<script>alert('user inconnu');</script>";
+            new View("user-token-unknown", "front");
         }
     }
 
@@ -198,8 +199,8 @@ class UserController extends Controller{
         if($form->isSubmit() && $form->isValid())
         { 
             $userManager = new UserManager(User::class,'user');
-           
-            if (!$userManager->findBy(["email"=>$_POST[$form->getName().'_email']]))
+            
+            if ($userManager->checkIfMailExist($_POST[$form->getName().'_email']) != true)
             {
                 $token = bin2hex(random_bytes(50));          
                 $user = new User;
@@ -207,9 +208,10 @@ class UserController extends Controller{
                 $user->setFirstname($_POST[$form->getName().'_firstname']);
                 $user->setEmail($_POST[$form->getName().'_email']);
                 $user->setPassword($_POST[$form->getName().'_password']);
-                $user->setAllow('customer');
+                $user->setAllow(0);
                 $user->setToken($token);
                 $user->setStatut(1);
+                $user->setImage_profile('null');
 
                 $userManager->save($user);
                 // on vérifie si le save a bien été fait et on envoie un mail
@@ -220,6 +222,9 @@ class UserController extends Controller{
                     $result = $mail->sendVerifAuth($_POST[$form->getName().'_email'], $token, $_POST[$form->getName().'_firstname']);
                     if(!$result){
                         echo "<script>alert('Confirmer votre adresse en cliquant sur le lien envoyé par mail !');</script>";
+                        $this->render("register", "account", [
+                            "configFormUser" => $form
+                        ]);
                     }else {
                         print_r($result);
                     }
