@@ -1,0 +1,9 @@
+@mixin arrow($url) {
+    content: '';
+    top: 0;
+    left: 0;
+    background-image: url($url);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}

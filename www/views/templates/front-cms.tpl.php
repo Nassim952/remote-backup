@@ -12,13 +12,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NEAR BY CMS</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="../dist/main.css">
+    <!-- <link rel="stylesheet" href="../../dist/main.css"> -->
+    <link rel="stylesheet" href="../../dist-scss/main.css">
     <link rel="stylesheet" href="../../css/home.css">
     <link rel="stylesheet" href="../../css/template-create.css">
     <link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
     <script src="../../js/chart.js"></script>
+    <script src="../../src/js/vendor/jquery-3.4.1.min.js"></script>
+    <script src="../../src/js/caroussel--billboard.js"></script>
+    <script src="../../src/js/caroussel--full--arrow.js"></script>
 </head>
 
 <body>
