@@ -1,8 +1,3 @@
-<?php 
-    session_start();
-    session_destroy();
-?>
-
 <head>
 	<title>NEAR BY - Inscription</title>
 </head>

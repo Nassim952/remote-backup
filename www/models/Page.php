@@ -39,7 +39,7 @@ class Page extends Model implements ModelInterface
     public function delete($id){
         $pageManager = new PageManager(Page::class, 'page');
 
-        $pageManager->deletePage($id);
+        $pageManager->delete($id);
     }
 
 

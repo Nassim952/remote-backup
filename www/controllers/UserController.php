@@ -8,8 +8,10 @@ use cms\core\Mailer;
 use cms\core\Helpers;
 use cms\managers\UserManager;
 use cms\managers\MovieManager;
+use cms\managers\PageManager;
 use cms\core\NotFoundException;
 use cms\core\Controller;
+use cms\core\Page;
 use cms\core\Validator;
 use cms\forms\LoginType;
 use cms\forms\RegisterType;
@@ -161,10 +163,6 @@ class UserController extends Controller{
         $user_id = $user->read($id);
 
         $this->render('show-user','back', ['myUser' => $user_id]);
-    }
-
-    public function templateCreateAction(){
-        new View('template-create','front-cms');
     }
 
 	public function loginAction()

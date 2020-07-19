@@ -12,11 +12,10 @@ class Page extends Model
     protected $id;
     protected $builder;
     protected $title;
-    protected $gabarit;
+    protected $type;
     protected $creation_date;
-    protected $font;
-    protected $font_color;
     protected $theme;
+    protected $background_image;
 
     public function __Construct()
     {
@@ -70,7 +69,7 @@ class Page extends Model
 
     public function getId()
     {
-       return $this->id;
+    return $this->id;
     }
 
     public function getTitle()
@@ -105,44 +104,4 @@ class Page extends Model
 
 //OPERATIONS
 
-
-    /**
-     * Get the value of font
-     */ 
-    public function getFont()
-    {
-        return $this->font;
-    }
-
-    /**
-     * Set the value of font
-     *
-     * @returnself
-     */ 
-    public function setFont($font)
-    {
-        $this->font = $font;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of font_color
-     */ 
-    public function getFont_color()
-    {
-        return $this->font_color;
-    }
-
-    /**
-     * Set the value of font_color
-     *
-     * @returnself
-     */ 
-    public function setFont_color($font_color)
-    {
-        $this->font_color = $font_color;
-
-        return $this;
-    }
 }

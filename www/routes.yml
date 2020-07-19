@@ -46,10 +46,6 @@
   controller: User
   action: home
 
-/template:
-  controller: User
-  action: templateCreate
-
 /user-verif:
   controller: User
   action: accountActivation
@@ -151,6 +147,10 @@
 /addpage:
   controller: Page
   action: addPage
+
+/template:
+  controller: Page
+  action: templateCreate
 
 ########### Component #############
 

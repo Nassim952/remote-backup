@@ -6,7 +6,8 @@ use cms\core\Builder\ElementPageBuilder;
 use cms\core\Builder\PageBuilder;
 use cms\core\Controller;
 use cms\managers\PageManager;
-use cms\core\Page;
+// use cms\core\Page;
+use cms\models\Page;
 use cms\core\View;
 use cms\forms\AddPageType;
 
@@ -35,7 +36,7 @@ class PageController extends Controller
             $page->setTheme($_POST[$form->getName().'_theme']);
             $page->setGabarit($_POST[$form->getName().'_gabarit']);
             $page->setFont($_POST[$form->getName().'_font']);
-            $page->setFont_color($_POST[$form->getName().'_font-color']);
+            $page->setFontColor($_POST[$form->getName().'_font-color']);
 
             $pageManager->save($page);
 
@@ -65,8 +66,12 @@ class PageController extends Controller
         $this->render("edit-page", "back", ['pages' => $pages]);
     }
 
+    public function templateCreateAction(){
+        new View('template-create','front-cms');
+    }
 
-    public function buildPageAction($params)
+
+    public function buildPageAction($page_id)
     {
         // $pageManager = new pageManager();
         // $page = $pageManager->find($params['id']);

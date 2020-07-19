@@ -144,8 +144,6 @@ class DB
 
             //INSERT
             $sql = "INSERT INTO ".$this->table." (".implode(",", $columns).") VALUES (:".implode(",:", $columns).");";
-            echo $sql;
-            die();
         } else {
             //UPDATE
             foreach ($columns as $column) {
