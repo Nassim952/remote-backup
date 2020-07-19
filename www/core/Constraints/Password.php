@@ -32,7 +32,7 @@ class Password implements ConstraintInterface
         {
             if(!preg_match($match, $value) )
             {
-                $this->errors[] = $this->minMessage;
+                $this->errors[] = $this->pwdMessage;
                 break;
             }
         }

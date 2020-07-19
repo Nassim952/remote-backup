@@ -25,6 +25,7 @@
 }
 
 .form-add{
+    margin-top: 20px;
     width: 75%;
     margin-left: auto;
     margin-right: auto;
@@ -74,4 +75,8 @@
 .input-form:focus{
     outline: none;
     border: 3px solid tomato;
+}
+
+.form-group{
+    background-color: #f1f1f1;
 }

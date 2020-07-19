@@ -5,6 +5,7 @@ namespace cms\forms;
 use cms\core\Helpers;
 use cms\core\Constraints\Length;
 use cms\core\Constraints\Password;
+use cms\core\Constraints\Captcha;
 use cms\core\Form;
 
 class LoginType extends Form {
@@ -28,7 +29,7 @@ class LoginType extends Form {
                              "id"=>""
                              ],
                              "required"=>true,
-                             "contraints" => [
+                             "constraints" => [
                                  new Password(),
                              ]
                          ])

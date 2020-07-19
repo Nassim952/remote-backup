@@ -5,6 +5,7 @@ namespace cms\forms;
 use cms\core\Form;
 use cms\core\Constraints\Length;
 use cms\core\Constraints\Password;
+use cms\core\Constraints\Captcha;
 use cms\core\Helpers;
 
 class RegisterType extends Form {
@@ -62,6 +63,16 @@ class RegisterType extends Form {
                         new Password(),
                     ]
                 ])
+            ->add( "captcha", "captcha", [
+                "attr" => ["placeholder"=>"captcha",
+                    "class"=>"form-control form-control-user",
+                    "id"=>"captcha"
+                ],
+                "required"=>true,
+                "constraints" => [
+                    new Captcha('Captch Incorrect'),
+                ]
+            ])
             ->add('submit', 'submit', [
                 'attr' => [
                 "class" => "button",

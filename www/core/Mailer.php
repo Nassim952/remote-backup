@@ -47,8 +47,8 @@ class Mailer
         $mail->Mailer = "smtp";
         $mail->SMTPAuth = true;  // Authentification SMTP active
         $mail->SMTPSecure = 'tls'; // Gmail REQUIERT Le transfert securise
-        $mail->Username = 'nasfahdine@gmail.com';
-        $mail->Password = 'Naima95230&';
+        $mail->Username = 'nearby@gmail.com';
+        $mail->Password = 'Password95230';
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 587;
         $mail->SetFrom('admin@nearby.com', 'Nearby Administrateur');
