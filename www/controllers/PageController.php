@@ -10,6 +10,9 @@ use cms\managers\PageManager;
 use cms\models\Page;
 use cms\core\View;
 use cms\forms\AddPageType;
+use cms\managers\CinemaManager;
+use cms\managers\MovieManager;
+use cms\models\Cinema;
 
 class PageController extends Controller
 {   
@@ -67,7 +70,16 @@ class PageController extends Controller
     }
 
     public function templateCreateAction(){
-        new View('template-create','front-cms');
+        $movieManager = new MovieManager(Movie::class, 'movie');
+        $movies = $movieManager->read();
+
+        $cinemaManager = new CinemaManager(Cinema::class, 'cinema');
+        $cinemas = $cinemaManager->read();
+
+        $this->render('template-create','front-cms',[
+            'movies' => $movies,
+            'cinemas' => $cinemas
+        ]);
     }
 
 
