@@ -38,7 +38,4 @@ class DashboardController extends Controller
         new View("stat","back");
     }
 
-    public function horrairesAction(){
-        new View("horraires","back");
-    }
 }

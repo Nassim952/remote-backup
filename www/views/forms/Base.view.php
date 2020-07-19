@@ -82,7 +82,42 @@ name="<?= $form->getName() ?>"
                 <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
                 <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
                 </input>
-            <?php endif;?>  
+            <?php endif;?>
+            
+            <!---------------NUMBER --->
+            <?php if($field->getType() == "number"):?>
+              <?php if(!empty($field->getOptions()["label"])):?>
+                <label
+                    <?php 
+                    if(isset($field->getOptions()['attr_label'])) {
+                      foreach($field->getOptions()['attr_label'] as $attr => $value)
+                        {
+                          echo "$attr = '$value' ";
+                        }
+                    }
+                    
+                      ?>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?></label>
+              <?php endif ?> 
+              
+              <input 
+                value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
+                type="number"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
+                <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+                </input>
+            <?php endif;?>
 
             <!---------------FILE --->
             <?php if($field->getType() == "file"):?>
@@ -181,8 +216,7 @@ name="<?= $form->getName() ?>"
                   }
                   ?>
                 
-                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
-                <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?>>
                 </input>
             <?php endif;?> 
             

@@ -8,6 +8,8 @@ class Room extends Model
 {
     protected $id;
     protected $name;
+    protected $cinema;
+    protected $places;
     protected $section;
     
     public function __Construct()
@@ -26,6 +28,14 @@ class Room extends Model
         $this->name = $name;
     }
 
+    public function setCinema(string $cinema){
+        $this->cinema = $cinema;
+    }
+
+    public function setPlaces(string $places){
+        $this->places = $places;
+    }
+
     public function setSection(string $section){
         $this->section = $section;
     }
@@ -38,6 +48,14 @@ class Room extends Model
 
     public function getName(){
         return $this->name;
+    }
+
+    public function getCinema(){
+        return $this->cinema;
+    }
+
+    public function getPlaces(){
+        return $this->places;
     }
 
     public function getSection(){

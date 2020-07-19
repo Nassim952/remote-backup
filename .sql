@@ -160,6 +160,26 @@ CREATE TABLE IF NOT EXISTS bape_component_page(
 );
 
 --
+-- Structure de la table `cinema`
+--
+
+DROP TABLE IF EXISTS bape_cinema;
+CREATE TABLE IF NOT EXISTS bape_cinema(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    place VARCHAR(255),
+    number_rooms INT,
+    image_url VARCHAR(255)
+);
+
+INSERT INTO bape_cinema (id, name, place, number_rooms, image_url) VALUES
+(1, 'Gaumont P.', 'Paris 6eme', 11, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Gaumont_logo.svg/1280px-Gaumont_logo.svg.png'),
+(2, 'UGC', 'Enghien-les-Bains', 7, 'https://www.biodegrad.com/wp-content/uploads/2016/04/logo-ugc.png'),
+(3, 'Paramount', 'Paris 13eme', 12, 'https://upload.wikimedia.org/wikipedia/fr/thumb/5/59/Paramount_Channel.svg/1200px-Paramount_Channel.svg.png'),
+(4, 'Universal', 'Sarcelles', 6, 'https://upload.wikimedia.org/wikipedia/fr/thumb/5/5c/Universal_logo.svg/1200px-Universal_logo.svg.png'),
+(5, 'Mega CGR', 'Epinay Villetaneuse', 11, 'https://www.cgrcinemas.fr/image/2017/logo.png');
+
+--
 -- Structure de la table `movie`
 --
 
@@ -197,9 +217,22 @@ INSERT INTO bape_movie (title, release_date, duration, kind, age_require, direct
 DROP TABLE IF EXISTS bape_room;
 CREATE TABLE IF NOT EXISTS bape_room(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255),
-    section CHAR(1)
+    cinema_id INT,
+    name_room VARCHAR(255),
+    nbr_places INT,
+    section CHAR(1),
+    FOREIGN KEY (cinema_id) REFERENCES bape_cinema(id) ON DELETE CASCADE
 );
+
+INSERT INTO `bape_room` (`id`, `cinema_id`, `name_room`, `nbr_places`, `section`) VALUES
+(1, 1, 'salle 01', 80, NULL),
+(2, 1, 'salle 02', 90, NULL),
+(3, 1, 'salle 03', 70, NULL),
+(4, 1, 'salle 04', 130, NULL),
+(5, 2, 'salle 01', 80, NULL),
+(6, 2, 'salle 02', 90, NULL),
+(7, 2, 'salle 03', 70, NULL),
+(8, 2, 'salle 04', 130, NULL);
 
 --
 -- Structure de la table `movie_session`
@@ -208,37 +241,31 @@ CREATE TABLE IF NOT EXISTS bape_room(
 DROP TABLE IF EXISTS bape_movie_session;
 CREATE TABLE IF NOT EXISTS bape_movie_session(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    date_screaning DATE,
-    schedule TIME,
+    date_screaning DATETIME,
     movie_id INT,
     room_id INT,
+    nbr_place_rest INT NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES bape_movie(id) ON DELETE CASCADE,
     FOREIGN KEY (room_id) REFERENCES bape_room(id) ON DELETE CASCADE
 );
+INSERT INTO `bape_movie_session` (`id`, `date_screaning`, `movie_id`, `room_id`, `nbr_place_rest`) VALUES
+(1, '2020-08-03 08:00:00', 1, 1, 80),
+(2, '2020-08-03 11:00:00', 1, 1, 80),
+(3, '2020-08-03 08:00:00', 2, 5, 90),
+(4, '2020-08-03 11:00:00', 2, 5, 90);
 
 --
--- Structure de la table `cinema`
+-- Structure de la table `movie_reservation`
 --
 
-DROP TABLE IF EXISTS bape_cinema;
-CREATE TABLE IF NOT EXISTS bape_cinema(
+DROP TABLE IF EXISTS bape_movie_reservation;
+CREATE TABLE IF NOT EXISTS bape_movie_reservation(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    place VARCHAR(255),
-    number_rooms INT,
-    image_url VARCHAR(255),
-    cinema_movie_id INT,
-    cinema_room_id INT,
-    FOREIGN KEY (cinema_movie_id) REFERENCES bape_movie(id) ON DELETE CASCADE,
-    FOREIGN KEY (cinema_room_id) REFERENCES bape_room(id) ON DELETE CASCADE
+    movie_session_id INT,
+    user_email VARCHAR(255) NOT NULL,
+    nbr_places INT NOT NULL,
+    FOREIGN KEY (movie_session_id) REFERENCES bape_movie_session(id) ON DELETE CASCADE
 );
-
-INSERT INTO bape_cinema (id, name, place, number_rooms, image_url) VALUES
-(1, 'Gaumont P.', 'Paris 6eme', 11, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Gaumont_logo.svg/1280px-Gaumont_logo.svg.png'),
-(2, 'UGC', 'Enghien-les-Bains', 7, 'https://www.biodegrad.com/wp-content/uploads/2016/04/logo-ugc.png'),
-(3, 'Paramount', 'Paris 13eme', 12, 'https://upload.wikimedia.org/wikipedia/fr/thumb/5/59/Paramount_Channel.svg/1200px-Paramount_Channel.svg.png'),
-(4, 'Universal', 'Sarcelles', 6, 'https://upload.wikimedia.org/wikipedia/fr/thumb/5/5c/Universal_logo.svg/1200px-Universal_logo.svg.png'),
-(5, 'Mega CGR', 'Epinay Villetaneuse', 11, 'https://www.cgrcinemas.fr/image/2017/logo.png')
 
 --
 -- Structure de la table `salles`

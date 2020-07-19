@@ -12,7 +12,7 @@ class DB
     private $connection;
     protected $class;
 
-    public function __construct(string $class, string $table, BDDInterface $connection = null)
+    public function __construct(string $class = null, string $table = null, BDDInterface $connection = null)
     {
         $this->class = $class;
         $this->table = DB_PREFIXE.$table;
@@ -115,7 +115,7 @@ class DB
     public function save($objectToSave)
     {
         $objectArray =  $objectToSave->__toArray();
-
+        
         $columnsData = array_values($objectArray);
 
         $columns = array_keys($objectArray);

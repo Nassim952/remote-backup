@@ -60,9 +60,9 @@ class QueryBuilder {
         $this->where = $where;
     }
 
-    public function setJoin($from)
+    public function setJoin($join)
     {
-        $this->from = $from;
+        $this->join = $join;
     }
 
     public function setParameters(string $key, string $value): QueryBuilder
@@ -132,7 +132,7 @@ class QueryBuilder {
 
     public function where(string $conditions):QueryBuilder
     {
-        if (!stristr($this->query, 'WHERE')) {
+        if (!stristr($this->getWhere(), 'WHERE')) {
             $where = 'WHERE';
         } else {
             $where = 'AND';
@@ -156,8 +156,6 @@ class QueryBuilder {
         [$table, $aliasTarget] = explode(" ", $table);
         
         $query = $this->buildJoin($table, $aliasTarget, $fieldSource, $fieldTarget);
-        
-        $this->setAlias( (null === $aliasTarget) ? $table : $aliasTarget);
 
         if (null !== $select) {
             $this->buildSelect($select, $this->alias);
@@ -293,7 +291,7 @@ class QueryBuilder {
 
     public function getQuery(): ResultInterface
     {
-        $this->query = "{$this->query}{$this->from}{$this->where}{$this->group}";
+        $this->query = "{$this->query}{$this->from}{$this->join}{$this->where}{$this->group}";
         $result =  $this->connection->query($this->query, $this->parameters);
 
         return $result;

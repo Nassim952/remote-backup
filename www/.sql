@@ -129,8 +129,11 @@ INSERT INTO bape_movie (title, release_date, duration, kind, age_require, direct
 DROP TABLE IF EXISTS bape_room;
 CREATE TABLE IF NOT EXISTS bape_room(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255),
+    cinema_id INT,
+    name_room VARCHAR(255),
+    nbr_places INT,
     section CHAR(1)
+    FOREIGN KEY (cinema_id) REFERENCES bape_cinema(id) ON DELETE CASCADE
 );
 
 
@@ -143,6 +146,16 @@ CREATE TABLE IF NOT EXISTS bape_movie_session(
     room_id INT,
     FOREIGN KEY (movie_id) REFERENCES bape_movie(id) ON DELETE CASCADE,
     FOREIGN KEY (room_id) REFERENCES bape_room(id) ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS bape_movie_reservation;
+CREATE TABLE IF NOT EXISTS bape_movie_reservation(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    movie_session_id INT,
+    user_id INT,
+    nbr_places INT NOT NULL,
+    FOREIGN KEY (movie_session_id) REFERENCES bape_movie_session(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES bape_user(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS bape_cinema;

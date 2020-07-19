@@ -20,11 +20,11 @@ class Controller implements \SplSubject
         $this->attach($this->event);
     }
 
-    public function createForm(string $class, Model &$model = null): Form
+    public function createForm(string $class, $data = null, Model &$model = null): Form
     {
         $form = new $class;
         $form->configureOptions();
-        $form->initForm();
+        $form->initForm($data);
         if($model){
             $form->setModel($model);
             $form->associateValue();

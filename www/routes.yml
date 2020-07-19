@@ -73,10 +73,6 @@
   controller: Cinema
   action: editCinema
 
-/horraires:
-  controller: Dashboard
-  action: horraires
-
 /delete-cinema:
   controller: Cinema
   action: deleteCinema
@@ -163,3 +159,15 @@
 /installation:
   controller: installer
   action: installer
+
+/seances:
+  controller: MovieReservation
+  action: seances
+
+/getSeances:
+  controller: MovieReservation
+  action: getSeances
+
+/reservation:
+  controller: MovieReservation
+  action: reservation

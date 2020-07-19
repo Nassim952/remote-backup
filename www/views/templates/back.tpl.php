@@ -58,7 +58,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-clock fa-lg"></div>
                         <div id="submenu-wrapper">
-                        <a href="<?=\cms\core\Helpers::getUrl("Dashboard", "horraires")?>" id="text-white"><span>Horraires</span></a>
+                        <a href="<?=\cms\core\Helpers::getUrl("MovieReservation", "seances")?>" id="text-white"><span>Séances</span></a>
                         </div>
                     </div>
                 </div>
