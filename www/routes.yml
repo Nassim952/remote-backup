@@ -48,7 +48,7 @@
 
 /template:
   controller: User
-  action: template
+  action: templateCreate
 
 /user-verif:
   controller: User

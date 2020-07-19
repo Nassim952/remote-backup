@@ -33,10 +33,6 @@ class UserController extends Controller{
         new View("home","empty");
     }
 
-    public function templateAction(){
-        new View("template-create","empty");
-    }
-
     public function statAction(){
         new View("stat","back");
     }
@@ -167,6 +163,10 @@ class UserController extends Controller{
         $this->render('show-user','back', ['myUser' => $user_id]);
     }
 
+    public function templateCreateAction(){
+        
+    }
+
 	public function loginAction()
     {
         
@@ -184,7 +184,7 @@ class UserController extends Controller{
                 if($userCheck->getVerified() == 1){
                     session_start();
                     $_SESSION['userId'] = $userCheck->getId();
-                    $view = Helpers::getUrl("Dashboard", "dashboard");
+                    $view = Helpers::getUrl("User", "templateCreate");
                     $newUrl = trim($view, "/");
                     header("Location: " . $newUrl);
                 }else{
