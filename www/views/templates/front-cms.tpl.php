@@ -1,6 +1,11 @@
+<?php 
+    use cms\core\Helpers;
+    use cms\managers\UserManager;
+    session_start();
+    (!isset($_SESSION['userId'])) ? header('Location: /session-not-start') : $current_user = (new UserManager(User::class, 'user'))->read($_SESSION['userId']);
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,9 +28,9 @@
                 <img id="logo_header" src="../../src/images/logo.png">
             </div>
             <div class="link-wrapper">
-                <a href="<?= \cms\core\Helpers::getUrl("User", "template-create") ?>" class="nav-text" style="text-decoration:underline;">Accueil</a>
-                <a href="#" class="nav-text" style="text-decoration:underline;">Profil</a>
-                <a href="#" class="nav-text" style="text-decoration:underline;">Deconnexion</a>
+                <a href="<?= Helpers::getUrl("User", "templateCreate") ?>" class="nav-text" style="text-decoration:underline;">Accueil</a>
+                <a href="<?= Helpers::getUrl("User", "showUser").'/'.reset($current_user)->getId() ?>" class="nav-text" style="text-decoration:underline;"><?= reset($current_user)->getFirstname() ?></a>
+                <a href="<?= Helpers::getUrl("User", "login") ?>" class="nav-text" style="text-decoration:underline;">Deconnexion</a>
             </div>
         </div>
     </nav>
@@ -36,7 +41,11 @@
             <a href="#" class="nav-text" style="text-decoration:underline;">Cinema</a>
         </div>
         <div class="right-input-wrapper">
-            <input type="text" class="input-round"/>
+            <form method="POST">
+                <label for="search_movie">Rechercher un film : </label> 
+                <input name="search_movie" type="text" class="input-round"/>
+                <button class="Button" type="submit">Valider</button>
+            </form>
         </div>
     </nav>
     <!-- INCLUDE VIEW HERE -->

@@ -35,7 +35,7 @@ class PageController extends Controller
             $page->setTheme($_POST[$form->getName().'_theme']);
             $page->setGabarit($_POST[$form->getName().'_gabarit']);
             $page->setFont($_POST[$form->getName().'_font']);
-            $page->setFontColor($_POST[$form->getName().'_font-color']);
+            $page->setFont_color($_POST[$form->getName().'_font-color']);
 
             $pageManager->save($page);
 
@@ -81,7 +81,7 @@ class PageController extends Controller
         $sections = new ElementPageBuilder(); //sectionManager return Element page builder
         ///
         
-        $page->setBuilder(((new PageBuilder()->setSections($sections))));
+        // $page->setBuilder(((new PageBuilder()->setSections($sections))));
         
         $this->render("default", "front", [
             "page" => $page

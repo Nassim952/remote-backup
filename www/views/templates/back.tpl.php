@@ -8,9 +8,6 @@
         if(reset($current_user)->getAllow() == 0){
             header('Location: /no-permission');
         }
-        if(reset($current_user)->getVerified() == 0){
-            header('Location: /mail-not-checked');
-        }
         if(reset($current_user)->getStatut() == 0){
             header('Location: /no-permission');
         }

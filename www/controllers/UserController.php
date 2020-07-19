@@ -164,7 +164,7 @@ class UserController extends Controller{
     }
 
     public function templateCreateAction(){
-        
+        new View('template-create','front-cms');
     }
 
 	public function loginAction()

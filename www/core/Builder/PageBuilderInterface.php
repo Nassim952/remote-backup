@@ -1,6 +1,6 @@
 <?php
 
-namespace cms\Core\Builder;
+namespace cms\core\Builder;
 
 use cms\models\Component;
 

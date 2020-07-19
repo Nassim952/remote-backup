@@ -1,9 +1,9 @@
 <?php
 
-namespace cms\Core\Builder;
+namespace cms\core\Builder;
 
-use cms\Core\Builder\ElementPageBuilder;
-use cms\Core\Builder\PageBuilderInterface;
+use cms\core\Builder\ElementPageBuilder;
+use cms\core\Builder\PageBuilderInterface;
 
 class PageBuilder implements PageBuilderInterface
 {
@@ -24,7 +24,7 @@ class PageBuilder implements PageBuilderInterface
 
     public function remove(int $position): PageBuilderInterface
     {
-        new SectionManager()->delete(section[$position]);
+        // new SectionManager()->delete(section[$position]);
         
         return $this;
     }
