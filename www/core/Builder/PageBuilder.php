@@ -1,30 +1,35 @@
 <?php
 
-namespace App\Core\Builder;
+namespace cms\Core\Builder;
 
-class PageBuilder implements ElementFormBuilderInterface
+use cms\Core\Builder\ElementPageBuilder;
+use cms\Core\Builder\PageBuilderInterface;
+
+class PageBuilder implements PageBuilderInterface
 {
     protected $sections = [];
     
-    public function add(string $type = "text"): PageBuilderInterface
+    public function add(ElementPageBuilder $section): PageBuilderInterface
     {
-        $this->sections[] = 
-            (new ElementPageBuilder())
-                ->setName($name)
-                ->setType($type)
-                ->setPosition(count($this->sections));
+
+        $this->sections[] = $section;    
      
         return $this;
     }
 
+    public function setSections(array $sections)
+    {
+        $this->sections = $sections;
+    }
+
     public function remove(int $position): PageBuilderInterface
     {
-        unset($this->elements[$position]);
-
+        new SectionManager()->delete(section[$position]);
+        
         return $this;
     }
 
-    public function getSection(int $position): ?ElementPageBuilder
+    public function getSection(int $position): ? ElementPageBuilder
     {
         return $this->sections[$position];
     }
