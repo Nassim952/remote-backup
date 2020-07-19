@@ -12,39 +12,31 @@ class LoginType extends Form {
     public function initForm()
     {
         $this->builder
-        ->add("username", "email", [
-            "attr"=>
-            [
-            "placeholder"=>"login",
-            "class"=>"form-control form-control-user"],
-            "required"=>true,
-            'constraints' => [
-                new Length(2,50, 'Votre prénom doit contenir au moins 2 caractères', 'Votre prénom doit contenir au plus 50 caractères')
-            ]
-            ])
-            ->add( "pwd", "password", [
-                "attr" => ["placeholder"=>"Mot de passe",
-                    "class"=>"form-control form-control-user",
-                    "id"=>""
-                    ],
-                    "required"=>true,
-                    "contraints" => [
-                        new Password(2,50, 'Votre prénom doit contenir au moins 2 caractères', 'Votre prénom doit contenir au plus 50 caractères')
-                    ]
-            ])
-            ->add("captcha", "captcha", [
-                "attr" => ["placeholder"=>"Captcha",
-                    "class"=>"form-control form-control-user",
-                    "id"=>"captcha"
-                    ],
-                    "required"=>true
-            ])
-            ->add('submit', 'submit', [
-                'attr' => [
-                "class" => "button",
-                ]
-            ]);
-
+            ->add("email", "email", [
+                            "attr"=>
+                            [
+                            "placeholder"=>"email",
+                            "class"=>"form-control form-control-user"],
+                            "required"=>true,
+                            'constraints' => [
+                                new Length(2,50, 'Votre prénom doit contenir au moins 2 caractères', 'Votre prénom doit contenir au plus 50 caractères')
+                            ]
+                        ])
+                        ->add( "password", "password", [
+                            "attr" => ["placeholder"=>"Mot de passe",
+                             "class"=>"form-control form-control-user",
+                             "id"=>""
+                             ],
+                             "required"=>true,
+                             "contraints" => [
+                                 new Password(),
+                             ]
+                         ])
+                        ->add('submit', 'submit', [
+                            'attr' => [
+                            "class" => "button",
+                            ]
+                        ]);
             return $this;
     }
 

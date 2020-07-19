@@ -31,7 +31,7 @@ class MovieController extends Controller
             $movie = new Movie();
 
             $movie->setTitle($_POST[$form->getName().'_title']);
-            $movie->setRelease($_POST[$form->getName().'_date']);
+            $movie->setRelease_date($_POST[$form->getName().'_date']);
             $movie->setDuration($_POST[$form->getName().'_duration']);
             $movie->setSynopsis($_POST[$form->getName().'_synopsis']);
             $movie->setKind($_POST[$form->getName().'_kind']);
@@ -99,7 +99,7 @@ class MovieController extends Controller
 
             $movie->setId($id);
             $movie->setTitle($_POST['title']);
-            $movie->setRelease($_POST['date']);
+            $movie->setRelease_date($_POST['date']);
             $movie->setDuration($_POST['duration']);
             $movie->setSynopsis($_POST['synopsis']);
             $movie->setKind($_POST['kind']);

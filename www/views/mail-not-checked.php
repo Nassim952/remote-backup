@@ -21,7 +21,7 @@
             justify-content: center;
             align-items: center;
             margin-top: 130px;">
-                <a class="Button" href="<?= cms\core\Helpers::getUrl('User', 'signin') ?>">Retour</a>
+                <a class="Button" href="<?= cms\core\Helpers::getUrl('User', 'login') ?>">Retour</a>
             </div>
         </section>
     </section>

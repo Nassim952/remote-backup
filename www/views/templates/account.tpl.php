@@ -2,8 +2,6 @@
 	session_start();
 	isset($_SESSION['user']) ? session_destroy() : '' ;
 ?>
-
-<!DOCTYPE html>
 <head>
 	<title>NEAR BY - Account</title>
 </head>

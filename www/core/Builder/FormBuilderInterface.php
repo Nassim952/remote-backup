@@ -5,7 +5,7 @@ namespace cms\core\Builder;
 
 interface FormBuilderInterface
 {
-    public function add(string $name, string $type, array $options): self;
+    public function add(string $name, string $type, array $options = []): self;
 
     public function remove(string $name): self;
 

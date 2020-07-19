@@ -1,3 +1,7 @@
+<head>
+	<title>NEAR BY - Connexion</title>
+</head>
+
 <main class="container">
 	<section class="section1">
 		<!-- IMAGE RED.PNG -->

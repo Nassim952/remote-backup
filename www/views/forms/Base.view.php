@@ -18,7 +18,6 @@ name="<?= $form->getName() ?>"
              echo "Erreur : $error <br>";
 
           }
-         
         }
       }
 ?>
@@ -319,7 +318,7 @@ name="<?= $form->getName() ?>"
                 
                   <?php 
                   if(isset($field->getOptions()['attr'])) {
-                    foreach($field->getOptions()['attr'] as $attr => $value)
+              foreach($field->getOptions()['attr'] as $attr => $value)
                       {
                         echo "$attr = '$value' ";
                       }
@@ -327,7 +326,7 @@ name="<?= $form->getName() ?>"
                     ?>
                   <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
                   <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
-                </div>
+                  </input>
               <?php endif;?> 
 
               <!---------------PASSWORD --->
@@ -360,6 +359,7 @@ name="<?= $form->getName() ?>"
                   ?>
                 <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
                 <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
+                </input>
                 <?php endif;?>
             <!---------------CONFIRM PASSWORD --->
             <?php if($field->getType() == "confirmPassword"):?>
@@ -394,6 +394,7 @@ name="<?= $form->getName() ?>"
                 <div class="label-password">
                     <input type="checkbox"/>
                 </div>
+                </input>
                 <?php endif;?>
           </div>
       </div>
