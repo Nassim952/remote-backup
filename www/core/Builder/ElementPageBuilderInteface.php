@@ -1,6 +1,8 @@
+<!-- ON L'UTILISAIT MAIS CA BUG DU COUP ON ENLEVE (logique) -->
+
 <?php
 
-namespace cms\Core\Builder;
+namespace cms\core\Builder;
 
 use cms\models\Component;
 

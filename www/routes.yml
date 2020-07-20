@@ -112,6 +112,7 @@
   controller: Movie
   action: addFilm
 
+
 ########### Comment #############
 
 /comments:
@@ -147,6 +148,18 @@
 /addpage:
   controller: Page
   action: addPage
+
+/show-pages:
+  controller: Page
+  action: showPages
+
+/build-page:
+  controller: Page
+  action: buildPage
+
+/show-custom-pages:
+  controller: Page
+  action: showCustomPages
 
 /template:
   controller: Page

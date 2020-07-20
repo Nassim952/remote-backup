@@ -6,6 +6,7 @@ use cms\core\Builder\ElementPageBuilder;
 use cms\core\Builder\PageBuilder;
 use cms\core\Controller;
 use cms\managers\PageManager;
+use cms\managers\ComponentManager;
 // use cms\core\Page;
 use cms\models\Page;
 use cms\core\View;
@@ -13,6 +14,9 @@ use cms\forms\AddPageType;
 use cms\managers\CinemaManager;
 use cms\managers\MovieManager;
 use cms\models\Cinema;
+use cms\core\NotFoundException;
+use cms\managers\SectionManager;
+use cms\models\Component;
 
 class PageController extends Controller
 {   
@@ -82,25 +86,51 @@ class PageController extends Controller
         ]);
     }
 
+    public function showPagesAction(){
+        $pageManager = new PageManager(Page::class,'page');
 
-    public function buildPageAction($page_id)
+        $pages = $pageManager->read();
+
+        $this->render('show-pages', 'back', [
+            'pages' => $pages
+        ]);
+    }
+
+    public function showCustomPagesAction(){
+        $pageManager = new PageManager(Page::class,'page');
+
+        $pages = $pageManager->read();
+
+        $this->render('show-pages-customizable', 'front-cms', [
+            'pages' => $pages
+        ]);
+    }
+
+
+    public function buildPageAction($page)
     {
-        // $pageManager = new pageManager();
-        // $page = $pageManager->find($params['id']);
+        if (!$page) {
+            throw new NotFoundException("page not found");
+        }
 
-        // if (!$page) {
-        //     throw new NotFoundException("page not found");
-        // }
+        if(is_string($page)){ 
+            $pageManager = new pageManager(Page::class, 'page');
+            $page = $pageManager->findBy(['title' => $page]);
+            $page = array_pop($page);
+        }
 
-        // recuperation  en BDD
-        $page = new Page();//find page PageManager()
+        $sections = (new SectionManager(ElementPageBuilder::class, 'section'))->sectionsPage($page->getId());
 
-        $sections = new ElementPageBuilder(); //sectionManager return Element page builder
-        ///
-        
-        // $page->setBuilder(((new PageBuilder()->setSections($sections))));
-        
-        $this->render("default", "front", [
+        $sectionUpdate = array_map(function($section){
+            return $section->setComponents((
+                    new ComponentManager(Component::class, 'component'))
+                    ->componentsSection($section->getId())
+            );
+        }, $sections);
+
+        $page->setSections($sectionUpdate);
+
+        $this->render("default", "front-cms", [
             "page" => $page
         ]);
     }

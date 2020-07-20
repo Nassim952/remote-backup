@@ -1,12 +1,15 @@
 <?php
 
-namespace cms\Core\Builder;
+namespace cms\core\Builder;
 
 use cms\models\Component;
-use cms\Core\Builder\ElementPageBuilderInterface;
+use cms\core\Model;
+use cms\core\Builder\ElementPageBuilderInterface;
 
-class ElementPageBuilder implements ElementPageBuilderInterface
+class ElementPageBuilder extends Model
 {
+    private $id;
+
     private $components = [];
 
     private $size;
@@ -15,9 +18,27 @@ class ElementPageBuilder implements ElementPageBuilderInterface
 
     private $position = null;
 
-    public function __construct()
+    public function initRelation(){
+        return[
+
+        ];
+    }
+
+    public function getId()
     {
-        
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function getPage_id()
+    {
+        return $this->page_id;
     }
 
     public function setType(string $type)
@@ -25,7 +46,7 @@ class ElementPageBuilder implements ElementPageBuilderInterface
         $this->type = $type;
     }
 
-    public function setPage(int $id)
+    public function setPage_id(int $id)
     {
         $this->page_id = $id;
     }
@@ -35,7 +56,7 @@ class ElementPageBuilder implements ElementPageBuilderInterface
         $this->size = $size;
     }
 
-    public function setPosition(array $position): ElementPageBuilder
+    public function setPosition(int $position): ElementPageBuilder
     {
         $this->position = $position;
 
@@ -66,8 +87,16 @@ class ElementPageBuilder implements ElementPageBuilderInterface
         return $this->components;
     }
 
-    private function getSize(int $size)
+    public function getSize()
     {
-       return $this->size;
+        return $this->size;
     }   
+
+    public function setComponents($components)
+    {
+        $this->components = $components;
+
+        return $this;
+    }
+
 }

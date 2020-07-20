@@ -45,6 +45,13 @@ class QueryBuilder {
         $this->select = $select;
     }
 
+    public function setWhere($where)
+    {
+        $this->where = $where;
+
+        return $this;
+    }
+
     public function setAlias($alias)
     {
         $this->alias = $alias;
@@ -55,14 +62,9 @@ class QueryBuilder {
         $this->from = $from;
     }
 
-    public function setWhere($where)
+    public function setJoin($join)
     {
-        $this->where = $where;
-    }
-
-    public function setJoin($from)
-    {
-        $this->from = $from;
+        $this->join = $join;
     }
 
     public function setParameters(string $key, string $value): QueryBuilder
@@ -111,23 +113,41 @@ class QueryBuilder {
     }
 
 //OPERATIONS
-    public function select(string $values = '*'):QueryBuilder
+    public function distinct()
     {
-        $select =  "SELECT $values";
+        $select =  "SELECT DISTINCT";
         $this->buildSelect($select);
         return $this;
     }
+    public function select(string $values = '*'):QueryBuilder
+    {
+        if(null === $this->select)
+        {
+            $select =  "SELECT $values";
+            $this->buildSelect($select);
+            return $this;
+        }
+        else
+        {
+            $select = "{$this->select}{$values}";
+            $this->buildSelect($select);
+            return $this;
+        }
 
+    }
+    
     public function from(string $table, string $alias = null):QueryBuilder
     {
-       $from = "FROM $table AS $alias";
+        $from = "FROM $table ";
 
-       if (null !== $alias) {
-        $this->$alias = $alias;
-       }
-       $this->addToFrom($from);
+        if (null !== $alias) {
+            $from .= "AS $alias";
+            $this->alias = $alias;
+        }
+        
+        $this->addToFrom($from);
 
-       return $this;  
+        return $this;  
     }
 
     public function where(string $conditions):QueryBuilder
@@ -243,7 +263,7 @@ class QueryBuilder {
     }
 
     private function on(string $table, string $aliasTarget, string $fieldSource, string $fieldTarget) :string
-    {
+    { 
         return (null === $aliasTarget) ? " ON $this->alias.$fieldSource = $table.$fieldTarget" : "ON $this->alias.$fieldSource = $aliasTarget.$fieldTarget";
     }
 
@@ -281,8 +301,9 @@ class QueryBuilder {
 
     public function addToWhere(string $where)
     {
-        $where = $this->getWhere().$where.' ';
-        $this->setWhere($where);
+        $where = $this->where.$where.' ';
+        
+        $this->where = $where;
     }
 
     private function addToSelect(string $select)
@@ -293,9 +314,10 @@ class QueryBuilder {
 
     public function getQuery(): ResultInterface
     {
-        $this->query = "{$this->query}{$this->from}{$this->where}{$this->group}";
+        $this->query = "{$this->query}{$this->from}{$this->join}{$this->where}{$this->group}";
+        // print_r($this->query."\n");
         $result =  $this->connection->query($this->query, $this->parameters);
-
         return $result;
     }
+    
 }

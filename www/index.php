@@ -17,6 +17,10 @@ spl_autoload_register("myAutoload");
 
 use cms\core\ConstLoader;
 
+use cms\managers\PageManager;
+
+use cms\controllers\PageController;
+
 new ConstLoader();
 
 $uri = $_SERVER["REQUEST_URI"];
@@ -55,11 +59,28 @@ try{
 			}
 
 	} else {
-		throw new Exception("l'url n'existe pas : Error 404");
+		$pages = (new PageManager(Page::class,'page'))->read();
+		if(!empty($pages)){
+			
+			foreach($pages as $page) {
+				
+				if($newUri == "/".str_replace('_',' ',$page->getTitle()))
+				{
+					
+					(new PageController)->buildPageAction($page);
+					break;
+				}
+			}
+		}
+		else
+		{
+			throw new Exception("l'url n'existe pas : Error 404");
+		}
 	}
 }
+
 catch (Exception $e)
 {
-	echo 'Exception. Message d\'erreur : '.$e->getMessage();
-	new cms\core\View('404','front');
+	// echo 'Exception. Message d\'erreur : '.$e->getMessage();
+	new cms\core\View('404');
 }

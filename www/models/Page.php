@@ -4,6 +4,7 @@ namespace cms\models;
 
 use cms\core\Model;
 use cms\core\ModelInterface;
+use cms\core\Builder\PageBuilder;
 use cms\managers\PageManager;
 
 class Page extends Model implements ModelInterface
@@ -17,9 +18,14 @@ class Page extends Model implements ModelInterface
     protected $font;
     protected $font_color;
 
+
+    public function __construct(){
+        $this->builder = new PageBuilder();
+    }
+    
     public function initRelation(): array {
         return [
-        
+            
         ];
     }
 
@@ -36,13 +42,6 @@ class Page extends Model implements ModelInterface
         }
     }
 
-    public function delete($id){
-        $pageManager = new PageManager(Page::class, 'page');
-
-        $pageManager->delete($id);
-    }
-
-
 //SETTERS
 
     public function setId($id)
@@ -58,9 +57,6 @@ class Page extends Model implements ModelInterface
         $this->gabarit = $gabarit;
     }
 
-    public function setCreationDate($creation_date){
-        $this->creation_date = $creation_date;
-    }
 
     public function setTheme($theme){
         $this->theme = $theme;
@@ -70,9 +66,16 @@ class Page extends Model implements ModelInterface
         $this->font = $font;
     }
 
-    public function setFontColor($font_color){
-        $this->font_color = $font_color;
+    public function setBuilder(PageBuilder $builder)
+    {
+        $this->builder = $builder;
     }
+
+    public function setSections(array $sections)
+    {
+        $this->builder->setSections($sections);
+    }
+
 
 //GETTERS
 
@@ -101,7 +104,48 @@ class Page extends Model implements ModelInterface
         return $this->font;
     }
 
-    public function getFontColor(){
+    public function getSections()
+    {
+        return $this->builder->getSections();
+    }
+
+    /**
+     * Get the value of font_color
+     */ 
+    public function getFont_color()
+    {
         return $this->font_color;
+    }
+
+    /**
+     * Set the value of font_color
+     *
+     * @returnself
+     */ 
+    public function setFont_color($font_color)
+    {
+        $this->font_color = $font_color;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of creation_date
+     */ 
+    public function getCreation_date()
+    {
+        return $this->creation_date;
+    }
+
+    /**
+     * Set the value of creation_date
+     *
+     * @returnself
+     */ 
+    public function setCreation_date($creation_date)
+    {
+        $this->creation_date = $creation_date;
+
+        return $this;
     }
 }

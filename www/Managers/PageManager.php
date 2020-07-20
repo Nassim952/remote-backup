@@ -26,4 +26,19 @@ class PageManager extends DB
                 ->getArrayResult(Page::class);
         }
     }
+
+    public function getNav()
+    {
+        $query = (new QueryBuilder())
+                ->distinct()
+                ->select('p.title')
+                ->from(DB_PREFIXE.'page', 'p');
+
+                if(isset($id)){
+                    $query->where('p.id = :idpage')
+                    ->setParameters('idpage', $id);
+                }
+                return $query->getQuery()
+                ->getArrayResult();
+    }
 }

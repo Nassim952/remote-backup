@@ -10,22 +10,16 @@ class Component extends Model implements ModelInterface
 { 
     protected $id;
     protected $title;
-    protected $column;
-    protected $type;
+    protected $categorie;
     protected $data = [];
     protected $position;
-    protected $style;
 
     public function initRelation(): array {
         return [
         
         ];
     }
-    public function delete($id){
-        $componentManager = new componentManager(Component::class, 'component');
 
-        $componentManager->deleteComponent($id);
-    }
     //SETTERS
 
     public function setId($id)
@@ -43,9 +37,9 @@ class Component extends Model implements ModelInterface
         $this->column = $column;
     }
 
-    public function setPosition($type)
+    public function setPosition($position)
     {
-        $this->type = $type;
+        $this->position = $position;
     }
 
     public function setStyle($style)
@@ -58,6 +52,13 @@ class Component extends Model implements ModelInterface
         $this->data = $data;
     }
 
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
 //GETTERS
 
     public function getId(): ?int
@@ -67,17 +68,12 @@ class Component extends Model implements ModelInterface
 
     public function getTitle()	
     {
-       return $this->title;
+        return $this->title;
     }
 
-    public function getColumn()
+    public function getClass()
     {
         return $this->class;
-    }
-
-    public function getPassword($type)
-    {
-        return $this->type;
     }
 
     public function getPosition()
@@ -93,5 +89,10 @@ class Component extends Model implements ModelInterface
     public function getStyle($style)
     {
         return $this->style;
+    }
+
+    public function getCategorie()
+    {
+        return $this->categorie;
     }
 }

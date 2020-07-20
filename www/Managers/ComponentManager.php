@@ -42,9 +42,35 @@ class ComponentManager extends DB{
                 ->getArrayResult(Component::class);
     }
 
-    public function deleteComponent($id)
-    {
-        $this->delete($id);
+    public function componentsSection($id = null){
+        {
+            $query = (new QueryBuilder())
+                ->select('*')
+                ->from(DB_PREFIXE.'component', 'c')
+                ->join(DB_PREFIXE.'section s','section_id');
+            
+                if(isset($id)){
+                    $query->where('c.section_id = :idsection')
+                    ->setParameters('idsection', $id);
+                }
+                return $query->getQuery()
+                ->getArrayResult(Component::class);
+        }
     }
+
+    // public function getComponentsData($id = null){
+    //     {
+    //         $query = (new QueryBuilder())
+    //             ->select('*')
+    //             ->from(DB_PREFIXE.'component', 'c');
+            
+    //             if(isset($id)){
+    //                 $query->where('c.section_id = :idsection')
+    //                 ->setParameters('idsection', $id);
+    //             }
+    //             return $query->getQuery()
+    //             ->getArrayResult(Component::class);
+    //     }
+    // }
 
 }

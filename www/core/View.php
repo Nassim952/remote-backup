@@ -52,12 +52,15 @@ class View
 	}
 
 	//inclue une section si elle existe
-	public function addSection(string $section, array $data)
+	public function addSection($section, array $data)
 	{
-		if (!file_exists("views/sections/".$section.".gab.php")) {
+		if (!file_exists("views/sections/default.gab.php")) {
 			throw new NotFoundException("ce gabarit de section  n'existe pas");
 		}
-		include "views/sections/".$section.".gab.php";
+		${"components".$section->getPage_id()} = $data;
+		${"sections".$section->getPage_id()} = $section;
+		$page = $this->data['page'];
+		include "views/sections/default.gab.php";
 	}
 
 	//inclue une section si elle existe

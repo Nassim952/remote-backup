@@ -104,6 +104,19 @@ CREATE TABLE IF NOT EXISTS bape_page(
     font_color VARCHAR(100)
 );
 
+-- 
+-- Structure de la table 'Section'
+-- 
+
+DROP TABLE IF EXISTS bape_section;
+CREATE TABLE IF NOT EXISTS bape_section(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    size INT,
+    page_id INT,
+    position INT,
+    FOREIGN KEY (page_id) REFERENCES bape_page(id) ON DELETE CASCADE
+);
+
 --
 -- Structure de la table `article`
 --

@@ -4,7 +4,6 @@ namespace cms\core\Builder;
 
 use cms\models\Component;
 
-
 interface PageBuilderInterface
 {
     public function add(ElementPageBuilder $section): self;

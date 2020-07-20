@@ -171,7 +171,7 @@ p {
 @media screen and (min-width: 965px) {
     .caroussel--billboard_ .nav_slider .puce_nav--unselected {
         width: 3rem;
-        height: 5px;
+        height: 1px;
     }
     .caroussel--billboard_ .nav_slider .puce_nav--selected {
         width: 6rem;
@@ -211,8 +211,7 @@ p {
     flex-wrap: wrap;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    height: 100%;
-    position: relative;
+    height: 12%;
 }
 
 .caroussel--full--arrow_ .nav_slider {
@@ -443,6 +442,19 @@ p {
     position: relative;
 }
 
+.front-fit-pic{
+    width: 340px;
+    height: 260px;
+}
+
+.front-box-container{
+    margin-right: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
 .image-banner--text>div {
     position: absolute;
     top: 0;
@@ -460,9 +472,10 @@ p {
 }
 
 .container {
-    max-width: 90%;
+    width: -webkit-fill-available;
     margin: auto;
     overflow-x: hidden;
+    display: flex;
 }
 
 .row {

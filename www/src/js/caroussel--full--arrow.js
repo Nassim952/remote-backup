@@ -26,7 +26,8 @@ function makeSlider(elem) {
     var slides_container = $('<div class="slides-container row" />');
     elem.children('img').each(function() {
         var src = $(this).attr('src');
-        var slide = $('<img class="slide">').attr('src', src);
+        var href = $(this).attr('href');
+        var slide = $('<img class="slide">').attr({'src':src, 'href':href});
         slide.css('height', $('.' + preFull + ' .slider').height() + 'px');
         slide.css('width', $('.' + preFull + ' .slider').width() + 'px');
         slides_container.append(slide);

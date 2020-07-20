@@ -21,7 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="../dist/main.css">
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../../css/salles.css">
     <link rel="stylesheet" href="../../css/addfilm.css">
     <link rel="stylesheet" href="../../css/show-movie.css">
@@ -50,7 +50,7 @@
                 </div>
             </a>
             <div class="nav-content">
-                <h2 id="text-submenu-fixer">Gestion film</h2>
+                <h2 id="text-submenu-fixer">Gestion</h2>
                 <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-film fa-lg"></div>
@@ -58,10 +58,12 @@
                             <a href="<?=\cms\core\Helpers::getUrl("Dashboard", "dashboard")?>" id="text-white"><span>Films</span></a>
                         </div>
                     </div>
+                </div>
+                <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-film fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?=\cms\core\Helpers::getUrl("Page", "addPage")?>" id="text-white"><span>Pages</span></a>
+                            <a href="<?=\cms\core\Helpers::getUrl("Page", "showPages")?>" id="text-white"><span>Pages</span></a>
                         </div>
                     </div>
                 </div>

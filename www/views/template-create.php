@@ -1,11 +1,18 @@
 <div class="template-main-content">
-    <div id="caroussel--billboard_">
-        <img src="../src/images/wallhaven-12.jpg">
-        <img src="../src/images/wallhaven-11.jpg">
-        <img src="../src/images/wallhaven-10.jpg">
-        <img src="../src/images/wallhaven-9.jpg">
-        <img src="../src/images/wallhaven-8.jpg">
-        <img src="../src/images/wallhaven-7.jpg">
-        <img src="../src/images/wallhaven-6.jpg">
+    <h1 style="margin-left:25px;">Les cinémas :</h1>
+    <div id="caroussel--full--arrow_">
+        <?php foreach($cinemas as $cinema): ?>
+        <img src="../public/images/<?= $cinema->getImage_url() ?>"/>
+        <?php endforeach; ?>
+    </div>
+    <div class="front-bottom-wrapper">
+        <div class="front-right-wrapper">
+            <h1 style="margin-left:25px;">Films à l'affiche :</h1>
+            <div id="caroussel--billboard_">
+                <?php foreach($movies as $movie): ?>
+                    <img class="front-fit-pic" src="../public/images/<?= $movie->getImage_poster() ?>">
+                <?php endforeach; ?>
+            </div>
+        </div>
     </div>
 </div>

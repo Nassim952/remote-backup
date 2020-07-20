@@ -182,7 +182,7 @@ class UserController extends Controller{
                 if($userCheck->getVerified() == 1){
                     session_start();
                     $_SESSION['userId'] = $userCheck->getId();
-                    $view = Helpers::getUrl("User", "templateCreate");
+                    $view = Helpers::getUrl("Page", "templateCreate");
                     $newUrl = trim($view, "/");
                     header("Location: " . $newUrl);
                 }else{

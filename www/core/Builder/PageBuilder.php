@@ -13,7 +13,7 @@ class PageBuilder implements PageBuilderInterface
     {
 
         $this->sections[] = $section;    
-     
+        
         return $this;
     }
 
