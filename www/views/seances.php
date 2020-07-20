@@ -7,7 +7,7 @@
 <main class="container">
 
 <div class="heading-banner">
-    <h1 class="white">Horraires de vos diffusions</h1>
+    <h1 class="white">Recherche de séances</h1>
 </div>
 <span class="separator"> </span>
     <form method="post" id='getseance'>
@@ -41,9 +41,14 @@
                         <input type="date" id='date_seance' min="<?php echo date("Y-m-d"); ?>"></input>
                     </td>
                 </tr>
+                <tr>
+                    <td class="choise"></td>
+                    <td width="310px;">
+                        <input type=submit value="Rechercher une séance">
+                    </td>
+                </tr>
             </tbody>
         </table>
-        <input type=submit value="Rechercher une séance">
     </form>
 
     <span class="separator"> </span>
