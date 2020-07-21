@@ -80,7 +80,7 @@ class Mailer
         <body>
         <div class="wrapper">
             <p>Merci de vous etre inscrit sur notre site Nearby. Cliquer sur le lien ci-dessous pour verifier votre compte ! :</p>
-            <a href="http://localhost:8081/user-verif/'.$token.'">Verify Email!</a>
+            <a href="http://'.LINK_WEB.'/user-verif/'.$token.'">Verify Email!</a>
         </div>
         </body>
 
