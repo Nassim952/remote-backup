@@ -23,13 +23,13 @@
                     <span id="show-label-bold">Date :</span> <?= $comment->getPost_date() ?>
                 </li>
                 <li class="show-li-wrapper"> 
-                    <span id="show-label-bold">Auteur :</span>  <?=  var_dump($myAuthor);  ?> 
+                    <span id="show-label-bold">Auteur :</span>  <?=  reset($userComment)->getLastName() ?> 
                 </li>
 
                 
             </ul>
             <div class='show-button-wrapper'>
-            <a class="Button" href="<?= Helpers::getUrl("Comment", "editComment").'/'.$comment->getId() ?>">Modifier</button>
+            
                 <a class="Button" href="<?= Helpers::getUrl("Comment", "deleteComment").'/'.$comment->getId() ?>">Supprimer</a>
                 <a class="Button" href="<?= Helpers::getUrl("Comment","comment") ?>">Retour</a>
             </div>

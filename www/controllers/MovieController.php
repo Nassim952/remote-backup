@@ -12,6 +12,7 @@ use cms\forms\AddFilmType;
 use cms\core\Helpers;
 use cms\core\View;
 use cms\managers\CommentManager;
+use cms\managers\UserManager;
 use \DateTime;
 
 class MovieController extends Controller
@@ -22,6 +23,10 @@ class MovieController extends Controller
         $movieManager = new MovieManager(Movie::class,'movie');
         $movie = $movieManager->read($id);
         $commentManager = new commentManager(Comment::class,'comment');
+        $comment = $commentManager->read($id);
+        $userManager = new userManager(User::class,'user');
+        $userComment = $userManager->read(reset($comment)->getUser_id());
+
         if( $_SERVER["REQUEST_METHOD"] == "POST"){
             $comment = new Comment();
             if (isset($comment)){
@@ -35,6 +40,7 @@ class MovieController extends Controller
         $comment = $commentManager->getFilmComments($id);
         $this->render('show-movie', 'back', [
             'myMovie' => $movie,
+            'userComment'=> $userComment,
             'hisComment' =>$comment]);
     }  
 

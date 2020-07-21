@@ -5,6 +5,7 @@ use cms\core\Controller;
 use cms\managers\CommentManager;
 use cms\models\Comment;
 use cms\core\View;
+use cms\managers\UserManager;
 
 class CommentController extends Controller{
     private $comments;
@@ -22,12 +23,13 @@ class CommentController extends Controller{
         $commentManager = new commentManager(Comment::class,'comment');
         $comment = $commentManager->read($id);
         //envoyer l'author
-        $author = $commentManager->getAuthor(reset($comment)->getUser_id());
-         var_dump($author);
+        $userManager = new userManager(User::class,'user');
+        $userComment = $userManager->read(reset($comment)->getUser_id());
+        
        
         $this->render("show-comment", "back", [
             'myComment' => $comment,
-            'myAuthor'=> $author
+            'userComment'=> $userComment
             ]);
 
     }

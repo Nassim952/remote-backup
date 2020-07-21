@@ -71,6 +71,7 @@ foreach($myMovie as $movie): ?>
                     ?>
                         <p id="text-wrappe"><?= $comment->getComment() ?></p>
                         <p id="hour-wrappe"><?= $comment->getPost_date() ?></p>
+                        <p id="hour-wrappe"><?= reset($userComment)->getLastName() ?></p>
         </td>
         <?php endforeach; ?>
     </div>
