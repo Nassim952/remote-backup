@@ -49,8 +49,8 @@ class CommentManager extends DB{
                 ->from(DB_PREFIXE.'comment', 'c');
             
                 if(isset($id)){
-                    $query->where('c.user_id = :user_id')
-                    ->setParameters('user_id', $id);
+                    $query->where('c.target = :target')
+                    ->setParameters('target', $id);
                 }
                 return $query->getQuery()
                 ->getArrayResult(Comment::class);
