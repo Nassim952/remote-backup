@@ -24,8 +24,8 @@
             <div class="link-wrapper">
                 <a href="#" class="nav-text" style="text-decoration:underline;">À propos</a>
                 <a href="#" class="nav-text" style="text-decoration:underline;">Tarifs</a>
-                <a href="<?= \cms\core\Helpers::getUrl("User", "signup") ?>" class="nav-text" style="text-decoration:underline;">S'inscrire</a>
-                <a href="<?= \cms\core\Helpers::getUrl("User", "signin") ?>" class="nav-text" style="text-decoration:underline;">Se connecter</a>
+                <a href="<?= \cms\core\Helpers::getUrl("User", "register") ?>" class="nav-text" style="text-decoration:underline;">S'inscrire</a>
+                <a href="<?= \cms\core\Helpers::getUrl("User", "login") ?>" class="nav-text" style="text-decoration:underline;">Se connecter</a>
             </div>
         </div>
     </nav>

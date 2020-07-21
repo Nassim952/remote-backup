@@ -147,7 +147,7 @@
         {
             $this
                 ->addConfig('class', User::class)
-                ->setName('AddFilm')
+                ->setName('Movie')
                 ->addConfig('attr', [
                     "method" => "POST",
                     "id"=>"formLoginUser",

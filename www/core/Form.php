@@ -122,7 +122,7 @@ class Form
                     foreach($element->getOptions()['constraints'] as $constraint)
                     {
                         $responseValidator = $this->validator->checkConstraint($constraint, $value);
-                       
+
                         if(NULL !== $responseValidator)
                         {
                             $this->isValid = false;

@@ -61,5 +61,5 @@ try{
 catch (Exception $e)
 {
 	echo 'Exception. Message d\'erreur : '.$e->getMessage();
-	//new View('404.php');
+	new cms\core\View('404');
 }

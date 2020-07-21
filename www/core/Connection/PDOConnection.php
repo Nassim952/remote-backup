@@ -32,7 +32,8 @@ class PDOConnection implements BDDInterface{
             try{
                 $queryPrepared->execute($parameters);
             } catch(PDOException $p) {
-                $p->getMessage();
+                syslog(LOG_ERR, "PDO Error : ".$p->getMessage());
+                
             }
             return new PDOResult($queryPrepared);
         } else {

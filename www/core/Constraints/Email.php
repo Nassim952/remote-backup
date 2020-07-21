@@ -18,8 +18,7 @@ class Password implements ConstraintInterface
         if(NULL == $this->emailMessage)
         {
             $this->emailMessage = "Adresse mail non valide";
-        }
-           
+        }  
     }
 
     // vérifie que la valeur est entre min et max

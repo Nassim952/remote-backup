@@ -1,20 +1,32 @@
 <?php
 
+
 namespace cms\core\Builder;
 
 use cms\core\Connection\BDDInterface;
 use cms\core\Connection\PDOConnection;
 use cms\core\Connection\ResultInterface;
 
-class QueryBuilder
-{
-    protected $connection;
-    protected $query;
-    protected $parameters;
-    protected $alias;
+class QueryBuilder {
 
-    public function __construct(BDDInterface $connection = NULL)
+    protected $connection;
+    protected $query = null;
+    protected $parameters = [];
+    protected $where = null;
+    protected $join = null;
+    protected $from = null;
+    protected $select = null;
+    protected $group = null;
+    protected $alias = null;
+    
+
+//SETTERS
+    public function __construct(BDDInterface $connection = null)
     {
+        $this->setConnection($connection);
+    }
+
+    public function setConnection(BDDInterface $connection = null){
         $this->connection = $connection;
         if(NULL === $connection)
             $this->connection = new PDOConnection();
@@ -23,26 +35,34 @@ class QueryBuilder
         $this->parameters = [];
     }
 
-    public function select( string $values = '*'): QueryBuilder
+    public function setQuery($query)
     {
-        $this->addToQuery("SELECT $values");
-        
-        return $this;
+        $this->query = $query;
     }
 
-    public function from( string $table, string $alias): QueryBuilder
+    public function setSelect(string $select)
     {
-        $this->addToQuery("FROM $table $alias");
+        $this->select = $select;
+    }
+
+    public function setAlias($alias)
+    {
         $this->alias = $alias;
-
-        return $this;
     }
 
-    public function where( string $conditions): QueryBuilder
+    public function setFrom($from)
     {
-        $this->addToQuery("WHERE $conditions");
-        
-        return $this;
+        $this->from = $from;
+    }
+
+    public function setWhere($where)
+    {
+        $this->where = $where;
+    }
+
+    public function setJoin($from)
+    {
+        $this->from = $from;
     }
 
     public function setParameters(string $key, string $value): QueryBuilder
@@ -52,36 +72,228 @@ class QueryBuilder
         return $this;
     }
 
-    public function join(string $table, string $aliasTarget, string $fieldSource = 'id', string $fieldTarget = 'id'): QueryBuilder
-    {
-        $aliasSource = $this->alias;
 
-        $this->addToQuery("JOIN $table $aliasTarget ON $aliasTarget.$fieldTarget = $aliasSource.$fieldSource");
+//GETTERS
+
+    public function getSelect()
+    {
+        return $this->select;
+    }
+
+    public function getFrom()
+    {
+        return $this->from;
+    }
+
+    public function getWhere()
+    {
+        return $this->where;
+    }
+
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+
+    public function getParameters()
+    {
+       return $this->parameters;
+    }
+
+    public function getConnection()
+    {
+        return $this->connection;
+    }
+
+    public function getJoin()
+    {
+        return $this->join;
+    }
+
+//OPERATIONS
+    public function select(string $values = '*'):QueryBuilder
+    {
+        $select =  "SELECT $values";
+        $this->buildSelect($select);
+        return $this;
+    }
+
+    public function from(string $table, string $alias = null):QueryBuilder
+    {
+       $from = "FROM $table AS $alias";
+
+       if (null !== $alias) {
+        $this->$alias = $alias;
+       }
+       $this->addToFrom($from);
+
+       return $this;  
+    }
+
+    public function where(string $conditions):QueryBuilder
+    {
+        if (!stristr($this->query, 'WHERE')) {
+            $where = 'WHERE';
+        } else {
+            $where = 'AND';
+        }
+        $query = "$where $conditions";
+        $this->addToWhere($query);
+
+        return $this; 
+    }
+
+    public function addParameter(string $key, string $value):QueryBuilder
+    {
+        if (null != $key && null != $value) {
+            $this->parameters[$key ] = $value;
+        }
+        return $this;
+    }
+
+    public function join(string $table, string $fieldSource = 'id', string $fieldTarget = 'id', string $select = null):QueryBuilder
+    { 
+        [$table, $aliasTarget] = explode(" ", $table);
+        
+        $query = $this->buildJoin($table, $aliasTarget, $fieldSource, $fieldTarget);
+        
+        $this->setAlias( (null === $aliasTarget) ? $table : $aliasTarget);
+
+        if (null !== $select) {
+            $this->buildSelect($select, $this->alias);
+        }
+        $this->addToJoin($query);
 
         return $this;
     } 
 
+    public function innerJoin(string $table, string $fieldSource = 'id', string $fieldTarget = 'id', string $select = null):QueryBuilder
+    { 
+        [$table, $aliasTarget] = explode(" ", $table);
+        
+        $query = $this->buildJoin($table, $aliasTarget, $fieldSource, $fieldTarget, "INNER");
+        $this->setAlias($aliasTarget);
 
-
-    public function leftJoin(string $table, string $aliasTarget, string $fieldSource = 'id', string $fieldTarget = 'id'): QueryBuilder
-    {
-        $aliasSource = $this->alias;
-
-        $this->addToQuery("LEFT JOIN $table $aliasTarget ON $aliasTarget.$fieldTarget = $aliasSource.$fieldSource");
+        if (null !== $select) {
+            $this->buildSelect($select, $this->alias);
+        }
+        $this->addToJoin($query);
 
         return $this;
     } 
 
-
-    public function addToQuery(string $query): QueryBuilder
+    public function leftJoin(string $table, string $fieldSource = 'id', string $fieldTarget = 'id', string $select = null):QueryBuilder
     {
-        $this->query .= $query. " ";
+        [$table, $aliasTarget] = explode(" ", $table);
+
+        $query = $this->buildJoin($table, $aliasTarget, $fieldSource, $fieldTarget, "LEFT");
+        $this->setAlias($aliasTarget);
+
+        if (null !== $select) {
+            $this->buildSelect($select, $this->alias);
+        }
+        $this->addToJoin($query);
 
         return $this;
     }
 
+    public function rightJoin(string $table, string $fieldSource = 'id', string $fieldTarget = 'id', string $select = null):QueryBuilder
+    {
+        [$table, $aliasTarget] = explode(" ", $table);
+        
+        $query = $this->buildJoin($table, $aliasTarget, $fieldSource, $fieldTarget, "RIGHT");
+        $this->setAlias($aliasTarget);
+
+        if (null !== $select) {
+            $this->buildSelect($select, $this->alias);
+        }
+        $this->addToJoin($query);
+
+        return $this;
+    }
+
+    public function groupBy($group)
+    {
+        $group = "GROUP BY $group";
+        $this->group .= $group;
+
+        return $this;
+    }
+
+//PRIVATE FUNCTION
+    private function buildJoin(string $table, string $aliasTarget, string $fieldSource, string $fieldTarget , string $join = null): string
+    {
+        switch ($join) {
+            case 'LEFT':
+                $query = "LEFT JOIN $table $aliasTarget ";
+                break;
+            case 'RIGHT':
+                $query = "RIGHT JOIN $table $aliasTarget  ";
+                break;
+            case 'INNER':
+                $query = "INNER JOIN $table $aliasTarget ";
+                break;
+            case null:
+                $query = "JOIN $table $aliasTarget ";
+                break;
+        }
+
+        $query .= $this->on($table, $aliasTarget, $fieldSource, $fieldTarget);
+        return $query;
+    }
+
+    private function on(string $table, string $aliasTarget, string $fieldSource, string $fieldTarget) :string
+    {
+        return (null === $aliasTarget) ? " ON $this->alias.$fieldSource = $table.$fieldTarget" : "ON $this->alias.$fieldSource = $aliasTarget.$fieldTarget";
+    }
+
+    private function buildSelect(string $fields, $aliasTarget = null)
+    {
+        $select = null;
+
+        if (null === $aliasTarget) {
+            $select .= "$fields";
+        } else {
+            if (!empty($fields) || $fields === null) {
+
+                foreach (explode('', $fields) as $field) {
+                    $select .= "$aliasTarget.$field";
+                }
+            } else {
+                $select .= "$aliasTarget.*";
+            } 
+        }
+        $this->addToSelect($select);
+    }
+
+
+    public function addToFrom(string $from)
+    {
+        $from = $this->getFrom().$from.' ';
+        $this->setFrom($from);
+    }
+
+    public function addToJoin(string $join)
+    {
+        $join = $this->getJoin().$join.' ';
+        $this->setJoin($join);
+    }
+
+    public function addToWhere(string $where)
+    {
+        $where = $this->getWhere().$where.' ';
+        $this->setWhere($where);
+    }
+
+    private function addToSelect(string $select)
+    {
+        $select = $this->getSelect().$select.' ';
+        $this->setQuery($select);
+    }
+
     public function getQuery(): ResultInterface
     {
+        $this->query = "{$this->query}{$this->from}{$this->where}{$this->group}";
         $result =  $this->connection->query($this->query, $this->parameters);
 
         return $result;

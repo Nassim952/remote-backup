@@ -1,3 +1,7 @@
+<head>
+	<title>NEAR BY - Inscription</title>
+</head>
+
 <main class="container">
     <section class="section1">
         <!-- IMAGE RED.PNG -->
@@ -15,9 +19,10 @@
             <br>
             <br>
             <div class="divInput">
-
-            <?php $this->formView('configFormUser')?>
-            
+                <?php $this->formView('configFormUser')?>
+            </div>
+            <div class="button_wrapper">
+                <a href="<?= \cms\core\Helpers::getUrl("User", "login") ?>" class="button" style="margin-top: 20px;">Déjà un compte ?</a>
             </div>
         </section>
     </section>

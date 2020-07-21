@@ -4,10 +4,6 @@
   controller: Dashboard
   action: dashboard
 
-/edition-film:
-  controller: Dashboard
-  action: editMovie
-
 /statistiques:
   controller: Dashboard
   action: stat
@@ -20,27 +16,11 @@
   controller: Dashboard
   action: horraires
 
-/addfilm:
-  controller: Dashboard
-  action: addFilm
-
-/addpage:
-  controller: Dashboard
-  action: addPage
-
 ############ User ############
 
 /:
   controller: User
   action: home
-
-/inscription:
-  controller: User
-  action: signup
-
-/connexion:
-  controller: User
-  action: signin
 
 /login:
   controller: User
@@ -112,6 +92,10 @@
   controller: Movie
   action: editMovie
 
+/addfilm:
+  controller: Movie
+  action: addFilm
+
 ########### Comment #############
 
 /comments:
@@ -134,7 +118,7 @@
   controller: Comment
   action: editComment
 
-########### page.php #############
+########### Page #############
 
 /pages:
   controller: Page
@@ -148,7 +132,11 @@
   controller: Page
   action: editPage
 
-########### Component.php #############
+/addpage:
+  controller: Page
+  action: addPage
+
+########### Component #############
 
 /components:
   controller: component
@@ -165,3 +153,9 @@
 /edition-component:
   controller: Component
   action: editComponent
+
+  ########### Installer #############
+
+/installation:
+  controller: installer
+  action: installer

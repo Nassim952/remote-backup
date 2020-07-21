@@ -45,11 +45,6 @@ class Movie extends Model implements ModelInterface
         $this->title = $title;
     }
 
-    public function setRelease($release_date)
-    {
-        $this->release_date = $release_date;
-    }
-
     public function setDuration($duration)
     {
         $this->duration = $duration;
@@ -70,11 +65,6 @@ class Movie extends Model implements ModelInterface
     public function getTitle()
     {
         return $this->title;
-    }
-
-    public function getRelease()
-    {
-        return $this->release_date;
     }
 
     public function getDuration()
@@ -225,6 +215,26 @@ class Movie extends Model implements ModelInterface
     public function setAge_require($age_require)
     {
         $this->age_require = $age_require;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of release_date
+     */ 
+    public function getRelease_date()
+    {
+        return $this->release_date;
+    }
+
+    /**
+     * Set the value of release_date
+     *
+     * @returnself
+     */ 
+    public function setRelease_date($release_date)
+    {
+        $this->release_date = $release_date;
 
         return $this;
     }
