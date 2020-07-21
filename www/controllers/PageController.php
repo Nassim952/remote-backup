@@ -43,7 +43,7 @@ class PageController extends Controller
             $page->setTheme($_POST[$form->getName().'_theme']);
             $page->setGabarit($_POST[$form->getName().'_gabarit']);
             $page->setFont($_POST[$form->getName().'_font']);
-            $page->setFontColor($_POST[$form->getName().'_font-color']);
+            $page->setFont_color($_POST[$form->getName().'_font-color']);
 
             $pageManager->save($page);
 
