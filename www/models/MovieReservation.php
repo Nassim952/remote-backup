@@ -19,6 +19,12 @@ class MovieReservation extends Model implements ModelInterface
         ];
     }
 
+    public function delete($id)
+    {
+        $movieReservationManager = new MovieReservationManager(MovieReservation::class, 'movie_reservation');
+        $movieReservationManager->deleteMovieReservation($id);
+    }
+
 //SETTERS
 
     public function setId($id)

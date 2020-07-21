@@ -111,7 +111,6 @@ class MovieReservationController extends Controller
             $movieReservationManager->save($movieReservation);
             $movieSessionManager->save($movieSession);
 
-            echo "<script>alert('Reservation ajoutée avec succès');</script>";
             $message = 'Réservation ajouté avec succès';
             header('Location: /seances?message=' . urlencode($message));
         }
@@ -120,5 +119,41 @@ class MovieReservationController extends Controller
             "configFormUser" => $form,
             "datas" => $datas 
         ]);
+    }
+
+    public function deleteReservationAction($datas){
+        $id = explode('-', $datas)[0];
+        $nbr_places = explode('-', $datas)[1];
+        $seance_id = explode('-', $datas)[2];
+        
+        if(isset($_POST['delete']) && $_POST['delete'] === 'Oui') {
+            $movieReservationManager = new MovieReservationManager(MovieReservation::class, 'movie_reservation');
+            $movieReservationManager->deleteMovieReservation($id);
+
+            $movieSession = new MovieSession();
+            $movieSessionManager = new movieSessionManager(MovieSession::class, 'movie_session');
+            
+            $movieSessionTmp = $movieSessionManager->read($seance_id);
+
+            $nbrplacerest = $movieSessionTmp[0]['nbr_place_rest'] + $nbr_places;
+
+            $movieSession->setId($seance_id);
+            $movieSession->setDate_screaning($movieSessionTmp[0]['date_screaning']);
+            $movieSession->setMovie($movieSessionTmp[0]['movie_id']);
+            $movieSession->setRoom($movieSessionTmp[0]['room_id']);
+            $movieSession->setNbr_place_rest($nbrplacerest);
+
+            $movieSessionManager->save($movieSession);
+
+            $message = 'Votre réservation a bien été supprimée avec succès!';
+            header('Location: /seances?message=' . urlencode($message));
+        } else if(isset($_POST['delete']) && $_POST['delete'] === 'Non') {
+            $message = 'Votre réservation n\'a pas été supprimée';
+            header('Location: /seances?message=' . urlencode($message));
+        } else {
+            $this->render("deleteReservation", "back", [
+                "datas" => $id 
+            ]);
+        }        
     }
 }

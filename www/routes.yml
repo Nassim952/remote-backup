@@ -179,3 +179,7 @@
 /getReservations:
   controller: MovieReservation
   action: getReservations
+
+/deleteReservation:
+  controller: MovieReservation
+  action: deleteReservation

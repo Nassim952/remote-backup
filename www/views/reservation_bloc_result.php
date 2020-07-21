@@ -1,3 +1,7 @@
+<?php
+use cms\core\Helpers;
+?>
+
 <span class="separator"> </span>
 <?php if(empty($data)){ ?>
     <p>Aucun resultats pour votre recherche</p>
@@ -16,7 +20,7 @@
         </thead>
         <tbody>
         <?php foreach($data as $row){ 
-            $url = '/deleteReservation?idresa='.$row["id"];
+            $url = Helpers::getUrl("MovieReservation", "deleteReservation").'/'.$row["id_resa"].'-'.$row["nbr_places"].'-'.$row["id"];
             ?>
             <tr>
                 <td><?php echo $row["user_email"] ?></td>

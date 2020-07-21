@@ -13,16 +13,16 @@ class MovieReservationManager extends DB{
     }
 
     public function read($id = null){
-            $query = (new QueryBuilder())
-                ->select('*')
-                ->from(DB_PREFIXE.'movie_reservation', 'mr');
-            
-                if(isset($id)){
-                    $query->where('mr.id = :idmoviereservation')
-                    ->setParameters('idmoviereservation', $id);
-                }
-                return $query->getQuery()
-                ->getArrayResult(MovieReservation::class);
+        $query = (new QueryBuilder())
+            ->select('*')
+            ->from(DB_PREFIXE.'movie_reservation', 'mr');
+        
+            if(isset($id)){
+                $query->where('mr.id = :idmoviereservation')
+                ->setParameters('idmoviereservation', $id);
+            }
+            return $query->getQuery()
+            ->getArrayResult(MovieReservation::class);
     }
 
     public function getSeance($cinema_id = null, $movie_id = null, $date = null){
@@ -52,7 +52,7 @@ class MovieReservationManager extends DB{
 
     public function getReservations($user_email = null, $cinema_id = null, $movie_id = null, $date = null){
         $query = (new QueryBuilder())
-                ->select('mr.id, mr.user_email, ms.date_screaning, ms.id, mr.nbr_places, m.title, r.name_room, c.name')
+                ->select('mr.id as id_resa, mr.user_email, ms.date_screaning, ms.id, mr.nbr_places, m.title, r.name_room, c.name')
                 ->from(DB_PREFIXE.'movie_session', 'ms')
                 ->join(DB_PREFIXE.'movie_reservation mr', 'ms.id', 'movie_session_id')
                 ->join(DB_PREFIXE.'movie m', 'ms.movie_id', 'id')
