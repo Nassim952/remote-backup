@@ -30,7 +30,7 @@ class CommentController extends Controller{
             ]);
 
     }
-
+    
     public function addCommentAction(){
         new View('add-comment');
         if ($_SERVER["REQUEST_METHOD"] == "POST"){

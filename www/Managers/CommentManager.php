@@ -42,6 +42,21 @@ class CommentManager extends DB{
            
         }
     }
+    public function getFilmComments( $id = null){
+        {
+            $query = (new QueryBuilder())
+                ->select('*')
+                ->from(DB_PREFIXE.'comment', 'c');
+            
+                if(isset($id)){
+                    $query->where('c.user_id = :user_id')
+                    ->setParameters('user_id', $id);
+                }
+                return $query->getQuery()
+                ->getArrayResult(Comment::class);
+           
+        }
+    }
     
     // fonction qui supprime un element de la base de donnée
     public function deleteComment($id)

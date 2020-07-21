@@ -10,6 +10,7 @@ use cms\models\Movie;
 use cms\forms\AddFilmType;
 use cms\core\Helpers;
 use cms\core\View;
+use cms\managers\CommentManager;
 
 class MovieController extends Controller
 {
@@ -17,7 +18,12 @@ class MovieController extends Controller
         $movieManager = new MovieManager(Movie::class,'movie');
         $movie = $movieManager->read($id);
 
-        $this->render('show-movie', 'back', ['myMovie' => $movie]);
+        $commentManager = new commentManager(Comment::class,'comment');
+        $comment = $commentManager->getFilmComments($id);
+
+        $this->render('show-movie', 'back', [
+            'myMovie' => $movie,
+            'hisComment' =>$comment]);
     }  
 
     public function addFilmAction()
