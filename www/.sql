@@ -128,8 +128,8 @@ CREATE TABLE IF NOT EXISTS bape_component(
 );
 
 INSERT INTO bape_component (title, categorie, position, section_id) VALUES
-('carousel', 'carousel', 1, 1),
-('carousel', 'carousel-bilboard', 2, 1);
+('carousel', 'carousel-billboard', 1, 1),
+('carousel', 'carousel-full-arrow', 2, 1);
 
 
 --

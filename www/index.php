@@ -66,7 +66,6 @@ try{
 				
 				if($newUri == "/".str_replace('_',' ',$page->getTitle()))
 				{
-					
 					(new PageController)->buildPageAction($page);
 					break;
 				}

@@ -48,6 +48,7 @@ class View
 		if (!file_exists("views/modals/".$modal.".mod.php")) {
 			throw new Exception("Le modal n'existe pas");
 		}
+		
 		include "views/modals/".$modal.".mod.php";
 	}
 
@@ -61,6 +62,7 @@ class View
 		${"sections".$section->getPage_id()} = $section;
 		$page = $this->data['page'];
 		include "views/sections/default.gab.php";
+		
 	}
 
 	//inclue une section si elle existe
