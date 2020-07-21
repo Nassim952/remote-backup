@@ -22,14 +22,6 @@
   controller: User
   action: home
 
-/inscription:
-  controller: User
-  action: signup
-
-/connexion:
-  controller: User
-  action: signin
-
 /login:
   controller: User
   action: login

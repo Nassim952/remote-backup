@@ -45,48 +45,6 @@ class UserController extends Controller{
         new View("users","back");
     }
 
-    public function signupAction(){
-        new View("signup","front");
-        $userManager = new UserManager(User::class,'user');
-
-        $registerForm  = new RegisterType();
-        
-        $configForm = $registerForm->getForm();
-
-        if( $_SERVER["REQUEST_METHOD"] == "POST"){
-            //Vérification des champs
-            $errors = Validator::formValidate($configForm, $_POST);
-            if(!empty($errors)){
-                print_r($errors);
-            }elseif(empty($errors)){  
-                $token = bin2hex(random_bytes(50));          
-                $user = new User;
-                $user->setLastname($_POST['lastname']);
-                $user->setFirstname($_POST['firstname']);
-                $user->setEmail($_POST['email']);
-                $user->setPassword($_POST['password']);
-                $user->setAllow('customer');
-                $user->setToken($token);
-                $user->setStatut(1);
-
-                $userManager->save($user);
-                
-                // on vérifie si le save a bien été fait et on envoie un mail
-                $users = $userManager->read();
-                $userCheck = $userManager->checkSave($this->email, $this->password, $users);
-                if($userCheck){
-                    $mail = new Mailer();
-                    $result = $mail->sendVerifAuth($_POST['email'], $token, $_POST['firstname']);
-                    if(!$result){
-                        echo "<script>alert('Confirmer votre adresse en cliquant sur le lien envoyé par mail !');</script>";
-                    }else {
-                        print_r($result);
-                    }
-                }
-            }
-        }
-    }
-
     public function accountActivationAction($token)
     {
         $user = (new UserManager(User::class,'user'))->getUserByToken($token);
