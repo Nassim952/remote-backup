@@ -1,0 +1,55 @@
+#logo_header {
+    height: 55px;
+}
+
+.navbar-header{
+    width: 100%;
+    top: 0;
+    background-color: white;
+    opacity: 0.9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: groove;
+}
+
+nav{
+    width: 100%;
+    height: 60px;
+}
+
+.nav-text{
+    font-family: Century Gothic;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    color: #000000;
+}
+
+.link-wrapper{
+    display: flex;
+    width: 90%;
+    justify-content: space-around;
+}
+
+.logo-wrapper{
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.img-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.landing-main-content{
+    justify-content: space-between;
+    display: flex;
+}
+
+.landing-side-wrapper{
+    margin-top: 35%;
+    margin-left: 10%;
+}

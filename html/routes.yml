@@ -1,0 +1,190 @@
+############ Dashboard ###########
+
+/dashboard:
+  controller: Dashboard
+  action: dashboard
+
+/statistiques:
+  controller: Dashboard
+  action: stat
+
+/horaires:
+  controller: Dashboard
+  action: horraires
+
+############ User ############
+
+/:
+  controller: User
+  action: home
+
+/users:
+  controller: User
+  action: users
+
+/delete-user:
+  controller: User
+  action: deleteUser
+
+/edit-user:
+  controller: User
+  action: editUser
+
+/show-user:
+  controller: User
+  action: showUser
+
+/login:
+  controller: User
+  action: login
+
+/register:
+  controller: User
+  action: register
+
+/home:
+  controller: User
+  action: home
+
+/user-verif:
+  controller: User
+  action: accountActivation
+
+/mail-not-checked:
+  controller: User
+  action: mailNotChecked
+
+/session-not-start:
+  controller: User
+  action: sessionNotStart
+
+/no-permission:
+  controller: User
+  action: noPermission
+
+
+########### Cinema #############
+
+/salles:
+  controller: Cinema
+  action: salles
+
+/cinema:
+  controller: Cinema
+  action: cinema
+
+/ajout-cinema:
+  controller: Cinema
+  action: addCinema
+
+/edit-cinema:
+  controller: Cinema
+  action: editCinema
+
+/horraires:
+  controller: Dashboard
+  action: horraires
+
+/delete-cinema:
+  controller: Cinema
+  action: deleteCinema
+
+/show-cinema:
+  controller: Cinema
+  action: showCinema
+
+
+######## Movie #########
+
+/show-movie:
+  controller: Movie
+  action: showMovie
+
+/delete-movie:
+  controller: Movie
+  action: deleteMovie
+
+/edit-movie:
+  controller: Movie
+  action: editMovie
+
+/addfilm:
+  controller: Movie
+  action: addFilm
+
+
+########### Comment #############
+
+/comments:
+  controller: Comment
+  action: comment
+
+/ajout-commentaire:
+  controller: Comment
+  action: addComment
+
+/delete-commentaire:
+  controller: Comment
+  action: deleteComment
+
+/edition-commentaire:
+  controller: Comment
+  action: editComment
+
+########### Page #############
+
+/pages:
+  controller: Page
+  action: Page
+
+/delete-page:
+  controller: Page
+  action: deletePage
+
+/edition-page:
+  controller: Page
+  action: editPage
+
+/addpage:
+  controller: Page
+  action: addPage
+
+/show-pages:
+  controller: Page
+  action: showPages
+
+/build-page:
+  controller: Page
+  action: buildPage
+
+/show-custom-pages:
+  controller: Page
+  action: showCustomPages
+
+/template:
+  controller: Page
+  action: templateCreate
+
+########### Component #############
+
+/components:
+  controller: component
+  action: component
+
+/ajout-component:
+  controller: Component
+  action: addComponent
+
+/delete-component:
+  controller: Component
+  action: deleteComponent
+
+/edition-component:
+  controller: Component
+  action: editComponent
+
+  ########### Installer #############
+
+/installation:
+  controller: installer
+  action: installer
