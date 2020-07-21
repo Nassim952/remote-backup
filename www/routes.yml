@@ -168,6 +168,14 @@
   controller: MovieReservation
   action: getSeances
 
+/addSeance:
+  controller: MovieSession
+  action: addSeance
+
 /reservation:
   controller: MovieReservation
   action: reservation
+
+/getReservations:
+  controller: MovieReservation
+  action: getReservations

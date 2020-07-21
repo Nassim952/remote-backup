@@ -3,6 +3,11 @@
 </head>
 
 <div class="site-content">
+<?php 
+if(isset($_GET['message']) && !empty($_GET['message'])) {
+    echo '<p>' . urldecode($_GET['message']) . '</p>';
+} 
+?>
     <div id="head-title">
         <h2>Reservation</h2>
     </div>

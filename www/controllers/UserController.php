@@ -132,7 +132,6 @@ class UserController extends Controller{
             $users = $userManager->read();
             
             $userCheck = $userManager->checkUserInDb($_POST[$form->getName().'_email'] ,$_POST[$form->getName().'_password'], $users);
-            // var_dump($userCheck);
             if($userCheck){
                 if($userCheck->getVerified() == 1){
                     session_start();

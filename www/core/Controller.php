@@ -72,12 +72,9 @@ class Controller implements \SplSubject
 
     public function notify()
     {
-        //var_dump('COUCOU'); die;
-    
         // /** @var SplObserver $observer */
         foreach ($this->observers as $observer) {
             $observer->update($this);
-        // $observer->logged($_SERVER['REQUEST_URI']);
         }
     }
 

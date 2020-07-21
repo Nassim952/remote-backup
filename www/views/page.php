@@ -20,9 +20,7 @@
             <tr class="tr-container"><?php
 
     foreach($pages as $page):
-        // var_dump($page);
-        
-       
+
 ?>
 <td class="td-dashboard-wrapper">
     <div class="pretty p-default p-curve p-bigger cb-fixer">

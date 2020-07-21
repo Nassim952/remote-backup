@@ -3,18 +3,20 @@
 namespace cms\models;
 
 use cms\core\Model;
+use cms\core\ModelInterface;
 
-class Room extends Model
+class Room extends Model implements ModelInterface
 {
     protected $id;
-    protected $name;
-    protected $cinema;
-    protected $places;
+    protected $name_room;
+    protected $cinema_id;
+    protected $nbr_places;
     protected $section;
     
-    public function __Construct()
-    {
-    
+    public function initRelation(): array {
+        return [
+        
+        ];
     }
 
 //SETTERS
@@ -22,44 +24,40 @@ class Room extends Model
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
-    public function setName(string $name){
-        $this->name = $name;
+    public function setName_room(string $name_room){
+        $this->name_room = $name_room;
+        return $this;
     }
 
-    public function setCinema(string $cinema){
-        $this->cinema = $cinema;
+    public function setCinema_id(int $cinema_id){
+        $this->cinema_id = $cinema_id;
+        return $this;
     }
 
-    public function setPlaces(string $places){
-        $this->places = $places;
-    }
-
-    public function setSection(string $section){
-        $this->section = $section;
+    public function setNbr_places(int $nbr_places){
+        $this->nbr_places = $nbr_places;
+        return $this;
     }
 
 //GETTERS
-    public function getId()
+    public function getId(): ?int
     {
-    return $this->id;
+        return $this->id;
     }
 
-    public function getName(){
-        return $this->name;
+    public function getName_room(){
+        return $this->name_room;
     }
 
-    public function getCinema(){
-        return $this->cinema;
+    public function getCinema_id(){
+        return $this->cinema_id;
     }
 
-    public function getPlaces(){
-        return $this->places;
-    }
-
-    public function getSection(){
-        return $this->section;
+    public function getNbr_places(){
+        return $this->nbr_places;
     }
 
 }

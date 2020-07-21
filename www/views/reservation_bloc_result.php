@@ -5,31 +5,27 @@
     <table style="margin:auto;">
         <thead>
             <tr>
+                <th>Email</th>
                 <th>Cinema</th>
                 <th>Salle</th>
                 <th>Film</th>
-                <th>Seance</th>
-                <th>Nombre de place</th>
+                <th>Séance</th>
+                <th>Nbr places reservées</th>
                 <th>Action</th>
             </tr><p>
         </thead>
         <tbody>
         <?php foreach($data as $row){ 
-            if ($row['nbr_place_rest'] <= 0) {
-                $url = '';
-                $disabled = 'disabled';
-            } else {
-                $url = '/reservation?idms='.urlencode($row["id"]).'&cinema='.urlencode($row["name"]).'&salle='.urlencode($row["name_room"]).'&film='.urlencode($row["title"]).'&seance='.urlencode($row["date_screaning"]).'&maxticket='.urlencode($row["nbr_place_rest"]);
-                $disabled = '';
-            }
+            $url = '/deleteReservation?idresa='.$row["id"];
             ?>
             <tr>
+                <td><?php echo $row["user_email"] ?></td>
                 <td><?php echo $row["name"] ?></td>
                 <td><?php echo $row["name_room"] ?></td>
                 <td><?php echo $row["title"] ?></td>
                 <td><?php echo $row["date_screaning"] ?></td>
-                <td><?php echo $row["nbr_place_rest"]." /".$row["nbr_places"] ?></td>
-                <td><a href=<?php echo $url ?>><button <?php echo $disabled ?>>Réserver</button></a></td>
+                <td><?php echo $row["nbr_places"]?></td>
+                <td><a href=<?php echo $url ?>><button>Supprimer</button></a></td>
             </tr>
         <?php } ?> 
         </tbody>

@@ -53,6 +53,26 @@ class MovieReservationController extends Controller
         ]);
     }
 
+    public function getReservationsAction(){
+        
+        $email_post = $_POST['email'];
+        $cinema_id = $_POST['cinema'];
+        $movie_id = $_POST['movie'];
+        $date_post = $_POST['date'];
+
+        (empty($email_post))? $email = NULL : $email = $email_post;
+        ($cinema_id == 0)? $cinema = NULL : $cinema = $cinema_id;
+        ($movie_id == 0)? $movie = NULL : $movie = $movie_id;
+        (empty($date_post))? $date = NULL : $date = $date_post;
+
+        $movieReservationManager = new movieReservationManager();
+        $data = $movieReservationManager->getReservations($email, $cinema, $movie, $date);
+
+        $this->render("reservation_bloc_result", "empty", [
+            'data'=> $data
+        ]);
+    }
+
     public function reservationAction(){
 
         $datas = array();
@@ -91,9 +111,9 @@ class MovieReservationController extends Controller
             $movieReservationManager->save($movieReservation);
             $movieSessionManager->save($movieSession);
 
-            echo "<script>alert('Reservation ajouté avec succès');</script>";
-            /* header('Location: /seances'); */
-
+            echo "<script>alert('Reservation ajoutée avec succès');</script>";
+            $message = 'Réservation ajouté avec succès';
+            header('Location: /seances?message=' . urlencode($message));
         }
 
         $this->render("reservation", "back", [
@@ -101,72 +121,4 @@ class MovieReservationController extends Controller
             "datas" => $datas 
         ]);
     }
-
-    /* public function cinemaAction(){
-        $cinemaManager = new cinemaManager(Movie::class,'movie');
-        $cinemas = $cinemaManager->read();
-
-        $this->render("cinema", "back", ['cinemas' => $cinemas]);
-    } */
-
-    /* public function addCinemaAction(){
-        new View('add-cinema');
-        if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            $cinema = new Cinema();
-
-            $cinema->setName($_POST['name']);
-            $cinema->setplace($_POST['city']);
-            $cinema->setNumber_rooms($_POST['number_rooms']);
-            $cinema->setImage_url($_POST['image_url']);
-
-            $cinemaManager = new cinemaManager(Cinema::class,'cinema');
-            $cinemaManager->save($cinema);
-
-            echo "<script>alert('Cinema ajouté avec succès');</script>";
-        }
-    }
-
-    public function deleteCinemaAction($id){
-        new View('confirm-page','back');
-        $cinemaManager = new cinemaManager(Cinema::class,'cinema');
-
-        $cinemaManager->delete($id);
-        echo "<script>alert('Cinema supprimé avec succès');</script>";
-    }
-
-    public function editCinemaAction($id){
-        $cinemaManager = new cinemaManager(Cinema::class,'cinema');
-        $cinema = $cinemaManager->read($id);
-
-        $this->render("edit-cinema", "back", ['myCinema' => $cinema]);
-
-        if( $_SERVER["REQUEST_METHOD"] == "POST"){
-
-            $cinema = new Cinema();
-
-            $cinema->setId($id);
-            $cinema->setName($_POST['name']);
-            $cinema->setPlace($_POST['city']);
-            $cinema->setNumber_rooms($_POST['number_rooms']);
-            $cinema->setImage_url($_POST['image_url']);
-
-            $cinemaManager->save($cinema);
-
-            echo "<script>alert('Film modifié avec succès');</script>";
-        }
-    }
-
-    public function showCinemaAction($id){
-        $cinemaManager = new cinemaManager(Cinema::class,'cinema');
-        $cinema = $cinemaManager->read($id);
-
-        $this->render("show-cinema", "back", ['myCinema' => $cinema]);
-    }
-
-    public function sallesAction(){
-        $cinemaManager = new cinemaManager(Movie::class,'movie');
-        $cinema_rooms = $cinemaManager->read();
-
-        $this->render("salles", "back", ['cinema_rooms' => $cinema_rooms]);
-    } */
 }

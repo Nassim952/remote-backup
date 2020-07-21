@@ -20,7 +20,6 @@
             <tr class="tr-container">
                 <?php
         foreach($components as $component):
-            //  var_dump($component);?>
                 <td class="td-dashboard-wrapper">
                     <div class="pretty p-default p-curve p-bigger cb-fixer">
                         <input type="checkbox">

@@ -255,6 +255,40 @@ name="<?= $form->getName() ?>"
                 </input>
             <?php endif;?> 
 
+            <!---------------DATETIME --->
+            <?php if($field->getType() == "datetime-local"):?>
+              <?php if(!empty($field->getOptions()["label"]) == "select"):?>
+                <label
+                    <?php 
+                    if(isset($field->getOptions()['attr_label'])) {
+                      foreach($field->getOptions()['attr_label'] as $attr => $value)
+                        {
+                          echo "$attr = '$value' ";
+                        }
+                    }
+                    
+                      ?>
+                ><?= (!empty($field->getOptions()["label"]))?'':''?> </label>
+              <?php endif ?> 
+              
+              <input 
+                value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
+                type="datetime-local"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>
+                
+                <?=(!empty($field->getOptions()["required"]))?"required='required'":''?>>
+                </input>
+            <?php endif;?> 
+
             <!---------------SELECT --->
             <?php if($field->getType() == "select"):?>
               <?php if(!empty($field->getOptions()["label"])):?>
