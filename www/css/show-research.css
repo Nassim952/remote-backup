@@ -1,0 +1,44 @@
+* 
+{
+    box-sizing: border-box;
+}
+
+.tableMovie
+{
+    width: 100%;
+}
+
+.trMovie
+{
+    width: 100%;
+}
+
+.trMovie:nth-child(even)
+{
+    background-color: #FEF6F6;
+}
+
+.tdPicture
+{
+    width: 30%;
+    padding: 40px 40px 0px;
+    
+}
+
+.tdDescription
+{
+    width: 70%;
+    
+}
+
+.tdPicture img
+{
+    width: 100%;
+    height:auto;
+    border-radius: 15px;
+}
+
+.hover:hover
+{
+    color: tomato;
+}

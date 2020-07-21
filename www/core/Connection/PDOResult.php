@@ -28,6 +28,7 @@ class PDOResult implements ResultInterface
             }
             return $results;
         }
+        
         return $result;
     }
 

@@ -13,6 +13,7 @@ use cms\core\Controller;
 use cms\core\Validator;
 use cms\forms\LoginType;
 use cms\forms\RegisterType;
+use cms\models\Movie;
 
 class UserController extends Controller{
 
@@ -34,7 +35,7 @@ class UserController extends Controller{
     }
 
     public function templateAction(){
-        new View("template-create","empty");
+        new View("template-create","front-cms");
     }
 
     public function statAction(){

@@ -74,6 +74,7 @@ class DB
                 $separator = '=';
             }
             $sql .= " $key $separator :$key and"; 
+
             // Select * FROM users WHERE firstname LIKE :firstname and
             $params[":$key"] = $value;
             unset($params[$key]);
@@ -88,8 +89,11 @@ class DB
         }
         // Select * FROM users WHERE firstname LIKE :firstname ORDER BY id desc
         $result = $this->connection->query($sql, $params);
-        return $result->getArrayResult($this->class);
-    }
+        
+        return $result->getArrayResult($this->class); 
+
+
+    } 
 
     public function count(array $params): int
     {

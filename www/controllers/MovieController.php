@@ -82,4 +82,16 @@ class MovieController extends Controller
             echo "<script>alert('Film modifié avec succès');</script>";
         }
     } 
+
+    public function searchMovieAction()
+    {
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $search = $_POST['name_movie'].'%';
+            $movieManager = new MovieManager(Movie::class, 'movie');
+            $result = $movieManager->findBy(['title'=>$search]);
+            $this->render('show-research', 'front-cms', ['searched'=>$result]);
+        } else {
+            echo "<script>alert('Entrez un film dans la barre de recherche');</script>";
+        }
+    }
 }
