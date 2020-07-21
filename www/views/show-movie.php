@@ -87,7 +87,10 @@ foreach($myMovie as $movie): ?>
         <div class="form-group">
             <label for="content"> Ajouter un commentaire  :</label>
             <!-- recuperer l'id du film avec un input hidden -->
-            <input type="hidden" name="id_commentaire" value="$id" />
+            <input type="hidden" name="id_commentaire" value="<?= $id ?> "/>
+            <input type="hidden" name="id_user" value="<?= $_SESSION['user']->getId() ?>"/>
             <textarea class="" name="content" id="content" rows="5"></textarea>
+            <button type="submit" class="btn btn-primary"> Soumettre mon commentaire </button>
     </form>
+
 </div>

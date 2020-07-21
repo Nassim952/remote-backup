@@ -5,22 +5,34 @@ namespace cms\controllers;
 use cms\managers\CinemaManager;
 use cms\controllers\DashboardController;
 use cms\managers\MovieManager;
+use cms\models\Comment;
 use cms\core\Controller;
 use cms\models\Movie;
 use cms\forms\AddFilmType;
 use cms\core\Helpers;
 use cms\core\View;
 use cms\managers\CommentManager;
+use \DateTime;
 
 class MovieController extends Controller
 {
     public function showMovieAction($id){
+        
+
         $movieManager = new MovieManager(Movie::class,'movie');
         $movie = $movieManager->read($id);
-
         $commentManager = new commentManager(Comment::class,'comment');
+        if( $_SERVER["REQUEST_METHOD"] == "POST"){
+            $comment = new Comment();
+            if (isset($comment)){
+                $comment->setComment($_POST['content']);
+                $comment->setTarget($id);
+                $comment->setAuthor($_POST['id_user']);
+                $commentManager->save($comment);
+            }
+        }
+       // session_start();
         $comment = $commentManager->getFilmComments($id);
-
         $this->render('show-movie', 'back', [
             'myMovie' => $movie,
             'hisComment' =>$comment]);

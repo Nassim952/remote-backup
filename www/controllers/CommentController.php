@@ -30,15 +30,15 @@ class CommentController extends Controller{
             ]);
 
     }
-    
+
     public function addCommentAction(){
-        new View('add-comment');
+        new View('movies');
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $comment = new Comment();
 
             $comment->setComment($_POST['comment']);
             $comment->setTarget($_POST['target']);
-            $comment->setAuthor($_POST['author']);
+            //$comment->setAuthor($_POST['author']);
             $comment->setPost_date($_POST['date']);
 
             $commentManager = new commentManager(Comment::class,'comment');
