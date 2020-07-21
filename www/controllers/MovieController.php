@@ -91,8 +91,6 @@ class MovieController extends Controller
         $movieManager = new MovieManager(Movie::class,'movie');
         $movieId = $movieManager->read($id);
 
-        $this->render('edit-movie','back', ['movie' => $movieId]);
-
         if( $_SERVER["REQUEST_METHOD"] == "POST"){
 
             $movie = new Movie();
@@ -108,7 +106,7 @@ class MovieController extends Controller
             $movie->setMain_actor($_POST['actor']);
             $movie->setNationality($_POST['nationality']);
             $movie->setMovie_type($_POST['type']);
-            
+
             if(!empty($_FILES['Movie_image']['name'])){
                 $data_image = $this->uploadImage();
                 if(isset($data_image) && !empty($data_image['image'])){
@@ -122,5 +120,8 @@ class MovieController extends Controller
 
             echo "<script>alert('Film modifié avec succès');</script>";
         }
+
+        $this->render('edit-movie','back', ['movie' => $movieId]);
+        
     } 
 }

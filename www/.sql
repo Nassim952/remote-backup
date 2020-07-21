@@ -85,15 +85,15 @@ CREATE TABLE IF NOT EXISTS bape_page(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     title VARCHAR(100),
     gabarit INT NOT NULL,
-    creation_date TIMESTAMP,
+    creation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     theme VARCHAR(100),
     font VARCHAR(100),
     font_color VARCHAR(100)
 );
 
-INSERT INTO bape_page (title, gabarit, theme, font, font_color) VALUES
-('home-template', 2, 'blue', 'Roboto', 'black'),
-('carousel-template', 1, 'blue', 'Roboto', 'black');
+INSERT INTO bape_page (title, gabarit, creation_date, theme, font, font_color) VALUES
+('home-template', 2, '2020-07-21 12:02:04', 'blue', 'Roboto', 'black'),
+('carousel-template', 1, '2020-07-21 12:02:04', 'blue', 'Roboto', 'black');
 
 -- 
 -- Structure de la table 'Section'
@@ -194,19 +194,20 @@ CREATE TABLE IF NOT EXISTS bape_movie(
     release_date VARCHAR(255),
     duration TIME,
     image_poster VARCHAR(255),
-    synopsis TEXT
+    synopsis TEXT,
+    creation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- 
 -- Chargement des donnees de la table movie
 -- 
 
-INSERT INTO bape_movie (title, release_date, duration, kind, age_require, director, main_actor, nationality, movie_type, image_poster, synopsis) VALUES
-('Spider-Man New Generation', '2021-01-06', '03:02', 'Action', 12, 'Sam Raimi', 'Miles Morales', 'American', 'Animation', 'spider-man_new-generation-1594989900.jpg', 'Spider-Man : New Generation suit les aventures de Miles Morales, un adolescent afro-americain et portoricain qui vit à Brooklyn et s’efforce de s’integrer dans son nouveau college à Manhattan.'),
-('Bad Boys For Life', '2022-01-02', '02:04','Action', 16, 'Bilal Fallah','Will Smith','American','Long-metrage','bad_boys_for_life-1594989852.jpg', 'Si Mike Lowrey est un seducteur invetere, heritier dune fortune et policier par passion, son collegue et ami Marcus Burnett est un homme range, marie et pere de famille..'),
-('Suicide Squad', '2020-01-02', '02:03','Action', 16, 'David Ayer','Will Smith','American','Long-metrage','suicide_squad-1594989912.jpg', 'Cest tellement jouissif dêtre un salopard ! Face à une menace aussi enigmatique quinvincible, lagent secret Amanda Waller reunit une armada de crapules de la pire espece.'),
-('Fast and Furious 8', '2018-02-01', '02:03', 'Action', 12, 'Gary Gray','Paul Walker','American','Long-metrage','faf_8-1594989874.jpg', 'Maintenant que Dom et Letty sont en lune de miel, que Brian et Mia se sont ranges et que le reste de l’equipe a ete disculpe, la bande de globetrotteurs retrouve un semblant de vie normale.'),
-('Je suis une legende', '2007-02-19', '01:40', 'Thriller', 18, 'Francis Lawrence','Will Smith','American','Long-metrage','je_suis_une_legende-1594989888.jpg', 'Robert Neville etait un savant de haut niveau et de reputation mondiale, mais il en aurait fallu plus pour stopper les ravages de cet incurable et terrifiant virus dorigine humaine.');
+INSERT INTO bape_movie (title, release_date, duration, kind, age_require, director, main_actor, nationality, movie_type, image_poster, synopsis, creation_date) VALUES
+('Spider-Man New Generation', '2021-01-06', '03:02', 'Action', 12, 'Sam Raimi', 'Miles Morales', 'American', 'Animation', 'spider-man_new-generation-1594989900.jpg', 'Spider-Man : New Generation suit les aventures de Miles Morales, un adolescent afro-americain et portoricain qui vit à Brooklyn et s’efforce de s’integrer dans son nouveau college à Manhattan.', '2020-07-21 12:02:04'),
+('Bad Boys For Life', '2022-01-02', '02:04','Action', 16, 'Bilal Fallah','Will Smith','American','Long-metrage','bad_boys_for_life-1594989852.jpg', 'Si Mike Lowrey est un seducteur invetere, heritier dune fortune et policier par passion, son collegue et ami Marcus Burnett est un homme range, marie et pere de famille..', '2020-07-21 12:02:04'),
+('Suicide Squad', '2020-01-02', '02:03','Action', 16, 'David Ayer','Will Smith','American','Long-metrage','suicide_squad-1594989912.jpg', 'Cest tellement jouissif dêtre un salopard ! Face à une menace aussi enigmatique quinvincible, lagent secret Amanda Waller reunit une armada de crapules de la pire espece.', '2020-07-21 12:02:04'),
+('Fast and Furious 8', '2018-02-01', '02:03', 'Action', 12, 'Gary Gray','Paul Walker','American','Long-metrage','faf_8-1594989874.jpg', 'Maintenant que Dom et Letty sont en lune de miel, que Brian et Mia se sont ranges et que le reste de l’equipe a ete disculpe, la bande de globetrotteurs retrouve un semblant de vie normale.', '2020-07-21 12:02:04'),
+('Je suis une legende', '2007-02-19', '01:40', 'Thriller', 18, 'Francis Lawrence','Will Smith','American','Long-metrage','je_suis_une_legende-1594989888.jpg', 'Robert Neville etait un savant de haut niveau et de reputation mondiale, mais il en aurait fallu plus pour stopper les ravages de cet incurable et terrifiant virus dorigine humaine.', '2020-07-21 12:02:04');
 
 --
 -- Structure de la table `room`
