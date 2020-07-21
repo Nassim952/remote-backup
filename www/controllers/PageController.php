@@ -2,11 +2,21 @@
 
 namespace cms\controllers;
 
+use cms\core\Builder\ElementPageBuilder;
+use cms\core\Builder\PageBuilder;
 use cms\core\Controller;
 use cms\managers\PageManager;
+use cms\managers\ComponentManager;
+// use cms\core\Page;
 use cms\models\Page;
 use cms\core\View;
 use cms\forms\AddPageType;
+use cms\managers\CinemaManager;
+use cms\managers\MovieManager;
+use cms\models\Cinema;
+use cms\core\NotFoundException;
+use cms\managers\SectionManager;
+use cms\models\Component;
 
 class PageController extends Controller
 {   
@@ -33,7 +43,7 @@ class PageController extends Controller
             $page->setTheme($_POST[$form->getName().'_theme']);
             $page->setGabarit($_POST[$form->getName().'_gabarit']);
             $page->setFont($_POST[$form->getName().'_font']);
-            $page->setFontColor($_POST[$form->getName().'_font-color']);
+            $page->setFont_color($_POST[$form->getName().'_font-color']);
 
             $pageManager->save($page);
 
@@ -63,54 +73,65 @@ class PageController extends Controller
         $this->render("edit-page", "back", ['pages' => $pages]);
     }
 
+    public function templateCreateAction(){
+        $movieManager = new MovieManager(Movie::class, 'movie');
+        $movies = $movieManager->read();
 
-    public function buildPageAction($params)
-    {
-        $pageManager = new pageManager();
-        $page = $pageManager->find($params['id']);
+        $cinemaManager = new CinemaManager(Cinema::class, 'cinema');
+        $cinemas = $cinemaManager->read();
 
-        if (!$page) {
-            throw new NotFoundException("page not found");
-        }
+        $this->render('template-create','front-cms',[
+            'movies' => $movies,
+            'cinemas' => $cinemas
+        ]);
+    }
 
-        $this->render("default", "front", [
-            "page" => $page
+    public function showPagesAction(){
+        $pageManager = new PageManager(Page::class,'page');
+
+        $pages = $pageManager->read();
+
+        $this->render('show-pages', 'back', [
+            'pages' => $pages
+        ]);
+    }
+
+    public function showCustomPagesAction(){
+        $pageManager = new PageManager(Page::class,'page');
+
+        $pages = $pageManager->read();
+
+        $this->render('show-pages-customizable', 'front-cms', [
+            'pages' => $pages
         ]);
     }
 
 
-
-	public function loginAction()
+    public function buildPageAction($page)
     {
-        $registerType = new LoginType();
-
-        if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-            //Vérification des champs
-            $this->render("register", "account", [
-                "form" => $registerType,
-                "errors" => Validator::formLoginValidate( $registerType, $_POST )
-            ]);
-        } else {
-            $this->render("register", "account", [
-                "form" => $registerType
-            ]);
+        if (!$page) {
+            throw new NotFoundException("page not found");
         }
-	}
-	
-    public function registerAction()
-    {
-        $registerType = new RegisterType();
 
-        if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-            //Vérification des champs
-            $this->render("register", "account", [
-                "form" => $registerType,
-                "errors" => Validator::formRegisterValidate( $registerType, $_POST )
-            ]);
-        } else {
-            $this->render("register", "account", [
-                "form" => $registerType
-            ]);
+        if(is_string($page)){ 
+            $pageManager = new pageManager(Page::class, 'page');
+            $page = $pageManager->findBy(['title' => $page]);
+            $page = array_pop($page);
         }
+
+        $sections = (new SectionManager(ElementPageBuilder::class, 'section'))->sectionsPage($page->getId());
+
+        $sectionUpdate = array_map(function($section){
+            return $section->setComponents((
+                    new ComponentManager(Component::class, 'component'))
+                    ->componentsSection($section->getId())
+            );
+        }, $sections);
+
+        $page->setSections($sectionUpdate);
+
+        $this->render("default", "front-cms", [
+            "page" => $page
+        ]);
     }
 }

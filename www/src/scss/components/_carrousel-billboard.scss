@@ -1,0 +1,139 @@
+$caroussel_full:'caroussel--billboard_';
+.#{$caroussel_full} .slider {
+    height: 350px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    align-items: center;
+    margin-top: 50px;
+    border-radius: 0.2rem;
+    margin-bottom: 50px;
+    ;
+}
+
+.#{$caroussel_full} .slides-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 1s;
+    flex-wrap: nowrap;
+}
+
+.#{$caroussel_full} .slide {
+    object-fit: cover;
+    background-color: grey;
+}
+
+.#{$caroussel_full} .nav_LR {
+    width: 100%;
+    justify-content: space-between;
+    height: 100%;
+    flex-wrap: nowrap;
+    position: relative;
+    align-items: center;
+}
+
+.#{$caroussel_full} .nav_slider {
+    margin: auto;
+    position: absolute;
+    bottom: 0;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.#{$caroussel_full} .nav_slider ol {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: none;
+}
+
+.#{$caroussel_full} .nav_slider .puce_nav {
+    display: inline-block;
+    margin: 0.1rem;
+    height: 0.1rem;
+    text-indent: -999px;
+    cursor: pointer;
+    align-self: center;
+    transition: all 0.25 ease-out;
+}
+
+.#{$caroussel_full} .nav_slider .puce_nav--unselected {
+    width: 0.5rem;
+    background-color: $white;
+}
+
+.#{$caroussel_full} .nav_slider .puce_nav--selected {
+    width: 1rem;
+    background-color: $lay-purple;
+    align-self: center;
+    transform: translate(0, -0.2rem);
+    box-shadow: 0px 2px 2px $shadow_black;
+    transition: all 0.25s ease-out;
+}
+
+.btn {
+    width: 3rem;
+    height: 100%;
+    position: relative;
+    opacity: 0;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 2px 2px $shadow_black;
+    background: white;
+    border: 0;
+    box-sizing: border-box;
+    padding: 1em 2em;
+}
+
+.btn:hover {
+    visibility: visible;
+    opacity: 0.2;
+}
+
+.btn::before {
+    width: 100%;
+    height: 100%;
+    // @include arrow("/src/assets/arrow.svg");
+}
+
+.btn--prev::before {
+    transform: rotate(180deg);
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+@media screen and (min-width: 480px) {
+    .#{$caroussel_full} .nav_slider .puce_nav--unselected {
+        width: 1rem;
+    }
+    .#{$caroussel_full} .nav_slider .puce_nav--selected {
+        width: 2rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .#{$caroussel_full} .nav_slider .puce_nav--unselected {
+        width: 2rem;
+    }
+    .#{$caroussel_full} .nav_slider .puce_nav--selected {
+        width: 3rem;
+    }
+}
+
+@media screen and (min-width: 965px) {
+    .#{$caroussel_full} .nav_slider .puce_nav--unselected {
+        width: 5rem;
+    }
+    .#{$caroussel_full} .nav_slider .puce_nav--selected {
+        width: 6rem;
+    }
+}

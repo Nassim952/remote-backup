@@ -1,7 +1,17 @@
-<?php 
+<?php
+    use cms\managers\UserManager;
+    use cms\core\Helpers;
     session_start();
-    (!isset($_SESSION['user'])) ? header('Location: localhost:8081/connexion') : '';
-    ($_SESSION['user']->getVerified()) == 0 ? header('Location: localhost:8081/mail-not-checked') : '';
+    (!isset($_SESSION['userId'])) ? header('Location: /session-not-start') : '';
+    if(isset($_SESSION['userId'])){
+        $current_user = (new UserManager(User::class, 'user'))->read($_SESSION['userId']);
+        if(reset($current_user)->getAllow() == 0){
+            header('Location: /no-permission');
+        }
+        if(reset($current_user)->getStatut() == 0){
+            header('Location: /no-permission');
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,7 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="../dist/main.css">
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../../css/salles.css">
     <link rel="stylesheet" href="../../css/addfilm.css">
     <link rel="stylesheet" href="../../css/show-movie.css">
@@ -33,12 +43,14 @@
                     <h3 id="text-white" style="font-size:20px;">Dashboard</h3>
                 </div>
             </div>
-            <div class="name-container">
-                <span id="dot"></span>
-                <p><?=ucFirst($_SESSION['user']->getFirstname());?></p>
-            </div>
+            <a href="<?= Helpers::getUrl('User','showUser').'/'.reset($current_user)->getId() ?>" style="width: -webkit-fill-available;">
+                <div class="name-container">
+                    <img src="../public/images/<?= reset($current_user)->getImage_profile() ?>" id="dot"/>
+                    <p><?=ucFirst(reset($current_user)->getFirstname());?></p>
+                </div>
+            </a>
             <div class="nav-content">
-                <h2 id="text-submenu-fixer">Gestion film</h2>
+                <h2 id="text-submenu-fixer">Gestion</h2>
                 <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-film fa-lg"></div>
@@ -46,10 +58,12 @@
                             <a href="<?=\cms\core\Helpers::getUrl("Dashboard", "dashboard")?>" id="text-white"><span>Films</span></a>
                         </div>
                     </div>
+                </div>
+                <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-film fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?=\cms\core\Helpers::getUrl("Page", "addPage")?>" id="text-white"><span>Pages</span></a>
+                            <a href="<?=\cms\core\Helpers::getUrl("Page", "showPages")?>" id="text-white"><span>Pages</span></a>
                         </div>
                     </div>
                 </div>
@@ -92,7 +106,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-users fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?=\cms\core\Helpers::getUrl("Dashboard","users")?>" id="text-white"><span>Users</span></a>
+                            <a href="<?=\cms\core\Helpers::getUrl("User","users")?>" id="text-white"><span>Users</span></a>
                         </div>
                     </div>
                 </div>
