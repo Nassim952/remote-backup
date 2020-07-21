@@ -64,16 +64,16 @@ class CommentManager extends DB{
         $this->delete($id);
     }
   
-    public function getAuthor($id)
+    public function getAuthor($user_id = null)
     {
         $query = (new QueryBuilder())
         ->select('c.id, comment, post_date, user_id,target, target_type')
-        ->from(DB_PREFIXE.'comment', 'c')
-        ->join(DB_PREFIXE.'user','u');
+        ->from(DB_PREFIXE.'comment' , 'c')
+        ->join(DB_PREFIXE.'user u','c.user_id','id');
 
-        if(isset($id)){
+        if(isset($user_id)){
             $query->where('c.user_id = :idcomment')
-            ->setParameters('idcomment', $id);
+            ->setParameters('idcomment', $user_id);
         }
         
         return $query->getQuery()

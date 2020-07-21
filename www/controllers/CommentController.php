@@ -23,6 +23,7 @@ class CommentController extends Controller{
         $comment = $commentManager->read($id);
         //envoyer l'author
         $author = $commentManager->getAuthor(reset($comment)->getUser_id());
+         var_dump($author);
        
         $this->render("show-comment", "back", [
             'myComment' => $comment,
