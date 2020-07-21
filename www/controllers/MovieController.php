@@ -27,7 +27,7 @@ class MovieController extends Controller
             if (isset($comment)){
                 $comment->setComment($_POST['content']);
                 $comment->setTarget($id);
-                $comment->setAuthor($_POST['id_user']);
+                $comment->setUser_id($_POST['id_user']);
                 $commentManager->save($comment);
             }
         }

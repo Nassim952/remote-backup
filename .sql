@@ -191,7 +191,6 @@ CREATE TABLE IF NOT EXISTS bape_comment(
     post_date TIMESTAMP,
     user_id INT NOT NULL,
     target INT NOT NULL,
-    target_type INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES bape_user(id) ON DELETE CASCADE,
     FOREIGN KEY (target) REFERENCES bape_movie(id) ON DELETE CASCADE
 );

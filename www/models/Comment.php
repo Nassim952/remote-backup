@@ -12,9 +12,8 @@ class Comment extends Model implements ModelInterface
     protected $comment;
     protected $post_date;
     protected $target;
-    protected $target_type;
     protected $user_id;
-    protected $author;
+   
 
     public function initRelation(): array {
         return [
@@ -102,25 +101,6 @@ class Comment extends Model implements ModelInterface
         return $this;
     }
 
-    /**
-     * Get the value of target_type
-     */ 
-    public function getTarget_type()
-    {
-        return $this->target_type;
-    }
-
-    /**
-     * Set the value of target_type
-     *
-     * @return  self
-     */ 
-    public function setTarget_type($target_type)
-    {
-        $this->target_type = $target_type;
-
-        return $this;
-    }
 
     /**
      * Get the value of user_id
@@ -142,23 +122,5 @@ class Comment extends Model implements ModelInterface
         return $this;
     }
 
-    /**
-     * Get the value of author
-     */ 
-    public function getAuthor()
-    {
-        return $this->author;
-    }
 
-    /**
-     * Set the value of author
-     *
-     * @return  self
-     */ 
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
 }

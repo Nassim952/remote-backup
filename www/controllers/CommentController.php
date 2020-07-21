@@ -38,7 +38,7 @@ class CommentController extends Controller{
 
             $comment->setComment($_POST['comment']);
             $comment->setTarget($_POST['target']);
-            //$comment->setAuthor($_POST['author']);
+
             $comment->setPost_date($_POST['date']);
 
             $commentManager = new commentManager(Comment::class,'comment');
