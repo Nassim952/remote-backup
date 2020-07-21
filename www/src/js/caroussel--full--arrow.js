@@ -49,8 +49,8 @@ function makeSlider(elem) {
     $('.' + preFull + ' .slider nav').append('<button onclick="next();resetInterval()" class="btn btn--next"></button>');
 
     //ajouter un bouton de détail
-    $('.' + preFull + ' .slider').append('<button class="button draw">Details</button>');
-    $('.' + preFull + ' .slider .draw').css({ 'left': 0, 'position': 'absolute', 'bottom': 0 });
+    // $('.' + preFull + ' .slider').append('<button class="button draw">Details</button>');
+    // $('.' + preFull + ' .slider .draw').css({ 'left': 0, 'position': 'absolute', 'bottom': 0 });
 
     //ajouter une navigation secondaire
     $('.' + preFull + ' .slider .nav_LR').append('<nav class="nav_slider row"> <ol></ol></nav>');

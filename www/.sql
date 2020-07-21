@@ -120,16 +120,15 @@ INSERT INTO bape_section (size, page_id, position) VALUES
 DROP TABLE IF EXISTS bape_component;
 CREATE TABLE IF NOT EXISTS bape_component(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    title VARCHAR(100),
     categorie VARCHAR(100),
     position INT,
     section_id INT,
     FOREIGN KEY (section_id) REFERENCES bape_section(id)
 );
 
-INSERT INTO bape_component (title, categorie, position, section_id) VALUES
-('carousel', 'carousel-billboard', 1, 1),
-('carousel', 'carousel-full-arrow', 2, 1);
+INSERT INTO bape_component (categorie, position, section_id) VALUES
+('carousel-billboard', 1, 1),
+('carousel-full-arrow', 2, 1);
 
 
 --
@@ -142,6 +141,7 @@ CREATE TABLE IF NOT EXISTS bape_article(
     title VARCHAR(255) NOT NULL,
     subtiltle VARCHAR(255),
     creation_date TIMESTAMP,
+    update_date TIMESTAMP,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES bape_user(id) ON DELETE CASCADE
 );

@@ -29,7 +29,7 @@ foreach($pages as $page): ?>
                             <span>Date création : <?= $page->getCreation_date() ?></span>
                         </li>
                     </ul>
-                    <a href="<?= Helpers::getUrl('Page','buildPage').'/'.$page->getTitle() ?>" class="Button">Valider</a>
+                    <a href="<?= Helpers::getUrl('Page','editPage').'/'.$page->getId() ?>" class="Button">Valider</a>
                 </div>
             </div>
             <?php endforeach;?>

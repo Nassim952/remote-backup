@@ -1,8 +1,14 @@
 <?php 
-    use cms\core\Helpers;
     use cms\managers\UserManager;
+    use cms\core\Helpers;
     session_start();
-    (!isset($_SESSION['userId'])) ? header('Location: /session-not-start') : $current_user = (new UserManager(User::class, 'user'))->read($_SESSION['userId']);
+    (!isset($_SESSION['userId'])) ? header('Location: /session-not-start') : '';
+    if(isset($_SESSION['userId'])){
+        $current_user = (new UserManager(User::class, 'user'))->read($_SESSION['userId']);
+        if(reset($current_user)->getStatut() == 0){
+            header('Location: /no-permission');
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +30,7 @@
     <script src="../../src/js/vendor/jquery-3.4.1.min.js"></script>
     <script src="../../src/js/caroussel--billboard.js"></script>
     <script src="../../src/js/caroussel--full--arrow.js"></script>
+    <script src="../../js/script.js"></script>
 </head>
 
 <body>
@@ -40,7 +47,7 @@
                     <a href="<?= Helpers::getUrl("Page", "showCustomPages") ?>" class="nav-text" style="text-decoration:none;">Customise </a>
                 <?php endif; ?>
                 <?php foreach ($nav as $links): ?>
-                    <a href="/<?= str_replace(' ','',$links['title']) ?>" class="nav-text" style="text-decoration:none;"><?=$links['title']?></a>
+                    <a href="/<?= str_replace(' ','_',$links['title']) ?>" class="nav-text" style="text-decoration:none;"><?=$links['title']?></a>
                 <?php endforeach  ?>
                 <a href="<?= Helpers::getUrl("User", "login") ?>" class="nav-text" style="text-decoration:none;">Deconnexion</a>
             </div>

@@ -9,10 +9,9 @@ use cms\managers\ComponentManager;
 class Component extends Model implements ModelInterface
 { 
     protected $id;
-    protected $title;
     protected $categorie;
-    protected $data = [];
     protected $position;
+    protected $section_id;
 
     public function initRelation(): array {
         return [
@@ -47,11 +46,6 @@ class Component extends Model implements ModelInterface
         $this->style = $style;
     }
 
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
-
     public function setCategorie($categorie)
     {
         $this->categorie = $categorie;
@@ -81,11 +75,6 @@ class Component extends Model implements ModelInterface
         return $this->position;
     }
 
-    public function getData()
-    {
-        return $this->data;
-    }
-
     public function getStyle($style)
     {
         return $this->style;
@@ -94,5 +83,25 @@ class Component extends Model implements ModelInterface
     public function getCategorie()
     {
         return $this->categorie;
+    }
+
+    /**
+     * Get the value of section_id
+     */ 
+    public function getSection_id()
+    {
+        return $this->section_id;
+    }
+
+    /**
+     * Set the value of section_id
+     *
+     * @returnself
+     */ 
+    public function setSection_id($section_id)
+    {
+        $this->section_id = $section_id;
+
+        return $this;
     }
 }

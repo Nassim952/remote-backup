@@ -67,6 +67,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="dashboard-menu">
+                    <div class="sidebar-sub-headers">
+                        <div class="fas fa-film fa-lg"></div>
+                        <div id="submenu-wrapper">
+                            <a href="<?=\cms\core\Helpers::getUrl("Page", "showSectionsPage")?>" id="text-white"><span>Components Page</span></a>
+                        </div>
+                    </div>
+                </div>
                 <h2 id="text-submenu-fixer">Diffusion</h2>
                 <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">

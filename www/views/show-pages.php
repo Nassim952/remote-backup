@@ -22,13 +22,26 @@
                     <span class="head-title-salle"><?= $page->getTitle() ?></span>
                 </div>
                 <div class="front-page-bottom-wrapper">
-                    <span class="front-show-libelle">Nombre de lignes : <?= $page->getGabarit() ?></span>
-                    <span class="front-show-libelle">Theme couleur : <?= $page->getTheme() ?></span>
-                    <span class="front-show-libelle">Police : <?= $page->getFont() ?></span>
-                    <span class="front-show-libelle">Couleur police : <?= $page->getFont_color() ?></span>
+                    <ul style="padding-inline-start: inherit;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        align-items: center;">
+                        <li><span class="front-show-libelle">Nombre de lignes : <?= $page->getGabarit() ?></span></li>
+                        <li><span class="front-show-libelle">Theme couleur : <?= $page->getTheme() ?></span></li>
+                        <li><span class="front-show-libelle">Police : <?= $page->getFont() ?></span></li>
+                        <li><span class="front-show-libelle">Couleur police : <?= $page->getFont_color() ?></span></li>
+                    </ul>
                 </div>
                 <?php if(reset($current_user)->getAllow() >= 2): ?>
-                    <a href="<?= cms\core\Helpers::getUrl("Pages","editPage").'/'.$page->getId() ?>" class="Button">Editer</a>
+                    <div style="display: flex;
+                            width: 250px;
+                            justify-content: space-around;
+                            align-items: center;
+                            margin-top: 15px;">    
+                        <a href="<?= cms\core\Helpers::getUrl("Page","editPage").'/'.$page->getId() ?>" class="Button">Editer</a>
+                        <a href="<?= cms\core\Helpers::getUrl("Page","deletePage").'/'.$page->getId() ?>" class="Button">Supprimer</a>
+                    </div>
                 <?php endif;?>
             </div>
         <?php endforeach; ?>

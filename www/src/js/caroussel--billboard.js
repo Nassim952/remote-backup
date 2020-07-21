@@ -58,8 +58,8 @@ function makeBillboard(elem) {
 
 
     //ajouter un bouton de détail
-    $('.' + preBoard + ' .slider').append('<button class="button draw">Details</button>');
-    $('.' + preBoard + ' .slider .draw').css({ 'left': 0, 'position': 'absolute', 'bottom': 0 });
+    // $('.' + preBoard + ' .slider').append('<button class="button draw">Details</button>');
+    // $('.' + preBoard + ' .slider .draw').css({ 'left': 0, 'position': 'absolute', 'bottom': 0 });
 
     //ajouter une navigation secondaire
     $('.' + preBoard + ' .slider ').append('<nav class="nav_slider row"> <ol></ol></nav>');

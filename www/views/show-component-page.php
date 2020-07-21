@@ -1,16 +1,17 @@
 <head>
-    <title>Suprressiod'un component</title>
+    <title>Show components</title>
 </head>
 
 <div class="site-content">
     <div id="head-title">
-        <h2 style="font-size:32px;">Edition d'un component</h2>
+        <h2 style="font-size:32px;">Show components</h2>
     </div>
     <div id="separation-bar"></div>
     <div class="lists-film">
         <table class="table-wrapper">
-            <tr class="tr-container">
+            <tr style="height: 120px;" class="tr-container">
                 <?php
+                    use cms\core\Helpers;
                     foreach($components as $component):
                 ?>
                     <td class="td-dashboard-wrapper">
@@ -20,17 +21,12 @@
                                 <label></label>
                             </div>
                         </div>
-                        <p id="text-wrappe"><?= $component->getTitle() ?></p>
+                        <p id="text-wrappe"><?= $component->getCategorie() ?></p>
                         |
-                        <p id="hour-wrappe"><?= $component->getClass() ?></p>
-                        <form name='form-delete-component' method="POST">
-                            <input type="hidden" name="id" value="<?=$component->getId() ?>">
-                            <div class="icons-wrapper">
-                                <button type="submit" class="fas fa-edit fa-lg"></a>
-                            </div>
-                        </form>
+                        <a class="fas fa-edit fa-lg" href="<?= Helpers::getUrl("Page", "editComponentPage").'/'.$component->getId() ?>"></a>
+                        <a class="fas fa-trash fa-lg" href="<?= Helpers::getUrl("Page", "deleteComponentPage").'/'.$component->getId() ?>"></a>
                     </td>
-                    <?php endforeach; ?>
+                <?php endforeach; ?>
             </tr>
         </table>
 </div>

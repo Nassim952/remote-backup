@@ -1,22 +1,18 @@
 <head>
-    <title>Dashboard</title>
+    <title>Sections des pages</title>
 </head>
 
 <div class="site-content">
     <div id="head-title">
-        <h2 style="font-size:32px;">Films</h2>
+        <h2 style="font-size:32px;">Sections des pages</h2>
     </div>
     <div id="separation-bar"></div>
-    <div class="quick-tools">
-        <div id="space-icons">
-            <a href="<?= \cms\core\Helpers::getUrl("Movie","addFilm") ?>" class="fas fa-plus fa-lg"></a>
-        </div>
-    </div>
     <div class="lists-film">
         <table class="table-wrapper">
             <tr class="tr-container">
                 <?php
-                    foreach($movies as $movie):
+                    use cms\core\Helpers;
+                    foreach($sections as $section):
                 ?>
                     <td class="td-dashboard-wrapper">
                         <div class="pretty p-default p-curve p-bigger cb-fixer">
@@ -25,9 +21,13 @@
                                 <label></label>
                             </div>
                         </div>
-                        <a id="text-wrappe" href="show-movie/<?= $movie->getId() ?>"><?= $movie->getTitle() ?></a>
+                        <a id="text-wrappe" href="<?=Helpers::getUrl('Page','showComponentsPage').'/'.$section->getId() ?>"> section numéro : <?= $section->getId() ?></a>
                         |
-                        <p id="hour-wrappe"><?= $movie->getDuration() ?></p>
+                        <?php foreach($pages as $page):?>
+                            <?php if($page->getId() == $section->getPage_Id()): ?>
+                                <p id="hour-wrappe"><?= $page->getTitle() ?></p>
+                            <?php endif; ?>
+                        <?php endforeach;?>
                     </td>
                 <?php endforeach; ?>
             </tr>

@@ -153,6 +153,10 @@
   controller: Page
   action: showPages
 
+/delete-pages:
+  controller: Page
+  action: deletePage
+
 /build-page:
   controller: Page
   action: buildPage
@@ -164,6 +168,22 @@
 /template:
   controller: Page
   action: templateCreate
+
+/show-sections-page:
+  controller: Page
+  action: showSectionsPage
+
+/show-components-page:
+  controller: Page
+  action: showComponentsPage
+
+/edit-component-page:
+  controller: Page
+  action: editComponentPage
+
+/delete-component-page:
+  controller: Page
+  action: deleteComponentPage
 
 ########### Component #############
 
