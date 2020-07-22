@@ -13,7 +13,7 @@ class CinemaManager extends DB{
     }
 
     public function read($id = null){
-        {
+    {
             $query = (new QueryBuilder())
                 ->select('*')
                 ->from(DB_PREFIXE.'cinema', 'c');
@@ -24,6 +24,21 @@ class CinemaManager extends DB{
                 }
                 return $query->getQuery()
                 ->getArrayResult(Cinema::class);
+        }
+    }
+
+    public function readName($id = null){
+    {
+            $query = (new QueryBuilder())
+                ->select('name')
+                ->from(DB_PREFIXE.'cinema', 'c');
+            
+                if(isset($id)){
+                    $query->where('c.id = :idcinema')
+                    ->setParameters('idcinema', $id);
+                }
+                return $query->getQuery()
+                ->getValueResult();
         }
     }
 }

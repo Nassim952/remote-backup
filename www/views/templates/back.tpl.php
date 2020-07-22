@@ -31,15 +31,10 @@
     <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="../../js/chart.js"></script>
 </head>
 <body style="font-family: Montserrat">
-    <script>
-        $(document).ready(
-        function() {
-            customTemplate('<?= CURRENT_FONT ?>', '<?= CURRENT_FONT_SIZE ?>', '<?= CURRENT_FONT_COLOR ?>', '<?= CURRENT_TEMPLATE ?>');
-        });
-    </script>
     <div class="flex-container">
         <div class="sidebar">
             <div class="title-container">
@@ -95,7 +90,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-clock fa-lg"></div>
                         <div id="submenu-wrapper">
-                        <a href="<?=\cms\core\Helpers::getUrl("Dashboard", "horraires")?>" id="text-white"><span>Horraires</span></a>
+                        <a href="<?=\cms\core\Helpers::getUrl("MovieReservation", "seances")?>" id="text-white"><span>Séances</span></a>
                         </div>
                     </div>
                 </div>
@@ -103,7 +98,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-sliders-h fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?=\cms\core\Helpers::getUrl("Cinema", "salles")?>" id="text-white"><span>Salles</span></a>
+                            <a href="<?=\cms\core\Helpers::getUrl("Room", "room")?>" id="text-white"><span>Salles</span></a>
                         </div>
                     </div>
                 </div>

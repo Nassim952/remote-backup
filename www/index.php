@@ -23,8 +23,9 @@ use cms\controllers\PageController;
 
 new ConstLoader('prod');
 
-$uri = $_SERVER["REQUEST_URI"];
+$url = $_SERVER["REQUEST_URI"];
 
+$uri = parse_url($url, PHP_URL_PATH);
 //recupère l'id de l'url si il existe # /show-movie/{{id}}
 $id = substr($uri, strrpos($uri, '/') +1);
 

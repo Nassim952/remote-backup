@@ -16,7 +16,7 @@
             <div class="flex-form-container">
                 <div class="flex-form-content-left">
                     <input class=input-form  type="text" name="city" value="<?= $cinema->getPlace(); ?>">
-                    <input class=input-form type="number" name="number_rooms" value="<?= $cinema->getNumber_rooms(); ?>">
+                    <input class=input-form type="hidden" name="number_rooms" value="<?= $cinema->getNumber_rooms(); ?>">
                 <div class="flex-form-content-right">
                     <label>Logo du cinéma :</label>
                     <input class="input-form affiche" type="file" name="image_url" value="<?= $cinema->getImage_url() ?>"></input>

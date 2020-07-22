@@ -29,7 +29,7 @@ class View
 	//redéfini la propriété avec la variable view récupérée via le controleur
 	public function setView(string $view)
 	{
-		$this->view = strtolower(trim($view));
+		$this->view =trim($view);
 
 		if (!file_exists("views/".$this->view.".php")) {
 			throw new Exception("La vue n'existe pas");

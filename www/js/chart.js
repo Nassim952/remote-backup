@@ -1,10 +1,38 @@
 function datachart(){
-    var ctx = document.getElementById("graph1").getContext('2d');
-    var data = {
-        labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre","Décembre"],
-        datasets: [{
-                label: 'Nb client',
-                data: [698, 876, 387, 903, 508, 398, 457, 263, 1246, 2167, 3098, 2098],
+    var labelsYear = [];
+    var datasYear = [];
+
+    totalReservationArray.years.forEach(function(yearArray) { 
+        labelsYear.push(yearArray.year);
+        datasYear.push(yearArray.total);
+    });
+
+    var labelsMonth = [];
+    var datasMonth = [];
+
+    var months = [
+        'Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai',
+        'Juin', 'Juillet', 'Aout', 'Septembre',
+        'Octobre', 'Novembre', 'Decembre'
+        ];
+
+    var d = new Date();
+    var n = d.getFullYear();
+
+    totalReservationArray.month.forEach(function(monthArray) { 
+        if(monthArray.year == n) {
+            var mois = monthArray.month - 1
+            labelsMonth.push(months[mois]);
+            datasMonth.push(monthArray.total);
+        }
+    });
+
+    dataMap = {
+        'annee': {
+            labels: labelsYear,
+            datasets: [{
+                label: 'Nb ticket vendus',
+                data: datasYear,
                 backgroundColor: [
                     'rgba(239, 53, 53, 0.37)',
                     'rgba(239, 53, 53, 0.37)',
@@ -35,9 +63,46 @@ function datachart(){
                 ],
                 borderWidth: 1
             }]
-        };
+        },
+        'mois': {
+            labels: labelsMonth,
+            datasets: [{
+                label: 'Nb tickets vendus',
+                data: datasMonth,
+                backgroundColor: [
+                    'rgba(239, 53, 53, 0.37)',
+                    'rgba(239, 53, 53, 0.37)',
+                    'rgba(239, 53, 53, 0.37)',
+                    'rgba(239, 53, 53, 0.37)',
+                    'rgba(239, 53, 53, 0.37)',
+                    'rgba(239, 53, 53, 0.37)',
+                    'rgba(239, 53, 53, 0.37)',
+                    'rgba(239, 53, 53, 0.37)',
+                    'rgba(239, 53, 53, 0.37)',
+                    'rgba(239, 53, 53, 0.37)',
+                    'rgba(239, 53, 53, 0.37)',
+                    'rgba(239, 53, 53, 0.37)'
+                ],
+                borderColor: [
+                    'rgba(239, 53, 53, 1)',
+                    'rgba(239, 53, 53, 1)',
+                    'rgba(239, 53, 53, 1)',
+                    'rgba(239, 53, 53, 1)',
+                    'rgba(239, 53, 53, 1)',
+                    'rgba(239, 53, 53, 1)',
+                    'rgba(239, 53, 53, 1)',
+                    'rgba(239, 53, 53, 1)',
+                    'rgba(239, 53, 53, 1)',
+                    'rgba(239, 53, 53, 1)',
+                    'rgba(239, 53, 53, 1)',
+                    'rgba(239, 53, 53, 1)'
+                ],
+                borderWidth: 1
+            }]
+        }
+    };
 
-    var options = {
+    options = {
 
             scales: {
                 yAxes: [{
@@ -57,16 +122,36 @@ function datachart(){
             },
             title: {
                 display: true,
-                text: 'Nombre de clients',
+                text: 'Nombre de ticket vendus',
                 fontSize: 20
             },
             legend: {
                 display: false,
             }
         }
-    var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: options
+
+        var params = dataMap['annee']
+
+        currentChart = new Chart(ctx, {
+            type: 'bar',
+            data: params,
+            options: options
+        });
+
+        
+        $('#chartType').on('change', updateChart)
+}
+
+function updateChart() {
+    if(typeof currentChart !== 'undefined'){currentChart.destroy();}
+
+    var determineChart = $("#chartType").val();
+
+    var params = dataMap[determineChart]
+
+    currentChart = new Chart(ctx, {
+        type: 'bar',
+        data: params,
+        options: options
     });
 }

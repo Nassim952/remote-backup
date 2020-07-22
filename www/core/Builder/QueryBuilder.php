@@ -152,7 +152,7 @@ class QueryBuilder {
 
     public function where(string $conditions):QueryBuilder
     {
-        if (!stristr($this->query, 'WHERE')) {
+        if (!stristr($this->getWhere(), 'WHERE')) {
             $where = 'WHERE';
         } else {
             $where = 'AND';
@@ -176,8 +176,6 @@ class QueryBuilder {
         [$table, $aliasTarget] = explode(" ", $table);
         
         $query = $this->buildJoin($table, $aliasTarget, $fieldSource, $fieldTarget);
-        
-        $this->setAlias( (null === $aliasTarget) ? $table : $aliasTarget);
 
         if (null !== $select) {
             $this->buildSelect($select, $this->alias);

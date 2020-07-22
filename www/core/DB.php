@@ -13,7 +13,7 @@ class DB
     private $connection;
     protected $class;
 
-    public function __construct(string $class, string $table, BDDInterface $connection = null)
+    public function __construct(string $class = null, string $table = null, BDDInterface $connection = null)
     {
         $this->class = $class;
         $this->table = DB_PREFIXE.$table;
@@ -120,7 +120,7 @@ class DB
     public function save($objectToSave)
     {
         $objectArray =  $objectToSave->__toArray();
-
+        
         $columnsData = array_values($objectArray);
 
         $columns = array_keys($objectArray);
@@ -150,6 +150,7 @@ class DB
 
             //INSERT
             $sql = "INSERT INTO ".$this->table." (".implode(",", $columns).") VALUES (:".implode(",:", $columns).");";
+            echo $sql;
             
         } else {
             // SI LE UPDATE BUG CORRIGER SES 2 LIGNES MODELE PAGE $builder

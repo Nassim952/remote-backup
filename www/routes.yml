@@ -65,10 +65,6 @@
 
 ########### Cinema #############
 
-/salles:
-  controller: Cinema
-  action: salles
-
 /cinema:
   controller: Cinema
   action: cinema
@@ -81,10 +77,6 @@
   controller: Cinema
   action: editCinema
 
-/horraires:
-  controller: Dashboard
-  action: horraires
-
 /delete-cinema:
   controller: Cinema
   action: deleteCinema
@@ -92,6 +84,24 @@
 /show-cinema:
   controller: Cinema
   action: showCinema
+
+######## Salles #########
+
+/salles:
+  controller: Room
+  action: room
+
+/add-salle:
+  controller: Room
+  action: addRoom
+
+/edit-salle:
+  controller: Room
+  action: editRoom
+
+/delete-salle:
+  controller: Room
+  action: deleteRoom
 
 ######## Movie #########
 
@@ -220,3 +230,38 @@
 /personnalisation:
   controller: Custom
   action: custom
+
+
+########### Reservation et Seances #############
+
+/seances:
+  controller: MovieReservation
+  action: seances
+
+/getSeances:
+  controller: MovieReservation
+  action: getSeances
+
+/addSeance:
+  controller: MovieSession
+  action: addSeance
+
+/reservation:
+  controller: MovieReservation
+  action: reservation
+
+/getReservations:
+  controller: MovieReservation
+  action: getReservations
+
+/deleteReservation:
+  controller: MovieReservation
+  action: deleteReservation
+
+/edit-seance:
+  controller: MovieSession
+  action: editSeance
+
+/delete-seance:
+  controller: MovieSession
+  action: deleteSeance

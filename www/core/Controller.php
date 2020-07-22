@@ -21,11 +21,11 @@ class Controller implements \SplSubject
         $this->attach($this->event);
     }
 
-    public function createForm(string $class, Model &$model = null): Form
+    public function createForm(string $class, $data = null, Model &$model = null): Form
     {
         $form = new $class;
         $form->configureOptions();
-        $form->initForm();
+        $form->initForm($data);
         if($model){
             $form->setModel($model);
             $form->associateValue();
@@ -48,6 +48,7 @@ class Controller implements \SplSubject
     public function render(string $view, string $template = "back", array $params = null)
     { 
         $myView = new View($view, $template);
+        
         if ((null !== $params && !empty($params)) || $template != "back")
         {
             if($template != "back")
@@ -73,12 +74,9 @@ class Controller implements \SplSubject
 
     public function notify()
     {
-        //var_dump('COUCOU'); die;
-    
         // /** @var SplObserver $observer */
         foreach ($this->observers as $observer) {
             $observer->update($this);
-        // $observer->logged($_SERVER['REQUEST_URI']);
         }
     }
 

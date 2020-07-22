@@ -12,9 +12,7 @@ if(isset($_GET['message']) && !empty($_GET['message'])) {
         <h2>Ajouter une page</h2>
     </div>
     <div id="separation-bar"></div>
-        <div class=form-add>
-            <div class=flex-form-container>
-                <?php $this->formView('configFormUser')?>
-            </div>
-        </div>
+    <div class=form-add style='margin-top: 50px;'>
+        <h2>ici le getForm() page</h2>
+    </div>
 </div>

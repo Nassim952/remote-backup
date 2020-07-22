@@ -120,29 +120,6 @@ INSERT INTO bape_comment (id, comment, post_date, user_id, target) VALUES
 (null,"'Suicide Squad' de David Ayer, après quelques déceptions récentes, fait cette fois figure d'une bonne surprise, enfin très drôle et vue sous un angle nouveau et différent ! DC Comics nous prouve que l'humour a ici sa place et c'est là le gros point fort... Et oui, surtout ne pas se prendre au sérieux comme l'était le suffisant 'Batman v Superman'...","2019-02-20 16:40:34",3,1),
 (null,"Un excellent divertissement ! Le scénario, qui ressemble à celui de Point Break, tient bien la route. Les courses poursuites sont très bien filmées et le casting est parfait, la présence de Paul Walker et Vin Diesel apporte beaucoup a ce superbe film d'action.","2019-05-18 10:20:22",2,4);
 
-
-DROP TABLE IF EXISTS bape_room;
-CREATE TABLE IF NOT EXISTS bape_room(
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255),
-    section CHAR(1)
-);
-
-
-
-DROP TABLE IF EXISTS bape_movie_session;
-CREATE TABLE IF NOT EXISTS bape_movie_session(
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    date_screaning DATE,
-    schedule TIME,
-    movie_id INT,
-    room_id INT,
-    FOREIGN KEY (movie_id) REFERENCES bape_movie(id) ON DELETE CASCADE,
-    FOREIGN KEY (room_id) REFERENCES bape_room(id) ON DELETE CASCADE
-);
-
-
-
 DROP TABLE IF EXISTS bape_cinema;
 CREATE TABLE IF NOT EXISTS bape_cinema(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -151,9 +128,7 @@ CREATE TABLE IF NOT EXISTS bape_cinema(
     number_rooms INT,
     image_url VARCHAR(255),
     cinema_movie_id INT,
-    cinema_room_id INT,
-    FOREIGN KEY (cinema_movie_id) REFERENCES bape_movie(id) ON DELETE CASCADE,
-    FOREIGN KEY (cinema_room_id) REFERENCES bape_room(id) ON DELETE CASCADE
+    cinema_room_id INT
 );
 
 INSERT INTO bape_cinema (id, name, place, number_rooms, image_url) VALUES
@@ -162,3 +137,49 @@ INSERT INTO bape_cinema (id, name, place, number_rooms, image_url) VALUES
 (3, 'Paramount', 'Paris 13eme', 12, 'paramount_pictures-1594990401.jpg'),
 (4, 'Universal', 'Sarcelles', 6, 'universal-1594990415.jpg'),
 (5, 'Mega CGR', 'Epinay Villetaneuse', 11, 'cinemas-cgr-1594990366.jpg');
+
+DROP TABLE IF EXISTS bape_room;
+CREATE TABLE IF NOT EXISTS bape_room(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    cinema_id INT,
+    name_room VARCHAR(255),
+    nbr_places INT,
+    section CHAR(1)
+);
+
+INSERT INTO `bape_room` (`id`, `cinema_id`, `name_room`, `nbr_places`, `section`) VALUES
+(1, 1, 'salle 01', 80, NULL),
+(2, 1, 'salle 02', 90, NULL),
+(3, 1, 'salle 03', 70, NULL),
+(4, 1, 'salle 04', 130, NULL),
+(5, 2, 'salle 01', 80, NULL),
+(6, 2, 'salle 02', 90, NULL),
+(7, 2, 'salle 03', 70, NULL),
+(8, 2, 'salle 04', 130, NULL);
+
+
+DROP TABLE IF EXISTS bape_movie_session;
+CREATE TABLE IF NOT EXISTS bape_movie_session(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    date_screaning DATETIME,
+    movie_id INT,
+    room_id INT,
+    nbr_place_rest INT NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES bape_movie(id) ON DELETE CASCADE,
+    FOREIGN KEY (room_id) REFERENCES bape_room(id) ON DELETE CASCADE
+);
+
+INSERT INTO `bape_movie_session` (`id`, `date_screaning`, `movie_id`, `room_id`, `nbr_place_rest`) VALUES
+(1, '2020-08-03 08:00:00', 1, 1, 80),
+(2, '2020-08-03 11:00:00', 1, 1, 80),
+(3, '2020-08-03 08:00:00', 2, 5, 90),
+(4, '2020-08-03 11:00:00', 2, 5, 90);
+
+DROP TABLE IF EXISTS bape_movie_reservation;
+CREATE TABLE IF NOT EXISTS bape_movie_reservation(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    movie_session_id INT,
+    user_email VARCHAR(255) NOT NULL,
+    nbr_places INT NOT NULL,
+    FOREIGN KEY (movie_session_id) REFERENCES bape_movie_session(id) ON DELETE CASCADE
+);

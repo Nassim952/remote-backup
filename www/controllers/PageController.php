@@ -47,7 +47,8 @@ class PageController extends Controller
 
             $pageManager->save($page);
 
-            echo "<script>alert('Page crée avec succès');</script>";
+            $message = 'Page créee avec succès';
+            header('Location: /addpage?message=' . urlencode($message));
         }
 
         $this->render("addpage", "back", [
