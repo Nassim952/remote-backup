@@ -68,9 +68,17 @@
                 </div>
                 <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">
-                        <div class="fa fa-desktop fa-lg"></div>
+                        <div class="fa fa-tasks fa-lg"></div>
                         <div id="submenu-wrapper">
                             <a href="<?=\cms\core\Helpers::getUrl("Page", "showPages")?>" id="text-white"><span>Pages</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-menu">
+                    <div class="sidebar-sub-headers">
+                        <div class="fa fa-desktop fa-lg"></div>
+                        <div id="submenu-wrapper">
+                            <a href="<?=\cms\core\Helpers::getUrl("Page","templateCreate")?>" id="text-white"><span>Template accueil</span></a>
                         </div>
                     </div>
                 </div>
