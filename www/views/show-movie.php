@@ -78,7 +78,8 @@ foreach($myMovie as $movie): ?>
                 <p id=""><?= $comment->getComment() ?></p>
                 <!-- display the author name -->
                 <p class="right" id="">Posté le : <?= $comment->getPost_date() ?> Par
-                    <?= reset($userComment)->getLastName().'  '.  reset($userComment)->getFirstName() ?></p>
+                    <?= reset($userComment)->getLastName().'  '.  reset($userComment)->getFirstName() ?>
+                </p>
                 <div id="separation-bar"></div>
         </td>
         <?php endforeach; ?>

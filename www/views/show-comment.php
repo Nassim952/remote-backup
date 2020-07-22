@@ -23,7 +23,7 @@
                     <span id="show-label-bold">Date :</span> <?= $comment->getPost_date() ?>
                 </li>
                 <li class="show-li-wrapper"> 
-                    <span id="show-label-bold">Auteur :</span>  <?=  reset($userComment)->getLastName() ?> 
+                    <span id="show-label-bold">Auteur :</span>  <?= reset($userComment)->getLastName().'  '.  reset($userComment)->getFirstName() ?>
                 </li>
 
                 
