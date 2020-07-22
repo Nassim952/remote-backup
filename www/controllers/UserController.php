@@ -15,6 +15,7 @@ use cms\core\Page;
 use cms\core\Validator;
 use cms\forms\LoginType;
 use cms\forms\RegisterType;
+use cms\models\Movie;
 
 class UserController extends Controller{
 

@@ -56,23 +56,20 @@
                     <a href="<?= Helpers::getUrl("Page", "addPage") ?>" class="nav-text" style="text-decoration:none;">Créer une page</a>
                     <a href="<?= Helpers::getUrl("Page", "showCustomPages") ?>" class="nav-text" style="text-decoration:none;">Customise </a>
                 <?php endif; ?>
-                <?php foreach ($nav as $links): ?>
-                    <a href="/<?= str_replace(' ','_',$links['title']) ?>" class="nav-text" style="text-decoration:none;"><?=$links['title']?></a>
-                <?php endforeach  ?>
                 <a href="<?= Helpers::getUrl("User", "login") ?>" class="nav-text" style="text-decoration:none;">Deconnexion</a>
             </div>
         </div>
     </nav>
     <nav class="sub-nav-template">
         <div class="link-wrapper-template">
-            <a href="#" class="nav-text" style="text-decoration:none;">Films & Evenement</a>
-            <a href="#" class="nav-text" style="text-decoration:none;">Offres & Actus</a>
-            <a href="#" class="nav-text" style="text-decoration:none;">Cinema</a>
+            <?php foreach ($nav as $links): ?>
+                <a href="/<?= str_replace(' ','_',$links['title']) ?>" class="nav-text" style="text-decoration:none;"><?=$links['title']?></a>
+            <?php endforeach  ?>
         </div>
         <div class="right-input-wrapper">
-            <form method="POST">
+            <form action="/show-research" method="POST">
                 <label for="search_movie">Rechercher un film : </label> 
-                <input name="search_movie" type="text" class="input-round"/>
+                <input placeholder="rechercher un film..." name="name_movie" type="text" class="input-round"/>
                 <button class="Button" type="submit">Valider</button>
             </form>
         </div>

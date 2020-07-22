@@ -106,9 +106,12 @@ class PageController extends Controller
         $sectionManager = new SectionManager(ElementPageBuilder::class, 'section');
         $sections = $sectionManager->sectionsPage($id);
 
+        $componentsId = (new ComponentManager(Component::class, 'component'))->findBy(['section_id' => $id]);
+
         $this->render('show-component-page', 'back', [
             'components' => $components,
-            'sections' => $sections
+            'sections' => $sections,
+            'componentsId' => $componentsId
             ]);
     }
 
@@ -131,10 +134,12 @@ class PageController extends Controller
     }
 
     public function deleteComponentPageAction($id){
+        new View('confirm-page');
         $componentManager = new ComponentManager(Component::class, 'component');
 
         $componentManager->delete($id);
         helpers::alert_popup("component supprimé avec succès");
+        
     }
 
     public function templateCreateAction(){

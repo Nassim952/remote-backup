@@ -14,7 +14,7 @@
                     use cms\managers\ComponentManager;
                     use cms\core\Helpers;
                     use cms\models\Component;
-                    $componentsId = (new ComponentManager(Component::class, 'component'))->read();
+                    
                     foreach($components as $component):
                     ?>
                     <td class="td-dashboard-wrapper">

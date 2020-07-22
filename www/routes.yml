@@ -93,7 +93,6 @@
   controller: Cinema
   action: showCinema
 
-
 ######## Movie #########
 
 /show-movie:
@@ -112,6 +111,9 @@
   controller: Movie
   action: addFilm
 
+/show-research:
+  controller: Movie
+  action: searchMovie
 
 ########### Comment #############
 

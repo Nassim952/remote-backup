@@ -27,6 +27,18 @@ class MovieManager extends DB{
         }
     }
 
+    public function searchMovie($searched){
+        {
+            $query = (new QueryBuilder())
+                ->select('*')
+                ->from(DB_PREFIXE.'movie', 'm');
+            $query->where('m.title = :idmovie')
+                ->setParameters('idmovie', $id);
+            return $query->getQuery()
+                ->getArrayResult(Movie::class);
+        }   
+    }
+
     public function deleteMovie($id)
     {
         $this->delete($id);
