@@ -5,6 +5,7 @@ use cms\core\Controller;
 use cms\managers\CommentManager;
 use cms\models\Comment;
 use cms\core\View;
+use cms\managers\UserManager;
 
 class CommentController extends Controller{
     private $comments;
@@ -18,15 +19,29 @@ class CommentController extends Controller{
 
     }
 
+    public function showCommentAction($id){
+        $commentManager = new commentManager(Comment::class,'comment');
+        $comment = $commentManager->read($id);
+        //envoyer l'author
+        $userManager = new userManager(User::class,'user');
+        $userComment = $userManager->read(reset($comment)->getUser_id());
+
+        $this->render("show-comment", "back", [
+            'myComment' => $comment,
+            'userComment'=> $userComment
+            ]);
+
+    }
+
     public function addCommentAction(){
-        new View('add-comment');
+        new View('movies');
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $comment = new Comment();
 
             $comment->setComment($_POST['comment']);
             $comment->setTarget($_POST['target']);
-            $comment->setAuthor($_POST['author']);
-            $comment->setPostDate($_POST['date']);
+
+            $comment->setPost_date($_POST['date']);
 
             $commentManager = new commentManager(Comment::class,'comment');
             $commentManager->save($comment);
@@ -35,37 +50,38 @@ class CommentController extends Controller{
 
 
     //on testing
-    public function deleteCommentAction(){
+    public function deleteCommentAction($id){
 
-        $commentManager = new CommentManager(Comment::class, 'Comment');
-        $comments = $commentManager->read();
-        // This send comment data to the view thanks to the Commentmanager read function
-        $this->render("comment", "back", ['comments'=> $comments ]);
+        new View('confirm-page','back');
 
-        if ( $_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_POST['id'];
-
-            $commentManager = new CommentManager(Comment::class, 'comment');
-            $commentManager->delete($id);
-            // refresh the page after delete
-            echo("<meta http-equiv='refresh' content='1'>");
-        }
-       
-    }
-
-
-    public function editCommentAction(){
         $commentManager = new CommentManager(Comment::class,'comment');
-        $comments = $commentManager->read();
+        $commentManager->delete($id);
 
-        $this->render("edit-comment", "back", ['comments' => $comments]);
-
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $comment = $commentManager->findBy(['id' => $_POST['id']]);
-
-            $this->render('edit-comment-id','empty', ['comment' => $comment]);
-        }
+        echo "<script>alert('Commentaire supprimé avec succès');</script>";
     }
 
+
+    public function editCommentAction($id){
+        $commentManager = new commentManager(comment::class,'comment');
+        $comment = $commentManager->read($id);
+
+        $this->render('edit-comment','back', ['myComment' => $comment]);
+
+        if( $_SERVER["REQUEST_METHOD"] == "POST"){
+
+            $comment = new comment();
+
+            $comment->setId($id);
+            $comment->setComment($_POST['comment']);
+            $comment->setPost_date($_POST['date']);
+            $comment->setAuthor($_POST['author']);
+            $comment->setUser_id($_POST['user_id']);
+
+            $commentManager->save($comment);
+
+            echo "<script>alert('Film modifié avec succès');</script>";
+    
+        }
+    }
    
 }

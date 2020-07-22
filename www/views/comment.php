@@ -1,5 +1,5 @@
 <head>
-    <title>Cinema</title>
+    <title>Comments</title>
 </head>
 
 
@@ -8,13 +8,6 @@
         <h2 style="font-size:32px;">Commentaires</h2>
     </div>
     <div id="separation-bar"></div>
-    <div class="quick-tools">
-        <div id="space-icons">
-            <a href="<?= cms\core\Helpers::getUrl('Comment','addComment') ?>" class="fas fa-plus fa-lg"></a>
-            <a href="<?= \cms\core\Helpers::getUrl("Comment","editComment") ?>" class="fas fa-edit fa-lg"></a>
-            <a href="<?= \cms\core\Helpers::getUrl("Comment","deleteComment") ?>" class="fas fa-trash-alt fa-lg"></a>
-        </div>
-    </div>
     <div class="lists-film">
         <table class="table-wrapper">
             <tr class="tr-container">
@@ -22,15 +15,15 @@
                     foreach($comments as $comment):
                     ?>
                 <td class="td-dashboard-wrapper">
-                    <div class="pretty p-default p-curve p-bigger cb-fixer">
-                        <input type="checkbox">
-                        <div class="state p-danger">
-                            <label></label>
-                        </div>
-                    </div>
-                    <p id="text-wrappe"><?= $comment->getComment(); ?></p>
+                    <?php 
 
-                    <p id="hour-wrappe"><?= $comment->getPostDate() ?></p>
+                    $commentReduced = $comment->getComment();
+                    //Limits string length to 70
+                    $commentReduced= substr($commentReduced, 0,70);
+                    ?>
+                    <!-- clickable link -->
+                    <a href="show-comment/<?= $comment->getId() ?>" id="text-wrappe"><?= $commentReduced ?></a>
+                    <p id="hour-wrappe"><?= $comment->getPost_date() ?></p>
                 </td>
                 <?php endforeach; ?>
             </tr>

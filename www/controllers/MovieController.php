@@ -5,19 +5,54 @@ namespace cms\controllers;
 use cms\managers\CinemaManager;
 use cms\controllers\DashboardController;
 use cms\managers\MovieManager;
+use cms\models\Comment;
 use cms\core\Controller;
 use cms\models\Movie;
 use cms\forms\AddFilmType;
 use cms\core\Helpers;
 use cms\core\View;
+use cms\managers\CommentManager;
+use cms\managers\UserManager;
+use \DateTime;
 
 class MovieController extends Controller
 {
     public function showMovieAction($id){
+        
+        // reading movie table
         $movieManager = new MovieManager(Movie::class,'movie');
         $movie = $movieManager->read($id);
+        //reading comment table
+        $commentManager = new commentManager(Comment::class,'comment');
 
-        $this->render('show-movie', 'back', ['myMovie' => $movie]);
+        $commentsOfMovie = $commentManager->findBy(['target' => $id]);
+
+        $userManager = new userManager(User::class,'user');
+
+        //getting the user id
+        $usersComment = [];
+        foreach($commentsOfMovie as $commentOfMovie){
+            $usersComment = array_merge($usersComment, $userManager->read($commentOfMovie->getUser_id()));
+        }
+        
+
+        if( $_SERVER["REQUEST_METHOD"] == "POST"){
+            $comment = new Comment();
+            //if $comment =! empty saving the data in comment table
+            if (isset($comment)){
+                $comment->setComment($_POST['content']);
+                $comment->setTarget($id);
+                $comment->setUser_id($_POST['id_user']);
+                $commentManager->save($comment);
+            }
+        }
+       // session_start();
+        $comment = $commentManager->getFilmComments($id);
+        $this->render('show-movie', 'back', [
+            'myMovie' => $movie,
+            'usersComment'=> $usersComment,
+            'commentsOfMovie' =>$commentsOfMovie
+        ]);
     }  
 
     public function addFilmAction()

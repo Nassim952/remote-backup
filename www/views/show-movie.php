@@ -3,21 +3,21 @@
 </head>
 
 <div class="site-content">
-<div id="head-title">
-    <h2 style="font-size:32px;">Movie</h2>
-</div>
-<div id="separation-bar"></div>
+    <div id="head-title">
+        <h2 style="font-size:32px;">Movie</h2>
+    </div>
+    <div id="separation-bar"></div>
 
-<div class="show-movie-container">
-    <div class="show-title-movie">
-    <?php
+    <div class="show-movie-container">
+        <div class="show-title-movie">
+            <?php
 
 use cms\core\Helpers;
 
 foreach($myMovie as $movie): ?>
-        <span class="show-title-style"><?= $movie->getTitle() ?></span>
-    </div>
-    <div class="show-desc-container">
+            <span class="show-title-style"><?= $movie->getTitle() ?></span>
+        </div>
+        <div class="show-desc-container">
         <div class='show-left-img'>
             <img class="show-fit-pic" src="../public/images/<?= $movie->getImage_poster() ?>"></img>
         </div>
@@ -59,6 +59,62 @@ foreach($myMovie as $movie): ?>
                 </div>
             </div>
         </div>
+        <?php endforeach; ?>
     </div>
-    <?php endforeach; ?>
+    
+</div>
+    <div class="container">
+        <?php if (empty($commentsOfMovie)): ?>
+            <div class="">Aucun commentaire pour ce film</div>
+            <!-- action save comment -->
+            <form method="POST" class="">
+                <div class="form-group">
+                    <label class="labelComment" for="content"> Ajouter un commentaire :</label>
+                    <!-- get the id film & id userby hidden ipunt -->
+                    <input type="hidden" name="id_user" value="<?= reset($current_user)->getId() ?>" />
+                    <textarea style="float:center" name="content" id="content" rows="8" cols="135"></textarea>
+                </div>
+
+                <div class='show-button-wrapper'>
+                    <button type="submit" class="Button row submit "> Soumettre mon commentaire </button>
+                </div>
+            </form>
+        <?php endif;?>
+        <?php if(!empty($commentsOfMovie)): ?>
+        <div class="show-movie-comment-container"><h2>Espace commentaire :</h2>
+            <?php foreach($commentsOfMovie as $comment): ?>
+                <?php $userComment = array_shift($usersComment) ?>
+                <td class="list-film">
+                    <div style="width: -webkit-fill-available;" class="card">
+                        <?php 
+                            $commentReduced = $comment->getComment();
+                            //Limits string lengt
+                            $commentReduced= substr($commentReduced, 0,200);
+                            ?>
+                        <!-- Display the comment -->
+                        <p id=""><?= $comment->getComment() ?></p>
+                        <!-- display the author name -->
+                        <p class="right" id="">Posté le : <?= $comment->getPost_date() ?> Par
+                            <?= $userComment->getLastname().'  '.  $userComment->getFirstname() ?>
+                        </p>
+                        <div id="separation-bar"></div>
+                    </div>
+                </td>
+            <?php endforeach; ?>
+            <!-- action save comment -->
+            <form method="POST" class="">
+                <div class="form-group">
+                    <label class="labelComment" for="content"> Ajouter un commentaire :</label>
+                    <!-- get the id film & id userby hidden ipunt -->
+                    <input type="hidden" name="id_commentaire" value="<?= $comment->getId() ?> " />
+                    <input type="hidden" name="id_user" value="<?= reset($current_user)->getId() ?>" />
+                    <textarea style="float:center" name="content" id="content" rows="8" cols="135"></textarea>
+                </div>
+
+                <div class='show-button-wrapper'>
+                    <button type="submit" class="Button row submit "> Soumettre mon commentaire </button>
+                </div>
+            </form>
+        <?php endif; ?>
+    </div>
 </div>

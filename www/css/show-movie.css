@@ -10,7 +10,25 @@
     padding: 20px;
     border-radius: 30px;
 }
-
+.show-movie-comment-container{
+    display: flex;
+    width: 1000px;
+    flex-wrap: wrap;
+    margin: auto;
+    margin-top: 50px;
+    background-color: white;
+    padding:  20px;
+}
+.right{
+    text-align: right;
+}
+textarea{
+    padding-bottom: 10px;
+}
+.labelComment{
+    color: black;
+    font-size: 25px;
+}
 .show-fit-pic{
     width: 307px;
     height: 494px;

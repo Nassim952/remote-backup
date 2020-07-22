@@ -253,24 +253,31 @@ INSERT INTO bape_cinema (id, name, place, number_rooms, image_url) VALUES
 (2, 'UGC', 'Enghien-les-Bains', 7, 'ugc-1594990410.jpg'),
 (3, 'Paramount', 'Paris 13eme', 12, 'paramount_pictures-1594990401.jpg'),
 (4, 'Universal', 'Sarcelles', 6, 'universal-1594990415.jpg'),
-(5, 'Mega CGR', 'Epinay Villetaneuse', 11, 'cinemas-cgr-1594990366.jpg')
+(5, 'Mega CGR', 'Epinay Villetaneuse', 11, 'cinemas-cgr-1594990366.jpg');
 
---
--- Structure de la table `salles`
---
 
--- DROP TABLE IF EXISTS bape_salle;
--- CREATE TABLE IF NOT EXISTS bape_salle(
---     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
---     id_cinema INT,
---     cinema_movie_id INT,
---     FOREIGN KEY (cinema_movie_id) REFERENCES bape_movie(id) ON DELETE CASCADE,
---     FOREIGN KEY (id_cinema) REFERENCES bape_cinema(id) ON DELETE CASCADE
--- );
+-- 
+--  Structure de la table comment
+-- 
 
--- INSERT INTO bape_salle (id, place) VALUES
--- (1, 'Gaumont Pathe', 'Paris 6eme'),
--- (2, 'UGC', 'Enghien-les-Bains'),
--- (3, 'Paramount', 'Paris 13eme'),
--- (4, 'Universal', 'Sarcelles'),
--- (5, 'Mega CGR', 'Epinay Villetaneuse')
+DROP TABLE IF EXISTS bape_comment;
+CREATE TABLE IF NOT EXISTS bape_comment(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    comment TEXT,
+    post_date TIMESTAMP,
+    user_id INT NOT NULL,
+    target INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES bape_user(id) ON DELETE CASCADE,
+    FOREIGN KEY (target) REFERENCES bape_movie(id) ON DELETE CASCADE
+);
+
+
+-- 
+-- Chargement des donnees de la table comment
+-- 
+
+INSERT INTO bape_comment (id, comment, post_date, user_id, target) VALUES
+(null,"Spiderman respecte parfaitement bien la BD. Les acteurs sont bien choisis et incarnent à merveille leurs rôles. Avec des personnages sont attachants en particulier Peter Parker qui bien qu'ayant de super pouvoirs reste dominer par son côté humain.","2020-07-16 14:40:34",5,3),
+(null,"Eh bien voilà, 17 ans d'attente, et le retour de nos Bad Boys favoris ! Ce qui marque avant tout c'est que l'alchimie entre Will Smith et Martin Lawrence n'a pas pris une seule ride. Leurs interactions sont toujours savoureuses.","2020-06-15 17:30:22",4,2),
+(null,"'Suicide Squad' de David Ayer, après quelques déceptions récentes, fait cette fois figure d'une bonne surprise, enfin très drôle et vue sous un angle nouveau et différent ! DC Comics nous prouve que l'humour a ici sa place et c'est là le gros point fort... Et oui, surtout ne pas se prendre au sérieux comme l'était le suffisant 'Batman v Superman'...","2019-02-20 16:40:34",3,1),
+(null,"Un excellent divertissement ! Le scénario, qui ressemble à celui de Point Break, tient bien la route. Les courses poursuites sont très bien filmées et le casting est parfait, la présence de Paul Walker et Vin Diesel apporte beaucoup a ce superbe film d'action.","2019-05-18 10:20:22",2,4)

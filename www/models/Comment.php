@@ -12,32 +12,28 @@ class Comment extends Model implements ModelInterface
     protected $comment;
     protected $post_date;
     protected $target;
-    protected $target_type;
     protected $user_id;
-    protected $author;
+   
 
     public function initRelation(): array {
         return [
         
         ];
     }
-
-    public function delete($id){
-        $commentManager = new CommentManager(Comment::class, 'comment');
-
-        $commentManager->deleteComment($id);
-    }
-
+    
+    /**
+     * Get the value of id
+     */ 
     public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-         * Set the value of id
-         *
-         * @return  self
-         */ 
+     * Set the value of id
+     *
+     * @return  self
+     */ 
     public function setId($id)
     {
         $this->id = $id;
@@ -45,60 +41,86 @@ class Comment extends Model implements ModelInterface
         return $this;
     }
 
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-    }
-
-    public function setPostDate($post_date)
-    {
-        $this->post_date = $post_date;
-    }
-
-    public function setTarget($target)
-    {
-        $this->target = $target;
-    }
-
-    public function setTargetType($target_type)
-    {
-        $this->target_type = $target_type;
-    }
-
-    public function setAuthor(User $author)
-    {
-        $this->author = $author;
-    }
-
-
-
-    //GETTERS
-
+    /**
+     * Get the value of comment
+     */ 
     public function getComment()
     {
         return $this->comment;
     }
 
-    public function getPostDate()
+    /**
+     * Set the value of comment
+     *
+     * @return  self
+     */ 
+    public function setComment($comment)
     {
-        
-        return $this->post_date;
-        
+        $this->comment = $comment;
+
+        return $this;
     }
 
+    /**
+     * Get the value of post_date
+     */ 
+    public function getPost_date()
+    {
+        return $this->post_date;
+    }
+
+    /**
+     * Set the value of post_date
+     *
+     * @return  self
+     */ 
+    public function setPost_date($post_date)
+    {
+        $this->post_date = $post_date;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of target
+     */ 
     public function getTarget()
     {
         return $this->target;
     }
 
-    public function getTargetType()
+    /**
+     * Set the value of target
+     *
+     * @return  self
+     */ 
+    public function setTarget($target)
     {
-        return $this->target_type;
+        $this->target = $target;
+
+        return $this;
     }
 
-    public function getAuthor()
+
+    /**
+     * Get the value of user_id
+     */ 
+    public function getUser_id()
     {
-        return $this->author;
+        return $this->user_id;
     }
+
+    /**
+     * Set the value of user_id
+     *
+     * @return  self
+     */ 
+    public function setUser_id($user_id)
+    {
+        $this->user_id = $user_id;
+
+        return $this;
+    }
+
 
 }

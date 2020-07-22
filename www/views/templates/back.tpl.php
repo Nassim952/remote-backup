@@ -68,7 +68,7 @@
                 </div>
                 <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">
-                        <div class="fas fa-film fa-lg"></div>
+                        <div class="fa fa-desktop fa-lg"></div>
                         <div id="submenu-wrapper">
                             <a href="<?=\cms\core\Helpers::getUrl("Page", "showPages")?>" id="text-white"><span>Pages</span></a>
                         </div>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">
-                        <div class="fas fa-film fa-lg"></div>
+                        <div class="fa fa-cube fa-lg"></div>
                         <div id="submenu-wrapper">
                             <a href="<?=\cms\core\Helpers::getUrl("Page", "showSectionsPage")?>" id="text-white"><span>Components Page</span></a>
                         </div>
@@ -110,7 +110,7 @@
                 <h2 id="text-submenu-fixer">KPI</h2>
                 <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">
-                        <div class="fas fa-users fa-lg"></div>
+                        <div class="fa fa-bar-chart fa-lg"></div>
                         <div id="submenu-wrapper">
                             <a href="<?=\cms\core\Helpers::getUrl("Dashboard","stat")?>" id="text-white"><span>Stats</span></a>
                         </div>
@@ -122,6 +122,14 @@
                         <div class="fas fa-users fa-lg"></div>
                         <div id="submenu-wrapper">
                             <a href="<?=\cms\core\Helpers::getUrl("User","users")?>" id="text-white"><span>Users</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-menu">
+                    <div class="sidebar-sub-headers">
+                        <div class="fa fa-comment-o fa-lg"></div>
+                        <div id="submenu-wrapper">
+                            <a href="<?=\cms\core\Helpers::getUrl("Comment","comment")?>" id="text-white"><span>Commentaires</span></a>
                         </div>
                     </div>
                 </div>
