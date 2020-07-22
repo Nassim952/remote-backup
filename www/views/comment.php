@@ -20,18 +20,13 @@
                     foreach($comments as $comment):
                     ?>
                 <td class="td-dashboard-wrapper">
-                    <div class="pretty p-default p-curve p-bigger cb-fixer">
-                        <input type="checkbox">
-                        <div class="state p-danger">
-                            <label></label>
-                        </div>
-                    </div>
                     <?php 
 
                     $commentReduced = $comment->getComment();
                     //Limits string length to 70
                     $commentReduced= substr($commentReduced, 0,70);
                     ?>
+                    <!-- clickable link -->
                     <a href="show-comment/<?= $comment->getId() ?>" id="text-wrappe"><?= $commentReduced ?></a>
                     <p id="hour-wrappe"><?= $comment->getPost_date() ?></p>
                 </td>

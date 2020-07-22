@@ -76,6 +76,7 @@ foreach($myMovie as $movie): ?>
                     ?>
                 <!-- Display the comment -->
                 <p id=""><?= $comment->getComment() ?></p>
+                <!-- display the author name -->
                 <p class="right" id="">Posté le : <?= $comment->getPost_date() ?> Par
                     <?= reset($userComment)->getLastName().'  '.  reset($userComment)->getFirstName() ?></p>
                 <div id="separation-bar"></div>
@@ -86,14 +87,17 @@ foreach($myMovie as $movie): ?>
         <!-- action save comment -->
         <form action="" method="POST" class="">
             <div class="form-group">
+
                 <label class="labelComment" for="content"> Ajouter un commentaire :</label>
-                <!-- recuperer l'id du film avec un input hidden -->
+                <!-- get the id film & id userby hidden ipunt -->
                 <input type="hidden" name="id_commentaire" value="<?= $id ?> " />
                 <input type="hidden" name="id_user" value="<?= $_SESSION['user']->getId() ?>" />
-                <textarea style="float:right" name="content" id="content" rows="8" cols="110"></textarea>
+                <textarea style="float:center" name="content" id="content" rows="8" cols="135"></textarea>
             </div>
-                <button style="float:right" type="submit" class="Button row submit "> Soumettre mon commentaire </button>
-           
+
+            <div class='show-button-wrapper'>
+                <button style="" type="submit" class="Button row submit "> Soumettre mon commentaire </button>
+            </div>
         </form>
     </div>
 </div>

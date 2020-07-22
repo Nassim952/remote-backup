@@ -19,16 +19,21 @@ class MovieController extends Controller
 {
     public function showMovieAction($id){
         
-
+        // reading movie table
         $movieManager = new MovieManager(Movie::class,'movie');
         $movie = $movieManager->read($id);
+        //reading comment table
         $commentManager = new commentManager(Comment::class,'comment');
         $comment = $commentManager->read($id);
+
         $userManager = new userManager(User::class,'user');
+        //reset return the value of the first array element
+        //getting the user id
         $userComment = $userManager->read(reset($comment)->getUser_id());
 
         if( $_SERVER["REQUEST_METHOD"] == "POST"){
             $comment = new Comment();
+            //if $comment =! empty saving the data in comment table
             if (isset($comment)){
                 $comment->setComment($_POST['content']);
                 $comment->setTarget($id);
