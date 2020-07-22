@@ -17,6 +17,7 @@ class User extends Model implements ModelInterface
     protected $allow;
     protected $image_profile;
     protected $token;
+    protected $report;
 
     public function initRelation(): array {
         return [
@@ -148,6 +149,26 @@ class User extends Model implements ModelInterface
     public function setImage_profile($image_profile)
     {
         $this->image_profile = $image_profile;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of report
+     */ 
+    public function getReport()
+    {
+        return $this->report;
+    }
+
+    /**
+     * Set the value of report
+     *
+     * @returnself
+     */ 
+    public function setReport($report)
+    {
+        $this->report = $report;
 
         return $this;
     }

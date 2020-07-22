@@ -62,6 +62,9 @@
   controller: User
   action: noPermission
 
+/report-user-comment:
+  controller: User
+  action: reportComment
 
 ########### Cinema #############
 

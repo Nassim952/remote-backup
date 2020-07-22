@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS bape_user(
     allow INT NOT NULL,
     image_profile VARCHAR(255),
     token varchar(255) DEFAULT NULL,
-    verified boolean DEFAULT 0
+    verified boolean DEFAULT 0,
+    report INT DEFAULT 0
 );
 
 INSERT INTO bape_user (lastname, firstname, email, password, statut, allow, image_profile, verified) VALUES

@@ -16,6 +16,7 @@ use cms\core\Validator;
 use cms\forms\LoginType;
 use cms\forms\RegisterType;
 use cms\models\Movie;
+use cms\PHPMailer\src\PHPMailer;
 
 class UserController extends Controller{
 
@@ -166,6 +167,27 @@ class UserController extends Controller{
         $user_id = $user->read($id);
 
         $this->render('show-user','back', ['myUser' => $user_id]);
+    }
+
+    public function reportCommentAction($id){
+        $userManager = new UserManager(User::class, 'user');
+
+        $users =  $userManager->read($id);
+        $user = array_shift($users);
+
+        $mail = new Mailer();
+
+        if($user->getReport() < 5){
+            $user->setReport($user->getReport() + 1);
+            $userManager->save($user);
+            $mail->sendUserReported($user->getEmail(), $user->getFirstname());
+        }elseif($user->getReport() >= 5){
+            $user->setStatut(0);
+            $userManager->save($user);
+            $mail->sendUserBanned($user->getEmail(), $user->getFirstname());
+        }
+        new View('confirm-page');
+        Helpers::alert_popup('Utilisateur signalé avec succès');
     }
 
 	public function loginAction()

@@ -97,6 +97,7 @@ foreach($myMovie as $movie): ?>
                         <p class="right" id="">Posté le : <?= $comment->getPost_date() ?> Par
                             <?= $userComment->getLastname().'  '.  $userComment->getFirstname() ?>
                         </p>
+                        <a class="Button" href="<?= Helpers::getUrl("User", "reportComment").'/'.$userComment->getId() ?>">Signaler</a>
                         <div id="separation-bar"></div>
                     </div>
                 </td>
