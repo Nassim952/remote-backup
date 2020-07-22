@@ -34,7 +34,7 @@ class LoginType extends Form {
                          ])
                         ->add('submit', 'submit', [
                             'attr' => [
-                            "class" => "button",
+                            "class" => "Button",
                             ]
                         ]);
             return $this;

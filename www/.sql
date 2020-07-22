@@ -1,40 +1,8 @@
---
--- Base de donnees :  `cinedata`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `identity`
---
 
 DROP DATABASE IF EXISTS cinedata;
 CREATE DATABASE IF NOT EXISTS cinedata;
 
 use cinedata;
-
-DROP TABLE IF EXISTS bape_identity;
--- CREATE TABLE IF NOT EXISTS bape_identity(
---     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
---     lastname VARCHAR(100),
---     firstname VARCHAR(100),
---     birthdate DATE
--- );
-
--- 
--- Chargement des donnees de la table user
--- 
-
--- INSERT INTO bape_identity (id, lastname, firstname, birthdate) VALUES
--- (1, 'desouza', 'eyram', '2020-01-01'),
--- (2, 'mbiya', 'eyram', '2020-01-01'),
--- (3, 'mmadi','nassim','2020-01-01'),
--- (4, 'belatoui', 'bibal', '2020-01-01'),
--- (5, 'mondor', 'andrew', '2020-01-01');
-
---
--- Structure de la table user
---
 
 DROP TABLE IF EXISTS bape_user;
 CREATE TABLE IF NOT EXISTS bape_user(
@@ -50,10 +18,6 @@ CREATE TABLE IF NOT EXISTS bape_user(
     verified boolean DEFAULT 0
 );
 
--- 
--- Chargement des donnees de la table user
--- 
-
 INSERT INTO bape_user (lastname, firstname, email, password, statut, allow, image_profile, verified) VALUES
 ('DeSouza', 'Eyram', 'eyram@nearby.com', '$2y$10$H6VlPXykHKmYCHo.4M/OAeTIjtIa1dq1Sy/h2w5JYAfSjCxD1x83e', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
 ('Mbiya','Randy', 'randy@nearby.com','$2y$10$H6VlPXykHKmYCHo.4M/OAeTIjtIa1dq1Sy/h2w5JYAfSjCxD1x83e', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
@@ -63,11 +27,6 @@ INSERT INTO bape_user (lastname, firstname, email, password, statut, allow, imag
 ('Scott', 'Travis','scott@nearby.com','$2y$10$H6VlPXykHKmYCHo.4M/OAeTIjtIa1dq1Sy/h2w5JYAfSjCxD1x83e', 1, 1, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
 ('Mondor', 'Andrew','andrew@nearby.com', '$2y$10$H6VlPXykHKmYCHo.4M/OAeTIjtIa1dq1Sy/h2w5JYAfSjCxD1x83e', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1);
 
-
---
--- Structure de la table `image`
---
-
 DROP TABLE IF EXISTS bape_image;
 CREATE TABLE IF NOT EXISTS bape_image(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -75,10 +34,6 @@ CREATE TABLE IF NOT EXISTS bape_image(
     REFERENCE VARCHAR (20),
     uploading_date TIMESTAMP
 );
-
---
--- Structure de la table `page`
---
 
 DROP TABLE IF EXISTS bape_page;
 CREATE TABLE IF NOT EXISTS bape_page(
@@ -92,9 +47,7 @@ INSERT INTO bape_page (title, gabarit) VALUES
 ('home-template', 2),
 ('carousel-template', 1);
 
--- 
--- Structure de la table 'Section'
--- 
+
 
 DROP TABLE IF EXISTS bape_section;
 CREATE TABLE IF NOT EXISTS bape_section(
@@ -110,9 +63,7 @@ INSERT INTO bape_section (size, page_id, position) VALUES
 (1, 2, 2);
 
 
--- 
---  Structure de la table Component
--- 
+
 
 DROP TABLE IF EXISTS bape_component;
 CREATE TABLE IF NOT EXISTS bape_component(
@@ -127,56 +78,6 @@ INSERT INTO bape_component (categorie, position, section_id) VALUES
 ('carousel-billboard', 1, 1),
 ('carousel-full-arrow', 2, 1);
 
-
---
--- Structure de la table `article`
---
-
-DROP TABLE IF EXISTS bape_article;
-CREATE TABLE IF NOT EXISTS bape_article(
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
-    subtiltle VARCHAR(255),
-    creation_date TIMESTAMP,
-    update_date TIMESTAMP,
-    user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES bape_user(id) ON DELETE CASCADE
-);
-
---
--- Structure de la table `article_image`
---
-
-DROP TABLE IF EXISTS bape_article_image;
-CREATE TABLE IF NOT EXISTS bape_article_image(
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    title VARCHAR(255),
-    REFERENCE VARCHAR (2),
-    uploading_date TIMESTAMP,
-    article_id INT NOT NULL,
-    image_id INT NOT NULL,
-    FOREIGN KEY (article_id) REFERENCES bape_article(id) ON DELETE CASCADE,
-    FOREIGN KEY (image_id) REFERENCES bape_image(id) ON DELETE CASCADE
-);
-
---
--- Structure de la table `comment`
---
-
-DROP TABLE IF EXISTS bape_comment;
-CREATE TABLE IF NOT EXISTS bape_comment(
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    comment TEXT,
-    post_date TIMESTAMP,
-    user_id INT NOT NULL,
-    target INT NOT NULL,
-    target_type INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES bape_user(id) ON DELETE CASCADE
-);
-
---
--- Structure de la table `movie`
---
 
 DROP TABLE IF EXISTS bape_movie;
 CREATE TABLE IF NOT EXISTS bape_movie(
@@ -194,10 +95,6 @@ CREATE TABLE IF NOT EXISTS bape_movie(
     synopsis TEXT
 );
 
--- 
--- Chargement des donnees de la table movie
--- 
-
 INSERT INTO bape_movie (title, release_date, duration, kind, age_require, director, main_actor, nationality, movie_type, image_poster, synopsis) VALUES
 ('Spider-Man New Generation', '2021-01-06', '03:02', 'Action', 12, 'Sam Raimi', 'Miles Morales', 'American', 'Animation', 'spider-man_new-generation-1594989900.jpg', 'Spider-Man : New Generation suit les aventures de Miles Morales, un adolescent afro-americain et portoricain qui vit à Brooklyn et s’efforce de s’integrer dans son nouveau college à Manhattan.'),
 ('Bad Boys For Life', '2022-01-02', '02:04','Action', 16, 'Bilal Fallah','Will Smith','American','Long-metrage','bad_boys_for_life-1594989852.jpg', 'Si Mike Lowrey est un seducteur invetere, heritier dune fortune et policier par passion, son collegue et ami Marcus Burnett est un homme range, marie et pere de famille..'),
@@ -205,9 +102,24 @@ INSERT INTO bape_movie (title, release_date, duration, kind, age_require, direct
 ('Fast and Furious 8', '2018-02-01', '02:03', 'Action', 12, 'Gary Gray','Paul Walker','American','Long-metrage','faf_8-1594989874.jpg', 'Maintenant que Dom et Letty sont en lune de miel, que Brian et Mia se sont ranges et que le reste de l’equipe a ete disculpe, la bande de globetrotteurs retrouve un semblant de vie normale.'),
 ('Je suis une legende', '2007-02-19', '01:40', 'Thriller', 18, 'Francis Lawrence','Will Smith','American','Long-metrage','je_suis_une_legende-1594989888.jpg', 'Robert Neville etait un savant de haut niveau et de reputation mondiale, mais il en aurait fallu plus pour stopper les ravages de cet incurable et terrifiant virus dorigine humaine.');
 
---
--- Structure de la table `room`
---
+
+DROP TABLE IF EXISTS bape_comment;
+CREATE TABLE IF NOT EXISTS bape_comment(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    comment TEXT,
+    post_date TIMESTAMP,
+    user_id INT NOT NULL,
+    target INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES bape_user(id) ON DELETE CASCADE,
+    FOREIGN KEY (target) REFERENCES bape_movie(id) ON DELETE CASCADE
+);
+
+INSERT INTO bape_comment (id, comment, post_date, user_id, target) VALUES
+(null,"Spiderman respecte parfaitement bien la BD. Les acteurs sont bien choisis et incarnent à merveille leurs rôles. Avec des personnages sont attachants en particulier Peter Parker qui bien qu'ayant de super pouvoirs reste dominer par son côté humain.","2020-07-16 14:40:34",5,3),
+(null,"Eh bien voilà, 17 ans d'attente, et le retour de nos Bad Boys favoris ! Ce qui marque avant tout c'est que l'alchimie entre Will Smith et Martin Lawrence n'a pas pris une seule ride. Leurs interactions sont toujours savoureuses.","2020-06-15 17:30:22",4,2),
+(null,"'Suicide Squad' de David Ayer, après quelques déceptions récentes, fait cette fois figure d'une bonne surprise, enfin très drôle et vue sous un angle nouveau et différent ! DC Comics nous prouve que l'humour a ici sa place et c'est là le gros point fort... Et oui, surtout ne pas se prendre au sérieux comme l'était le suffisant 'Batman v Superman'...","2019-02-20 16:40:34",3,1),
+(null,"Un excellent divertissement ! Le scénario, qui ressemble à celui de Point Break, tient bien la route. Les courses poursuites sont très bien filmées et le casting est parfait, la présence de Paul Walker et Vin Diesel apporte beaucoup a ce superbe film d'action.","2019-05-18 10:20:22",2,4);
+
 
 DROP TABLE IF EXISTS bape_room;
 CREATE TABLE IF NOT EXISTS bape_room(
@@ -216,9 +128,7 @@ CREATE TABLE IF NOT EXISTS bape_room(
     section CHAR(1)
 );
 
---
--- Structure de la table `movie_session`
---
+
 
 DROP TABLE IF EXISTS bape_movie_session;
 CREATE TABLE IF NOT EXISTS bape_movie_session(
@@ -231,9 +141,7 @@ CREATE TABLE IF NOT EXISTS bape_movie_session(
     FOREIGN KEY (room_id) REFERENCES bape_room(id) ON DELETE CASCADE
 );
 
---
--- Structure de la table `cinema`
---
+
 
 DROP TABLE IF EXISTS bape_cinema;
 CREATE TABLE IF NOT EXISTS bape_cinema(
@@ -256,9 +164,6 @@ INSERT INTO bape_cinema (id, name, place, number_rooms, image_url) VALUES
 (5, 'Mega CGR', 'Epinay Villetaneuse', 11, 'cinemas-cgr-1594990366.jpg');
 
 
--- 
---  Structure de la table comment
--- 
 
 DROP TABLE IF EXISTS bape_comment;
 CREATE TABLE IF NOT EXISTS bape_comment(
@@ -271,10 +176,6 @@ CREATE TABLE IF NOT EXISTS bape_comment(
     FOREIGN KEY (target) REFERENCES bape_movie(id) ON DELETE CASCADE
 );
 
-
--- 
--- Chargement des donnees de la table comment
--- 
 
 INSERT INTO bape_comment (id, comment, post_date, user_id, target) VALUES
 (null,"Spiderman respecte parfaitement bien la BD. Les acteurs sont bien choisis et incarnent à merveille leurs rôles. Avec des personnages sont attachants en particulier Peter Parker qui bien qu'ayant de super pouvoirs reste dominer par son côté humain.","2020-07-16 14:40:34",5,3),

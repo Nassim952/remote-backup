@@ -20,10 +20,10 @@ class CustomController extends Controller{
             $font_color = $_POST[$form->getName().'_font_color'];
             $template = $_POST[$form->getName().'_template'];
             
-            $conf[] = "CURRENT_FONT=$font \n";
-            $conf[] = "CURRENT_FONT_SIZE=$font_size \n";
-            $conf[] = "CURRENT_FONT_COLOR=$font_color \n";
-            $conf[] = "CURRENT_TEMPLATE=$template".PHP_EOL;
+            $conf[] = "CURRENT_FONT=$font \r\n";
+            $conf[] = "CURRENT_FONT_SIZE=$font_size \r\n";
+            $conf[] = "CURRENT_FONT_COLOR=$font_color \r\n";
+            $conf[] = "CURRENT_TEMPLATE=$template \r\n";
 
             file_put_contents(".conf", $conf);
 

@@ -16,7 +16,7 @@ class InstallerType extends Form {
                             "attr"=>
                             [
                             "placeholder"=>"Host DB",
-                            "class"=>"form-control form-control-user"],
+                            "class"=>"input-form"],
                             "required"=>true,
                             "label"=> "Hote"
                         ])
@@ -24,7 +24,7 @@ class InstallerType extends Form {
                             "attr"=>
                             [
                             "placeholder"=>"Name BDD",
-                            "class"=>"form-control form-control-user"],
+                            "class"=>"input-form"],
                             "required"=>true,
                             "label"=> "Database"
                          ])
@@ -32,7 +32,7 @@ class InstallerType extends Form {
                             "attr"=>
                             [
                                 "placeholder"=>"User DB Name",
-                                "class"=>"form-control form-control-user"
+                                "class"=>"input-form"
                             ],
                             "required"=>true,
                             "label"=> "Utilisateur"
@@ -40,7 +40,7 @@ class InstallerType extends Form {
                          ->add( "dbpassword", "password", [
                             "attr" => [
                                 "placeholder"=>"Password DB",
-                                "class"=>"form-control form-control-user",
+                                "class"=>"input-form",
                                 "id"=>""
                              ],
                             "required"=>true,
@@ -48,7 +48,7 @@ class InstallerType extends Form {
                          ])
             ->add('submit', 'submit', [
                 'attr' => [
-                "class" => "button",
+                "class" => "Button",
                 ]
             ]);
 

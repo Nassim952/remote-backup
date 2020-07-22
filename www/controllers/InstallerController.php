@@ -3,6 +3,7 @@
 namespace cms\controllers;
 
 use cms\core\Installer;
+use cms\core\Helpers;
 use cms\core\NotFoundException;
 use cms\core\Controller;
 use cms\forms\InstallerType;
@@ -12,6 +13,7 @@ class InstallerController extends Controller{
 
 	public function installerAction()
     {
+
         $form = $this->createForm(InstallerType::class);
         $form->handle();
 
@@ -19,24 +21,20 @@ class InstallerController extends Controller{
         {  
             if((new Installer())->connectDatabase())
             {
-                $form = $this->createForm(LoginType::class);
-                $form->handle();
-                $this->render("login", "account", [
-                    "configFormUser" => $form
-                ]);
+                $view = Helpers::getUrl("Page", "templateCreate");
+                $newUrl = trim($view, "/");
+                header("Location: " . $newUrl);
             } else {
-                $this->render("login", "account", [
+                $this->render("installer", "installer", [
                     "configFormUser" => $form
                 ]);
             }
         }
         else
         {
-            $this->render("login", "account", [
+            $this->render("installer", "installer", [
                 "configFormUser" => $form
             ]);
         }
-
-       
     }
 }

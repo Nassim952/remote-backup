@@ -48,8 +48,8 @@ class Installer
 			if(file_exists(".sql"))
 			{
 				try {
-					//var_dump(file_get_contents(".sql"));
 					$stmt = $pdo->prepare(file_get_contents(".sql"));
+					print_r($stmt);
 					$stmt->execute();
 				} catch(PDOException $e){
 					//print_r($e->getMessage());
@@ -60,38 +60,16 @@ class Installer
 				throw new Exception("File Exeption");
 			}
 
-			// //Création de la conf
-			// $confProd = file('.prod');
-			// if (null === $conf || empty($conf)){
-			// 	foreach ($confProd as $key => $line) {
-			// 		if( strpos($line, 'USER_DB') !== FALSE )
-			// 				$conf[$key] = "USER_DB = $dbuser \n";
-			// 		if( strpos($line, 'PWD_DB') !== FALSE )
-			// 				$conf[$key] = "PWD_DB = $dbpassword \n";
-			// 		if( strpos($line, 'HOST_DB') !== FALSE )
-			// 				$conf[$key] = "HOST_DB = $dbhost \n";
-			// 		if( strpos($line, 'NAME_DB') !== FALSE )
-			// 				$conf[$key] = "NAME_DB = $dbname \n";
-			// 		if( strpos($line, 'DBPORT') !== FALSE )
-			// 				$conf[$key] = "PORT_DB = 8888 \n";
-			// 		// $fp = fopen('.prod','r+');
-			// 		// ftruncate($fp,0);
-			// 		// rewind($fp);
-			// 	}
-			// } else {
-
-				$conf[] = "USER_DB = $dbuser \n";
-				$conf[] = "PWD_DB = $dbpassword \n";
-				$conf[] = "HOST_DB = $dbhost \n";
-				$conf[] = "NAME_DB = $dbname \n";
-				$conf[] = "PORT_DB = 8888 \n";
+				$conf[] = "USER_DB=$dbuser \r\n";
+				$conf[] = "PWD_DB=$dbpassword \r\n";
+				$conf[] = "HOST_DB=$dbhost \r\n";
+				$conf[] = "NAME_DB=$dbname \r\n";
+				$conf[] = "PORT_DB=8888 \r\n";
 
 			// }
-			$conf[] =  'APP_INSTALLED = true;'. "\n";
+			$conf[] =  'APP_INSTALLED = true'. "\r\n";
 		
 			file_put_contents('.prod', $conf);
-
-			print_r($conf);
 
 			return true;
 		}

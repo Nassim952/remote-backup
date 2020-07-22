@@ -170,7 +170,12 @@ class UserController extends Controller{
 
 	public function loginAction()
     {
-        
+        if(!defined(APP_INSTALLED)){
+            $view = Helpers::getUrl("installer", "installer");
+            $newUrl = trim($view, "/");
+            header("Location: " . $newUrl);
+        }
+
         $form = $this->createForm(LoginType::class);
         $form->handle();
 
@@ -185,9 +190,6 @@ class UserController extends Controller{
                 if($userCheck->getVerified() == 1){
                     session_start();
                     $_SESSION['userId'] = $userCheck->getId();
-                    $view = Helpers::getUrl("Page", "templateCreate");
-                    $newUrl = trim($view, "/");
-                    header("Location: " . $newUrl);
                 }else{
                     $view = Helpers::getUrl("User", "mailNotChecked");
                     $newUrl = trim($view, "/");
