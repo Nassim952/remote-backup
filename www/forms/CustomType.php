@@ -57,9 +57,8 @@
                 ],
                 'required'=>true,
                 'options'=>[
-                    'basic'=>'basic', 
-                    'Lightgrey'=>'Lightgrey',
-                    'black' => 'black'
+                    'front-cms'=>'White template',
+                    'front-cms-bis'=>'Pink-template',  
                 ],
             ])
             ->add('submit', 'submit', [

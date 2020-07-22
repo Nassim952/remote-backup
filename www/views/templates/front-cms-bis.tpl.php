@@ -43,7 +43,7 @@
         });
     </script>
     <nav style="color:blue;" class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
+        <div style="background-color: lightcoral;" class="navbar-header">
             <div class="logo-wrapper">
                 <img id="logo_header" src="../../src/images/logo.png">
             </div>
@@ -58,7 +58,7 @@
             </div>
         </div>
     </nav>
-    <nav class="sub-nav-template">
+    <nav style="background-color: gainsboro;" class="sub-nav-template">
         <div class="link-wrapper-template">
             <?php foreach ($nav as $links): ?>
                 <a href="/<?= str_replace(' ','_',$links['title']) ?>" class="nav-text" style="text-decoration:none;"><?=$links['title']?></a>

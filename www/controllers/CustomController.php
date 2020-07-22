@@ -3,6 +3,7 @@
 namespace cms\controllers;
 
 use cms\core\Controller;
+use cms\core\Helpers;
 use cms\forms\CustomType;
 
 class CustomController extends Controller{
@@ -27,7 +28,7 @@ class CustomController extends Controller{
 
             file_put_contents(".conf", $conf);
 
-
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         }else
         {
             $this->render("custom-front", "back", [

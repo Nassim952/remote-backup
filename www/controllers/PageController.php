@@ -212,7 +212,7 @@ class PageController extends Controller
 
         $page->setSections($sectionUpdate);
 
-        $this->render("default", "front-cms", [
+        $this->render("default", CURRENT_TEMPLATE, [
             "page" => $page
         ]);
 
