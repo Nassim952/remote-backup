@@ -36,6 +36,10 @@ class Helpers
         }
     }
 
+    public static function alert_popup(string $msg){
+        echo "<script>alert('$msg');</script>";
+    }
+
     public static function refresh($newUri){
         $listOfRoutes = yaml_parse_file("routes.yml");
         

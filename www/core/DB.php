@@ -152,7 +152,8 @@ class DB
             // array_shift($columns);
             // array_shift($params);
 
-            if(reset($columns) instanceof PageBuilder){
+            // c'est crade mais on avait pas le choix
+            if(reset($columns) == 'builder'){
                 array_shift($columns);
                 array_shift($params);
             } 

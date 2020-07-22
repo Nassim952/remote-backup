@@ -43,10 +43,7 @@ class PageController extends Controller
             $page = new Page();
 
             $page->setTitle($_POST[$form->getName().'_title']);
-            $page->setTheme($_POST[$form->getName().'_theme']);
             $page->setGabarit($_POST[$form->getName().'_gabarit']);
-            $page->setFont($_POST[$form->getName().'_font']);
-            $page->setFont_color($_POST[$form->getName().'_font-color']);
 
             $pageManager->save($page);
 
@@ -94,9 +91,6 @@ class PageController extends Controller
             $page->setId($id);
             $page->setTitle($_POST['title']);
             $page->setGabarit($_POST['gabarit']);
-            $page->setTheme($_POST['theme']);
-            $page->setFont($_POST['font']);
-            $page->setFont_color($_POST['font_color']);
 
             $pageManager->save($page);
 
@@ -121,19 +115,26 @@ class PageController extends Controller
     public function editComponentPageAction($id){
         // je récupère les components qui appartient aux sections de la page
         $componentManager = new ComponentManager(Component::class, 'component');
-        $component = $componentManager->componentsSection($id);
-
-        $this->render('edit-component-page', 'back', [
-            'component' => $component
-        ]);
+        $components = $componentManager->componentsSection($id);
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            
+            print_r($components);
+            $components->setCategorie($_POST['categorie']);
+            $componentManager->save($components);
+
+            Helpers::alert_popup('component modifié avec succès');
         }
+        
+        $this->render('edit-component-page', 'back', [
+            'component' => $components
+        ]);
     }
 
     public function deleteComponentPageAction($id){
-        
+        $componentManager = new ComponentManager(Component::class, 'component');
+
+        $componentManager->delete($id);
+        helpers::alert_popup("component supprimé avec succès");
     }
 
     public function templateCreateAction(){

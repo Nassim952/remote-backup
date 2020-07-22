@@ -14,9 +14,6 @@ class Page extends Model implements ModelInterface
     protected $title;
     protected $gabarit;
     protected $creation_date;
-    protected $theme;
-    protected $font;
-    protected $font_color;
 
 
     public function __construct(){
@@ -58,14 +55,6 @@ class Page extends Model implements ModelInterface
     }
 
 
-    public function setTheme($theme){
-        $this->theme = $theme;
-    }
-    
-    public function setFont($font){
-        $this->font = $font;
-    }
-
     public function setBuilder(PageBuilder $builder)
     {
         $this->builder = $builder;
@@ -96,37 +85,9 @@ class Page extends Model implements ModelInterface
         return $this->creation_date;
     }
 
-    public function getTheme(){
-        return $this->theme;
-    }
-    
-    public function getFont(){
-        return $this->font;
-    }
-
     public function getSections()
     {
         return $this->builder->getSections();
-    }
-
-    /**
-     * Get the value of font_color
-     */ 
-    public function getFont_color()
-    {
-        return $this->font_color;
-    }
-
-    /**
-     * Set the value of font_color
-     *
-     * @returnself
-     */ 
-    public function setFont_color($font_color)
-    {
-        $this->font_color = $font_color;
-
-        return $this;
     }
 
     /**

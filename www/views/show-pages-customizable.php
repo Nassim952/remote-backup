@@ -14,22 +14,13 @@ foreach($pages as $page): ?>
                 <div class="front-custom-li-wrapper">
                     <ul style="padding-inline-start: initial;">
                         <li class="li-style-none">
-                            <span>Theme : <?= $page->getTheme() ?></span>
-                        </li>
-                        <li class="li-style-none">
                             <span>Nombre rows : <?= $page->getGabarit() ?></span>
-                        </li>
-                        <li class="li-style-none">
-                            <span>Police : <?= $page->getFont() ?></span>
-                        </li>
-                        <li class="li-style-none">
-                            <span>Couleur police : <?= $page->getFont_color() ?></span>
                         </li>
                         <li class="li-style-none">
                             <span>Date création : <?= $page->getCreation_date() ?></span>
                         </li>
                     </ul>
-                    <a href="<?= Helpers::getUrl('Page','editPage').'/'.$page->getId() ?>" class="Button">Valider</a>
+                    <a href="<?= Helpers::getUrl('Page','editPage').'/'.$page->getId() ?>" class="Button">Modifier</a>
                 </div>
             </div>
             <?php endforeach;?>

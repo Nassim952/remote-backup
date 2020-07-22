@@ -12,8 +12,8 @@
             <tr class="tr-container">
                     <div class="flex-form-container">
                         <div class="flex-form-content-left">
-                            <form>
-                                <select type="select" class=input-form  type="int" name="font_color">
+                            <form method="POST">
+                                <select type="select" class=input-form  type="int" name="categorie">
                                     <?php foreach($component as $myComponent): ?>
                                         <option value="<?= $myComponent->getCategorie(); ?>"> <?= $myComponent->getCategorie(); ?></option>
                                     <?php endforeach;?>

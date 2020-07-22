@@ -33,7 +33,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
     <script src="../../js/chart.js"></script>
 </head>
-<body>
+<body style="font-family: Montserrat">
     <script>
         $(document).ready(
         function() {

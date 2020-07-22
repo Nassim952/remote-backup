@@ -28,9 +28,6 @@
                         justify-content: center;
                         align-items: center;">
                         <li><span class="front-show-libelle">Nombre de lignes : <?= $page->getGabarit() ?></span></li>
-                        <li><span class="front-show-libelle">Theme couleur : <?= $page->getTheme() ?></span></li>
-                        <li><span class="front-show-libelle">Police : <?= $page->getFont() ?></span></li>
-                        <li><span class="front-show-libelle">Couleur police : <?= $page->getFont_color() ?></span></li>
                     </ul>
                 </div>
                 <?php if(reset($current_user)->getAllow() >= 2): ?>

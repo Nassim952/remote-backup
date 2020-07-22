@@ -55,13 +55,13 @@ CREATE TABLE IF NOT EXISTS bape_user(
 -- 
 
 INSERT INTO bape_user (lastname, firstname, email, password, statut, allow, image_profile, verified) VALUES
-('DeSouza', 'Eyram', 'eyram@nearby.com', 'password', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Mbiya','Randy', 'randy@nearby.com','password', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Mmadi','Nassim','nassim@nearby.com','password', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Belatoui', 'Bilal','bilal@nearby.com','password', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Drizzy', 'Drake','drake@nearby.com','password', 1, 2, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Scott', 'Travis','scott@nearby.com','password', 1, 1, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
-('Mondor', 'Andrew','andrew@nearby.com', 'password', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1);
+('DeSouza', 'Eyram', 'eyram@nearby.com', '$2y$10$H6VlPXykHKmYCHo.4M/OAeTIjtIa1dq1Sy/h2w5JYAfSjCxD1x83e', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Mbiya','Randy', 'randy@nearby.com','$2y$10$H6VlPXykHKmYCHo.4M/OAeTIjtIa1dq1Sy/h2w5JYAfSjCxD1x83e', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Mmadi','Nassim','nassim@nearby.com','$2y$10$H6VlPXykHKmYCHo.4M/OAeTIjtIa1dq1Sy/h2w5JYAfSjCxD1x83e', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Belatoui', 'Bilal','bilal@nearby.com','$2y$10$H6VlPXykHKmYCHo.4M/OAeTIjtIa1dq1Sy/h2w5JYAfSjCxD1x83e', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Drizzy', 'Drake','drake@nearby.com','$2y$10$H6VlPXykHKmYCHo.4M/OAeTIjtIa1dq1Sy/h2w5JYAfSjCxD1x83e', 1, 2, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Scott', 'Travis','scott@nearby.com','$2y$10$H6VlPXykHKmYCHo.4M/OAeTIjtIa1dq1Sy/h2w5JYAfSjCxD1x83e', 1, 1, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1),
+('Mondor', 'Andrew','andrew@nearby.com', '$2y$10$H6VlPXykHKmYCHo.4M/OAeTIjtIa1dq1Sy/h2w5JYAfSjCxD1x83e', 1, 3, 'uchiha_sasuke_uchiha_clan-1661251-1594986945.jpg',1);
 
 
 --
@@ -85,15 +85,12 @@ CREATE TABLE IF NOT EXISTS bape_page(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     title VARCHAR(100),
     gabarit INT NOT NULL,
-    creation_date TIMESTAMP,
-    theme VARCHAR(100),
-    font VARCHAR(100),
-    font_color VARCHAR(100)
+    creation_date TIMESTAMP
 );
 
-INSERT INTO bape_page (title, gabarit, theme, font, font_color) VALUES
-('home-template', 2, 'blue', 'Roboto', 'black'),
-('carousel-template', 1, 'blue', 'Roboto', 'black');
+INSERT INTO bape_page (title, gabarit) VALUES
+('home-template', 2),
+('carousel-template', 1);
 
 -- 
 -- Structure de la table 'Section'

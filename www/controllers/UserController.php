@@ -131,6 +131,7 @@ class UserController extends Controller{
             new View('mail-check', 'front');
         }else{
             echo "<script>alert('user inconnu');</script>";
+            Helpers::alert_popup('user inconnu');
             new View("user-token-unknown", "front");
         }
     }
@@ -240,7 +241,7 @@ class UserController extends Controller{
                     $mail = new Mailer();
                     $result = $mail->sendVerifAuth($_POST[$form->getName().'_email'], $token, $_POST[$form->getName().'_firstname']);
                     if(!$result){
-                        echo "<script>alert('Confirmer votre adresse en cliquant sur le lien envoyé par mail !');</script>";
+                        Helpers::alert_popup('Confirmer votre adresse en cliquant sur le lien envoyé par mail !');
                         $this->render("register", "account", [
                             "configFormUser" => $form
                         ]);

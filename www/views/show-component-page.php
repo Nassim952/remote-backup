@@ -11,9 +11,12 @@
         <table class="table-wrapper">
             <tr style="height: 120px;" class="tr-container">
                 <?php
+                    use cms\managers\ComponentManager;
                     use cms\core\Helpers;
+                    use cms\models\Component;
+                    $componentsId = (new ComponentManager(Component::class, 'component'))->read();
                     foreach($components as $component):
-                ?>
+                    ?>
                     <td class="td-dashboard-wrapper">
                         <div class="pretty p-default p-curve p-bigger cb-fixer">
                             <input type="checkbox">
@@ -23,8 +26,7 @@
                         </div>
                         <p id="text-wrappe"><?= $component->getCategorie() ?></p>
                         |
-                        <a class="fas fa-edit fa-lg" href="<?= Helpers::getUrl("Page", "editComponentPage").'/'.$component->getId() ?>"></a>
-                        <a class="fas fa-trash fa-lg" href="<?= Helpers::getUrl("Page", "deleteComponentPage").'/'.$component->getId() ?>"></a>
+                        <a class="fas fa-trash fa-lg" href="<?= Helpers::getUrl("Page", "deleteComponentPage").'/'.array_shift($componentsId)->getId() ?>"></a>
                     </td>
                 <?php endforeach; ?>
             </tr>

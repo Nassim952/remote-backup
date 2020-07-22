@@ -37,47 +37,6 @@ class AddPageType extends Form {
                         3=>"3 row"
                     ]
                 ])
-                ->add("theme", "select", [
-                    "attr"=>[
-                        "placeholder"=>"Couleur du theme",
-                        "id"=>"theme",
-                        "class"=>"input-form"
-                    ],
-                    "required"=>true,
-                    "options"=>[
-                        "blue"=>"Bleu", 
-                        "red"=>"Rouge", 
-                        "grey"=>"Gris", 
-                        "white"=>"Blanc" 
-                    ]
-                ])
-                ->add("font", "select", [
-                    "attr"=>[
-                        "placeholder"=>"Police d'écriture",
-                        "id"=>"font",
-                        "class"=>"input-form"
-                    ],
-                    "required"=>true,
-                    "options"=>[
-                        "roboto"=>"Roboto", 
-                        "raleway"=>"Raleway", 
-                        "fondamento"=>"Fondamento"
-                    ]
-                ])
-                ->add("font-color", "select", [
-                    "attr"=>[
-                        "placeholder"=>"Couleur de police",
-                        "id"=>"font-color",
-                        "class"=>"input-form"
-                    ],
-                    "required"=>true,
-                    "options"=>[
-                        "blue"=>"Bleu", 
-                        "red"=>"Rouge", 
-                        "grey"=>"Gris", 
-                        "white"=>"Blanc"
-                    ]
-                ])
                 ->add('add-page', 'submit', [
                     'attr' => [
                         'value'=>'Ajouter la page',
