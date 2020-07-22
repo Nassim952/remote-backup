@@ -49,10 +49,6 @@
 
 ########### Cinema #############
 
-/salles:
-  controller: Cinema
-  action: salles
-
 /cinema:
   controller: Cinema
   action: cinema
@@ -73,6 +69,23 @@
   controller: Cinema
   action: showCinema
 
+######## Salles #########
+
+/salles:
+  controller: Room
+  action: room
+
+/add-salle:
+  controller: Room
+  action: addRoom
+
+/edit-salle:
+  controller: Room
+  action: editRoom
+
+/delete-salle:
+  controller: Room
+  action: deleteRoom
 
 ######## Movie #########
 

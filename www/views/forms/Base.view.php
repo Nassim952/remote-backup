@@ -84,6 +84,24 @@ name="<?= $form->getName() ?>"
                 </input>
             <?php endif;?>
             
+            <!---------------HIDDEN --->
+            <?php if($field->getType() == "hidden"):?>
+              <input 
+                value="<?= (isset($field->getOptions()['value'])) ? $field->getOptions()['value']:'' ?>"
+                type="hidden"
+                name="<?= $form->getName().'_'.$field->getName() ?>"
+               
+                <?php 
+                if(isset($field->getOptions()['attr'])) {
+                  foreach($field->getOptions()['attr'] as $attr => $value)
+                    {
+                      echo "$attr = '$value' ";
+                    }
+                  }
+                  ?>>
+                </input>
+            <?php endif;?>
+            
             <!---------------NUMBER --->
             <?php if($field->getType() == "number"):?>
               <?php if(!empty($field->getOptions()["label"])):?>
@@ -322,8 +340,13 @@ name="<?= $form->getName() ?>"
                   <?=(!empty($field->getOptions()["required"]))?"required='required'":''?> 
                   <?=(!empty($field->getOptions()["placeholder"]))? "placeholder = '".$field->getOptions()['placeholder'].'\'':''?>>
                   
-                  <?php foreach ($field->getOptions()['options'] as $key => $option):?>
-                    <option value="<?= $key?>"> <?=$option?></option>
+                  <?php foreach ($field->getOptions()['options'] as $key => $option):
+                    if (!empty($field->getOptions()["selected"]) && $field->getOptions()["selected"] == $key) {
+                      $selected = 'selected';
+                    } else {
+                      $selected = '';
+                    }?>
+                    <option value="<?= $key?>" <?= $selected?>> <?=$option?></option>
                   <?php endforeach;?> 
                 </select>
             <?php endif;?> 

@@ -66,7 +66,7 @@
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-sliders-h fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?=\cms\core\Helpers::getUrl("Cinema", "salles")?>" id="text-white"><span>Salles</span></a>
+                            <a href="<?=\cms\core\Helpers::getUrl("Room", "room")?>" id="text-white"><span>Salles</span></a>
                         </div>
                     </div>
                 </div>

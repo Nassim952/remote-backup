@@ -13,12 +13,12 @@
             <div class="flex-form-container">
                 <div class="flex-form-content-left">
                     <input class=input-form  type="text" name="city" placeholder="Ville">
-                    <input class=input-form type="number" name="number_rooms" placeholder="nombre de salles">
+                    <input class=input-form value='0' type="hidden" name="number_rooms" placeholder="nombre de salles">
                 <div class="flex-form-content-right">
                     <input class="input-form affiche" type="url" name="image_url" placeholder="url image"></input>
                 </div>
             </div>
-            <input type="submit" class="input-form submit-addfilm" value="Ajouter le film"></input>
+            <input type="submit" class="input-form submit-addfilm" value="Ajouter le cinéma"></input>
         </form>
     </div>
 </div>
