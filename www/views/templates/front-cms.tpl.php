@@ -10,6 +10,9 @@
         }
     }
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,9 +34,16 @@
     <script src="../../src/js/caroussel--billboard.js"></script>
     <script src="../../src/js/caroussel--full--arrow.js"></script>
     <script src="../../js/script.js"></script>
+    <script src="../../js/custom-page.js"></script>
 </head>
 
 <body>
+    <script>
+        $(document).ready(
+        function() {
+            customTemplate('<?= CURRENT_FONT ?>', '<?= CURRENT_FONT_SIZE ?>', '<?= CURRENT_FONT_COLOR ?>', '<?= CURRENT_TEMPLATE ?>');
+        });
+    </script>
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
             <div class="logo-wrapper">

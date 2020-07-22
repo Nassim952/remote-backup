@@ -208,3 +208,9 @@
 /installation:
   controller: installer
   action: installer
+
+############ Customization ##########
+
+/personnalisation:
+  controller: Custom
+  action: custom

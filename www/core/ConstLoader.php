@@ -16,11 +16,15 @@ class ConstLoader{
 
     }
 
-    public function getFilesEnv(){
+    public function getFilesEnv(){        
+        //.conf
+        $this->text = trim(file_get_contents(".conf"));
         //.dev ou .prod
-        $this->text = trim(file_get_contents(".".$this->extend));
+        $this->text .= "\r\n".trim(file_get_contents(".".$this->extend));
         //.env
-        $this->text .= "\n".trim(file_get_contents(".env"));
+        $this->text .= "\r\n".trim(file_get_contents(".env"));
+
+        
     }
 
     public function checkFiles(){
@@ -29,6 +33,9 @@ class ConstLoader{
         }
         else if(!file_exists(".".$this->extend)){
             die("le fichier ".$this->extend."n'existe pas");
+        }
+        else if(!file_exists(".conf")){
+            die("le fichier .conf n'existe pas");
         }
     }
 

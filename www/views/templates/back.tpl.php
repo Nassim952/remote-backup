@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="../../css/show-cinema.css">
     <link rel="stylesheet" href="../../css/horraires.css">
     <link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
+    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
     <script src="../../js/chart.js"></script>
@@ -115,6 +116,14 @@
                         <div class="fas fa-users fa-lg"></div>
                         <div id="submenu-wrapper">
                             <a href="<?=\cms\core\Helpers::getUrl("User","users")?>" id="text-white"><span>Users</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-menu">
+                    <div class="sidebar-sub-headers">
+                        <div class="fa fa-sliders fa-lg"></div>
+                        <div id="submenu-wrapper">
+                            <a href="<?=\cms\core\Helpers::getUrl("Custom","custom")?>" id="text-white"><span>Personnalisation</span></a>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,3 @@
-define("APP_INSTALLED",true);
-
-define("APP_INSTALLED",true);
-
 DB_PREFIXE=bape_
 DRIVER_DB=mysql
 NAME_DB=cinedata
