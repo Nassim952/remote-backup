@@ -34,6 +34,12 @@
     <script src="../../js/chart.js"></script>
 </head>
 <body>
+    <script>
+        $(document).ready(
+        function() {
+            customTemplate('<?= CURRENT_FONT ?>', '<?= CURRENT_FONT_SIZE ?>', '<?= CURRENT_FONT_COLOR ?>', '<?= CURRENT_TEMPLATE ?>');
+        });
+    </script>
     <div class="flex-container">
         <div class="sidebar">
             <div class="title-container">

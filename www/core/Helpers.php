@@ -2,6 +2,9 @@
 
 namespace cms\core;
 
+use cms\managers\PageManager;
+use cms\controllers\PageController;
+
 class Helpers
 {
     public static function getUrl($controller, $action)
@@ -29,6 +32,31 @@ class Helpers
                 $action.='Action';
                 
                 (new $controller())->$action(implode(',',$params));
+            }
+        }
+    }
+
+    public static function refresh($newUri){
+        $listOfRoutes = yaml_parse_file("routes.yml");
+        
+        foreach ($listOfRoutes as $url => $values) 
+        {
+            if($newUri == $url){
+                echo "<meta http-equiv='refresh' content='0;url='.$newUri />";
+            }
+            else
+            {
+                $pages = (new PageManager(Page::class,'page'))->read();
+
+                if(!empty($pages)){
+                    foreach($pages as $page) {
+                        if($newUri == "/".str_replace(' ','_',$page->getTitle()))
+                        {	
+                            (new PageController())->buildPageAction($page);
+                            break;
+                        }
+                    }
+                }
             }
         }
     }

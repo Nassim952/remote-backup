@@ -6,6 +6,7 @@ use cms\core\Builder\ElementPageBuilder;
 use cms\core\Builder\ElementPageBuilderInterface;
 use cms\core\Builder\PageBuilder;
 use cms\core\Controller;
+use cms\core\Helpers;
 use cms\managers\PageManager;
 use cms\managers\ComponentManager;
 // use cms\core\Page;
@@ -41,9 +42,6 @@ class PageController extends Controller
             $pageManager = new PageManager(Page::class, 'page');
             $page = new Page();
 
-            $sectionManager = new SectionManager(ElementPageBuilder::class, 'section');
-            $section = new Section();
-
             $page->setTitle($_POST[$form->getName().'_title']);
             $page->setTheme($_POST[$form->getName().'_theme']);
             $page->setGabarit($_POST[$form->getName().'_gabarit']);
@@ -51,16 +49,6 @@ class PageController extends Controller
             $page->setFont_color($_POST[$form->getName().'_font-color']);
 
             $pageManager->save($page);
-
-            // je recupere l'id de la dernière page enregistré et je lui associe une section par défaut
-            $newPages = $pageManager->read();
-            $lastPageId = end($newPages);
-
-            $section->setId($lastPageId->getId());
-            $section->setSize(1);
-            $section->setPosition(1);
-
-            $sectionManager->save($section);
 
             echo "<script>alert('Page crée avec succès');</script>";
         }
@@ -238,6 +226,11 @@ class PageController extends Controller
                         $sectionManager->save($section);
 
                         echo "<script>alert('section ajouté avec succès');</script>";
+
+                        // on refrech la page courante
+                        $newUrl = "/".str_replace(' ','_',$page->getTitle());
+                        echo "<meta http-equiv='refresh' content='0;url='.$newUrl />";
+
                     }else{
                         echo "<script>alert('nombre maximum de section atteint pour cette page !');</script>";
                     }
@@ -253,6 +246,10 @@ class PageController extends Controller
                     $componentManager->save($component);
 
                     echo "<script>alert('component ajouté avec succès');</script>";
+
+                    // on refrech la page courante
+                    $newUrl = "/".str_replace(' ','_',$page->getTitle());
+                    echo "<meta http-equiv='refresh' content='0;url='.$newUrl />";
                 }
         }
     }
