@@ -2,6 +2,7 @@
 
 namespace cms\forms;
 
+use cms\core\Constraints\ConfirmPwd;
 use cms\core\Form;
 use cms\core\Constraints\Length;
 use cms\core\Constraints\Password;
@@ -48,18 +49,18 @@ class RegisterType extends Form {
                     "id"=>""
                     ],
                     "required"=>true,
-                    "contraints" => [
+                    "constraints" => [
                         new Password(),
                     ]
                 ])
             ->add( "pwdConfirm", "password", [
-                "attr" => ["placeholder"=>"Mot de passe",
+                "attr" => ["placeholder"=>"Confirmer mot de passe",
                     "class"=>"form-control form-control-user",
                     "id"=>""
                     ],
                     "required"=>true,
-                    "contraints" => [
-                        new Password(),
+                    "constraints" => [
+                        new ConfirmPwd($this->getName()),
                     ]
                 ])
             ->add('submit', 'submit', [

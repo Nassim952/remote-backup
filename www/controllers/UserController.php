@@ -124,6 +124,7 @@ class UserController extends Controller{
     public function accountActivationAction($token)
     {
         $user = (new UserManager(User::class,'user'))->getUserByToken($token);
+        
         if ($user) {
             reset($user)->setVerified(1);
             (new UserManager(User::class,'user'))->save(reset($user));
@@ -177,7 +178,7 @@ class UserController extends Controller{
             $userManager = new UserManager(User::class,'user');
             $users = $userManager->read();
             
-            $userCheck = $userManager->checkUserInDb($_POST[$form->getName().'_email'] ,$_POST[$form->getName().'_password'], $users);
+            $userCheck = $userManager->checkUserInDb($_POST[$form->getName().'_email'] , $users, $_POST[$form->getName().'_password']);
             if($userCheck){
                 if($userCheck->getVerified() == 1){
                     session_start();
@@ -222,16 +223,19 @@ class UserController extends Controller{
                 $user->setLastname($_POST[$form->getName().'_lastname']);
                 $user->setFirstname($_POST[$form->getName().'_firstname']);
                 $user->setEmail($_POST[$form->getName().'_email']);
-                $user->setPassword($_POST[$form->getName().'_password']);
+                $pwdHash = password_hash($_POST[$form->getName().'_password'], PASSWORD_DEFAULT);
+                $user->setPassword($pwdHash);
                 $user->setAllow(0);
                 $user->setToken($token);
                 $user->setStatut(1);
                 $user->setImage_profile('null');
 
                 $userManager->save($user);
+
                 // on vérifie si le save a bien été fait et on envoie un mail
                 $users = $userManager->read();
-                $userCheck = $userManager->checkSave($_POST[$form->getName().'_email'], $_POST[$form->getName().'_password'], $users);
+                $userCheck = $userManager->checkUserInDb($_POST[$form->getName().'_email'], $users, $_POST[$form->getName().'_password']);
+
                 if($userCheck){
                     $mail = new Mailer();
                     $result = $mail->sendVerifAuth($_POST[$form->getName().'_email'], $token, $_POST[$form->getName().'_firstname']);

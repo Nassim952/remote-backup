@@ -314,7 +314,7 @@ class QueryBuilder {
 
     public function getQuery(): ResultInterface
     {
-        $this->query = "{$this->query}{$this->from}{$this->join}{$this->where}{$this->group}";
+        $this->query = "{$this->query}{$this->from}{$this->join}{$this->where}{$this->group};";
         // print_r($this->query."\n");
         $result =  $this->connection->query($this->query, $this->parameters);
         return $result;

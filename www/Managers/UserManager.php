@@ -73,13 +73,31 @@ class UserManager extends DB{
     }
 
     
-    public function checkUserInDb($email, $password, $users)
+    public function checkUserInDb($email, $users, $password = null)
     {
         foreach ($users as $user) 
         {
-            if ($user->getEmail() == $email && $user->getPassword() == $password) 
+            if ($user->getEmail() == $email) 
             {
-                return $user;
+                if($password !== null)
+                {
+                    // $hash = '$2y$10$kYLWu1oA.p2Scn3Gt1q7SeLqSGtfjWT/iTuFwHt7.QnNR.Y163XAC';
+                    
+                    // // print_r($hash."\n");
+                    // print_r($user->getEmail());
+                    
+                    // if (password_verify($password, $hash)) {
+                    //     echo 'Le mot de passe est valide !';
+                    // } else {
+                    //     echo 'Le mot de passe est invalide.';
+                    // }
+                    // $test = password_verify($password, $user->getPassword());
+                    // var_dump($test);
+
+                    if(password_verify($password, $user->getPassword())){
+                        return $user;
+                    }
+                }
             }
         }
     }
