@@ -21,7 +21,7 @@ use cms\managers\PageManager;
 
 use cms\controllers\PageController;
 
-new ConstLoader('env');
+new ConstLoader('prod');
 
 $uri = $_SERVER["REQUEST_URI"];
 

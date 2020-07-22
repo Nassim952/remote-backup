@@ -20,6 +20,24 @@ class InstallerType extends Form {
                             "required"=>true,
                             "label"=> "Hote"
                         ])
+                        ->add( "db_driver", "text", [
+                            "attr"=>
+                            [
+                                "placeholder"=>"driver db",
+                                "class"=>"input-form"
+                            ],
+                            "required"=>true,
+                            "label"=> "Utilisateur"
+                        ])
+                        ->add( "db_prefixe", "text", [
+                            "attr"=>
+                            [
+                                "placeholder"=>"prefixe db",
+                                "class"=>"input-form"
+                            ],
+                            "required"=>true,
+                            "label"=> "Utilisateur"
+                        ])
                         ->add( "dbname", "text", [
                             "attr"=>
                             [

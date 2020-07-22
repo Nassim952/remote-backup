@@ -1,6 +1,8 @@
-USER_DB=root 
-PWD_DB=password 
-HOST_DB=database 
-NAME_DB=cinedata 
-PORT_DB=8888 
-APP_INSTALLED = true
+USER_DB=root
+PWD_DB=password
+HOST_DB=database
+NAME_DB=cinedata
+DB_DRIVER=mysql
+PREFIXE_DB=bape_
+PORT_DB=8888
+APP_INSTALLED=true

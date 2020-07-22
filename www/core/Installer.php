@@ -11,11 +11,21 @@ class Installer
 	public  function connectDatabase()
 	{
 		$dbhost = '';
+		$dbdriver = '';
+		$dbprefixe = '';
 		$dbname = '';
 		$dbuser = '';
 		$dbpassword = '';
 		$error = false;
 		
+		if(isset($_POST['Installer_db_driver'])){
+			$dbdriver = $_POST['Installer_db_driver'];
+		}
+
+		if(isset($_POST['Installer_db_prefixe'])){
+			$dbprefixe = $_POST['Installer_db_prefixe'];
+		}
+
 		if(isset($_POST['Installer_dbhost'])){
 			$dbhost = $_POST['Installer_dbhost'];
 		}
@@ -49,7 +59,6 @@ class Installer
 			{
 				try {
 					$stmt = $pdo->prepare(file_get_contents(".sql"));
-					print_r($stmt);
 					$stmt->execute();
 				} catch(PDOException $e){
 					//print_r($e->getMessage());
@@ -60,14 +69,16 @@ class Installer
 				throw new Exception("File Exeption");
 			}
 
-				$conf[] = "USER_DB=$dbuser \r\n";
-				$conf[] = "PWD_DB=$dbpassword \r\n";
-				$conf[] = "HOST_DB=$dbhost \r\n";
-				$conf[] = "NAME_DB=$dbname \r\n";
-				$conf[] = "PORT_DB=8888 \r\n";
+				$conf[] = "USER_DB=$dbuser\r\n";
+				$conf[] = "PWD_DB=$dbpassword\r\n";
+				$conf[] = "HOST_DB=$dbhost\r\n";
+				$conf[] = "NAME_DB=$dbname\r\n";
+				$conf[] = "DB_DRIVER=$dbdriver\r\n";
+				$conf[] = "PREFIXE_DB=$dbprefixe\r\n";
+				$conf[] = "PORT_DB=8888\r\n";
 
 			// }
-			$conf[] =  'APP_INSTALLED = true'. "\r\n";
+			$conf[] =  'APP_INSTALLED=true'."\r\n";
 		
 			file_put_contents('.prod', $conf);
 

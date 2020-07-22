@@ -21,7 +21,7 @@ class InstallerController extends Controller{
         {  
             if((new Installer())->connectDatabase())
             {
-                $view = Helpers::getUrl("Page", "templateCreate");
+                $view = Helpers::getUrl("login", "account");
                 $newUrl = trim($view, "/");
                 header("Location: " . $newUrl);
             } else {
