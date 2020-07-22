@@ -4,6 +4,7 @@ namespace cms\forms;
 
 use cms\core\Helpers;
 use cms\core\Constraints\Length;
+use cms\core\Constraints\NoSpecialChar;
 use cms\core\Constraints\Password;
 use cms\core\Form;
 

@@ -4,7 +4,8 @@
     
     use cms\core\Helpers;
     use cms\core\Constraints\Length;
-    use cms\core\Constraints\Password;
+use cms\core\Constraints\NoSpecialChar;
+use cms\core\Constraints\Password;
     use cms\core\Form;
     
     class AddFilmType extends Form {
@@ -20,7 +21,8 @@
                 ],
                 'required'=>true,
                 'constraints' => [
-                    new Length(2,100, 'Votre titre doit contenir au moins 2 caractères', 'Votre titre doit contenir au plus 50 caractères')
+                    new Length(2,100, 'Votre titre doit contenir au moins 2 caractères', 'Votre titre doit contenir au plus 50 caractères'),
+                    new NoSpecialChar()
                 ]
             ])
             ->add('duration', 'time', [
@@ -76,7 +78,8 @@
                 ],
                 'required'=>true,
                 'constraints' => [
-                    new Length(2,100, 'Le nom du réalisateur doit contenir au moins 2 caractères', 'Le nom du réalisateur doit contenir au plus 50 caractères')
+                    new Length(2,100, 'Le nom du réalisateur doit contenir au moins 2 caractères', 'Le nom du réalisateur doit contenir au plus 50 caractères'),
+                    new NoSpecialChar()
                 ]
             ])
             ->add('actor', 'text', [
@@ -87,7 +90,8 @@
                 ],
                 'required'=>true,
                 'constraints' => [
-                    new Length(2,100, "Le nom de l'acteur doit contenir au moins 2 caractères", "Le nom de l'acteur doit contenir au plus 50 caractères")
+                    new Length(2,100, "Le nom de l'acteur doit contenir au moins 2 caractères", "Le nom de l'acteur doit contenir au plus 50 caractères"),
+                    new NoSpecialChar()
                 ]
             ])
             ->add('nationality', 'select', [

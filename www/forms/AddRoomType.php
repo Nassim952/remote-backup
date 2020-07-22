@@ -4,6 +4,7 @@ namespace cms\forms;
 
 use cms\core\Helpers;
 use cms\core\Form;
+use cms\core\Constraints\NoSpecialChar;
 
 
 class AddRoomType extends Form {
@@ -33,7 +34,10 @@ class AddRoomType extends Form {
                         "id"=>"name_room",
                         "class"=>"input-form"
                     ],
-                    "required"=>true
+                    "required"=>true,
+                    "constraints"=>[
+                        new NoSpecialChar()
+                    ]
                 ])
                 ->add('nbr_places', 'number', [
                     'attr'=>[

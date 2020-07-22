@@ -4,7 +4,8 @@
     
     use cms\core\Helpers;
     use cms\core\Constraints\Length;
-    use cms\core\Constraints\Password;
+use cms\core\Constraints\NoSpecialChar;
+use cms\core\Constraints\Password;
     use cms\core\Form;
     
     class ReservationType extends Form {
@@ -27,7 +28,10 @@
                     "placeholder"=>"email",
                     "class"=>"input-form"
                 ],
-                "required"=>true
+                "required"=>true,
+                "constraints"=>[
+                    new NoSpecialChar()
+                ]
             ])
             ->add('valid_reservation', 'submit', [
                 'attr' => [

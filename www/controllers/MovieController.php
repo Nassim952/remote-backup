@@ -4,6 +4,7 @@ namespace cms\controllers;
 
 use cms\managers\CinemaManager;
 use cms\controllers\DashboardController;
+use cms\core\Constraints\NoSpecialChar;
 use cms\managers\MovieManager;
 use cms\models\Comment;
 use cms\core\Controller;
@@ -38,12 +39,16 @@ class MovieController extends Controller
 
         if( $_SERVER["REQUEST_METHOD"] == "POST"){
             $comment = new Comment();
+            $checkSpecialChar = new NoSpecialChar();
+
             //if $comment =! empty saving the data in comment table
-            if (isset($comment)){
+            if ($checkSpecialChar->isValid($_POST['content']) != null && isset($_POST['content'])){
                 $comment->setComment($_POST['content']);
                 $comment->setTarget($id);
                 $comment->setUser_id($_POST['id_user']);
                 $commentManager->save($comment);
+            }else{
+                Helpers::alert_popup(array_shift($checkSpecialChar->getErrors()));
             }
         }
        // session_start();
@@ -163,10 +168,18 @@ class MovieController extends Controller
     public function searchMovieAction()
     {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+            $checkSpecialChar = new NoSpecialChar();
             $search = $_POST['name_movie'].'%';
-            $movieManager = new MovieManager(Movie::class, 'movie');
-            $result = $movieManager->findBy(['title'=>$search]);
-            $this->render('show-research', 'front-cms', ['searched'=>$result]);
+            
+            if($checkSpecialChar->isValid($search)){
+                $movieManager = new MovieManager(Movie::class, 'movie');
+                $result = $movieManager->findBy(['title'=>$search]);
+                $this->render('show-research', 'front-cms', ['searched'=>$result]);
+            }else{
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            }
+            
         } else {
             echo "<script>alert('Entrez un film dans la barre de recherche');</script>";
         }
