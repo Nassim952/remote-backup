@@ -44,11 +44,18 @@ class Validator
 							$listOfErrors[] = $configField["errorMsg"];
 						}
 					}
+					if (isset($_POST['input']) && sizeof($_POST['input']) > 0)
+					{
+						// If the captcha is valid 
+						if ($_POST['input'] == $_SESSION['captcha']){
+							$msg = '<span style="color:green">SUCCESSFUL!!!</span>'; 
+						} else {
+							$msg = '<span style="color:red">CAPTCHA FAILED!!!</span>';
+						} 			 
 				} else {
 					return ["Tentative de hack"];
 				}
-			}
-		} else {
+			} else {
 			return ["Tentative de hack"];
 		}
 		return $listOfErrors;
@@ -70,7 +77,13 @@ class Validator
 					} elseif($configField["type"] = "password" && !self::pwdValidate($data[$name])) {
 						$listOfErrors[] = $configField["errorMsg"];
 					}
-					//Vérifier le captcha
+					if (isset($_POST['input']) && sizeof($_POST['input']) > 0) 
+  
+						// If the captcha is valid 
+						if ($_POST['input'] == $_SESSION['captcha']) 
+							$msg = '<span style="color:green">SUCCESSFUL!!!</span>'; 
+						else 
+							$msg = '<span style="color:red">CAPTCHA FAILED!!!</span>'; 
 				} else {
 					return ["Tentative de hack !!!"];
 				}

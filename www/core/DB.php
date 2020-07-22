@@ -150,7 +150,6 @@ class DB
 
             //INSERT
             $sql = "INSERT INTO ".$this->table." (".implode(",", $columns).") VALUES (:".implode(",:", $columns).");";
-            echo $sql;
             
         } else {
             // SI LE UPDATE BUG CORRIGER SES 2 LIGNES MODELE PAGE $builder

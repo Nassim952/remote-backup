@@ -1,5 +1,9 @@
 <?php 
-	session_start();
+	$url = $_SERVER["REQUEST_URI"];
+	$uri = parse_url($url, PHP_URL_PATH);
+	if($uri != '/register'){
+		session_start();
+	}
 	isset($_SESSION['userId']) ? session_destroy() : '' ;
 ?>
 <head>
