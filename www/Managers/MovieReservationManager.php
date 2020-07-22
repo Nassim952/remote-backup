@@ -116,7 +116,7 @@ class MovieReservationManager extends DB{
            
 
         $query = (new QueryBuilder())
-                ->select('SUM(mr.id) as total ' . $day_select . $month_select . $year_select)
+                ->select('SUM(mr.nbr_places) as nb' . $day_select . $month_select . $year_select)
                 ->from(DB_PREFIXE.'movie_reservation', 'mr');
         
                 $query->setAlias('mr');
