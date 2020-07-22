@@ -55,27 +55,31 @@ foreach($myMovie as $movie): ?>
         <?php endforeach; ?>
     </div>
     <div class="container">
+   
         <?php 
         if (empty($hisComment)) {
             echo ' <div class="">Aucun commentaire pour ce film</div>';
         }else
+        echo '<div class="show-movie-container"><h2>Espace commentaire :</h2>';
+        
         foreach($hisComment as $comment): ?>
-        <td class="td-dashboard-wrapper">
-            <div class="">
-                <div class="">
-                    <div class="">
+        <td class="list-film">
+            
+            <div id="separation-bar"></div>
+                    <div class="card">
                         <?php 
                     $commentReduced = $comment->getComment();
                     //Limits string length to 70
                     $commentReduced= substr($commentReduced, 0,200);
                     ?>
-                        <p id="text-wrappe"><?= $comment->getComment() ?></p>
-                        <p id="hour-wrappe"><?= $comment->getPost_date() ?></p>
-                        <p id="hour-wrappe"><?= reset($userComment)->getLastName() ?></p>
+                        <p id=""><?= $comment->getComment() ?></p>
+                        <p id=""><?= $comment->getPost_date() ?></p>
+                        <p id="text-wrappe"><?= reset($userComment)->getLastName() ?></p>
         </td>
         <?php endforeach; ?>
     </div>
-<div class="show-movie container">
+   
+
     <!-- action save comment -->
     <form action="" method="POST" class="">
         <div class="form-group">
@@ -83,8 +87,9 @@ foreach($myMovie as $movie): ?>
             <!-- recuperer l'id du film avec un input hidden -->
             <input type="hidden" name="id_commentaire" value="<?= $id ?> "/>
             <input type="hidden" name="id_user" value="<?= $_SESSION['user']->getId() ?>"/>
-            <textarea class="" name="content" id="content" rows="5"></textarea>
-            <button type="submit" class="btn btn-primary"> Soumettre mon commentaire </button>
+            <textarea class="" name="content" id="content" rows="8" cols="80"></textarea>
+            <button type="submit" class="Button"> Soumettre mon commentaire </button>
     </form>
 
 </div>
+

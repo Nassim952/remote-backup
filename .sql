@@ -200,11 +200,11 @@ CREATE TABLE IF NOT EXISTS bape_comment(
 -- Chargement des donnees de la table user
 -- 
 
-INSERT INTO bape_comment (id, comment, post_date, user_id, target, target_type) VALUES
-(null,"Spiderman respecte parfaitement bien la BD. Les acteurs sont bien choisis et incarnent à merveille leurs rôles. Avec des personnages sont attachants en particulier Peter Parker qui bien qu'ayant de super pouvoirs reste dominer par son côté humain.","2020-07-16 14:40:34",5,3,3),
-(null,"Eh bien voilà, 17 ans d'attente, et le retour de nos Bad Boys favoris ! Ce qui marque avant tout c'est que l'alchimie entre Will Smith et Martin Lawrence n'a pas pris une seule ride. Leurs interactions sont toujours savoureuses.","2020-06-15 17:30:22",4,2,2),
-(null,"'Suicide Squad' de David Ayer, après quelques déceptions récentes, fait cette fois figure d'une bonne surprise, enfin très drôle et vue sous un angle nouveau et différent ! DC Comics nous prouve que l'humour a ici sa place et c'est là le gros point fort... Et oui, surtout ne pas se prendre au sérieux comme l'était le suffisant 'Batman v Superman'...","2019-02-20 16:40:34",3,1,1),
-(null,"Un excellent divertissement ! Le scénario, qui ressemble à celui de Point Break, tient bien la route. Les courses poursuites sont très bien filmées et le casting est parfait, la présence de Paul Walker et Vin Diesel apporte beaucoup a ce superbe film d'action.","2019-05-18 10:20:22",2,4,4);
+INSERT INTO bape_comment (id, comment, post_date, user_id, target) VALUES
+(null,"Spiderman respecte parfaitement bien la BD. Les acteurs sont bien choisis et incarnent à merveille leurs rôles. Avec des personnages sont attachants en particulier Peter Parker qui bien qu'ayant de super pouvoirs reste dominer par son côté humain.","2020-07-16 14:40:34",5,3),
+(null,"Eh bien voilà, 17 ans d'attente, et le retour de nos Bad Boys favoris ! Ce qui marque avant tout c'est que l'alchimie entre Will Smith et Martin Lawrence n'a pas pris une seule ride. Leurs interactions sont toujours savoureuses.","2020-06-15 17:30:22",4,2),
+(null,"'Suicide Squad' de David Ayer, après quelques déceptions récentes, fait cette fois figure d'une bonne surprise, enfin très drôle et vue sous un angle nouveau et différent ! DC Comics nous prouve que l'humour a ici sa place et c'est là le gros point fort... Et oui, surtout ne pas se prendre au sérieux comme l'était le suffisant 'Batman v Superman'...","2019-02-20 16:40:34",3,1),
+(null,"Un excellent divertissement ! Le scénario, qui ressemble à celui de Point Break, tient bien la route. Les courses poursuites sont très bien filmées et le casting est parfait, la présence de Paul Walker et Vin Diesel apporte beaucoup a ce superbe film d'action.","2019-05-18 10:20:22",2,4);
 
 
 --
