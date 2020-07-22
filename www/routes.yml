@@ -165,6 +165,8 @@
   controller: installer
   action: installer
 
+  ########### Reservation et Seances #############
+
 /seances:
   controller: MovieReservation
   action: seances
@@ -188,3 +190,11 @@
 /deleteReservation:
   controller: MovieReservation
   action: deleteReservation
+
+/edit-seance:
+  controller: MovieSession
+  action: editSeance
+
+/delete-seance:
+  controller: MovieSession
+  action: deleteSeance

@@ -48,7 +48,8 @@ class MovieController extends Controller
             
             $movieManager->save($movie);
 
-            echo "<script>alert('Film ajouté avec succès');</script>";
+            $message = 'Film ajouté avec succès';
+            header('Location: /dashboard?message=' . urlencode($message));
 
         }
 
@@ -84,7 +85,8 @@ class MovieController extends Controller
         $movieManager = new MovieManager(Movie::class,'movie');
         $movieManager->delete($id);
 
-        echo "<script>alert('Film supprimé avec succès');</script>";
+        $message = 'Film supprimé avec succès';
+        header('Location: /delete-movie?message=' . urlencode($message));
     }   
 
     public function editMovieAction($id){
@@ -119,8 +121,6 @@ class MovieController extends Controller
             }
             
             $movieManager->save($movie);
-
-            echo "<script>alert('Film modifié avec succès');</script>";
         }
     } 
 }
