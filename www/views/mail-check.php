@@ -20,7 +20,7 @@
                 justify-content: center;
                 align-items: center;
                 margin-top: 130px;">
-                <a class="Button" href="<?= cms\core\Helpers::getUrl('User', 'signin') ?>">Se connecter</a>
+                <a class="Button" href="<?= cms\core\Helpers::getUrl('User', 'login') ?>">Se connecter</a>
             </div>
         </section>
     </section>

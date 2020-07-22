@@ -47,16 +47,16 @@ class Mailer
         $mail->Mailer = "smtp";
         $mail->SMTPAuth = true;  // Authentification SMTP active
         $mail->SMTPSecure = 'tls'; // Gmail REQUIERT Le transfert securise
-        $mail->Username = 'nasfahdine@gmail.com';
-        $mail->Password = 'Naima95230&';
+        $mail->Username = 'nearby.cms@gmail.com';
+        $mail->Password = 'Password123&';
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 587;
-        $mail->SetFrom('admin@nearby.com', 'Nearby Administrateur');
-        $mail->Subject = 'Activation du compte';
+        $mail->SetFrom('admin@gmail.com', 'Nearby Administrateur');
+        $mail->Subject = 'Activer votre compte !';
         $mail->Priority = 1;
         $mail->IsHTML(true);
         $body = '<!DOCTYPE html>
-        <html lang="en">
+        <html lang="fr">
 
         <head>
         <meta charset="UTF-8">
@@ -79,7 +79,7 @@ class Mailer
 
         <body>
         <div class="wrapper">
-            <p>Merci de vous être inscrit sur notre site Nearby. Cliquer sur le lien ci-dessous pour vérifier votre compte !:.</p>
+            <p>Merci de vous etre inscrit sur notre site Nearby. Cliquer sur le lien ci-dessous pour verifier votre compte ! :</p>
             <a href="http://localhost:8081/user-verif/'.$token.'">Verify Email!</a>
         </div>
         </body>

@@ -5,6 +5,7 @@ namespace cms\core;
 use SplObserver;
 use SplObjectStorage;
 use cms\core\Builder\FormBuilder;
+use cms\managers\PageManager;
 use cms\core\Events\ControllerEvent;
 
 class Controller implements \SplSubject
@@ -46,18 +47,18 @@ class Controller implements \SplSubject
 
     public function render(string $view, string $template = "back", array $params = null)
     { 
-        // $this->notify();
-        // $this->detach($this->event);
-
         $myView = new View($view, $template);
-        // print_r($myView);
-        if (null !== $params && !empty($params))
+        if ((null !== $params && !empty($params)) || $template != "back")
         {
+            if($template != "back")
+            {
+                $params['nav']=  (new PageManager(Movie::class,'movie'))->getNav();
+            }
             foreach($params as $key => $param) {
                 $myView->assign($key, $param);
             }
         }
-        
+
     }
 
     public function attach(SplObserver $observer)

@@ -31,7 +31,10 @@ foreach($myMovie as $movie): ?>
                         <span id="show-label-bold">Genre :</span> <?= $movie->getKind() ?>
                     </li>
                     <li class="show-li-wrapper">
-                        <span id="show-label-bold">Interdit au moins de :</span> <?= $movie->getAge_require() ?>
+                        <span id="show-label-bold">Interdit au moins de :</span> <?= $movie->getAge_require() ?> ans
+                    </li>
+                    <li class="show-li-wrapper">
+                        <span id="show-label-bold">Réalisateur :</span> <?= $movie->getDirector() ?>
                     </li>
                     <li class="show-li-wrapper">
                         <span id="show-label-bold">Acteur principal :</span> <?= $movie->getMain_actor() ?>

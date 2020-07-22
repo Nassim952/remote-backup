@@ -1,15 +1,16 @@
+<!-- ON L'UTILISAIT MAIS CA BUG DU COUP ON ENLEVE (logique) -->
+
 <?php
 
-namespace App\Core\Builder;
+namespace cms\core\Builder;
 
+use cms\models\Component;
 
 interface ElementPageBuilderInterface
 {
-    public function setType(string $type): self;
+    public function setType(string $type);
 
     public function getType(): string;
-
-    public function setOptions(array $options): self;
 
     public function addComponent(Component $component): self;
 

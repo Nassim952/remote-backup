@@ -1,8 +1,11 @@
 <?php
 
-namespace www\models;
+namespace cms\core;
 
-use www\core\Model;
+use cms\core\Model;
+use cms\core\Builder\ElementPageBuilder;
+use cms\core\Builder\PageBuilder;
+use cms\models\Page as ModelsPage;
 
 class Page extends Model
 {
@@ -16,7 +19,7 @@ class Page extends Model
 
     public function __Construct()
     {
-    
+        $this->builder = new PageBuilder();
     }
 
 //SETTERS
@@ -56,11 +59,17 @@ class Page extends Model
         $this->background_image = $background_image;
     }
 
+    public function setBuilder(PageBuilder $builder)
+    {
+        $this->builder = $builder;
+    }
+    
+
 //GETTERS
 
     public function getId()
     {
-       return $this->id;
+    return $this->id;
     }
 
     public function getTitle()
@@ -75,7 +84,7 @@ class Page extends Model
 
     public function getGabarit()
     {
-        return $this->gabarit = $gabarit;
+        return $this->gabarit;
     }
 
     public function getDate()

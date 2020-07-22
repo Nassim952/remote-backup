@@ -58,16 +58,19 @@ class Helpers
         };
     }
 
-    public function displayState($number_state) {
-        switch ($number_state) {
+    public static function getPermission($permission) {
+        switch ($permission) {
+            case 0:
+                return "customer";
+                break;
             case 1:
-                echo "Pas fait";
+                return "admin";
                 break;
             case 2:
-                echo "A corriger";
+                return "superAdmin";
                 break;
             case 3:
-                echo "Corrigé";
+                return "owner";
                 break;
         }
     }

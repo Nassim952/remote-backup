@@ -28,8 +28,8 @@ class LoginType extends Form {
                              "id"=>""
                              ],
                              "required"=>true,
-                             "contraints" => [
-                                 new Password(),
+                             "constraints" => [
+                                // new Password(),
                              ]
                          ])
                         ->add('submit', 'submit', [

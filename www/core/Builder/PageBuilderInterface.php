@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Core\Builder;
+namespace cms\core\Builder;
 
+use cms\models\Component;
 
 interface PageBuilderInterface
 {
-    public function add(Component $component): self;
+    public function add(ElementPageBuilder $section): self;
 
     public function remove(int $position): self;
 

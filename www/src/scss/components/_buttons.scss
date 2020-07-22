@@ -1,26 +1,88 @@
 .button {
-    text-decoration: none;
-    color: $white;
-    padding: 1em;
-    text-transform: uppercase;
-    background-color: $text-color;
-    font-size: rem(12);
-    display: inline-block;
-    letter-spacing: 0.05em;
-    transition: background-color 0.3s;
+    border-radius: 20px;
+    background: $shadow-white;
+    border: 0;
+    box-sizing: border-box;
+    margin: 2em;
+    padding: 0.1em 0.5em;
+    box-shadow: inset 0 0 0 2px $shadow-white;
+    color: $text-color;
+    font-size: 0.8rem;
+    font-weight: 700;
+    position: relative;
+    vertical-align: middle;
+    &::before,
+    &::after {
+        border-radius: 20px;
+        box-sizing: inherit;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.draw {
+    transition: color 0.25s;
+    &::before,
+    &::after {
+        border: 2px solid transparent;
+        width: 0;
+        height: 0;
+    }
+    &::before {
+        top: 0;
+        left: 0;
+    }
+    &::after {
+        bottom: 0;
+        right: 0;
+    }
     &:hover {
-        background-color: lighten($text-color, 10%);
+        color: $lay-purple;
     }
-    &--success {
-        background-color: $green;
-        &:hover {
-            background-color: lighten($green, 10%);
-        }
+    &:hover::before,
+    &:hover::after {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
     }
-    &--alert {
-        background-color: $red;
-        &:hover {
-            background-color: lighten($green, 10%);
-        }
+    &:hover::before {
+        border-top-color: $shadow_black;
+        border-right-color: $shadow_black;
+    }
+    &:hover::after {
+        border-bottom-color: $shadow_black;
+        border-left-color: $shadow_black;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .button {
+        margin: 1.5em;
+        font-size: 0.8rem;
+        border-radius: 20px;
+        padding: 0.1em 0.25em;
+        font-weight: 700;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .button {
+        margin: 1.5em;
+        font-size: 1rem;
+        border-radius: 20px;
+        padding: 0.3em 0.7em;
+        font-weight: 700;
+    }
+}
+
+@media screen and (min-width: 965px) {
+    .button {
+        margin: 1.5em;
+        font-size: 1.2rem;
+        border-radius: 20px;
+        padding: 0.5em 1em;
+        font-weight: 700;
     }
 }

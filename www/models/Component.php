@@ -9,23 +9,16 @@ use cms\managers\ComponentManager;
 class Component extends Model implements ModelInterface
 { 
     protected $id;
-    protected $title;
-    protected $class;
-    protected $type;
-    protected $data = [];
+    protected $categorie;
     protected $position;
-    protected $style;
+    protected $section_id;
 
     public function initRelation(): array {
         return [
         
         ];
     }
-    public function delete($id){
-        $componentManager = new componentManager(Component::class, 'component');
 
-        $componentManager->deleteComponent($id);
-    }
     //SETTERS
 
     public function setId($id)
@@ -33,19 +26,19 @@ class Component extends Model implements ModelInterface
         $this->id = $id;
     }
 
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
-    public function setClass($class)
+    public function setColumn(int $column)
     {
-        $this->title = $class;
+        $this->column = $column;
     }
 
-    public function setPosition($type)
+    public function setPosition($position)
     {
-        $this->type = $type;
+        $this->position = $position;
     }
 
     public function setStyle($style)
@@ -53,9 +46,11 @@ class Component extends Model implements ModelInterface
         $this->style = $style;
     }
 
-    public function setData($data)
+    public function setCategorie($categorie)
     {
-        $this->data = $data;
+        $this->categorie = $categorie;
+
+        return $this;
     }
 
 //GETTERS
@@ -67,7 +62,7 @@ class Component extends Model implements ModelInterface
 
     public function getTitle()	
     {
-       return $this->title;
+        return $this->title;
     }
 
     public function getClass()
@@ -75,23 +70,38 @@ class Component extends Model implements ModelInterface
         return $this->class;
     }
 
-    public function getPassword($type)
-    {
-        return $this->type;
-    }
-
     public function getPosition()
     {
         return $this->position;
     }
 
-    public function getData()
-    {
-        return $this->data;
-    }
-
     public function getStyle($style)
     {
         return $this->style;
+    }
+
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * Get the value of section_id
+     */ 
+    public function getSection_id()
+    {
+        return $this->section_id;
+    }
+
+    /**
+     * Set the value of section_id
+     *
+     * @returnself
+     */ 
+    public function setSection_id($section_id)
+    {
+        $this->section_id = $section_id;
+
+        return $this;
     }
 }

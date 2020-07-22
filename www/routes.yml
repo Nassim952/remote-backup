@@ -8,10 +8,6 @@
   controller: Dashboard
   action: stat
 
-/users:
-  controller: Dashboard
-  action: users
-
 /horaires:
   controller: Dashboard
   action: horraires
@@ -21,6 +17,22 @@
 /:
   controller: User
   action: home
+
+/users:
+  controller: User
+  action: users
+
+/delete-user:
+  controller: User
+  action: deleteUser
+
+/edit-user:
+  controller: User
+  action: editUser
+
+/show-user:
+  controller: User
+  action: showUser
 
 /login:
   controller: User
@@ -34,10 +46,6 @@
   controller: User
   action: home
 
-/template:
-  controller: User
-  action: template
-
 /user-verif:
   controller: User
   action: accountActivation
@@ -45,6 +53,14 @@
 /mail-not-checked:
   controller: User
   action: mailNotChecked
+
+/session-not-start:
+  controller: User
+  action: sessionNotStart
+
+/no-permission:
+  controller: User
+  action: noPermission
 
 
 ########### Cinema #############
@@ -96,6 +112,7 @@
   controller: Movie
   action: addFilm
 
+
 ########### Comment #############
 
 /comments:
@@ -132,6 +149,42 @@
   controller: Page
   action: addPage
 
+/show-pages:
+  controller: Page
+  action: showPages
+
+/delete-pages:
+  controller: Page
+  action: deletePage
+
+/build-page:
+  controller: Page
+  action: buildPage
+
+/show-custom-pages:
+  controller: Page
+  action: showCustomPages
+
+/template:
+  controller: Page
+  action: templateCreate
+
+/show-sections-page:
+  controller: Page
+  action: showSectionsPage
+
+/show-components-page:
+  controller: Page
+  action: showComponentsPage
+
+/edit-component-page:
+  controller: Page
+  action: editComponentPage
+
+/delete-component-page:
+  controller: Page
+  action: deleteComponentPage
+
 ########### Component #############
 
 /components:
@@ -155,3 +208,9 @@
 /installation:
   controller: installer
   action: installer
+
+############ Customization ##########
+
+/personnalisation:
+  controller: Custom
+  action: custom

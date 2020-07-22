@@ -2,11 +2,23 @@
 
 namespace cms\controllers;
 
+use cms\core\Builder\ElementPageBuilder;
+use cms\core\Builder\ElementPageBuilderInterface;
+use cms\core\Builder\PageBuilder;
 use cms\core\Controller;
 use cms\managers\PageManager;
+use cms\managers\ComponentManager;
+// use cms\core\Page;
 use cms\models\Page;
+use cms\models\Section;
 use cms\core\View;
 use cms\forms\AddPageType;
+use cms\managers\CinemaManager;
+use cms\managers\MovieManager;
+use cms\models\Cinema;
+use cms\core\NotFoundException;
+use cms\managers\SectionManager;
+use cms\models\Component;
 
 class PageController extends Controller
 {   
@@ -29,13 +41,26 @@ class PageController extends Controller
             $pageManager = new PageManager(Page::class, 'page');
             $page = new Page();
 
+            $sectionManager = new SectionManager(ElementPageBuilder::class, 'section');
+            $section = new Section();
+
             $page->setTitle($_POST[$form->getName().'_title']);
             $page->setTheme($_POST[$form->getName().'_theme']);
             $page->setGabarit($_POST[$form->getName().'_gabarit']);
             $page->setFont($_POST[$form->getName().'_font']);
-            $page->setFontColor($_POST[$form->getName().'_font-color']);
+            $page->setFont_color($_POST[$form->getName().'_font-color']);
 
             $pageManager->save($page);
+
+            // je recupere l'id de la dernière page enregistré et je lui associe une section par défaut
+            $newPages = $pageManager->read();
+            $lastPageId = end($newPages);
+
+            $section->setId($lastPageId->getId());
+            $section->setSize(1);
+            $section->setPosition(1);
+
+            $sectionManager->save($section);
 
             echo "<script>alert('Page crée avec succès');</script>";
         }
@@ -47,7 +72,7 @@ class PageController extends Controller
 
 
     //deleting data in the database
-    public function deletepageAction($id){
+    public function deletePageAction($id){
         new View('confirm-page','back');
 
         $pageManager = new pageManager(Page::class,'page');
@@ -55,62 +80,180 @@ class PageController extends Controller
 
         echo "<script>alert('Page supprimé avec succès');</script>";
     }
-    //editing a row in the database by id
-    public function editpageAction($id){
-        $pageManager = new pageManager(Page::class,'page');
-        $pages = $pageManager->read($id);
 
-        $this->render("edit-page", "back", ['pages' => $pages]);
+    //editing a row in the database by id
+    public function editPageAction($id){
+        $pageManager = new pageManager(Page::class,'page');
+        $page = $pageManager->read($id);
+
+        //  je récupère les sections qui appartient à la page
+        $sectionManager = new SectionManager(ElementPageBuilder::class, 'section');
+        $sections = $sectionManager->sectionsPage($id);
+
+        // je récupère les components qui appartient aux sections de la page
+        $componentManager = new ComponentManager(Component::class, 'component');
+        $components = $componentManager->read();
+
+        $this->render("edit-page", "back", [
+            'page' => $page,
+            'components' => $components,
+            'sections' => $sections
+        ]);
+
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $page = new Page();
+
+            $page->setId($id);
+            $page->setTitle($_POST['title']);
+            $page->setGabarit($_POST['gabarit']);
+            $page->setTheme($_POST['theme']);
+            $page->setFont($_POST['font']);
+            $page->setFont_color($_POST['font_color']);
+
+            $pageManager->save($page);
+
+            echo "<script>alert('Film modifié avec succès');</script>";
+        }
     }
 
+    public function showComponentsPageAction($id){
+        // je récupère les components qui appartient aux sections de la page
+        $componentManager = new ComponentManager(Component::class, 'component');
+        $components = $componentManager->componentsSection($id);
 
-    public function buildPageAction($params)
-    {
-        $pageManager = new pageManager();
-        $page = $pageManager->find($params['id']);
+        $sectionManager = new SectionManager(ElementPageBuilder::class, 'section');
+        $sections = $sectionManager->sectionsPage($id);
 
-        if (!$page) {
-            throw new NotFoundException("page not found");
+        $this->render('show-component-page', 'back', [
+            'components' => $components,
+            'sections' => $sections
+            ]);
+    }
+
+    public function editComponentPageAction($id){
+        // je récupère les components qui appartient aux sections de la page
+        $componentManager = new ComponentManager(Component::class, 'component');
+        $component = $componentManager->componentsSection($id);
+
+        $this->render('edit-component-page', 'back', [
+            'component' => $component
+        ]);
+
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            
         }
+    }
 
-        $this->render("default", "front", [
-            "page" => $page
+    public function deleteComponentPageAction($id){
+        
+    }
+
+    public function templateCreateAction(){
+        $movieManager = new MovieManager(Movie::class, 'movie');
+        $movies = $movieManager->read();
+
+        $cinemaManager = new CinemaManager(Cinema::class, 'cinema');
+        $cinemas = $cinemaManager->read();
+
+        $this->render('template-create','front-cms',[
+            'movies' => $movies,
+            'cinemas' => $cinemas
+        ]);
+    }
+
+    public function showSectionsPageAction(){
+        $pageManager = new PageManager(PageManager::class, 'page');
+        $pages = $pageManager->read();
+
+        $sectionManager = new SectionManager(ElementPageBuilder::class, 'section');
+        $sections = $sectionManager->read();
+
+        $this->render('show-section-pages','back',[
+            'sections' => $sections,
+            'pages' => $pages
+        ]);
+    }
+
+    public function showPagesAction(){
+        $pageManager = new PageManager(Page::class,'page');
+
+        $pages = $pageManager->read();
+
+        $this->render('show-pages', 'back', [
+            'pages' => $pages
+        ]);
+    }
+
+    public function showCustomPagesAction(){
+        $pageManager = new PageManager(Page::class,'page');
+        $pages = $pageManager->read();
+
+        $this->render('show-pages-customizable', 'front-cms', [
+            'pages' => $pages
         ]);
     }
 
 
-
-	public function loginAction()
+    public function buildPageAction($page)
     {
-        $registerType = new LoginType();
-
-        if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-            //Vérification des champs
-            $this->render("register", "account", [
-                "form" => $registerType,
-                "errors" => Validator::formLoginValidate( $registerType, $_POST )
-            ]);
-        } else {
-            $this->render("register", "account", [
-                "form" => $registerType
-            ]);
+        if (!$page) {
+            throw new NotFoundException("page not found");
         }
-	}
-	
-    public function registerAction()
-    {
-        $registerType = new RegisterType();
 
-        if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-            //Vérification des champs
-            $this->render("register", "account", [
-                "form" => $registerType,
-                "errors" => Validator::formRegisterValidate( $registerType, $_POST )
-            ]);
-        } else {
-            $this->render("register", "account", [
-                "form" => $registerType
-            ]);
+        if(is_string($page)){ 
+            $pageManager = new pageManager(Page::class, 'page');
+            $page = $pageManager->findBy(['title' => $page]);
+            $page = array_pop($page);
+        }
+
+        $sections = (new SectionManager(ElementPageBuilder::class, 'section'))->sectionsPage($page->getId());
+
+        $sectionUpdate = array_map(function($section){
+            return $section->setComponents((
+                    new ComponentManager(Component::class, 'component'))
+                    ->componentsSection($section->getId())
+            );
+        }, $sections);
+
+        $page->setSections($sectionUpdate);
+
+        $this->render("default", "front-cms", [
+            "page" => $page
+        ]);
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                if(!empty($_POST['size'])){
+                    $section = new Section();
+                    $sectionManager = new SectionManager(ElementPageBuilder::class, 'section');
+
+                    $section->setPage_id($page->getId());
+                    $section->setSize($_POST['size']);
+
+                    $nbSections = $sectionManager->count([
+                        'page_id' => $page->getId()
+                    ]);
+                    
+                    if($page->getGabarit() >= $nbSections){
+                        $section->setPosition($nbSections + 1);
+                        $sectionManager->save($section);
+
+                        echo "<script>alert('section ajouté avec succès');</script>";
+                    }else{
+                        echo "<script>alert('nombre maximum de section atteint pour cette page !');</script>";
+                    }
+                }else{
+                    $component = new Component();
+                    
+                    $component->setCategorie($_POST['categorie']);
+                    $component->setSection_id($_POST['section_id']);
+                    $component->setPosition(1);
+
+                    $componentManager = new ComponentManager(Component::class, 'component');
+
+                    $componentManager->save($component);
+
+                    echo "<script>alert('component ajouté avec succès');</script>";
+                }
         }
     }
 }

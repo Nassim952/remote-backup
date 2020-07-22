@@ -134,6 +134,7 @@ class DB
         }
 
         array_pop($columns);
+        
         array_pop($params);
 
         if (!is_numeric($objectToSave->getId())) {
@@ -144,12 +145,18 @@ class DB
 
             //INSERT
             $sql = "INSERT INTO ".$this->table." (".implode(",", $columns).") VALUES (:".implode(",:", $columns).");";
+            
         } else {
+            // SI LE UPDATE BUG CORRIGER SES 2 LIGNES
+            array_shift($columns);
+            array_shift($params);
+
             //UPDATE
             foreach ($columns as $column) {
                 $sqlUpdate[] = $column."=:".$column;
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",", $sqlUpdate)." WHERE id=:id;";
+            
         }
         $this->connection->query($sql, $params);    
     }

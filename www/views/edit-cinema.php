@@ -11,14 +11,15 @@
     </div>
     <div id="separation-bar"></div>
     <div class=form-add style='margin-top: 50px;'>
-        <form class=add-film method="post">
+        <form enctype="multipart/form-data" class=add-film method="post">
             <input class="input-form cinema-title" type="text" name="name" value="<?= $cinema->getName(); ?>"></input>
             <div class="flex-form-container">
                 <div class="flex-form-content-left">
                     <input class=input-form  type="text" name="city" value="<?= $cinema->getPlace(); ?>">
                     <input class=input-form type="number" name="number_rooms" value="<?= $cinema->getNumber_rooms(); ?>">
                 <div class="flex-form-content-right">
-                    <input class="input-form affiche" type="url" name="image_url" value="<?= $cinema->getImage_url() ?>"></input>
+                    <label>Logo du cinéma :</label>
+                    <input class="input-form affiche" type="file" name="image_url" value="<?= $cinema->getImage_url() ?>"></input>
                 </div>
             </div>
             <input type="submit" class="input-form submit-addfilm" value="Valider"></input>

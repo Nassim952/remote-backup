@@ -34,7 +34,7 @@
                         <option value="18">-18</option>
                     </select>
                     <label>Date de sortie</label>
-                    <input class=input-form type="date" name="date" id="date" value="" placeholder="date de sortie"></input>
+                    <input class=input-form type="date" name="date" id="date" value="<?= $myMovie->getRelease_date() ?>" placeholder="date de sortie"></input>
                     <label>Réalisateur</label>
                     <input class=input-form value="<?= $myMovie->getDirector() ?>" type="text" id="real" name="director" placeholder="réalisateur"></input>
                     <label>Acteur principal</label>

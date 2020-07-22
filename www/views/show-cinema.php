@@ -15,7 +15,7 @@
             foreach($myCinema as $cinema): 
         ?>
         <div class="show-cinema-upper-img">
-            <img class="show-cinema-fit-img" src="<?= $cinema->getImage_url() ?>">
+            <img class="show-cinema-fit-img" src="../public/images/<?= $cinema->getImage_url() ?>">
         </div>
         <div class="show-cinema-down">
             <ul>
@@ -30,8 +30,10 @@
                 </li>
             </ul>
             <div class='show-button-wrapper'>
-            <a class="Button" href="<?= Helpers::getUrl("Cinema", "editCinema").'/'.$cinema->getId() ?>">Modifier</button>
-                <a class="Button" href="<?= Helpers::getUrl("Cinema", "deleteCinema").'/'.$cinema->getId() ?>">Supprimer</a>
+                <?php if(reset($current_user)->getAllow() >= 2): ?>
+                    <a class="Button" href="<?= Helpers::getUrl("Cinema", "editCinema").'/'.$cinema->getId() ?>">Modifier</button>
+                    <a class="Button" href="<?= Helpers::getUrl("Cinema", "deleteCinema").'/'.$cinema->getId() ?>">Supprimer</a>
+                <?php endif; ?>
                 <a class="Button" href="<?= Helpers::getUrl("Cinema","cinema") ?>">Retour</a>
             </div>
             <?php endforeach; ?>

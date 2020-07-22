@@ -3,7 +3,7 @@
 namespace cms\Managers;
 
 use cms\core\DB;
-use cms\core\builder\QueryBuilder;
+use cms\core\Builder\QueryBuilder;
 use cms\models\Comment;
 
 class CommentManager extends DB{
