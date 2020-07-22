@@ -20,6 +20,7 @@ class Movie extends Model implements ModelInterface
     protected $nationality;
     protected $movie_type;
     protected $image_poster;
+    protected $creation_date;
 
     public function initRelation(): array {
         return [
@@ -55,6 +56,13 @@ class Movie extends Model implements ModelInterface
         $this->synopsis = $synopsis;
     }
 
+    public function setCreation_date($creation_date)
+    {
+        $this->creation_date = $creation_date;
+
+        return $this;
+    }
+
 //GETTERS
 
     public function getId(): ?int
@@ -77,6 +85,10 @@ class Movie extends Model implements ModelInterface
         return $this->synopsis;
     }
 
+    public function getCreation_date()
+    {
+        return $this->creation_date;
+    }
 
 
     /**
