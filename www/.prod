@@ -5,4 +5,4 @@ NAME_DB=cinedata
 DB_DRIVER=mysql
 PREFIXE_DB=bape_
 PORT_DB=8888
-APP_INSTALLED=true
+APP_INSTALLED=false

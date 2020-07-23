@@ -40,7 +40,7 @@ class ConstLoader{
     }
 
     public function load(){
-        $lines = explode("\r\n", $this->text);
+        $lines = explode("\n", $this->text);
         foreach ($lines as $line) {
             $data = explode("=", $line);
                 if (!defined($data[0]) && isset($data[1])) {

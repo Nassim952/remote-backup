@@ -136,7 +136,7 @@
   controller: Movie
   action: searchMovie
 
-/show-searched:
+/front-show-movie:
   controller: Movie
   action: showSearched
 
