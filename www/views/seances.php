@@ -45,19 +45,23 @@ if(isset($_GET['message']) && !empty($_GET['message'])) {
 ?>
 
 <div id="head-title">
-    <h2 style="font-size:32px;">Séances</h2>
+    <h2 class='page-title' style="font-size:32px;">Séances</h2>
     <div class="quick-tools" style="margin-top:0; margin-right:25px;">
         <div id="space-icons" >
+        <?php if(reset($current_user)->getAllow() >= 2): ?>
             <a title="Ajouter une séance" href="<?= cms\core\Helpers::getUrl('MovieSession','addSeance') ?>" class="fas fa-plus fa-lg"></a>
+            <?php endif ?>
         </div>
     </div>
 </div>
 <div id="separation-bar"></div>
 
-<div id="head-title">
+<div id="head-title" class='search'>
     <ul id="onglets">
         <li class="actif">Recherchez une séance</li> 
-        <li>Recherchez une reservation</li> 
+        <?php if(reset($current_user)->getAllow() >= 2): ?>
+            <li>Recherchez une reservation</li> 
+        <?php endif ?>
     </ul>
 </div>
 <div id="separation-bar"></div>
@@ -112,6 +116,7 @@ if(isset($_GET['message']) && !empty($_GET['message'])) {
 
         </div>
     </div>
+    <?php if(reset($current_user)->getAllow() >= 2): ?>
     <div class="item">
         <form method="post" id='getreservation'>
             <table class="selection-table">
@@ -160,12 +165,14 @@ if(isset($_GET['message']) && !empty($_GET['message'])) {
                 </tbody>
             </table>
         </form>
+        <?php endif ?>
 
         <span class="separator"> </span>
 
         <div id="resultgetreservation">
 
         </div>
+        
     </div>
 </div>
 </main>

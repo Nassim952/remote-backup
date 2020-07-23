@@ -49,6 +49,7 @@
             </div>
             <div class="link-wrapper">
                 <a href="<?= Helpers::getUrl("Page", "templateCreate") ?>" class="nav-text" style="text-decoration:none;">Accueil</a>
+                <a href="<?= Helpers::getUrl("MovieReservation", "showSeances") ?>" class="nav-text" style="text-decoration:none;">Reservation</a>
                 <a href="<?= Helpers::getUrl("User", "showUser").'/'.reset($current_user)->getId() ?>" class="nav-text" style="text-decoration:none;"><?= reset($current_user)->getFirstname() ?></a>
                 <?php if(reset($current_user)->getAllow() >= 2): ?>
                     <a href="<?= Helpers::getUrl("Dashboard", "dashboard") ?>" class="nav-text" style="text-decoration:none;">Dashboard</a>

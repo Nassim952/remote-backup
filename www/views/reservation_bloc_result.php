@@ -29,7 +29,9 @@ use cms\core\Helpers;
                 <td><?php echo $row["title"] ?></td>
                 <td><?php echo $row["date_screaning"] ?></td>
                 <td><?php echo $row["nbr_places"]?></td>
+                <?php if(reset($current_user)->getAllow() >= 2): ?>
                 <td><a href=<?php echo $url ?>><button>Supprimer</button></a></td>
+                <?php endif ?>
             </tr>
         <?php } ?> 
         </tbody>

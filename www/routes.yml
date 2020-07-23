@@ -236,6 +236,13 @@
 
 
 ########### Reservation et Seances #############
+/show-seances:
+  controller: MovieReservation
+  action: showSeances
+
+/showReservation:
+  controller: MovieReservation
+  action: showReservation
 
 /seances:
   controller: MovieReservation
