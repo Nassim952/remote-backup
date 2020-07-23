@@ -1,5 +1,5 @@
 <head>
-    <title>NEAR BY - Vérifier votre Email !</title>
+    <title>NEAR BY - Aucune session en cours !</title>
 </head>
 
 <main class="container">
@@ -15,7 +15,6 @@
         </header>
 
         <section class="sectionSignup">
-            <h1> Aucune session en cours </h1>
             <h1 style="margin-top:50px;"> Connectez-vous pour accédez à cette page !</h1>
             <div style="display: flex;
             justify-content: center;

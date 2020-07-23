@@ -21,9 +21,9 @@ class InstallerController extends Controller{
         {  
             if((new Installer())->connectDatabase())
             {
-                $view = Helpers::getUrl("login", "account");
+                $view = Helpers::getUrl("User", "login");
                 $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
+                header('Location: ' . $newUrl);
             } else {
                 $this->render("installer", "installer", [
                     "configFormUser" => $form

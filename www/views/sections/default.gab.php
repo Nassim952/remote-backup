@@ -12,9 +12,8 @@
     $cinemaManager = new CinemaManager(Cinema::class, 'cinema');
     $cinemas = $cinemaManager->read();
 ?>
-
     <?php foreach ($data as $component): ?>
-        <div class="col-sm-<?= $section->getSize() ?> col-md-5">
+        <div class="col-sm-<?= $section->getSize() + 1 ?> col-md-5">
             <?php
                 $this->addModal($component->getCategorie(), [
                     'movies' => $movies,

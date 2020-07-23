@@ -254,8 +254,6 @@ class PageController extends Controller
 
                     $componentManager->save($component);
 
-                    echo "<script>alert('component ajouté avec succès');</script>";
-
                     // on refrech la page courante
                     $newUrl = "/".str_replace(' ','_',$page->getTitle());
                     echo "<meta http-equiv='refresh' content='0;url='.$newUrl />";

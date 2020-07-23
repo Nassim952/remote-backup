@@ -192,7 +192,7 @@ class UserController extends Controller{
 
 	public function loginAction()
     {
-        if(!defined(APP_INSTALLED)){
+        if(APP_INSTALLED == 'false'){
             $view = Helpers::getUrl("installer", "installer");
             $newUrl = trim($view, "/");
             header("Location: " . $newUrl);
@@ -238,6 +238,12 @@ class UserController extends Controller{
 	
     public function registerAction()
     {
+        if(APP_INSTALLED == 'false'){
+            $view = Helpers::getUrl("installer", "installer");
+            $newUrl = trim($view, "/");
+            header("Location: " . $newUrl);
+        }
+
         $form = $this->createForm(RegisterType::class);
         $form->handle();
 
