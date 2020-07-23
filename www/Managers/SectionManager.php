@@ -30,7 +30,7 @@ class SectionManager extends DB{
     public function sectionsPage($id = null){
         {
             $query = (new QueryBuilder())
-                ->select('*')
+                ->select('s.*')
                 ->from(DB_PREFIXE.'section', 's')
                 ->join(DB_PREFIXE.'page p','page_id');
             

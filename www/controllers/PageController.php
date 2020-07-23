@@ -201,8 +201,10 @@ class PageController extends Controller
             $page = array_pop($page);
         }
 
+        // on recupere tous les sections de la page
         $sections = (new SectionManager(ElementPageBuilder::class, 'section'))->sectionsPage($page->getId());
 
+        // parcourt tous les elements de section et retourne un element du tableau puis set ses components
         $sectionUpdate = array_map(function($section){
             return $section->setComponents((
                     new ComponentManager(Component::class, 'component'))

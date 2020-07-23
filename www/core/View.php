@@ -10,7 +10,7 @@ class View
 	private $template;
 	private $data = [];
 
-	public function __construct(string $view, string $template='base')
+	public function __construct(string $view, string $template='back')
 	{
 		$this->setTemplate($template);
 		$this->setView($view);
