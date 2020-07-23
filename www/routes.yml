@@ -136,6 +136,10 @@
   controller: Movie
   action: searchMovie
 
+/show-searched:
+  controller: Movie
+  action: showSearched
+
 ########### Comment #############
 
 /comments:
