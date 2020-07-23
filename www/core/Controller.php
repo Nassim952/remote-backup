@@ -36,7 +36,19 @@ class Controller implements \SplSubject
     // Permet la redirection
     public function redirectTo(string $controller, $action)
     {
-
+        $listOfRoutes = yaml_parse_file("routes.yml");
+        foreach ($listOfRoutes as $url => $values) 
+        {
+            echo $controller."\n".$action."<br>";
+            print_r($values);
+            echo "<br>";
+            if($values["controller"]==$controller && $values["action"]==$action)
+            {
+               
+                
+                header("Location: " . $url);
+            }
+        }
     }
 
     // Récupère l'utilisateur connecté où retourne null

@@ -19,45 +19,59 @@ use \DateTime;
 class MovieController extends Controller
 {
     public function showMovieAction($id){
+
+       if (null !== $id && is_numeric($id)) {
+            // reading movie table
+            $movieManager = new MovieManager(Movie::class,'movie');
         
-        // reading movie table
-        $movieManager = new MovieManager(Movie::class,'movie');
-        $movie = $movieManager->read($id);
-        //reading comment table
-        $commentManager = new commentManager(Comment::class,'comment');
+            $movie = $movieManager->read($id);
+             
+            if ($movie) {
 
-        $commentsOfMovie = $commentManager->findBy(['target' => $id]);
+                //reading comment table
+                $commentManager = new commentManager(Comment::class,'comment');
 
-        $userManager = new userManager(User::class,'user');
+                $commentsOfMovie = $commentManager->findBy(['target' => $id]);
 
-        //getting the user id
-        $usersComment = [];
-        foreach($commentsOfMovie as $commentOfMovie){
-            $usersComment = array_merge($usersComment, $userManager->read($commentOfMovie->getUser_id()));
+                $userManager = new userManager(User::class,'user');
+
+                //getting the user id
+                $usersComment = [];
+                foreach($commentsOfMovie as $commentOfMovie){
+                    $usersComment = array_merge($usersComment, $userManager->read($commentOfMovie->getUser_id()));
+                }
+                
+
+                if( $_SERVER["REQUEST_METHOD"] == "POST"){
+                    $comment = new Comment();
+                    $checkSpecialChar = new NoSpecialChar();
+
+                    //if $comment =! empty saving the data in comment table
+                    if ($checkSpecialChar->isValid($_POST['content']) != null && isset($_POST['content'])){
+                        $comment->setComment($_POST['content']);
+                        $comment->setTarget($id);
+                        $comment->setUser_id($_POST['id_user']);
+                        $commentManager->save($comment);
+                    }else{
+                        Helpers::alert_popup(array_shift($checkSpecialChar->getErrors()));
+                    }
+                }
+                // session_start();
+                $comment = $commentManager->getFilmComments($id);
+                $this->render('show-movie', 'back', [
+                    'myMovie' => $movie,
+                    'usersComment'=> $usersComment,
+                    'commentsOfMovie' =>$commentsOfMovie
+                ]);
+             }
+             else{
+
+                $this->redirectTo('Dashboard','dashboard');
+             }   
         }
-        
-
-        if( $_SERVER["REQUEST_METHOD"] == "POST"){
-            $comment = new Comment();
-            $checkSpecialChar = new NoSpecialChar();
-
-            //if $comment =! empty saving the data in comment table
-            if ($checkSpecialChar->isValid($_POST['content']) != null && isset($_POST['content'])){
-                $comment->setComment($_POST['content']);
-                $comment->setTarget($id);
-                $comment->setUser_id($_POST['id_user']);
-                $commentManager->save($comment);
-            }else{
-                Helpers::alert_popup(array_shift($checkSpecialChar->getErrors()));
-            }
+        else {
+            $this->redirectTo('Dashboard','dashboard');
         }
-       // session_start();
-        $comment = $commentManager->getFilmComments($id);
-        $this->render('show-movie', 'back', [
-            'myMovie' => $movie,
-            'usersComment'=> $usersComment,
-            'commentsOfMovie' =>$commentsOfMovie
-        ]);
     }  
 
     public function addFilmAction()
