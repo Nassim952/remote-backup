@@ -469,3 +469,12 @@ a {
   padding: 50px;
 }
 
+#resultgetreservation td{
+  padding: 10px;
+  text-align: center;
+}
+
+#resultgetseance td{
+  padding: 10px;
+  text-align: center;
+}

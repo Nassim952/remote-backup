@@ -33,6 +33,19 @@ class MovieReservationController extends Controller
         ]);
     }
 
+    public function showSeancesAction(){
+        $cinemaManager = new cinemaManager();
+        $cinemas = $cinemaManager->read();
+
+        $movieManager = new movieManager();
+        $movies = $movieManager->read();
+
+        $this->render("seances", "front-cms", [
+            "cinemas" => $cinemas,
+            "movies" => $movies
+        ]);
+    }
+
     public function getSeancesAction(){
 
         $cinema_id = $_POST['cinema'];
@@ -116,6 +129,54 @@ class MovieReservationController extends Controller
         }
 
         $this->render("reservation", "back", [
+            "configFormUser" => $form,
+            "datas" => $datas 
+        ]);
+    }
+
+    public function showReservationAction(){
+
+        $datas = array();
+        $datas['cinema'] = $_GET['cinema'];
+        $datas['salle'] = $_GET['salle'];
+        $datas['film'] = $_GET['film'];
+        $datas['seance'] = $_GET['seance'];
+        $datas['seance_id'] = $_GET['idms'];
+
+        $form = $this->createForm(ReservationType::class, $_GET['maxticket']);
+        $form->handle();
+
+        if($form->isSubmit() && $form->isValid())
+        {  
+            $movieReservation = new MovieReservation();
+            $movieReservationManager = new MovieReservationManager(MovieReservation::class, 'movie_reservation');
+            $movieSession = new MovieSession();
+            $movieSessionManager = new movieSessionManager(MovieSession::class, 'movie_session');
+
+            $movieReservation->setNbr_places($_POST[$form->getName().'_nbr_ticket']);
+            $movieReservation->setUser_email($_POST[$form->getName().'_email']);
+            $movieReservation->setMovie_session_id($datas['seance_id']);
+            
+            $movieSessionTmp = $movieSessionManager->read($datas['seance_id']);
+
+            $nbrplacerest = $movieSessionTmp[0]['nbr_place_rest'] - $_POST[$form->getName().'_nbr_ticket'];
+
+            $movieSession->setId($datas['seance_id']);
+            $movieSession->setDate_screaning($movieSessionTmp[0]['date_screaning']);
+            $movieSession->setMovie($movieSessionTmp[0]['movie_id']);
+            $movieSession->setRoom($movieSessionTmp[0]['room_id']);
+            $movieSession->setNbr_place_rest($nbrplacerest);
+
+
+            
+            $movieReservationManager->save($movieReservation);
+            $movieSessionManager->save($movieSession);
+
+            $message = 'Réservation ajouté avec succès';
+            header('Location: /show-seances?message=' . urlencode($message));
+        }
+
+        $this->render("reservation", "front-cms", [
             "configFormUser" => $form,
             "datas" => $datas 
         ]);

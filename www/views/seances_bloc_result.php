@@ -24,7 +24,7 @@ use cms\core\Helpers;
                 $url = '';
                 $disabled = 'disabled';
             } else {
-                $url = '/reservation?idms='.urlencode($row["id"]).'&cinema='.urlencode($row["name"]).'&salle='.urlencode($row["name_room"]).'&film='.urlencode($row["title"]).'&seance='.urlencode($row["date_screaning"]).'&maxticket='.urlencode($row["nbr_place_rest"]);
+                $url = '/showReservation?idms='.urlencode($row["id"]).'&cinema='.urlencode($row["name"]).'&salle='.urlencode($row["name_room"]).'&film='.urlencode($row["title"]).'&seance='.urlencode($row["date_screaning"]).'&maxticket='.urlencode($row["nbr_place_rest"]);
                 $disabled = '';
             }
             ?>
@@ -36,8 +36,10 @@ use cms\core\Helpers;
                 <td><?php echo $row["nbr_place_rest"]." /".$row["nbr_places"] ?></td>
                 <td>
                     <a href=<?php echo $url ?>><button <?php echo $disabled ?>>Réserver</button></a>
+                    <?php if(reset($current_user)->getAllow() >= 2): ?>
                     <a href=<?php echo $editUrl ?>><button>Modifier</button></a>
                     <a href=<?php echo $deleteUrl ?>><button>Supprimer</button></a>
+                    <?php endif ?>
                 </td>
             </tr>
         <?php } ?> 

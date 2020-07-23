@@ -132,3 +132,40 @@ opacity: 1;
 .fix-wrapper-form{
     margin-right: 300px;
 }
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.page-title{
+    text-align: center;
+}
+
+#head-title h2{
+    margin: auto;
+}
+
+#contenu{
+    margin: auto !important;
+    margin-top: 40px !important; 
+}
+
+#space-icons{
+    margin-left: 1000px;
+}
+
+.search{
+    margin: auto;
+    margin-top: 100px;
+}
+
+#resultgetreservation td{
+    padding: 10px;
+    text-align: center;
+  }
+  
+#resultgetseance td{
+padding: 10px;
+text-align: center;
+}
