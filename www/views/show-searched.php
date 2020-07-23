@@ -97,7 +97,7 @@ background-size: cover;">
             <?php endif;?>
 
             <?php if(!empty($commentsOfMovie)): ?>
-                <div class="show-movie-comment-container"><h2>Espace commentaire :</h2>
+                <div class="show-movie-comment-container" style="overflow: auto;"><h2>Espace commentaire :</h2>
                     <?php foreach($commentsOfMovie as $comment): ?>
                         <?php $userComment = array_shift($usersComment) ?>
                         <td class="list-film">
