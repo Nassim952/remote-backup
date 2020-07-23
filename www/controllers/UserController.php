@@ -15,6 +15,8 @@ use cms\core\Page;
 use cms\core\Validator;
 use cms\forms\LoginType;
 use cms\forms\RegisterType;
+use cms\forms\ResetPwdFormType;
+use cms\forms\ResetPwdType;
 use cms\models\Movie;
 use cms\PHPMailer\src\PHPMailer;
 
@@ -146,10 +148,6 @@ class UserController extends Controller{
         new View('session-not-start','front');
     }
 
-    public function forgetPwdAction(){
-        new View("forgetPwd", "account");
-    }
-
 	public function getUserAction($params)
     {
         $userManager = new UserManager('user', 'user');
@@ -235,7 +233,81 @@ class UserController extends Controller{
             ]);
         }
     }
-	
+
+    public function forgetPasswordAction(){
+        $form = $this->createForm(ResetPwdType::class);
+        $form->handle();
+        $userManager = new UserManager(User::class, 'user');
+        
+        if($form->isSubmit() && $form->isValid())
+        { 
+            $myUser = $userManager->findBy(['email' => $_POST[$form->getName().'_email']]);
+            
+            if(empty($myUser)){
+                Helpers::alert_popup('Utilisateur inconnu');
+                $url = Helpers::getUrl("User", "forgetPassword");
+                echo "<meta http-equiv='refresh' content='0;url='.$url />";
+            }else{
+                $user = array_shift($myUser);
+
+                if($user->getStatut() == 1){
+                    $token = bin2hex(random_bytes(50));
+                    $user->setToken($token);
+                    $userManager->save($user);
+                    
+                    $mail = new Mailer();
+                    $userNewEmail = $_POST[$form->getName().'_email'];
+                    $mail->sendForgetPwd($userNewEmail, $user->getFirstname(), $token);
+
+                    Helpers::alert_popup("Un lien de réinitialisation vous a été envoyé par mail !");
+
+                    $view = Helpers::getUrl("User", "login");
+                    $newUrl = trim($view, "/");
+                    header("Location: " . $newUrl);
+                }else{
+                    Helpers::alert_popup("Votre compte n'est pas autorisé à accéder au site");
+                    $url = Helpers::getUrl("User", "login");
+                    echo "<meta http-equiv='refresh' content='0;url='.$url />";
+                }
+            }
+        }else{
+            $this->render("forget-pwd", "account", [
+            "configFormUser" => $form
+            ]);
+        }
+    }   
+
+    public function resetFormPwdAction($token){
+        $form = $this->createForm(ResetPwdFormType::class);
+        $form->handle();
+        $userManager = new UserManager(User::class, 'user');
+        
+        $user = $userManager->getUserByToken($token);
+
+        if(empty($user)){
+            Helpers::alert_popup('Utilisateur inconnu');
+            $url = Helpers::getUrl("User", "login");
+            echo "<meta http-equiv='refresh' content='0;url='.$url />";
+        }else{
+            if($form->isSubmit() && $form->isValid())
+            { 
+                $pwdHash = password_hash($_POST[$form->getName().'_password'], PASSWORD_DEFAULT);
+                $myUser = array_shift($user);
+                $myUser->setPassword($pwdHash);
+
+                $userManager->save($myUser);
+
+                $view = Helpers::getUrl("login", "account");
+                $newUrl = trim($view, "/");
+                header("Location: " . $newUrl);
+            }else{
+                $this->render("reset-form-pwd", "account", [
+                    "configFormUser" => $form
+                ]);
+            }
+        }
+    }
+
     public function registerAction()
     {
         if(APP_INSTALLED == 'false'){

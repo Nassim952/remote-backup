@@ -1,5 +1,5 @@
 <head>
-	<title>NEAR BY - Connexion</title>
+	<title>NEAR BY - Reset password </title>
 </head>
 
 <main class="container">
@@ -15,15 +15,10 @@
 		</header>
 
 		<section class="sectionSignup">
-			<h1> Connectez-vous ! </h1>
-			<br>
+			<h1> Entrez votre mot de passe </h1>
 			<br>
 			<div class="divInput">
 				<?php $this->formView('configFormUser')?>
-			</div>
-			<div class="button_wrapper">
-				<a href="<?= \cms\core\Helpers::getUrl("User", "register") ?>" class="button" style="margin-top: 20px;">Pas de compte ?</a>
-				<a href="<?= \cms\core\Helpers::getUrl("User", "forgetPassword") ?>" class="button" style="margin-top: 20px;">mot de passe oublié ?</a>
 			</div>
 		</section>
 	</section>

@@ -42,6 +42,14 @@
   controller: User
   action: register
 
+/forget-password:
+  controller: User
+  action: forgetPassword
+
+/reset-form-pwd:
+  controller: User
+  action: resetFormPwd
+
 /home:
   controller: User
   action: home
