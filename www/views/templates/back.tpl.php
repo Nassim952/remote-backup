@@ -120,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-                <h2 id="text-submenu-fixer">Gestion</h2>
+                <h2 id="text-submenu-fixer">Administration</h2>
                 <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">
                         <div class="fas fa-users fa-lg"></div>
