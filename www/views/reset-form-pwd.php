@@ -15,7 +15,7 @@
 		</header>
 
 		<section class="sectionSignup">
-			<h1> Entrez votre mot de passe </h1>
+			<h1> Entrez votre nouveau mot de passe </h1>
 			<br>
 			<div class="divInput">
 				<?php $this->formView('configFormUser')?>

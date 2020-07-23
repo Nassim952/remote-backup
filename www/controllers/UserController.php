@@ -297,9 +297,9 @@ class UserController extends Controller{
 
                 $userManager->save($myUser);
 
-                $view = Helpers::getUrl("login", "account");
-                $newUrl = trim($view, "/");
-                header("Location: " . $newUrl);
+                Helpers::alert_popup("Mot de passe réinitialisé, connectez-vous !");
+                $url = Helpers::getUrl("User", "home");
+                echo "<meta http-equiv='refresh' content='0;url='.$url />";
             }else{
                 $this->render("reset-form-pwd", "account", [
                     "configFormUser" => $form
