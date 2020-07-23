@@ -61,7 +61,6 @@ class Installer
 					$stmt = $pdo->prepare(file_get_contents(".sql"));
 					$stmt->execute();
 				} catch(PDOException $e){
-					//print_r($e->getMessage());
 					syslog(LOG_ERR, "PDO Error : ".$e->getMessage());
 				}	
 				

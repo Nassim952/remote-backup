@@ -39,13 +39,8 @@ class Controller implements \SplSubject
         $listOfRoutes = yaml_parse_file("routes.yml");
         foreach ($listOfRoutes as $url => $values) 
         {
-            echo $controller."\n".$action."<br>";
-            print_r($values);
-            echo "<br>";
             if($values["controller"]==$controller && $values["action"]==$action)
             {
-               
-                
                 header("Location: " . $url);
             }
         }

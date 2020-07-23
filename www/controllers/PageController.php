@@ -122,7 +122,6 @@ class PageController extends Controller
         $components = $componentManager->componentsSection($id);
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            print_r($components);
             $components->setCategorie($_POST['categorie']);
             $componentManager->save($components);
 

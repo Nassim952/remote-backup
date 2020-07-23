@@ -36,7 +36,7 @@ class UserController extends Controller{
     }
 
     public function homeAction(){
-        new View("home","empty");
+        new View("home","landing");
     }
 
     public function statAction(){
@@ -351,8 +351,6 @@ class UserController extends Controller{
                         $this->render("register", "account", [
                             "configFormUser" => $form
                         ]);
-                    }else {
-                        print_r($result);
                     }
                 }
             } else {

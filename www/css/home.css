@@ -133,7 +133,7 @@ opacity: 1;
     margin-right: 300px;
 }
 
-.container{
+.fix-column{
     display: flex;
     flex-direction: column;
 }

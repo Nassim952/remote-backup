@@ -14,8 +14,6 @@ class Validator
 		//Vérification du bon nb de input
 		if(count($config["fields"]) == count($data)) 
 		{
-			// print_r($config);
-			// print_r($data);
 			foreach($config["fields"] as $value => $configField){
 				//Vérifier que les names existent et Vérifier les required
 				if (isset($data[$value]) && ($configField["required"] && !empty($data[$value]))) 

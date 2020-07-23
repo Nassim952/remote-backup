@@ -24,7 +24,11 @@ use cms\core\Helpers;
                 $url = '';
                 $disabled = 'disabled';
             } else {
-                $url = '/showReservation?idms='.urlencode($row["id"]).'&cinema='.urlencode($row["name"]).'&salle='.urlencode($row["name_room"]).'&film='.urlencode($row["title"]).'&seance='.urlencode($row["date_screaning"]).'&maxticket='.urlencode($row["nbr_place_rest"]);
+                if(reset($current_user)->getAllow() >= 2){
+                    $url = '/reservation?idms='.urlencode($row["id"]).'&cinema='.urlencode($row["name"]).'&salle='.urlencode($row["name_room"]).'&film='.urlencode($row["title"]).'&seance='.urlencode($row["date_screaning"]).'&maxticket='.urlencode($row["nbr_place_rest"]);
+                }else{
+                    $url = '/showReservation?idms='.urlencode($row["id"]).'&cinema='.urlencode($row["name"]).'&salle='.urlencode($row["name_room"]).'&film='.urlencode($row["title"]).'&seance='.urlencode($row["date_screaning"]).'&maxticket='.urlencode($row["nbr_place_rest"]);
+                }
                 $disabled = '';
             }
             ?>

@@ -44,13 +44,15 @@
     </script>
     <nav style="color:blue;" class="navbar navbar-default" role="navigation">
         <div style="background-color: lightcoral;" class="navbar-header">
-            <div class="logo-wrapper">
+        <div class="logo-wrapper">
                 <img id="logo_header" src="../../src/images/logo.png">
             </div>
             <div class="link-wrapper">
                 <a href="<?= Helpers::getUrl("Page", "templateCreate") ?>" class="nav-text" style="text-decoration:none;">Accueil</a>
+                <a href="<?= Helpers::getUrl("MovieReservation", "showSeances") ?>" class="nav-text" style="text-decoration:none;">Reservation</a>
                 <a href="<?= Helpers::getUrl("User", "showUser").'/'.reset($current_user)->getId() ?>" class="nav-text" style="text-decoration:none;"><?= reset($current_user)->getFirstname() ?></a>
                 <?php if(reset($current_user)->getAllow() >= 2): ?>
+                    <a href="<?= Helpers::getUrl("Dashboard", "dashboard") ?>" class="nav-text" style="text-decoration:none;">Dashboard</a>
                     <a href="<?= Helpers::getUrl("Page", "addPage") ?>" class="nav-text" style="text-decoration:none;">Créer une page</a>
                     <a href="<?= Helpers::getUrl("Page", "showCustomPages") ?>" class="nav-text" style="text-decoration:none;">Customise </a>
                 <?php endif; ?>

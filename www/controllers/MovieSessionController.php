@@ -53,7 +53,6 @@ class MovieSessionController extends Controller
             $movieSession->setRoom($_POST[$form->getName().'_room']);
             $movieSession->setNbr_place_rest($nbrplacerest);
             
-            var_dump($movieSession);
             $movieSessionManager->save($movieSession);
 
             $message = 'Séance ajouté avec succès';

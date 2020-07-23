@@ -36,7 +36,7 @@
 	</style>
 </head>
 
-<main class="container" style="width:100%">
+<main class="container fix-column" style="width:100%">
 
 <?php 
 if(isset($_GET['message']) && !empty($_GET['message'])) {

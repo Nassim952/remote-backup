@@ -82,7 +82,6 @@ class QueryBuilder
 
     public function getQuery(): ResultInterface
     {
-        print_r($this->parameters);
         $result =  $this->connection->query($this->query, $this->parameters);
 
         return $result;

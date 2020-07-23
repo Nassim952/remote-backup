@@ -75,7 +75,7 @@ try{
 
 				}
 
-				if (!$found) {
+				if ($found === true) {
 					throw new ExeptionHandler("l'url n'existe pas : Error 404");
 				}
 			}
