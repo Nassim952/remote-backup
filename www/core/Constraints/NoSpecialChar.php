@@ -12,7 +12,7 @@ class NoSpecialChar implements ConstraintInterface
     // mettre un message par défaut si minMessage et maxMessage sont nuls, et setter les valeurs
     public function __construct(string $specialCharMsg = null)
     {
-        $this->match = '@ &amp;|&quot;|&#039;|&lt;|&gt;@';
+        $this->matchs = '@&amp;|&quot;|&lt;|&gt;@';
         
         $this->specialCharMsg = $specialCharMsg;
 
@@ -29,7 +29,7 @@ class NoSpecialChar implements ConstraintInterface
         $value = htmlspecialchars ($value,ENT_QUOTES);
 
         $this->errors = [];
-            if(preg_match( $this->match , $value) )
+            if(preg_match( $this->matchs , $value) || strpos($value,';')!==false)
             {
                 $this->errors[] = $this->specialCharMsg;
             }
