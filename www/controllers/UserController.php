@@ -195,7 +195,7 @@ class UserController extends Controller{
         if(APP_INSTALLED == 'false'){
             $view = Helpers::getUrl("installer", "installer");
             $newUrl = trim($view, "/");
-            header("Location: " . $newUrl);
+            header("Location: ".$newUrl);
         }
 
         $form = $this->createForm(LoginType::class);
@@ -214,11 +214,11 @@ class UserController extends Controller{
                     $_SESSION['userId'] = $userCheck->getId();
                     $view = Helpers::getUrl("Page", "templateCreate");
                     $newUrl = trim($view, "/");
-                    header("Location: " . $newUrl);
+                    header("Location: ".$newUrl);
                 }else{
                     $view = Helpers::getUrl("User", "mailNotChecked");
                     $newUrl = trim($view, "/");
-                    header("Location: " . $newUrl);
+                    header("Location: ".$newUrl);
                 }
             }
             else
@@ -241,7 +241,7 @@ class UserController extends Controller{
         if(APP_INSTALLED == 'false'){
             $view = Helpers::getUrl("installer", "installer");
             $newUrl = trim($view, "/");
-            header("Location: " . $newUrl);
+            header("Location: ".$newUrl);
         }
 
         $form = $this->createForm(RegisterType::class);

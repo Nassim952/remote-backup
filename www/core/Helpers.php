@@ -21,20 +21,13 @@ class Helpers
         return "/";
     }
 
-    public static function redirect_to(string $controller, string $action, array $params = null)
+    public static function pageNotFound()
     {
-        $listOfRoutes = yaml_parse_file("routes.yml");
-        foreach ($listOfRoutes as $url => $values) 
-        {
-            if($values["controller"]==$controller && $values["action"]==$action)
-            {
-                $controller.='Controller';
-                $action.='Action';
-                
-                (new $controller())->$action(implode(',',$params));
-            }
-        }
+        (new Controller())->render("404", "front-cms", [
+        ]);
     }
+    
+
 
     public static function alert_popup(string $msg){
         echo "<script>alert('$msg');</script>";

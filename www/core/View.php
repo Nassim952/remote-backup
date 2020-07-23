@@ -2,7 +2,7 @@
 
 namespace cms\core;
 
-use Exception;
+use \cms\core\Exeptions\InvalidRouteExeption;
 
 class View
 {
@@ -32,7 +32,7 @@ class View
 		$this->view =trim($view);
 
 		if (!file_exists("views/".$this->view.".php")) {
-			throw new Exception("La vue n'existe pas");
+			throw new InvalidRouteExeption("La vue n'existe pas");
 		}
 	}
 
@@ -46,7 +46,7 @@ class View
 	public function addModal(string $modal, array $data)
 	{
 		if (!file_exists("views/modals/".$modal.".mod.php")) {
-			throw new Exception("Le modal n'existe pas");
+			throw new InvalidRouteExeption("Le modal n'existe pas");
 		}
 		
 		include "views/modals/".$modal.".mod.php";
@@ -56,7 +56,7 @@ class View
 	public function addSection($section, array $data)
 	{
 		if (!file_exists("views/sections/default.gab.php")) {
-			throw new NotFoundException("ce gabarit de section  n'existe pas");
+			throw new InvalidRouteExeption("ce gabarit de section  n'existe pas");
 		}
 		${"components".$section->getPage_id()} = $data;
 		${"sections".$section->getPage_id()} = $section;
@@ -69,7 +69,7 @@ class View
 	public function formView(string $formName, string $formTemplate = "base")
     {
         if (!file_exists("views/forms/".$formTemplate.".view.php")) {
-            throw new NotFoundException("Le template de formulaire n'existe pas!!!");
+            throw new InvalidRouteExeption("Le template de formulaire n'existe pas!!!");
         }
         $form = $this->data[$formName];// Objet Form
         include "views/forms/".$formTemplate.".view.php";

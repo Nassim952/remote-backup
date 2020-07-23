@@ -63,9 +63,7 @@ class CommentController extends Controller{
 
     public function editCommentAction($id){
         $commentManager = new commentManager(comment::class,'comment');
-        $comment = $commentManager->read($id);
-
-        $this->render('edit-comment','back', ['myComment' => $comment]);
+        $comment = $commentManager->read($id); 
 
         if( $_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -74,7 +72,6 @@ class CommentController extends Controller{
             $comment->setId($id);
             $comment->setComment($_POST['comment']);
             $comment->setPost_date($_POST['date']);
-            $comment->setAuthor($_POST['author']);
             $comment->setUser_id($_POST['user_id']);
 
             $commentManager->save($comment);
@@ -82,6 +79,8 @@ class CommentController extends Controller{
             echo "<script>alert('Film modifié avec succès');</script>";
     
         }
+        
+        $this->render('edit-comment','back', ['myComment' => $comment]);
     }
    
 }
