@@ -184,4 +184,46 @@ class MovieController extends Controller
             echo "<script>alert('Entrez un film dans la barre de recherche');</script>";
         }
     }
+
+    public function showSearchedAction($id){
+        
+        // reading movie table
+        $movieManager = new MovieManager(Movie::class,'movie');
+        $movie = $movieManager->read($id);
+        //reading comment table
+        $commentManager = new commentManager(Comment::class,'comment');
+
+        $commentsOfMovie = $commentManager->findBy(['target' => $id]);
+
+        $userManager = new userManager(User::class,'user');
+
+        //getting the user id
+        $usersComment = [];
+        foreach($commentsOfMovie as $commentOfMovie){
+            $usersComment = array_merge($usersComment, $userManager->read($commentOfMovie->getUser_id()));
+        }
+        
+
+        if( $_SERVER["REQUEST_METHOD"] == "POST"){
+            $comment = new Comment();
+            $checkSpecialChar = new NoSpecialChar();
+
+            //if $comment =! empty saving the data in comment table
+            if ($checkSpecialChar->isValid($_POST['content']) != null && isset($_POST['content'])){
+                $comment->setComment($_POST['content']);
+                $comment->setTarget($id);
+                $comment->setUser_id($_POST['id_user']);
+                $commentManager->save($comment);
+            }else{
+                Helpers::alert_popup(array_shift($checkSpecialChar->getErrors()));
+            }
+        }
+       // session_start();
+        $comment = $commentManager->getFilmComments($id);
+        $this->render('show-searched', 'front-cms', [
+            'myMovie' => $movie,
+            'usersComment'=> $usersComment,
+            'commentsOfMovie' =>$commentsOfMovie
+        ]);
+    }
 }
