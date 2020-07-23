@@ -48,7 +48,7 @@
               âge <?= $movie->getAge_require() ?>+
               </p>
 
-              <span><a href="/show-searched/<?= $movie->getId() ?>" style="font-weight: bold;" class="hover">Voir plus</a></span>
+              <span><a href="/front-show-movie/<?= $movie->getId() ?>" style="font-weight: bold;" class="hover">Voir plus</a></span>
             </td>
           </tr>
         <?php endforeach; ?>
