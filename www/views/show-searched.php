@@ -1,5 +1,6 @@
 <head>
     <title>NEAR BY CMS - Film recherché</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../dist/main.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../../css/salles.css">
@@ -13,15 +14,62 @@
 </head>
 
 <?php use cms\core\Helpers; ?>
-<body 
-style=" 
-background-image: url('../images/dream.gif');
-background-position: right 140px;
-background-repeat: no-repeat;
-background-size: cover;">
+
+<script>
+    jQuery(document).ready(function() {
+    var duration = 300;
+    jQuery(window).scroll(function() {
+        if (jQuery(this).scrollTop() > 300) {
+        // Défillement de 300 pixels ou plus
+        // Ajoute le bouton
+        jQuery('.top').fadeIn(duration);
+        } else {
+        // Enlève le bouton
+        jQuery('.top').fadeOut(duration);
+        }
+    });
+            
+    jQuery('.top').click(function(event) {
+        // Retour en haut animé au clic
+        event.preventDefault();
+        jQuery('html, body').animate({scrollTop: 0}, duration);
+        return false;
+    })
+    });
+</script>
+
+<style>
+    .top
+    {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        z-index: 99;
+        border: none;
+        outline: none;
+        background-color: #EF3535;
+        color: white;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 18px;
+        transition:all ease-in 0.2s;
+        }
+
+    .top:before{ content: "\25b2"; }
+
+    .top:hover
+    {
+        background-color: #555;
+        transition:all ease-in 0.2s;
+    }
+</style>
+
+<body>
     <div class="site-content" style="margin: 0 auto;">
         <?php foreach($myMovie as $movie): ?>
-            <div class="show-movie-container" style="background-color: rgb(black);">
+            <div class="show-movie-container">
 
                 <div class="show-title-movie">
                     <span class="show-title-style"><?= $movie->getTitle() ?></span>
@@ -136,4 +184,6 @@ background-size: cover;">
             <?php endif; ?>
         </div>
     </div>
+
+    <a class="top" title="Go to top"> Remonter</a>
 </body>
