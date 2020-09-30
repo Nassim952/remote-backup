@@ -22,8 +22,8 @@
 				<?php $this->formView('configFormUser')?>
 			</div>
 			<div class="button_wrapper">
-				<a href="<?= \cms\core\Helpers::getUrl("User", "register") ?>" class="button" style="margin-top: 20px;">Pas de compte ?</a>
-				<a href="<?= \cms\core\Helpers::getUrl("User", "forgetPassword") ?>" class="button" style="margin-top: 20px;">mot de passe oublié ?</a>
+				<a href="<?= \cms\core\Helpers::getUrl("User", "register") ?>" id="no-decoration" class="button" style="margin-top: 20px; width:auto;">Pas de compte ?</a>
+				<a href="<?= \cms\core\Helpers::getUrl("User", "forgetPassword") ?>" class="button" id="no-decoration" style="margin-top: 20px; width:auto;">mot de passe oublié ?</a>
 			</div>
 		</section>
 	</section>

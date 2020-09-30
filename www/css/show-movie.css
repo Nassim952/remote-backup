@@ -1,7 +1,7 @@
 .show-movie-container
 {
     display: flex;
-    width: 705px;
+    width: 1000px;
     height: 585px;
     flex-wrap: wrap;
     margin: auto;
@@ -71,8 +71,7 @@ textarea{
     justify-content: space-evenly;
     align-items: center;
     margin: auto;
-    margin-top: 40px;
-    width: 340px;
+    margin-top: 10px;
 }
 
 #show-label-bold{

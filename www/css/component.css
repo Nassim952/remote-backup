@@ -1,45 +1,15 @@
-// @media screen and (min-width: 480px) {
-//     .button {
-//         margin: 1.5em;
-//         font-size: 0.8rem;
-//         border-radius: 20px;
-//         padding: 0.1em 0.25em;
-//         font-weight: 700;
-//     }
-// }
-
-// @media screen and (min-width: 768px) {
-//     .button {
-//         margin: 1.5em;
-//         font-size: 1rem;
-//         border-radius: 20px;
-//         padding: 0.3em 0.7em;
-//         font-weight: 700;
-//     }
-// }
-
-// @media screen and (min-width: 965px) {
-//     .button {
-//         margin: 1.5em;
-//         font-size: 1.2rem;
-//         border-radius: 20px;
-//         padding: 0.5em 1em;
-//         font-weight: 700;
-//     }
-// }
-
 .button {
-    text-align: center;
     text-transform: uppercase;
     cursor: pointer;
-    font-size: 20px;
-    letter-spacing: 4px;
+    font-family: calibri;
+    font-size: 15px;
+    letter-spacing: 2px;
     position: relative;
     background-color: #16a085;
     border: none;
     color: #fff;
     padding: 20px;
-    width: 200px;
+    width: 115px;
     text-align: center;
     transition-duration: 0.4s;
     overflow: hidden;

@@ -15,6 +15,7 @@ use cms\models\MovieSession;
 use cms\models\MovieReservation;
 use cms\forms\ReservationType;
 use cms\core\Helpers;
+use cms\core\Mailer;
 use cms\core\View;
 
 class MovieReservationController extends Controller
@@ -118,8 +119,9 @@ class MovieReservationController extends Controller
             $movieSession->setMovie($movieSessionTmp[0]['movie_id']);
             $movieSession->setRoom($movieSessionTmp[0]['room_id']);
             $movieSession->setNbr_place_rest($nbrplacerest);
-
-
+            
+            $mail = new Mailer;
+            $mail->sendConfirmReservation($_POST[$form->getName().'_email'], $datas['film'], $_POST[$form->getName().'_nbr_ticket'], $datas['seance'], $datas['cinema']);
             
             $movieReservationManager->save($movieReservation);
             $movieSessionManager->save($movieSession);

@@ -9,7 +9,6 @@ use cms\core\Controller;
 use cms\core\Helpers;
 use cms\managers\PageManager;
 use cms\managers\ComponentManager;
-// use cms\core\Page;
 use cms\models\Page;
 use cms\models\Section;
 use cms\core\View;
@@ -95,7 +94,7 @@ class PageController extends Controller
 
             $pageManager->save($page);
 
-            echo "<script>alert('Film modifié avec succès');</script>";
+            echo "<script>alert('Page modifié avec succès');</script>";
         }
     }
 

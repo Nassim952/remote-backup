@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS bape_page(
 );
 
 INSERT INTO bape_page (title, gabarit) VALUES
-('home-template', 2),
+('home-template', 1),
 ('carousel-template', 1);
 
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS bape_section(
 );
 
 INSERT INTO bape_section (size, page_id, position) VALUES
-(2, 1, 1),
+(1, 1, 1),
 (1, 2, 2),
 (1, 2, 1);
 

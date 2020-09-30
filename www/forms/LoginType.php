@@ -36,6 +36,7 @@ class LoginType extends Form {
                         ->add('submit', 'submit', [
                             'attr' => [
                             "class" => "Button",
+                            "id" => "margin-wrapper"
                             ]
                         ]);
             return $this;

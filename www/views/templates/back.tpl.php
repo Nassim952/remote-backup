@@ -5,10 +5,7 @@
     (!isset($_SESSION['userId'])) ? header('Location: /session-not-start') : '';
     if(isset($_SESSION['userId'])){
         $current_user = (new UserManager(User::class, 'user'))->read($_SESSION['userId']);
-        if(reset($current_user)->getAllow() == 0){
-            header('Location: /no-permission');
-        }
-        if(reset($current_user)->getStatut() == 0){
+        if(reset($current_user)->getAllow() == 0 || reset($current_user)->getStatut() == 0){
             header('Location: /no-permission');
         }
     }
@@ -72,17 +69,17 @@
                 </div>
                 <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">
-                        <div class="fa fa-desktop fa-lg"></div>
+                        <div class="fa fa-cube fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?=\cms\core\Helpers::getUrl("Page","templateCreate")?>" id="text-white"><span>Template accueil</span></a>
+                            <a href="<?=\cms\core\Helpers::getUrl("Page", "showSectionsPage")?>" id="text-white"><span>Components Page</span></a>
                         </div>
                     </div>
                 </div>
                 <div class="dashboard-menu">
                     <div class="sidebar-sub-headers">
-                        <div class="fa fa-cube fa-lg"></div>
+                        <div class="fa fa-desktop fa-lg"></div>
                         <div id="submenu-wrapper">
-                            <a href="<?=\cms\core\Helpers::getUrl("Page", "showSectionsPage")?>" id="text-white"><span>Components Page</span></a>
+                            <a href="<?=\cms\core\Helpers::getUrl("Page","templateCreate")?>" id="text-white"><span>Template accueil</span></a>
                         </div>
                     </div>
                 </div>
