@@ -12,7 +12,6 @@ $charsAuthorized = str_shuffle($charsAuthorized);
 $lengthCaptcha = rand(6,8);
 $captcha = substr($charsAuthorized, 0, $lengthCaptcha);
 
-
 $listOfFonts = glob("../fonts/*.ttf");
 
 $x = rand(30,40);
@@ -48,7 +47,4 @@ for($i=0 ; $i<=$nbGeo ; $i++){
 
 $_SESSION['captcha'] = $captcha;
 
-
 imagepng($image);
-
-
