@@ -1,6 +1,5 @@
 <?php
 
-
 namespace cms\core\Builder;
 
 use cms\core\Connection\BDDInterface;
