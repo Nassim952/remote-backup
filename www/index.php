@@ -76,13 +76,13 @@ try{
 				}
 
 				if ($found === true) {
-					throw new ExeptionHandler("l'url n'existe pas : Error 404");
+					throw new ExeptionHandler("cette url n'existe pas : Error 404");
 				}
 			}
 		}
 		else
 		{
-			throw new ExeptionHandler("l'url n'existe pas : Error 404");
+			throw new ExeptionHandler("cette url n'existe pas : Error 404");
 		}
 	}
 }
