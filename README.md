@@ -1,6 +1,6 @@
 # Projet Docker
 
-Developers :
+Developeurs :
  - DeSouza Eyram
  - Mondor Andrew
  - Belatoui Bilal
